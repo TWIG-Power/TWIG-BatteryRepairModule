@@ -11,24 +11,24 @@ using System.Windows.Forms;
 
 namespace BatteryRepairModule.Forms.BRM
 {
-    public partial class serviceInspectionFirstForm : Form
+    public partial class BrmTicketCreationForm2 : Form
     {
 
         private BrmMainMenuForm parentForm;
-        public serviceInspectionFirstForm(BrmMainMenuForm parent)
+        public BrmTicketCreationForm2(BrmMainMenuForm parent)
         {
             InitializeComponent();
             this.parentForm = parent;
         }
 
-        private void button1_Click(object sender, EventArgs e)
-        {
-            parentForm.OpenChildForm(new serviceInspectionSecondForm(parentForm));
-        }
-
         private void backButton_Click(object sender, EventArgs e)
         {
             this.Close();
+        }
+
+        private void continueButton_Click(object sender, EventArgs e)
+        {
+            parentForm.OpenChildForm(new BrmTicketCreationForm3(parentForm));
         }
     }
 }

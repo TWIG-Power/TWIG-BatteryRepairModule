@@ -272,7 +272,7 @@ namespace BatteryRepairModule.Forms.BRM
             continueButton.Name = "continueButton";
             continueButton.Size = new Size(175, 80);
             continueButton.TabIndex = 6;
-            continueButton.Text = "Create Ticket";
+            continueButton.Text = "Continue";
             continueButton.UseVisualStyleBackColor = true;
             continueButton.Click += continueButton_Click;
             // 

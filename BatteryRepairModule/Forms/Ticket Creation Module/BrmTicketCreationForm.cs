@@ -12,9 +12,11 @@ namespace BatteryRepairModule.Forms.BRM
 {
     public partial class BrmTicketCreationForm : Form
     {
-        public BrmTicketCreationForm()
+        private BrmMainMenuForm parentForm;
+        public BrmTicketCreationForm(BrmMainMenuForm parentRef)
         {
             InitializeComponent();
+            this.parentForm = parentRef; 
         }
 
         private void panel3_Paint(object sender, PaintEventArgs e)
@@ -24,7 +26,7 @@ namespace BatteryRepairModule.Forms.BRM
 
         private void continueButton_Click(object sender, EventArgs e)
         {
-            this.Close();
+            parentForm.OpenChildForm(new BrmTicketCreationForm2(parentForm)); 
         }
 
         private void cancelButton_Click(object sender, EventArgs e)

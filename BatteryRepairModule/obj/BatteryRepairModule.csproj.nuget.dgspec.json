@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\FMustico\\Documents\\Visual Studio 2022\\BatteryRepairModule\\BatteryRepairModule\\BatteryRepairModule.csproj": {}
+    "C:\\Users\\FMustico\\Documents\\github\\TWIG-BatteryRepairModule\\BatteryRepairModule\\BatteryRepairModule.csproj": {}
   },
   "projects": {
-    "C:\\Users\\FMustico\\Documents\\Visual Studio 2022\\BatteryRepairModule\\BatteryRepairModule\\BatteryRepairModule.csproj": {
+    "C:\\Users\\FMustico\\Documents\\github\\TWIG-BatteryRepairModule\\BatteryRepairModule\\BatteryRepairModule.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\FMustico\\Documents\\Visual Studio 2022\\BatteryRepairModule\\BatteryRepairModule\\BatteryRepairModule.csproj",
+        "projectUniqueName": "C:\\Users\\FMustico\\Documents\\github\\TWIG-BatteryRepairModule\\BatteryRepairModule\\BatteryRepairModule.csproj",
         "projectName": "BatteryRepairModule",
-        "projectPath": "C:\\Users\\FMustico\\Documents\\Visual Studio 2022\\BatteryRepairModule\\BatteryRepairModule\\BatteryRepairModule.csproj",
+        "projectPath": "C:\\Users\\FMustico\\Documents\\github\\TWIG-BatteryRepairModule\\BatteryRepairModule\\BatteryRepairModule.csproj",
         "packagesPath": "C:\\Users\\FMustico\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\FMustico\\Documents\\Visual Studio 2022\\BatteryRepairModule\\BatteryRepairModule\\obj\\",
+        "outputPath": "C:\\Users\\FMustico\\Documents\\github\\TWIG-BatteryRepairModule\\BatteryRepairModule\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"

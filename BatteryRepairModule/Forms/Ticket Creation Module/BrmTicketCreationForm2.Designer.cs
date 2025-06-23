@@ -4,7 +4,7 @@ using static System.Net.Mime.MediaTypeNames;
 
 namespace BatteryRepairModule.Forms.BRM
 {
-    partial class serviceInspectionFirstForm
+    partial class BrmTicketCreationForm2
     {
         /// <summary>
         /// Required designer variable.
@@ -32,9 +32,6 @@ namespace BatteryRepairModule.Forms.BRM
         /// </summary>
         private void InitializeComponent()
         {
-            twigTicketNumContainer = new Panel();
-            comboBox2 = new ComboBox();
-            label1 = new Label();
             panel2 = new Panel();
             radioButton3 = new RadioButton();
             radioButton2 = new RadioButton();
@@ -48,51 +45,21 @@ namespace BatteryRepairModule.Forms.BRM
             checkBox1 = new CheckBox();
             label2 = new Label();
             panel3 = new Panel();
+            checkBox7 = new CheckBox();
+            checkBox6 = new CheckBox();
+            cableDamageCheckBox = new CheckBox();
+            chargePortCheckBox = new CheckBox();
+            panel4 = new Panel();
             radioButton7 = new RadioButton();
             radioButton6 = new RadioButton();
             label4 = new Label();
             continueButton = new Button();
-            backButton = new Button();
-            twigTicketNumContainer.SuspendLayout();
+            cancelButton = new Button();
             panel2.SuspendLayout();
             panel1.SuspendLayout();
             panel3.SuspendLayout();
+            panel4.SuspendLayout();
             SuspendLayout();
-            // 
-            // twigTicketNumContainer
-            // 
-            twigTicketNumContainer.AutoSizeMode = AutoSizeMode.GrowAndShrink;
-            twigTicketNumContainer.Controls.Add(comboBox2);
-            twigTicketNumContainer.Controls.Add(label1);
-            twigTicketNumContainer.Dock = DockStyle.Top;
-            twigTicketNumContainer.Location = new Point(0, 0);
-            twigTicketNumContainer.Name = "twigTicketNumContainer";
-            twigTicketNumContainer.Padding = new Padding(10, 10, 10, 5);
-            twigTicketNumContainer.Size = new Size(880, 80);
-            twigTicketNumContainer.TabIndex = 1;
-            // 
-            // comboBox2
-            // 
-            comboBox2.Dock = DockStyle.Fill;
-            comboBox2.Font = new Font("Segoe UI", 20F, FontStyle.Regular, GraphicsUnit.Point);
-            comboBox2.FormattingEnabled = true;
-            comboBox2.Location = new Point(363, 10);
-            comboBox2.MaximumSize = new Size(500, 0);
-            comboBox2.Name = "comboBox2";
-            comboBox2.Size = new Size(500, 45);
-            comboBox2.TabIndex = 2;
-            // 
-            // label1
-            // 
-            label1.AutoSize = true;
-            label1.Dock = DockStyle.Left;
-            label1.Font = new Font("Segoe UI", 22F, FontStyle.Bold, GraphicsUnit.Point);
-            label1.Location = new Point(10, 10);
-            label1.Name = "label1";
-            label1.Padding = new Padding(10, 0, 10, 10);
-            label1.Size = new Size(353, 51);
-            label1.TabIndex = 0;
-            label1.Text = "TWIG Ticket Number: ";
             // 
             // panel2
             // 
@@ -102,7 +69,7 @@ namespace BatteryRepairModule.Forms.BRM
             panel2.Controls.Add(radioButton1);
             panel2.Controls.Add(label3);
             panel2.Dock = DockStyle.Top;
-            panel2.Location = new Point(0, 80);
+            panel2.Location = new Point(0, 0);
             panel2.Name = "panel2";
             panel2.Padding = new Padding(10, 10, 10, 5);
             panel2.Size = new Size(880, 80);
@@ -175,18 +142,18 @@ namespace BatteryRepairModule.Forms.BRM
             panel1.Location = new Point(0, 0);
             panel1.Name = "panel1";
             panel1.Padding = new Padding(10, 10, 10, 5);
-            panel1.Size = new Size(537, 261);
+            panel1.Size = new Size(578, 262);
             panel1.TabIndex = 4;
             // 
             // checkBox5
             // 
             checkBox5.AutoSize = true;
             checkBox5.Dock = DockStyle.Top;
-            checkBox5.Font = new Font("Segoe UI", 18F, FontStyle.Regular, GraphicsUnit.Point);
-            checkBox5.Location = new Point(248, 186);
+            checkBox5.Font = new Font("Segoe UI", 20F, FontStyle.Regular, GraphicsUnit.Point);
+            checkBox5.Location = new Point(248, 206);
             checkBox5.Name = "checkBox5";
             checkBox5.Padding = new Padding(0, 0, 0, 8);
-            checkBox5.Size = new Size(279, 44);
+            checkBox5.Size = new Size(320, 49);
             checkBox5.TabIndex = 5;
             checkBox5.Text = "Missing Wires";
             checkBox5.UseVisualStyleBackColor = true;
@@ -195,11 +162,11 @@ namespace BatteryRepairModule.Forms.BRM
             // 
             checkBox4.AutoSize = true;
             checkBox4.Dock = DockStyle.Top;
-            checkBox4.Font = new Font("Segoe UI", 18F, FontStyle.Regular, GraphicsUnit.Point);
-            checkBox4.Location = new Point(248, 142);
+            checkBox4.Font = new Font("Segoe UI", 20F, FontStyle.Regular, GraphicsUnit.Point);
+            checkBox4.Location = new Point(248, 157);
             checkBox4.Name = "checkBox4";
             checkBox4.Padding = new Padding(0, 0, 0, 8);
-            checkBox4.Size = new Size(279, 44);
+            checkBox4.Size = new Size(320, 49);
             checkBox4.TabIndex = 4;
             checkBox4.Text = "Housing dents / holes";
             checkBox4.UseVisualStyleBackColor = true;
@@ -208,11 +175,11 @@ namespace BatteryRepairModule.Forms.BRM
             // 
             checkBox3.AutoSize = true;
             checkBox3.Dock = DockStyle.Top;
-            checkBox3.Font = new Font("Segoe UI", 18F, FontStyle.Regular, GraphicsUnit.Point);
-            checkBox3.Location = new Point(248, 98);
+            checkBox3.Font = new Font("Segoe UI", 20F, FontStyle.Regular, GraphicsUnit.Point);
+            checkBox3.Location = new Point(248, 108);
             checkBox3.Name = "checkBox3";
             checkBox3.Padding = new Padding(0, 0, 0, 8);
-            checkBox3.Size = new Size(279, 44);
+            checkBox3.Size = new Size(320, 49);
             checkBox3.TabIndex = 3;
             checkBox3.Text = "Screws missing";
             checkBox3.UseVisualStyleBackColor = true;
@@ -221,11 +188,11 @@ namespace BatteryRepairModule.Forms.BRM
             // 
             checkBox2.AutoSize = true;
             checkBox2.Dock = DockStyle.Top;
-            checkBox2.Font = new Font("Segoe UI", 18F, FontStyle.Regular, GraphicsUnit.Point);
-            checkBox2.Location = new Point(248, 54);
+            checkBox2.Font = new Font("Segoe UI", 20F, FontStyle.Regular, GraphicsUnit.Point);
+            checkBox2.Location = new Point(248, 59);
             checkBox2.Name = "checkBox2";
             checkBox2.Padding = new Padding(0, 0, 0, 8);
-            checkBox2.Size = new Size(279, 44);
+            checkBox2.Size = new Size(320, 49);
             checkBox2.TabIndex = 2;
             checkBox2.Text = "Evidence of tampering";
             checkBox2.UseVisualStyleBackColor = true;
@@ -234,11 +201,11 @@ namespace BatteryRepairModule.Forms.BRM
             // 
             checkBox1.AutoSize = true;
             checkBox1.Dock = DockStyle.Top;
-            checkBox1.Font = new Font("Segoe UI", 18F, FontStyle.Regular, GraphicsUnit.Point);
+            checkBox1.Font = new Font("Segoe UI", 20F, FontStyle.Regular, GraphicsUnit.Point);
             checkBox1.Location = new Point(248, 10);
             checkBox1.Name = "checkBox1";
             checkBox1.Padding = new Padding(0, 0, 0, 8);
-            checkBox1.Size = new Size(279, 44);
+            checkBox1.Size = new Size(320, 49);
             checkBox1.TabIndex = 1;
             checkBox1.Text = "Housing Scrapes";
             checkBox1.UseVisualStyleBackColor = true;
@@ -257,26 +224,90 @@ namespace BatteryRepairModule.Forms.BRM
             // 
             // panel3
             // 
-            panel3.Controls.Add(radioButton7);
-            panel3.Controls.Add(radioButton6);
-            panel3.Controls.Add(label4);
+            panel3.Controls.Add(checkBox7);
+            panel3.Controls.Add(checkBox6);
+            panel3.Controls.Add(cableDamageCheckBox);
+            panel3.Controls.Add(chargePortCheckBox);
             panel3.Controls.Add(panel1);
             panel3.Dock = DockStyle.Top;
-            panel3.Location = new Point(0, 160);
+            panel3.Location = new Point(0, 80);
             panel3.Name = "panel3";
-            panel3.Size = new Size(880, 261);
+            panel3.Size = new Size(880, 262);
             panel3.TabIndex = 5;
+            // 
+            // checkBox7
+            // 
+            checkBox7.AutoSize = true;
+            checkBox7.Dock = DockStyle.Top;
+            checkBox7.Font = new Font("Segoe UI", 20F, FontStyle.Regular, GraphicsUnit.Point);
+            checkBox7.Location = new Point(578, 147);
+            checkBox7.Name = "checkBox7";
+            checkBox7.Padding = new Padding(0, 0, 0, 8);
+            checkBox7.Size = new Size(302, 49);
+            checkBox7.TabIndex = 8;
+            checkBox7.Text = "Communication Port";
+            checkBox7.UseVisualStyleBackColor = true;
+            // 
+            // checkBox6
+            // 
+            checkBox6.AutoSize = true;
+            checkBox6.Dock = DockStyle.Top;
+            checkBox6.Font = new Font("Segoe UI", 20F, FontStyle.Regular, GraphicsUnit.Point);
+            checkBox6.Location = new Point(578, 98);
+            checkBox6.Name = "checkBox6";
+            checkBox6.Padding = new Padding(0, 0, 0, 8);
+            checkBox6.Size = new Size(302, 49);
+            checkBox6.TabIndex = 7;
+            checkBox6.Text = "Gove Vent ";
+            checkBox6.UseVisualStyleBackColor = true;
+            // 
+            // cableDamageCheckBox
+            // 
+            cableDamageCheckBox.AutoSize = true;
+            cableDamageCheckBox.Dock = DockStyle.Top;
+            cableDamageCheckBox.Font = new Font("Segoe UI", 20F, FontStyle.Regular, GraphicsUnit.Point);
+            cableDamageCheckBox.Location = new Point(578, 49);
+            cableDamageCheckBox.Name = "cableDamageCheckBox";
+            cableDamageCheckBox.Padding = new Padding(0, 0, 0, 8);
+            cableDamageCheckBox.Size = new Size(302, 49);
+            cableDamageCheckBox.TabIndex = 6;
+            cableDamageCheckBox.Text = "Cable Damage";
+            cableDamageCheckBox.UseVisualStyleBackColor = true;
+            // 
+            // chargePortCheckBox
+            // 
+            chargePortCheckBox.AutoSize = true;
+            chargePortCheckBox.Dock = DockStyle.Top;
+            chargePortCheckBox.Font = new Font("Segoe UI", 20F, FontStyle.Regular, GraphicsUnit.Point);
+            chargePortCheckBox.Location = new Point(578, 0);
+            chargePortCheckBox.Name = "chargePortCheckBox";
+            chargePortCheckBox.Padding = new Padding(0, 0, 0, 8);
+            chargePortCheckBox.Size = new Size(302, 49);
+            chargePortCheckBox.TabIndex = 5;
+            chargePortCheckBox.Text = "Charge Port";
+            chargePortCheckBox.UseVisualStyleBackColor = true;
+            // 
+            // panel4
+            // 
+            panel4.Controls.Add(radioButton7);
+            panel4.Controls.Add(radioButton6);
+            panel4.Controls.Add(label4);
+            panel4.Dock = DockStyle.Top;
+            panel4.Location = new Point(0, 342);
+            panel4.Name = "panel4";
+            panel4.Size = new Size(880, 98);
+            panel4.TabIndex = 6;
             // 
             // radioButton7
             // 
             radioButton7.AutoSize = true;
-            radioButton7.Dock = DockStyle.Top;
+            radioButton7.Dock = DockStyle.Left;
             radioButton7.Font = new Font("Segoe UI", 18F, FontStyle.Regular, GraphicsUnit.Point);
-            radioButton7.Location = new Point(537, 83);
+            radioButton7.Location = new Point(497, 0);
             radioButton7.Name = "radioButton7";
             radioButton7.Padding = new Padding(20, 0, 20, 0);
-            radioButton7.Size = new Size(343, 36);
-            radioButton7.TabIndex = 10;
+            radioButton7.Size = new Size(104, 98);
+            radioButton7.TabIndex = 14;
             radioButton7.TabStop = true;
             radioButton7.Text = "No";
             radioButton7.UseVisualStyleBackColor = true;
@@ -284,13 +315,13 @@ namespace BatteryRepairModule.Forms.BRM
             // radioButton6
             // 
             radioButton6.AutoSize = true;
-            radioButton6.Dock = DockStyle.Top;
+            radioButton6.Dock = DockStyle.Left;
             radioButton6.Font = new Font("Segoe UI", 18F, FontStyle.Regular, GraphicsUnit.Point);
-            radioButton6.Location = new Point(537, 47);
+            radioButton6.Location = new Point(391, 0);
             radioButton6.Name = "radioButton6";
             radioButton6.Padding = new Padding(20, 0, 20, 0);
-            radioButton6.Size = new Size(343, 36);
-            radioButton6.TabIndex = 9;
+            radioButton6.Size = new Size(106, 98);
+            radioButton6.TabIndex = 13;
             radioButton6.TabStop = true;
             radioButton6.Text = "Yes";
             radioButton6.UseVisualStyleBackColor = true;
@@ -298,14 +329,14 @@ namespace BatteryRepairModule.Forms.BRM
             // label4
             // 
             label4.AutoSize = true;
-            label4.Dock = DockStyle.Top;
+            label4.Dock = DockStyle.Left;
             label4.Font = new Font("Segoe UI", 20.25F, FontStyle.Bold, GraphicsUnit.Point);
             label4.LiveSetting = System.Windows.Forms.Automation.AutomationLiveSetting.Assertive;
-            label4.Location = new Point(537, 0);
+            label4.Location = new Point(0, 0);
             label4.Name = "label4";
-            label4.Padding = new Padding(10, 0, 25, 10);
-            label4.Size = new Size(376, 47);
-            label4.TabIndex = 5;
+            label4.Padding = new Padding(25);
+            label4.Size = new Size(391, 87);
+            label4.TabIndex = 9;
             label4.Text = "Battery Leads Protected: ";
             // 
             // continueButton
@@ -313,61 +344,55 @@ namespace BatteryRepairModule.Forms.BRM
             continueButton.AutoSize = true;
             continueButton.Dock = DockStyle.Right;
             continueButton.Font = new Font("Segoe UI", 18F, FontStyle.Regular, GraphicsUnit.Point);
-            continueButton.Location = new Point(705, 421);
+            continueButton.Location = new Point(705, 440);
             continueButton.MaximumSize = new Size(175, 80);
             continueButton.MinimumSize = new Size(175, 80);
             continueButton.Name = "continueButton";
             continueButton.Size = new Size(175, 80);
-            continueButton.TabIndex = 7;
+            continueButton.TabIndex = 17;
             continueButton.Text = "Continue";
             continueButton.UseVisualStyleBackColor = true;
-            continueButton.Click += button1_Click;
+            continueButton.Click += continueButton_Click;
             // 
-            // backButton
+            // cancelButton
             // 
-            backButton.AutoSize = true;
-            backButton.Dock = DockStyle.Right;
-            backButton.Font = new Font("Segoe UI", 18F, FontStyle.Regular, GraphicsUnit.Point);
-            backButton.Location = new Point(530, 421);
-            backButton.MaximumSize = new Size(175, 80);
-            backButton.MinimumSize = new Size(175, 80);
-            backButton.Name = "backButton";
-            backButton.Size = new Size(175, 80);
-            backButton.TabIndex = 8;
-            backButton.Text = "Back ";
-            backButton.UseVisualStyleBackColor = true;
-            backButton.Click += backButton_Click;
+            cancelButton.Dock = DockStyle.Right;
+            cancelButton.Font = new Font("Segoe UI", 18F, FontStyle.Regular, GraphicsUnit.Point);
+            cancelButton.Location = new Point(530, 440);
+            cancelButton.MaximumSize = new Size(175, 80);
+            cancelButton.MinimumSize = new Size(175, 80);
+            cancelButton.Name = "cancelButton";
+            cancelButton.Size = new Size(175, 80);
+            cancelButton.TabIndex = 18;
+            cancelButton.Text = "Cancel";
+            cancelButton.UseVisualStyleBackColor = true;
             // 
-            // serviceInspectionFirstForm
+            // BrmTicketCreationForm2
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(880, 556);
-            Controls.Add(backButton);
+            Controls.Add(cancelButton);
             Controls.Add(continueButton);
+            Controls.Add(panel4);
             Controls.Add(panel3);
             Controls.Add(panel2);
-            Controls.Add(twigTicketNumContainer);
             MinimumSize = new Size(0, 530);
-            Name = "serviceInspectionFirstForm";
+            Name = "BrmTicketCreationForm2";
             Text = "serviceInspectionFirstForm";
-            twigTicketNumContainer.ResumeLayout(false);
-            twigTicketNumContainer.PerformLayout();
             panel2.ResumeLayout(false);
             panel2.PerformLayout();
             panel1.ResumeLayout(false);
             panel1.PerformLayout();
             panel3.ResumeLayout(false);
             panel3.PerformLayout();
+            panel4.ResumeLayout(false);
+            panel4.PerformLayout();
             ResumeLayout(false);
             PerformLayout();
         }
 
         #endregion
-
-        private Panel twigTicketNumContainer;
-        private Label label1;
-        private ComboBox comboBox2;
         private Panel panel2;
         private RadioButton radioButton3;
         private RadioButton radioButton2;
@@ -381,10 +406,15 @@ namespace BatteryRepairModule.Forms.BRM
         private CheckBox checkBox1;
         private Label label2;
         private Panel panel3;
+        private CheckBox chargePortCheckBox;
+        private CheckBox cableDamageCheckBox;
+        private CheckBox checkBox6;
+        private CheckBox checkBox7;
+        private Panel panel4;
         public Label label4;
-        private Button continueButton;
-        private Button backButton;
-        private RadioButton radioButton7;
         private RadioButton radioButton6;
+        private RadioButton radioButton7;
+        private Button continueButton;
+        private Button cancelButton;
     }
 }

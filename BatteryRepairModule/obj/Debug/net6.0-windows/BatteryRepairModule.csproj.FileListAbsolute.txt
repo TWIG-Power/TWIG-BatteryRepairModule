@@ -22,3 +22,29 @@ C:\Users\FMustico\Documents\Visual Studio 2022\BatteryRepairModule\BatteryRepair
 C:\Users\FMustico\Documents\Visual Studio 2022\BatteryRepairModule\BatteryRepairModule\obj\Debug\net6.0-windows\BatteryRepairModule.pdb
 C:\Users\FMustico\Documents\Visual Studio 2022\BatteryRepairModule\BatteryRepairModule\obj\Debug\net6.0-windows\BatteryRepairModule.genruntimeconfig.cache
 C:\Users\FMustico\Documents\Visual Studio 2022\BatteryRepairModule\BatteryRepairModule\obj\Debug\net6.0-windows\ref\BatteryRepairModule.dll
+C:\Users\FMustico\Documents\github\TWIG-BatteryRepairModule\BatteryRepairModule\bin\Debug\net6.0-windows\BatteryRepairModule.exe
+C:\Users\FMustico\Documents\github\TWIG-BatteryRepairModule\BatteryRepairModule\bin\Debug\net6.0-windows\BatteryRepairModule.deps.json
+C:\Users\FMustico\Documents\github\TWIG-BatteryRepairModule\BatteryRepairModule\bin\Debug\net6.0-windows\BatteryRepairModule.runtimeconfig.json
+C:\Users\FMustico\Documents\github\TWIG-BatteryRepairModule\BatteryRepairModule\bin\Debug\net6.0-windows\BatteryRepairModule.dll
+C:\Users\FMustico\Documents\github\TWIG-BatteryRepairModule\BatteryRepairModule\bin\Debug\net6.0-windows\BatteryRepairModule.pdb
+C:\Users\FMustico\Documents\github\TWIG-BatteryRepairModule\BatteryRepairModule\obj\Debug\net6.0-windows\BatteryRepairModule.Forms.BRM.addRepairActionForm.resources
+C:\Users\FMustico\Documents\github\TWIG-BatteryRepairModule\BatteryRepairModule\obj\Debug\net6.0-windows\BatteryRepairModule.Forms.BRM.BrmAuthorizeRepairsForm.resources
+C:\Users\FMustico\Documents\github\TWIG-BatteryRepairModule\BatteryRepairModule\obj\Debug\net6.0-windows\BatteryRepairModule.Forms.BRM.BrmMainMenuForm.resources
+C:\Users\FMustico\Documents\github\TWIG-BatteryRepairModule\BatteryRepairModule\obj\Debug\net6.0-windows\BatteryRepairModule.Forms.BRM.BrmRepairActionForm.resources
+C:\Users\FMustico\Documents\github\TWIG-BatteryRepairModule\BatteryRepairModule\obj\Debug\net6.0-windows\BatteryRepairModule.Forms.BRM.BrmTicketCreationForm.resources
+C:\Users\FMustico\Documents\github\TWIG-BatteryRepairModule\BatteryRepairModule\obj\Debug\net6.0-windows\BatteryRepairModule.csproj.GenerateResource.cache
+C:\Users\FMustico\Documents\github\TWIG-BatteryRepairModule\BatteryRepairModule\obj\Debug\net6.0-windows\BatteryRepairModule.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\FMustico\Documents\github\TWIG-BatteryRepairModule\BatteryRepairModule\obj\Debug\net6.0-windows\BatteryRepairModule.AssemblyInfoInputs.cache
+C:\Users\FMustico\Documents\github\TWIG-BatteryRepairModule\BatteryRepairModule\obj\Debug\net6.0-windows\BatteryRepairModule.AssemblyInfo.cs
+C:\Users\FMustico\Documents\github\TWIG-BatteryRepairModule\BatteryRepairModule\obj\Debug\net6.0-windows\BatteryRepairModule.csproj.CoreCompileInputs.cache
+C:\Users\FMustico\Documents\github\TWIG-BatteryRepairModule\BatteryRepairModule\obj\Debug\net6.0-windows\BatteryRepairModule.sourcelink.json
+C:\Users\FMustico\Documents\github\TWIG-BatteryRepairModule\BatteryRepairModule\obj\Debug\net6.0-windows\BatteryRepairModule.dll
+C:\Users\FMustico\Documents\github\TWIG-BatteryRepairModule\BatteryRepairModule\obj\Debug\net6.0-windows\refint\BatteryRepairModule.dll
+C:\Users\FMustico\Documents\github\TWIG-BatteryRepairModule\BatteryRepairModule\obj\Debug\net6.0-windows\BatteryRepairModule.pdb
+C:\Users\FMustico\Documents\github\TWIG-BatteryRepairModule\BatteryRepairModule\obj\Debug\net6.0-windows\BatteryRepairModule.genruntimeconfig.cache
+C:\Users\FMustico\Documents\github\TWIG-BatteryRepairModule\BatteryRepairModule\obj\Debug\net6.0-windows\ref\BatteryRepairModule.dll
+C:\Users\FMustico\Documents\github\TWIG-BatteryRepairModule\BatteryRepairModule\obj\Debug\net6.0-windows\BatteryRepairModule.Properties.Resources.resources
+C:\Users\FMustico\Documents\github\TWIG-BatteryRepairModule\BatteryRepairModule\obj\Debug\net6.0-windows\BatteryRepairModule.Forms.BRM.BrmTicketCreationForm2.resources
+C:\Users\FMustico\Documents\github\TWIG-BatteryRepairModule\BatteryRepairModule\obj\Debug\net6.0-windows\BatteryRepairModule.BrmTicketCreationForm3.resources
+C:\Users\FMustico\Documents\github\TWIG-BatteryRepairModule\BatteryRepairModule\obj\Debug\net6.0-windows\BatteryRepairModule.Forms.Service_Inspection_Forms.serviceInspectionForm1.resources
+C:\Users\FMustico\Documents\github\TWIG-BatteryRepairModule\BatteryRepairModule\obj\Debug\net6.0-windows\BatteryRepairModule.Forms.Service_Inspection_Forms.serviceInspectionForm2.resources

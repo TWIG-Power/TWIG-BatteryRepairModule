@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using BatteryRepairModule.Forms.Service_Inspection_Forms;
 
 namespace BatteryRepairModule.Forms.BRM;
 
@@ -24,17 +25,18 @@ public partial class BrmMainMenuForm : Form
     {
         if (!safeToClose)
         {
+
         }
     }
 
     private void ticketCreationModButton_Click(object sender, EventArgs e)
     {
-        OpenChildForm(new Forms.BRM.BrmTicketCreationForm());
+        OpenChildForm(new Forms.BRM.BrmTicketCreationForm(this));
     }
 
     private void serviceInspectionModButton_Click(object sender, EventArgs e)
     {
-        OpenChildForm(new Forms.BRM.serviceInspectionFirstForm(this));
+        OpenChildForm(new serviceInspectionForm1(this));
     }
 
     private void authorizeReportModButton_Click(object sender, EventArgs e)

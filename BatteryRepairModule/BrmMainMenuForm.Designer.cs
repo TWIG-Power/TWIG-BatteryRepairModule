@@ -85,7 +85,6 @@ namespace BatteryRepairModule.Forms.BRM
             button5.Dock = DockStyle.Top;
             button5.FlatStyle = FlatStyle.Flat;
             button5.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point);
-            //button5.Image = Properties.Resources.icons8_shipping_50;
             button5.ImageAlign = ContentAlignment.MiddleLeft;
             button5.Location = new Point(0, 375);
             button5.Name = "button5";
@@ -104,7 +103,7 @@ namespace BatteryRepairModule.Forms.BRM
             testingQualityModButton.Dock = DockStyle.Top;
             testingQualityModButton.FlatStyle = FlatStyle.Flat;
             testingQualityModButton.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point);
-            //testingQualityModButton.Image = Properties.Resources.icons8_quality_50;
+            testingQualityModButton.Image = Properties.Resources.icons8_quality_50;
             testingQualityModButton.ImageAlign = ContentAlignment.MiddleLeft;
             testingQualityModButton.Location = new Point(0, 300);
             testingQualityModButton.Name = "testingQualityModButton";
@@ -123,7 +122,7 @@ namespace BatteryRepairModule.Forms.BRM
             repairActionModButton.Dock = DockStyle.Top;
             repairActionModButton.FlatStyle = FlatStyle.Flat;
             repairActionModButton.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point);
-            //repairActionModButton.Image = Properties.Resources.icons8_repair_50;
+            repairActionModButton.Image = Properties.Resources.icons8_repair_50;
             repairActionModButton.Location = new Point(0, 225);
             repairActionModButton.Name = "repairActionModButton";
             repairActionModButton.Padding = new Padding(5, 0, 0, 0);
@@ -141,7 +140,7 @@ namespace BatteryRepairModule.Forms.BRM
             authorizeReportModButton.Dock = DockStyle.Top;
             authorizeReportModButton.FlatStyle = FlatStyle.Flat;
             authorizeReportModButton.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point);
-            //authorizeReportModButton.Image = Properties.Resources.icons8_confirm_48;
+            authorizeReportModButton.Image = Properties.Resources.icons8_confirm_48;
             authorizeReportModButton.ImageAlign = ContentAlignment.MiddleLeft;
             authorizeReportModButton.Location = new Point(0, 150);
             authorizeReportModButton.Name = "authorizeReportModButton";
@@ -160,7 +159,7 @@ namespace BatteryRepairModule.Forms.BRM
             serviceInspectionModButton.Dock = DockStyle.Top;
             serviceInspectionModButton.FlatStyle = FlatStyle.Flat;
             serviceInspectionModButton.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point);
-            //serviceInspectionModButton.Image = Properties.Resources.icons8_wrench_50;
+            serviceInspectionModButton.Image = Properties.Resources.icons8_wrench_50;
             serviceInspectionModButton.ImageAlign = ContentAlignment.MiddleLeft;
             serviceInspectionModButton.Location = new Point(0, 75);
             serviceInspectionModButton.Name = "serviceInspectionModButton";
@@ -179,7 +178,7 @@ namespace BatteryRepairModule.Forms.BRM
             ticketCreationModButton.Dock = DockStyle.Top;
             ticketCreationModButton.FlatStyle = FlatStyle.Flat;
             ticketCreationModButton.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point);
-            //ticketCreationModButton.Image = Properties.Resources.icons8_report_50;
+            ticketCreationModButton.Image = Properties.Resources.icons8_report_50;
             ticketCreationModButton.ImageAlign = ContentAlignment.MiddleLeft;
             ticketCreationModButton.Location = new Point(0, 0);
             ticketCreationModButton.Name = "ticketCreationModButton";
