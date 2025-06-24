@@ -1,4 +1,5 @@
-﻿using BatteryRepairModule.Forms.BRM;
+﻿using BatteryRepairModule.Forms.Add_Forms;
+using BatteryRepairModule.Forms.BRM;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -16,42 +17,33 @@ namespace BatteryRepairModule.Forms.BRM
         public BrmRepairActionForm()
         {
             InitializeComponent();
+            BRMinformation.InitializeStaffOptions();
         }
 
-        private void repairCompletedButton_Click(object sender, EventArgs e)
+        private void continueButton_Click_1(object sender, EventArgs e)
         {
 
         }
 
-        private void addRepairActionbutton_Click(object sender, EventArgs e)
+        private void backButton_Click(object sender, EventArgs e)
         {
 
         }
 
-        private void continueButton_Click(object sender, EventArgs e)
+        private void addRepairActionButton_Click_2(object sender, EventArgs e)
         {
-
+            using (var newForm = new addRepairActionForm(repairActionsListBox))
+            {
+                newForm.ShowDialog(this);
+            }
         }
 
-        private void cancelButton_Click(object sender, EventArgs e)
+        private void updateStatusButton_Click(object sender, EventArgs e)
         {
-
-        }
-
-        private void recycleButton_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void addRepairActionButton_Click_1(object sender, EventArgs e)
-        {
-            var newForm = new addRepairActionForm();
-            newForm.Show();
-        }
-
-        private void repairCompletedButton_Click_1(object sender, EventArgs e)
-        {
-
+            using (var newForm = new addStatusUpdateForm())
+            {
+                newForm.ShowDialog(this);
+            }
         }
     }
 }

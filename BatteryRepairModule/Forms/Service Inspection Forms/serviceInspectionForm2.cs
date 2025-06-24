@@ -17,7 +17,25 @@ namespace BatteryRepairModule.Forms.Service_Inspection_Forms
         public serviceInspectionForm2(BrmMainMenuForm parentRef)
         {
             InitializeComponent();
-            this.parentForm = parentRef; 
+            this.parentForm = parentRef;
+        }
+
+        private void continueButton_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+
+        private void backButton_Click(object sender, EventArgs e)
+        {
+            parentForm.OpenChildForm(new serviceInspectionForm1(parentForm));
+        }
+
+        private void addRepairActionButton_Click(object sender, EventArgs e)
+        {
+            using (var newForm = new addRepairActionForm(repairActionsListBox))
+            {
+                newForm.ShowDialog(this); 
+            }
         }
     }
 }

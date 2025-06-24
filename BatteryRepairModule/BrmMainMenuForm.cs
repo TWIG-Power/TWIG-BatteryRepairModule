@@ -14,50 +14,86 @@ namespace BatteryRepairModule.Forms.BRM;
 public partial class BrmMainMenuForm : Form
 {
     private Form activeForm;
-    bool safeToClose = false;
+    private Button selectedButton;
+    private string name;
+
     public BrmMainMenuForm()
     {
         InitializeComponent();
-        this.FormClosing += formCloser;
     }
 
-    private void formCloser(object sender, EventArgs e)
+    private void SelectButton(Button button)
     {
-        if (!safeToClose)
-        {
+        ResetAllButtons();
+        selectedButton = button;
 
+        button.FlatStyle = FlatStyle.Flat;
+        button.BackColor = Color.LightBlue;
+        button.FlatAppearance.BorderSize = 3;
+        button.FlatAppearance.BorderColor = Color.DarkRed;
+        name = button.Text.ToString();
+        titleLabel.Text = name;
+    }
+
+    private void ResetAllButtons()
+    {
+        var menuButtons = new[]
+        {
+            ticketCreationModButton,
+            serviceInspectionModButton,
+            authorizeReportModButton,
+            repairActionModButton,
+            testingQualityModButton,
+            qualityButton,
+            shippingButton,
+            statusReviewButton
+        };
+
+        foreach (var btn in menuButtons)
+        {
+            btn.FlatStyle = FlatStyle.Flat;
+            btn.BackColor = Color.LightBlue;
+            btn.FlatAppearance.BorderSize = 1;
+            btn.FlatAppearance.BorderColor = Color.Black;
         }
     }
 
     private void ticketCreationModButton_Click(object sender, EventArgs e)
     {
-        OpenChildForm(new Forms.BRM.BrmTicketCreationForm(this));
+        SelectButton(ticketCreationModButton);
+        OpenChildForm(new BrmTicketCreationForm(this));
     }
 
     private void serviceInspectionModButton_Click(object sender, EventArgs e)
     {
+        SelectButton(serviceInspectionModButton);
         OpenChildForm(new serviceInspectionForm1(this));
     }
 
     private void authorizeReportModButton_Click(object sender, EventArgs e)
     {
-        OpenChildForm(new Forms.BRM.BrmAuthorizeRepairsForm());
+        SelectButton(authorizeReportModButton);
+        OpenChildForm(new BrmAuthorizeRepairsForm());
     }
 
     private void repairActionModButton_Click(object sender, EventArgs e)
     {
-        OpenChildForm(new Forms.BRM.BrmRepairActionForm());
+        SelectButton(repairActionModButton);
+        OpenChildForm(new BrmRepairActionForm());
     }
 
     private void testingQualityModButton_Click(object sender, EventArgs e)
     {
-
+        SelectButton(testingQualityModButton);
     }
 
-    private void button5_Click(object sender, EventArgs e)
+    private void qualityButton_Click(object sender, EventArgs e)
     {
-
+        SelectButton(qualityButton);
+        OpenChildForm(new Forms.Quality.qualityForm1(this));
     }
+
+
 
     public void OpenChildForm(Form childForm)
     {
@@ -73,5 +109,15 @@ public partial class BrmMainMenuForm : Form
         this.childFormContainer.Tag = childForm;
         childForm.BringToFront();
         childForm.Show();
+    }
+
+    private void shippingButton_Click(object sender, EventArgs e)
+    {
+        SelectButton(shippingButton);
+    }
+
+    private void statusReviewButton_Click(object sender, EventArgs e)
+    {
+        SelectButton(statusReviewButton); 
     }
 }

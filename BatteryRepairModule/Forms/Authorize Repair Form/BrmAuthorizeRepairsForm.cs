@@ -30,8 +30,10 @@ namespace BatteryRepairModule.Forms.BRM
 
         private void addAuthorizedRepairAction_Click(object sender, EventArgs e)
         {
-            var newForm = new addRepairActionForm();
-            newForm.Show();
+            using (var neForm = new addRepairActionForm(authorizedRepairsListBox))
+            {
+                neForm.ShowDialog(this);
+            }
         }
 
         private void removeAuthorizedRepairAction_Click(object sender, EventArgs e)

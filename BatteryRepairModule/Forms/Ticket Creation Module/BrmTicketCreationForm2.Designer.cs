@@ -72,7 +72,7 @@ namespace BatteryRepairModule.Forms.BRM
             panel2.Location = new Point(0, 0);
             panel2.Name = "panel2";
             panel2.Padding = new Padding(10, 10, 10, 5);
-            panel2.Size = new Size(880, 80);
+            panel2.Size = new Size(931, 78);
             panel2.TabIndex = 3;
             // 
             // radioButton3
@@ -83,7 +83,7 @@ namespace BatteryRepairModule.Forms.BRM
             radioButton3.Location = new Point(562, 10);
             radioButton3.Name = "radioButton3";
             radioButton3.Padding = new Padding(20, 0, 20, 0);
-            radioButton3.Size = new Size(241, 65);
+            radioButton3.Size = new Size(241, 63);
             radioButton3.TabIndex = 3;
             radioButton3.TabStop = true;
             radioButton3.Text = "Does not apply ";
@@ -97,7 +97,7 @@ namespace BatteryRepairModule.Forms.BRM
             radioButton2.Location = new Point(417, 10);
             radioButton2.Name = "radioButton2";
             radioButton2.Padding = new Padding(20, 0, 20, 0);
-            radioButton2.Size = new Size(145, 65);
+            radioButton2.Size = new Size(145, 63);
             radioButton2.TabIndex = 2;
             radioButton2.TabStop = true;
             radioButton2.Text = "Unsafe";
@@ -111,7 +111,7 @@ namespace BatteryRepairModule.Forms.BRM
             radioButton1.Location = new Point(299, 10);
             radioButton1.Name = "radioButton1";
             radioButton1.Padding = new Padding(20, 0, 20, 0);
-            radioButton1.Size = new Size(118, 65);
+            radioButton1.Size = new Size(118, 63);
             radioButton1.TabIndex = 1;
             radioButton1.TabStop = true;
             radioButton1.Text = "Safe";
@@ -230,9 +230,9 @@ namespace BatteryRepairModule.Forms.BRM
             panel3.Controls.Add(chargePortCheckBox);
             panel3.Controls.Add(panel1);
             panel3.Dock = DockStyle.Top;
-            panel3.Location = new Point(0, 80);
+            panel3.Location = new Point(0, 78);
             panel3.Name = "panel3";
-            panel3.Size = new Size(880, 262);
+            panel3.Size = new Size(931, 262);
             panel3.TabIndex = 5;
             // 
             // checkBox7
@@ -243,7 +243,7 @@ namespace BatteryRepairModule.Forms.BRM
             checkBox7.Location = new Point(578, 147);
             checkBox7.Name = "checkBox7";
             checkBox7.Padding = new Padding(0, 0, 0, 8);
-            checkBox7.Size = new Size(302, 49);
+            checkBox7.Size = new Size(353, 49);
             checkBox7.TabIndex = 8;
             checkBox7.Text = "Communication Port";
             checkBox7.UseVisualStyleBackColor = true;
@@ -256,7 +256,7 @@ namespace BatteryRepairModule.Forms.BRM
             checkBox6.Location = new Point(578, 98);
             checkBox6.Name = "checkBox6";
             checkBox6.Padding = new Padding(0, 0, 0, 8);
-            checkBox6.Size = new Size(302, 49);
+            checkBox6.Size = new Size(353, 49);
             checkBox6.TabIndex = 7;
             checkBox6.Text = "Gove Vent ";
             checkBox6.UseVisualStyleBackColor = true;
@@ -269,7 +269,7 @@ namespace BatteryRepairModule.Forms.BRM
             cableDamageCheckBox.Location = new Point(578, 49);
             cableDamageCheckBox.Name = "cableDamageCheckBox";
             cableDamageCheckBox.Padding = new Padding(0, 0, 0, 8);
-            cableDamageCheckBox.Size = new Size(302, 49);
+            cableDamageCheckBox.Size = new Size(353, 49);
             cableDamageCheckBox.TabIndex = 6;
             cableDamageCheckBox.Text = "Cable Damage";
             cableDamageCheckBox.UseVisualStyleBackColor = true;
@@ -282,7 +282,7 @@ namespace BatteryRepairModule.Forms.BRM
             chargePortCheckBox.Location = new Point(578, 0);
             chargePortCheckBox.Name = "chargePortCheckBox";
             chargePortCheckBox.Padding = new Padding(0, 0, 0, 8);
-            chargePortCheckBox.Size = new Size(302, 49);
+            chargePortCheckBox.Size = new Size(353, 49);
             chargePortCheckBox.TabIndex = 5;
             chargePortCheckBox.Text = "Charge Port";
             chargePortCheckBox.UseVisualStyleBackColor = true;
@@ -293,9 +293,9 @@ namespace BatteryRepairModule.Forms.BRM
             panel4.Controls.Add(radioButton6);
             panel4.Controls.Add(label4);
             panel4.Dock = DockStyle.Top;
-            panel4.Location = new Point(0, 342);
+            panel4.Location = new Point(0, 340);
             panel4.Name = "panel4";
-            panel4.Size = new Size(880, 98);
+            panel4.Size = new Size(931, 71);
             panel4.TabIndex = 6;
             // 
             // radioButton7
@@ -306,7 +306,7 @@ namespace BatteryRepairModule.Forms.BRM
             radioButton7.Location = new Point(497, 0);
             radioButton7.Name = "radioButton7";
             radioButton7.Padding = new Padding(20, 0, 20, 0);
-            radioButton7.Size = new Size(104, 98);
+            radioButton7.Size = new Size(104, 71);
             radioButton7.TabIndex = 14;
             radioButton7.TabStop = true;
             radioButton7.Text = "No";
@@ -320,7 +320,7 @@ namespace BatteryRepairModule.Forms.BRM
             radioButton6.Location = new Point(391, 0);
             radioButton6.Name = "radioButton6";
             radioButton6.Padding = new Padding(20, 0, 20, 0);
-            radioButton6.Size = new Size(106, 98);
+            radioButton6.Size = new Size(106, 71);
             radioButton6.TabIndex = 13;
             radioButton6.TabStop = true;
             radioButton6.Text = "Yes";
@@ -334,8 +334,8 @@ namespace BatteryRepairModule.Forms.BRM
             label4.LiveSetting = System.Windows.Forms.Automation.AutomationLiveSetting.Assertive;
             label4.Location = new Point(0, 0);
             label4.Name = "label4";
-            label4.Padding = new Padding(25);
-            label4.Size = new Size(391, 87);
+            label4.Padding = new Padding(25, 15, 25, 25);
+            label4.Size = new Size(391, 77);
             label4.TabIndex = 9;
             label4.Text = "Battery Leads Protected: ";
             // 
@@ -344,7 +344,7 @@ namespace BatteryRepairModule.Forms.BRM
             continueButton.AutoSize = true;
             continueButton.Dock = DockStyle.Right;
             continueButton.Font = new Font("Segoe UI", 18F, FontStyle.Regular, GraphicsUnit.Point);
-            continueButton.Location = new Point(705, 440);
+            continueButton.Location = new Point(756, 411);
             continueButton.MaximumSize = new Size(175, 80);
             continueButton.MinimumSize = new Size(175, 80);
             continueButton.Name = "continueButton";
@@ -358,26 +358,27 @@ namespace BatteryRepairModule.Forms.BRM
             // 
             cancelButton.Dock = DockStyle.Right;
             cancelButton.Font = new Font("Segoe UI", 18F, FontStyle.Regular, GraphicsUnit.Point);
-            cancelButton.Location = new Point(530, 440);
+            cancelButton.Location = new Point(581, 411);
             cancelButton.MaximumSize = new Size(175, 80);
             cancelButton.MinimumSize = new Size(175, 80);
             cancelButton.Name = "cancelButton";
             cancelButton.Size = new Size(175, 80);
             cancelButton.TabIndex = 18;
-            cancelButton.Text = "Cancel";
+            cancelButton.Text = "Back";
             cancelButton.UseVisualStyleBackColor = true;
+            cancelButton.Click += cancelButton_Click;
             // 
             // BrmTicketCreationForm2
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(880, 556);
+            ClientSize = new Size(931, 511);
             Controls.Add(cancelButton);
             Controls.Add(continueButton);
             Controls.Add(panel4);
             Controls.Add(panel3);
             Controls.Add(panel2);
-            MinimumSize = new Size(0, 530);
+            MinimumSize = new Size(947, 550);
             Name = "BrmTicketCreationForm2";
             Text = "serviceInspectionFirstForm";
             panel2.ResumeLayout(false);

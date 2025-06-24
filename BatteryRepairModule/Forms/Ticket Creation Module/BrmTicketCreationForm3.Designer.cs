@@ -38,9 +38,9 @@
             errorsListBox = new ListBox();
             panel12 = new Panel();
             panel14 = new Panel();
-            button2 = new Button();
+            removeCustomerReportButton = new Button();
             panel13 = new Panel();
-            button1 = new Button();
+            addCustomerReportButton = new Button();
             cancelButton = new Button();
             continueButton = new Button();
             panel5.SuspendLayout();
@@ -58,7 +58,7 @@
             panel5.Dock = DockStyle.Top;
             panel5.Location = new Point(0, 0);
             panel5.Name = "panel5";
-            panel5.Size = new Size(880, 50);
+            panel5.Size = new Size(931, 50);
             panel5.TabIndex = 8;
             // 
             // label5
@@ -66,19 +66,19 @@
             label5.AutoSize = true;
             label5.Dock = DockStyle.Left;
             label5.Font = new Font("Segoe UI", 22F, FontStyle.Bold, GraphicsUnit.Point);
-            label5.Location = new Point(458, 0);
+            label5.Location = new Point(440, 0);
             label5.Name = "label5";
             label5.Padding = new Padding(10, 0, 25, 10);
-            label5.Size = new Size(254, 51);
+            label5.Size = new Size(453, 51);
             label5.TabIndex = 6;
-            label5.Text = "Added Faults: ";
+            label5.Text = "Particular Customer Report: ";
             // 
             // panel10
             // 
             panel10.Dock = DockStyle.Left;
-            panel10.Location = new Point(316, 0);
+            panel10.Location = new Point(421, 0);
             panel10.Name = "panel10";
-            panel10.Size = new Size(142, 50);
+            panel10.Size = new Size(19, 50);
             panel10.TabIndex = 5;
             // 
             // label4
@@ -89,9 +89,9 @@
             label4.Location = new Point(0, 0);
             label4.Name = "label4";
             label4.Padding = new Padding(10, 0, 25, 10);
-            label4.Size = new Size(316, 51);
+            label4.Size = new Size(421, 51);
             label4.TabIndex = 1;
-            label4.Text = "Pre-defined faults:";
+            label4.Text = "Customer Report Options:";
             // 
             // panel7
             // 
@@ -101,7 +101,7 @@
             panel7.Dock = DockStyle.Top;
             panel7.Location = new Point(0, 50);
             panel7.Name = "panel7";
-            panel7.Size = new Size(880, 246);
+            panel7.Size = new Size(931, 246);
             panel7.TabIndex = 11;
             // 
             // addedErrorsListBox
@@ -110,15 +110,15 @@
             addedErrorsListBox.Font = new Font("Segoe UI", 18F, FontStyle.Regular, GraphicsUnit.Point);
             addedErrorsListBox.FormattingEnabled = true;
             addedErrorsListBox.ItemHeight = 32;
-            addedErrorsListBox.Location = new Point(458, 0);
+            addedErrorsListBox.Location = new Point(478, 0);
             addedErrorsListBox.Name = "addedErrorsListBox";
-            addedErrorsListBox.Size = new Size(422, 246);
+            addedErrorsListBox.Size = new Size(442, 246);
             addedErrorsListBox.TabIndex = 5;
             // 
             // panel9
             // 
             panel9.Dock = DockStyle.Left;
-            panel9.Location = new Point(421, 0);
+            panel9.Location = new Point(441, 0);
             panel9.Name = "panel9";
             panel9.Size = new Size(37, 246);
             panel9.TabIndex = 4;
@@ -131,7 +131,7 @@
             errorsListBox.ItemHeight = 32;
             errorsListBox.Location = new Point(0, 0);
             errorsListBox.Name = "errorsListBox";
-            errorsListBox.Size = new Size(421, 246);
+            errorsListBox.Size = new Size(441, 246);
             errorsListBox.TabIndex = 0;
             // 
             // panel12
@@ -142,71 +142,74 @@
             panel12.Location = new Point(0, 296);
             panel12.Name = "panel12";
             panel12.Padding = new Padding(10);
-            panel12.Size = new Size(880, 95);
+            panel12.Size = new Size(931, 95);
             panel12.TabIndex = 13;
             // 
             // panel14
             // 
-            panel14.Controls.Add(button2);
+            panel14.Controls.Add(removeCustomerReportButton);
             panel14.Dock = DockStyle.Left;
-            panel14.Location = new Point(440, 10);
+            panel14.Location = new Point(465, 10);
             panel14.Name = "panel14";
             panel14.Padding = new Padding(5);
-            panel14.Size = new Size(430, 75);
+            panel14.Size = new Size(455, 75);
             panel14.TabIndex = 1;
             // 
-            // button2
+            // removeCustomerReportButton
             // 
-            button2.AutoSize = true;
-            button2.Dock = DockStyle.Fill;
-            button2.Font = new Font("Segoe UI", 18F, FontStyle.Regular, GraphicsUnit.Point);
-            button2.Location = new Point(5, 5);
-            button2.Name = "button2";
-            button2.Size = new Size(420, 65);
-            button2.TabIndex = 19;
-            button2.Text = "Remove Customer Report";
-            button2.UseVisualStyleBackColor = true;
+            removeCustomerReportButton.AutoSize = true;
+            removeCustomerReportButton.Dock = DockStyle.Fill;
+            removeCustomerReportButton.Font = new Font("Segoe UI", 18F, FontStyle.Regular, GraphicsUnit.Point);
+            removeCustomerReportButton.Location = new Point(5, 5);
+            removeCustomerReportButton.Name = "removeCustomerReportButton";
+            removeCustomerReportButton.Size = new Size(445, 65);
+            removeCustomerReportButton.TabIndex = 19;
+            removeCustomerReportButton.Text = "Remove Customer Report";
+            removeCustomerReportButton.UseVisualStyleBackColor = true;
+            removeCustomerReportButton.Click += removeCustomerReportButton_Click;
             // 
             // panel13
             // 
-            panel13.Controls.Add(button1);
+            panel13.Controls.Add(addCustomerReportButton);
             panel13.Dock = DockStyle.Left;
             panel13.Location = new Point(10, 10);
             panel13.Name = "panel13";
             panel13.Padding = new Padding(5);
-            panel13.Size = new Size(430, 75);
+            panel13.Size = new Size(455, 75);
             panel13.TabIndex = 0;
             // 
-            // button1
+            // addCustomerReportButton
             // 
-            button1.AutoSize = true;
-            button1.Dock = DockStyle.Fill;
-            button1.Font = new Font("Segoe UI", 18F, FontStyle.Regular, GraphicsUnit.Point);
-            button1.Location = new Point(5, 5);
-            button1.Name = "button1";
-            button1.Size = new Size(420, 65);
-            button1.TabIndex = 18;
-            button1.Text = "Add Customer Report";
-            button1.UseVisualStyleBackColor = true;
+            addCustomerReportButton.AutoSize = true;
+            addCustomerReportButton.Dock = DockStyle.Fill;
+            addCustomerReportButton.Font = new Font("Segoe UI", 18F, FontStyle.Regular, GraphicsUnit.Point);
+            addCustomerReportButton.Location = new Point(5, 5);
+            addCustomerReportButton.Name = "addCustomerReportButton";
+            addCustomerReportButton.Size = new Size(445, 65);
+            addCustomerReportButton.TabIndex = 18;
+            addCustomerReportButton.Text = "Add Customer Report";
+            addCustomerReportButton.UseVisualStyleBackColor = true;
+            addCustomerReportButton.Click += addCustomerReportButton_Click;
             // 
             // cancelButton
             // 
             cancelButton.Dock = DockStyle.Right;
             cancelButton.Font = new Font("Segoe UI", 18F, FontStyle.Regular, GraphicsUnit.Point);
-            cancelButton.Location = new Point(530, 391);
+            cancelButton.Location = new Point(581, 391);
             cancelButton.MaximumSize = new Size(175, 80);
             cancelButton.MinimumSize = new Size(175, 80);
             cancelButton.Name = "cancelButton";
             cancelButton.Size = new Size(175, 80);
             cancelButton.TabIndex = 16;
-            cancelButton.Text = "Cancel";
+            cancelButton.Text = "Back";
             cancelButton.UseVisualStyleBackColor = true;
+            cancelButton.Click += cancelButton_Click;
             // 
             // continueButton
             // 
             continueButton.Dock = DockStyle.Right;
             continueButton.Font = new Font("Segoe UI", 18F, FontStyle.Regular, GraphicsUnit.Point);
-            continueButton.Location = new Point(705, 391);
+            continueButton.Location = new Point(756, 391);
             continueButton.MaximumSize = new Size(175, 80);
             continueButton.MinimumSize = new Size(175, 80);
             continueButton.Name = "continueButton";
@@ -220,7 +223,8 @@
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(880, 491);
+            BackColor = Color.Gainsboro;
+            ClientSize = new Size(931, 511);
             Controls.Add(cancelButton);
             Controls.Add(continueButton);
             Controls.Add(panel12);
@@ -251,9 +255,9 @@
         private ListBox errorsListBox;
         private Panel panel12;
         private Panel panel14;
-        private Button button2;
+        private Button removeCustomerReportButton;
         private Panel panel13;
-        private Button button1;
+        private Button addCustomerReportButton;
         private Button cancelButton;
         private Button continueButton;
     }

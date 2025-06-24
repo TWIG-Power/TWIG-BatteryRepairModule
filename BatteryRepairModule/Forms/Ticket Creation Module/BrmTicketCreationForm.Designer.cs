@@ -69,7 +69,7 @@ namespace BatteryRepairModule.Forms.BRM
             twigTicketNumContainer.Location = new Point(0, 0);
             twigTicketNumContainer.Name = "twigTicketNumContainer";
             twigTicketNumContainer.Padding = new Padding(10, 10, 10, 5);
-            twigTicketNumContainer.Size = new Size(880, 80);
+            twigTicketNumContainer.Size = new Size(931, 80);
             twigTicketNumContainer.TabIndex = 0;
             // 
             // twigTicketNumberTextBox
@@ -78,8 +78,9 @@ namespace BatteryRepairModule.Forms.BRM
             twigTicketNumberTextBox.Font = new Font("Segoe UI", 20F, FontStyle.Regular, GraphicsUnit.Point);
             twigTicketNumberTextBox.Location = new Point(363, 10);
             twigTicketNumberTextBox.MaximumSize = new Size(500, 0);
+            twigTicketNumberTextBox.MinimumSize = new Size(0, 110);
             twigTicketNumberTextBox.Name = "twigTicketNumberTextBox";
-            twigTicketNumberTextBox.Size = new Size(500, 43);
+            twigTicketNumberTextBox.Size = new Size(500, 110);
             twigTicketNumberTextBox.TabIndex = 1;
             // 
             // label1
@@ -102,7 +103,7 @@ namespace BatteryRepairModule.Forms.BRM
             panel1.Dock = DockStyle.Top;
             panel1.Location = new Point(0, 80);
             panel1.Name = "panel1";
-            panel1.Size = new Size(880, 0);
+            panel1.Size = new Size(931, 0);
             panel1.TabIndex = 1;
             // 
             // comboBox1
@@ -137,7 +138,7 @@ namespace BatteryRepairModule.Forms.BRM
             panel2.Location = new Point(0, 80);
             panel2.Name = "panel2";
             panel2.Padding = new Padding(10, 10, 10, 5);
-            panel2.Size = new Size(880, 80);
+            panel2.Size = new Size(931, 80);
             panel2.TabIndex = 2;
             // 
             // batteryTypeDropDown
@@ -171,7 +172,7 @@ namespace BatteryRepairModule.Forms.BRM
             panel3.Location = new Point(0, 160);
             panel3.Name = "panel3";
             panel3.Padding = new Padding(10, 10, 10, 5);
-            panel3.Size = new Size(880, 80);
+            panel3.Size = new Size(931, 80);
             panel3.TabIndex = 3;
             panel3.Paint += panel3_Paint;
             // 
@@ -181,8 +182,9 @@ namespace BatteryRepairModule.Forms.BRM
             batterySerialNumberTextBox.Font = new Font("Segoe UI", 20F, FontStyle.Regular, GraphicsUnit.Point);
             batterySerialNumberTextBox.Location = new Point(372, 10);
             batterySerialNumberTextBox.MaximumSize = new Size(500, 0);
+            batterySerialNumberTextBox.MinimumSize = new Size(0, 110);
             batterySerialNumberTextBox.Name = "batterySerialNumberTextBox";
-            batterySerialNumberTextBox.Size = new Size(498, 43);
+            batterySerialNumberTextBox.Size = new Size(500, 110);
             batterySerialNumberTextBox.TabIndex = 1;
             // 
             // label4
@@ -204,7 +206,7 @@ namespace BatteryRepairModule.Forms.BRM
             panel4.Location = new Point(0, 240);
             panel4.Name = "panel4";
             panel4.Padding = new Padding(10, 10, 10, 5);
-            panel4.Size = new Size(880, 80);
+            panel4.Size = new Size(931, 80);
             panel4.TabIndex = 4;
             // 
             // vehicleVinNumberTextBox
@@ -213,8 +215,9 @@ namespace BatteryRepairModule.Forms.BRM
             vehicleVinNumberTextBox.Font = new Font("Segoe UI", 20F, FontStyle.Regular, GraphicsUnit.Point);
             vehicleVinNumberTextBox.Location = new Point(372, 10);
             vehicleVinNumberTextBox.MaximumSize = new Size(500, 0);
+            vehicleVinNumberTextBox.MinimumSize = new Size(0, 110);
             vehicleVinNumberTextBox.Name = "vehicleVinNumberTextBox";
-            vehicleVinNumberTextBox.Size = new Size(498, 43);
+            vehicleVinNumberTextBox.Size = new Size(500, 110);
             vehicleVinNumberTextBox.TabIndex = 1;
             // 
             // label5
@@ -236,7 +239,7 @@ namespace BatteryRepairModule.Forms.BRM
             panel5.Location = new Point(0, 320);
             panel5.Name = "panel5";
             panel5.Padding = new Padding(10, 10, 10, 5);
-            panel5.Size = new Size(880, 80);
+            panel5.Size = new Size(931, 80);
             panel5.TabIndex = 5;
             // 
             // staffInitiatingReportDropDown
@@ -247,7 +250,7 @@ namespace BatteryRepairModule.Forms.BRM
             staffInitiatingReportDropDown.Location = new Point(372, 10);
             staffInitiatingReportDropDown.MaximumSize = new Size(500, 0);
             staffInitiatingReportDropDown.Name = "staffInitiatingReportDropDown";
-            staffInitiatingReportDropDown.Size = new Size(498, 45);
+            staffInitiatingReportDropDown.Size = new Size(500, 45);
             staffInitiatingReportDropDown.TabIndex = 1;
             // 
             // label6
@@ -266,7 +269,7 @@ namespace BatteryRepairModule.Forms.BRM
             // 
             continueButton.Dock = DockStyle.Right;
             continueButton.Font = new Font("Segoe UI", 18F, FontStyle.Regular, GraphicsUnit.Point);
-            continueButton.Location = new Point(705, 400);
+            continueButton.Location = new Point(756, 400);
             continueButton.MaximumSize = new Size(175, 80);
             continueButton.MinimumSize = new Size(175, 80);
             continueButton.Name = "continueButton";
@@ -280,7 +283,7 @@ namespace BatteryRepairModule.Forms.BRM
             // 
             cancelButton.Dock = DockStyle.Right;
             cancelButton.Font = new Font("Segoe UI", 18F, FontStyle.Regular, GraphicsUnit.Point);
-            cancelButton.Location = new Point(530, 400);
+            cancelButton.Location = new Point(581, 400);
             cancelButton.MaximumSize = new Size(175, 80);
             cancelButton.MinimumSize = new Size(175, 80);
             cancelButton.Name = "cancelButton";
@@ -295,7 +298,7 @@ namespace BatteryRepairModule.Forms.BRM
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.Gainsboro;
-            ClientSize = new Size(880, 491);
+            ClientSize = new Size(931, 511);
             Controls.Add(cancelButton);
             Controls.Add(continueButton);
             Controls.Add(panel5);

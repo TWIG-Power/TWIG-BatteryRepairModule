@@ -1,0 +1,5 @@
+C:\Users\FMustico\Documents\github\TWIG-BatteryRepairModule\BatteryRepairModule\bin\Release\net6.0-windows\app.publish\BatteryRepairModule.exe
+C:\Users\FMustico\Documents\github\TWIG-BatteryRepairModule\BatteryRepairModule\bin\Release\net6.0-windows\app.publish\BatteryRepairModule.dll
+C:\Users\FMustico\Documents\github\TWIG-BatteryRepairModule\BatteryRepairModule\bin\Release\net6.0-windows\app.publish\BatteryRepairModule.deps.json
+C:\Users\FMustico\Documents\github\TWIG-BatteryRepairModule\BatteryRepairModule\bin\Release\net6.0-windows\app.publish\BatteryRepairModule.runtimeconfig.json
+C:\Users\FMustico\Documents\github\TWIG-BatteryRepairModule\BatteryRepairModule\bin\Release\net6.0-windows\app.publish\BatteryRepairModule.pdb

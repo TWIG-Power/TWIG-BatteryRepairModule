@@ -31,7 +31,7 @@ namespace BatteryRepairModule.Forms.BRM
 
         private void cancelButton_Click(object sender, EventArgs e)
         {
-
+            this.Close(); 
         }
     }
 }

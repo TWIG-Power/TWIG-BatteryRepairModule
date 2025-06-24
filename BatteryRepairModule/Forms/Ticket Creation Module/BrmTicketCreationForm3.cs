@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using BatteryRepairModule.Forms.Add_Repair_Action_Form;
 using BatteryRepairModule.Forms.BRM;
 
 namespace BatteryRepairModule
@@ -22,7 +23,22 @@ namespace BatteryRepairModule
 
         private void continueButton_Click(object sender, EventArgs e)
         {
-            this.Close(); 
+            this.Close();
+        }
+
+        private void cancelButton_Click(object sender, EventArgs e)
+        {
+            parentForm.OpenChildForm(new BrmTicketCreationForm2(parentForm));
+        }
+
+        private void addCustomerReportButton_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void removeCustomerReportButton_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

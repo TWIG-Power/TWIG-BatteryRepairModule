@@ -3,24 +3,20 @@
   "WorkspaceRootPath": "C:\\Users\\FMustico\\Documents\\github\\TWIG-BatteryRepairModule\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{527B0BCE-AA0F-4D73-9DF5-0079242DFD81}|BatteryRepairModule\\BatteryRepairModule.csproj|c:\\users\\fmustico\\documents\\github\\twig-batteryrepairmodule\\batteryrepairmodule\\forms\\service inspection forms\\serviceinspectionform1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{527B0BCE-AA0F-4D73-9DF5-0079242DFD81}|BatteryRepairModule\\BatteryRepairModule.csproj|solutionrelative:batteryrepairmodule\\forms\\service inspection forms\\serviceinspectionform1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{527B0BCE-AA0F-4D73-9DF5-0079242DFD81}|BatteryRepairModule\\BatteryRepairModule.csproj|c:\\users\\fmustico\\documents\\github\\twig-batteryrepairmodule\\batteryrepairmodule\\forms\\service inspection forms\\serviceinspectionform1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
-      "RelativeMoniker": "D:0:0:{527B0BCE-AA0F-4D73-9DF5-0079242DFD81}|BatteryRepairModule\\BatteryRepairModule.csproj|solutionrelative:batteryrepairmodule\\forms\\service inspection forms\\serviceinspectionform1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{527B0BCE-AA0F-4D73-9DF5-0079242DFD81}|BatteryRepairModule\\BatteryRepairModule.csproj|c:\\users\\fmustico\\documents\\github\\twig-batteryrepairmodule\\batteryrepairmodule\\forms\\service inspection forms\\serviceinspectionform2.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
-      "RelativeMoniker": "D:0:0:{527B0BCE-AA0F-4D73-9DF5-0079242DFD81}|BatteryRepairModule\\BatteryRepairModule.csproj|solutionrelative:batteryrepairmodule\\forms\\service inspection forms\\serviceinspectionform2.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{527B0BCE-AA0F-4D73-9DF5-0079242DFD81}|BatteryRepairModule\\BatteryRepairModule.csproj|c:\\users\\fmustico\\documents\\github\\twig-batteryrepairmodule\\batteryrepairmodule\\forms\\repair action form\\brmrepairactionform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
       "RelativeMoniker": "D:0:0:{527B0BCE-AA0F-4D73-9DF5-0079242DFD81}|BatteryRepairModule\\BatteryRepairModule.csproj|solutionrelative:batteryrepairmodule\\forms\\repair action form\\brmrepairactionform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
     },
     {
+      "AbsoluteMoniker": "D:0:0:{527B0BCE-AA0F-4D73-9DF5-0079242DFD81}|BatteryRepairModule\\BatteryRepairModule.csproj|c:\\users\\fmustico\\documents\\github\\twig-batteryrepairmodule\\batteryrepairmodule\\brmmainmenuform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{527B0BCE-AA0F-4D73-9DF5-0079242DFD81}|BatteryRepairModule\\BatteryRepairModule.csproj|solutionrelative:batteryrepairmodule\\brmmainmenuform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{527B0BCE-AA0F-4D73-9DF5-0079242DFD81}|BatteryRepairModule\\BatteryRepairModule.csproj|c:\\users\\fmustico\\documents\\github\\twig-batteryrepairmodule\\batteryrepairmodule\\brmmainmenuform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
       "RelativeMoniker": "D:0:0:{527B0BCE-AA0F-4D73-9DF5-0079242DFD81}|BatteryRepairModule\\BatteryRepairModule.csproj|solutionrelative:batteryrepairmodule\\brmmainmenuform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{527B0BCE-AA0F-4D73-9DF5-0079242DFD81}|BatteryRepairModule\\BatteryRepairModule.csproj|c:\\users\\fmustico\\documents\\github\\twig-batteryrepairmodule\\batteryrepairmodule\\brmmainmenuform.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{527B0BCE-AA0F-4D73-9DF5-0079242DFD81}|BatteryRepairModule\\BatteryRepairModule.csproj|solutionrelative:batteryrepairmodule\\brmmainmenuform.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -30,72 +26,61 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 0,
+          "SelectedChildIndex": 1,
           "Children": [
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{d78612c7-9962-4b83-95d9-268046dad23a}"
+            },
             {
               "$type": "Document",
               "DocumentIndex": 0,
-              "Title": "serviceInspectionForm1.cs",
-              "DocumentMoniker": "C:\\Users\\FMustico\\Documents\\github\\TWIG-BatteryRepairModule\\BatteryRepairModule\\Forms\\Service Inspection Forms\\serviceInspectionForm1.cs",
-              "RelativeDocumentMoniker": "BatteryRepairModule\\Forms\\Service Inspection Forms\\serviceInspectionForm1.cs",
-              "ToolTip": "C:\\Users\\FMustico\\Documents\\github\\TWIG-BatteryRepairModule\\BatteryRepairModule\\Forms\\Service Inspection Forms\\serviceInspectionForm1.cs",
-              "RelativeToolTip": "BatteryRepairModule\\Forms\\Service Inspection Forms\\serviceInspectionForm1.cs",
-              "ViewState": "AgIAAAUAAAAAAAAAAAAmwBcAAAAJAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-23T18:43:14.608Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "serviceInspectionForm2.cs [Design]",
-              "DocumentMoniker": "C:\\Users\\FMustico\\Documents\\github\\TWIG-BatteryRepairModule\\BatteryRepairModule\\Forms\\Service Inspection Forms\\serviceInspectionForm2.cs",
-              "RelativeDocumentMoniker": "BatteryRepairModule\\Forms\\Service Inspection Forms\\serviceInspectionForm2.cs",
-              "ToolTip": "C:\\Users\\FMustico\\Documents\\github\\TWIG-BatteryRepairModule\\BatteryRepairModule\\Forms\\Service Inspection Forms\\serviceInspectionForm2.cs [Design]",
-              "RelativeToolTip": "BatteryRepairModule\\Forms\\Service Inspection Forms\\serviceInspectionForm2.cs [Design]",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-23T18:37:21.531Z",
-              "EditorCaption": " [Design]"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 3,
               "Title": "BrmRepairActionForm.cs [Design]",
               "DocumentMoniker": "C:\\Users\\FMustico\\Documents\\github\\TWIG-BatteryRepairModule\\BatteryRepairModule\\Forms\\Repair Action Form\\BrmRepairActionForm.cs",
               "RelativeDocumentMoniker": "BatteryRepairModule\\Forms\\Repair Action Form\\BrmRepairActionForm.cs",
-              "ToolTip": "C:\\Users\\FMustico\\Documents\\github\\TWIG-BatteryRepairModule\\BatteryRepairModule\\Forms\\Repair Action Form\\BrmRepairActionForm.cs [Design]*",
-              "RelativeToolTip": "BatteryRepairModule\\Forms\\Repair Action Form\\BrmRepairActionForm.cs [Design]*",
+              "ToolTip": "C:\\Users\\FMustico\\Documents\\github\\TWIG-BatteryRepairModule\\BatteryRepairModule\\Forms\\Repair Action Form\\BrmRepairActionForm.cs [Design]",
+              "RelativeToolTip": "BatteryRepairModule\\Forms\\Repair Action Form\\BrmRepairActionForm.cs [Design]",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-23T18:36:15.007Z",
+              "WhenOpened": "2025-06-24T18:13:44.492Z",
               "EditorCaption": " [Design]"
             },
             {
               "$type": "Document",
               "DocumentIndex": 1,
-              "Title": "serviceInspectionForm1.cs [Design]",
-              "DocumentMoniker": "C:\\Users\\FMustico\\Documents\\github\\TWIG-BatteryRepairModule\\BatteryRepairModule\\Forms\\Service Inspection Forms\\serviceInspectionForm1.cs",
-              "RelativeDocumentMoniker": "BatteryRepairModule\\Forms\\Service Inspection Forms\\serviceInspectionForm1.cs",
-              "ToolTip": "C:\\Users\\FMustico\\Documents\\github\\TWIG-BatteryRepairModule\\BatteryRepairModule\\Forms\\Service Inspection Forms\\serviceInspectionForm1.cs [Design]",
-              "RelativeToolTip": "BatteryRepairModule\\Forms\\Service Inspection Forms\\serviceInspectionForm1.cs [Design]",
+              "Title": "BrmMainMenuForm.cs",
+              "DocumentMoniker": "C:\\Users\\FMustico\\Documents\\github\\TWIG-BatteryRepairModule\\BatteryRepairModule\\BrmMainMenuForm.cs",
+              "RelativeDocumentMoniker": "BatteryRepairModule\\BrmMainMenuForm.cs",
+              "ToolTip": "C:\\Users\\FMustico\\Documents\\github\\TWIG-BatteryRepairModule\\BatteryRepairModule\\BrmMainMenuForm.cs",
+              "RelativeToolTip": "BatteryRepairModule\\BrmMainMenuForm.cs",
+              "ViewState": "AgIAAGcAAAAAAAAAAAAIwHgAAAAqAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-23T18:31:49.393Z",
-              "EditorCaption": " [Design]"
+              "WhenOpened": "2025-06-24T17:19:06.481Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 2,
               "Title": "BrmMainMenuForm.cs [Design]",
               "DocumentMoniker": "C:\\Users\\FMustico\\Documents\\github\\TWIG-BatteryRepairModule\\BatteryRepairModule\\BrmMainMenuForm.cs",
               "RelativeDocumentMoniker": "BatteryRepairModule\\BrmMainMenuForm.cs",
               "ToolTip": "C:\\Users\\FMustico\\Documents\\github\\TWIG-BatteryRepairModule\\BatteryRepairModule\\BrmMainMenuForm.cs [Design]",
               "RelativeToolTip": "BatteryRepairModule\\BrmMainMenuForm.cs [Design]",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-23T18:26:13.229Z",
+              "WhenOpened": "2025-06-24T17:19:04.484Z",
               "EditorCaption": " [Design]"
             },
             {
-              "$type": "Bookmark",
-              "Name": "ST:0:0:{d78612c7-9962-4b83-95d9-268046dad23a}"
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "BrmMainMenuForm.Designer.cs",
+              "DocumentMoniker": "C:\\Users\\FMustico\\Documents\\github\\TWIG-BatteryRepairModule\\BatteryRepairModule\\BrmMainMenuForm.Designer.cs",
+              "RelativeDocumentMoniker": "BatteryRepairModule\\BrmMainMenuForm.Designer.cs",
+              "ToolTip": "C:\\Users\\FMustico\\Documents\\github\\TWIG-BatteryRepairModule\\BatteryRepairModule\\BrmMainMenuForm.Designer.cs",
+              "RelativeToolTip": "BatteryRepairModule\\BrmMainMenuForm.Designer.cs",
+              "ViewState": "AgIAAHgAAAAAAAAAAAAmwIwAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-24T17:18:56.678Z",
+              "EditorCaption": ""
             }
           ]
         },

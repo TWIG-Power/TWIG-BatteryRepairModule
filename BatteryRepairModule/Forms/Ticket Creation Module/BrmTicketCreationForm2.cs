@@ -30,5 +30,10 @@ namespace BatteryRepairModule.Forms.BRM
         {
             parentForm.OpenChildForm(new BrmTicketCreationForm3(parentForm));
         }
+
+        private void cancelButton_Click(object sender, EventArgs e)
+        {
+            parentForm.OpenChildForm(new BrmTicketCreationForm(parentForm)); 
+        }
     }
 }

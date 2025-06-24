@@ -55,20 +55,20 @@
             panel7.Controls.Add(panel10);
             panel7.Controls.Add(panel8);
             panel7.Dock = DockStyle.Top;
-            panel7.Location = new Point(0, 369);
+            panel7.Location = new Point(0, 353);
             panel7.Name = "panel7";
-            panel7.Padding = new Padding(15);
-            panel7.Size = new Size(880, 101);
+            panel7.Padding = new Padding(2);
+            panel7.Size = new Size(931, 75);
             panel7.TabIndex = 22;
             // 
             // panel10
             // 
             panel10.Controls.Add(repairCompletedButton);
             panel10.Dock = DockStyle.Left;
-            panel10.Location = new Point(449, 15);
+            panel10.Location = new Point(464, 2);
             panel10.Name = "panel10";
             panel10.Padding = new Padding(5);
-            panel10.Size = new Size(416, 71);
+            panel10.Size = new Size(444, 71);
             panel10.TabIndex = 20;
             // 
             // repairCompletedButton
@@ -78,7 +78,7 @@
             repairCompletedButton.Font = new Font("Segoe UI", 15.75F, FontStyle.Regular, GraphicsUnit.Point);
             repairCompletedButton.Location = new Point(5, 5);
             repairCompletedButton.Name = "repairCompletedButton";
-            repairCompletedButton.Size = new Size(406, 61);
+            repairCompletedButton.Size = new Size(434, 61);
             repairCompletedButton.TabIndex = 18;
             repairCompletedButton.Text = "Remove Repair Action";
             repairCompletedButton.UseVisualStyleBackColor = true;
@@ -87,10 +87,10 @@
             // 
             panel8.Controls.Add(addRepairActionButton);
             panel8.Dock = DockStyle.Left;
-            panel8.Location = new Point(15, 15);
+            panel8.Location = new Point(2, 2);
             panel8.Name = "panel8";
             panel8.Padding = new Padding(5);
-            panel8.Size = new Size(434, 71);
+            panel8.Size = new Size(462, 71);
             panel8.TabIndex = 19;
             // 
             // addRepairActionButton
@@ -100,10 +100,11 @@
             addRepairActionButton.Font = new Font("Segoe UI", 15.75F, FontStyle.Regular, GraphicsUnit.Point);
             addRepairActionButton.Location = new Point(5, 5);
             addRepairActionButton.Name = "addRepairActionButton";
-            addRepairActionButton.Size = new Size(424, 61);
+            addRepairActionButton.Size = new Size(452, 61);
             addRepairActionButton.TabIndex = 17;
             addRepairActionButton.Text = "Add Repair Action";
             addRepairActionButton.UseVisualStyleBackColor = true;
+            addRepairActionButton.Click += addRepairActionButton_Click;
             // 
             // panel5
             // 
@@ -111,10 +112,10 @@
             panel5.Controls.Add(panel4);
             panel5.Controls.Add(reportedIssuesListBox);
             panel5.Dock = DockStyle.Top;
-            panel5.Location = new Point(0, 100);
+            panel5.Location = new Point(0, 84);
             panel5.Name = "panel5";
-            panel5.Padding = new Padding(20);
-            panel5.Size = new Size(880, 269);
+            panel5.Padding = new Padding(5);
+            panel5.Size = new Size(931, 269);
             panel5.TabIndex = 21;
             // 
             // repairActionsListBox
@@ -123,17 +124,17 @@
             repairActionsListBox.Font = new Font("Segoe UI", 18F, FontStyle.Regular, GraphicsUnit.Point);
             repairActionsListBox.FormattingEnabled = true;
             repairActionsListBox.ItemHeight = 32;
-            repairActionsListBox.Location = new Point(460, 20);
+            repairActionsListBox.Location = new Point(475, 5);
             repairActionsListBox.Name = "repairActionsListBox";
-            repairActionsListBox.Size = new Size(409, 229);
+            repairActionsListBox.Size = new Size(439, 259);
             repairActionsListBox.TabIndex = 2;
             // 
             // panel4
             // 
             panel4.Dock = DockStyle.Left;
-            panel4.Location = new Point(429, 20);
+            panel4.Location = new Point(444, 5);
             panel4.Name = "panel4";
-            panel4.Size = new Size(31, 229);
+            panel4.Size = new Size(31, 259);
             panel4.TabIndex = 1;
             // 
             // reportedIssuesListBox
@@ -142,9 +143,9 @@
             reportedIssuesListBox.Font = new Font("Segoe UI", 18F, FontStyle.Regular, GraphicsUnit.Point);
             reportedIssuesListBox.FormattingEnabled = true;
             reportedIssuesListBox.ItemHeight = 32;
-            reportedIssuesListBox.Location = new Point(20, 20);
+            reportedIssuesListBox.Location = new Point(5, 5);
             reportedIssuesListBox.Name = "reportedIssuesListBox";
-            reportedIssuesListBox.Size = new Size(409, 229);
+            reportedIssuesListBox.Size = new Size(439, 259);
             reportedIssuesListBox.TabIndex = 0;
             // 
             // panel3
@@ -156,8 +157,8 @@
             panel3.Dock = DockStyle.Top;
             panel3.Location = new Point(0, 0);
             panel3.Name = "panel3";
-            panel3.Padding = new Padding(20);
-            panel3.Size = new Size(880, 100);
+            panel3.Padding = new Padding(15);
+            panel3.Size = new Size(931, 84);
             panel3.TabIndex = 20;
             // 
             // label2
@@ -165,7 +166,7 @@
             label2.AutoSize = true;
             label2.Dock = DockStyle.Left;
             label2.Font = new Font("Segoe UI", 22F, FontStyle.Bold, GraphicsUnit.Point);
-            label2.Location = new Point(454, 20);
+            label2.Location = new Point(434, 15);
             label2.Name = "label2";
             label2.Padding = new Padding(10);
             label2.Size = new Size(258, 61);
@@ -175,9 +176,9 @@
             // panel1
             // 
             panel1.Dock = DockStyle.Left;
-            panel1.Location = new Point(289, 20);
+            panel1.Location = new Point(284, 15);
             panel1.Name = "panel1";
-            panel1.Size = new Size(165, 60);
+            panel1.Size = new Size(150, 54);
             panel1.TabIndex = 2;
             // 
             // label3
@@ -185,7 +186,7 @@
             label3.AutoSize = true;
             label3.Dock = DockStyle.Left;
             label3.Font = new Font("Segoe UI", 22F, FontStyle.Bold, GraphicsUnit.Point);
-            label3.Location = new Point(20, 20);
+            label3.Location = new Point(15, 15);
             label3.Name = "label3";
             label3.Padding = new Padding(10);
             label3.Size = new Size(269, 61);
@@ -197,7 +198,7 @@
             backButton.AutoSize = true;
             backButton.Dock = DockStyle.Right;
             backButton.Font = new Font("Segoe UI", 18F, FontStyle.Regular, GraphicsUnit.Point);
-            backButton.Location = new Point(530, 470);
+            backButton.Location = new Point(581, 428);
             backButton.MaximumSize = new Size(175, 80);
             backButton.MinimumSize = new Size(175, 80);
             backButton.Name = "backButton";
@@ -205,13 +206,14 @@
             backButton.TabIndex = 24;
             backButton.Text = "Back";
             backButton.UseVisualStyleBackColor = true;
+            backButton.Click += backButton_Click;
             // 
             // continueButton
             // 
             continueButton.AutoSize = true;
             continueButton.Dock = DockStyle.Right;
             continueButton.Font = new Font("Segoe UI", 18F, FontStyle.Regular, GraphicsUnit.Point);
-            continueButton.Location = new Point(705, 470);
+            continueButton.Location = new Point(756, 428);
             continueButton.MaximumSize = new Size(175, 80);
             continueButton.MinimumSize = new Size(175, 80);
             continueButton.Name = "continueButton";
@@ -219,12 +221,14 @@
             continueButton.TabIndex = 23;
             continueButton.Text = "Continue";
             continueButton.UseVisualStyleBackColor = true;
+            continueButton.Click += continueButton_Click;
             // 
             // serviceInspectionForm2
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(880, 556);
+            BackColor = Color.Gainsboro;
+            ClientSize = new Size(931, 511);
             Controls.Add(backButton);
             Controls.Add(continueButton);
             Controls.Add(panel7);
