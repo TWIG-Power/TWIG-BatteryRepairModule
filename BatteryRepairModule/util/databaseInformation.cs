@@ -10,6 +10,8 @@ public static class BRMinformation
     public static int? batterySerialNumber = 0;
     public static string? vehicleVINNumber = string.Empty;
     public static List<string> staffOptions = new List<string>();
+    public static string? staffCreatedReport = string.Empty;
+    public static List<string> moduleReportedErrors = new List<string>(); 
 
     #endregion
 
@@ -23,7 +25,7 @@ public static class BRMinformation
                         checkScrewsMissing = false,
                         checkHousingDentsHoles = false,
                         checkMissingWires = false;
-    public static string? batteryLeadsProtected = string.Empty;
+    public static bool? batteryLeadsProtected;
     public static bool? checkCleanHousing = false;
     public static bool? checkThirtyMinuteDrying = false;
     public static bool? checkPluggedIntoDiagTool = false;

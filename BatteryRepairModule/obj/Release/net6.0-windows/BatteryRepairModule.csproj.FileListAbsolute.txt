@@ -26,6 +26,17 @@ C:\Users\FMustico\Documents\github\TWIG-BatteryRepairModule\BatteryRepairModule\
 C:\Users\FMustico\Documents\github\TWIG-BatteryRepairModule\BatteryRepairModule\obj\Release\net6.0-windows\ref\BatteryRepairModule.dll
 C:\Users\FMustico\Documents\github\TWIG-BatteryRepairModule\BatteryRepairModule\obj\Release\net6.0-windows\BatteryRepairModule.Forms.Add_Repair_Action_Form.addCustomerReportForm.resources
 C:\Users\FMustico\Documents\github\TWIG-BatteryRepairModule\BatteryRepairModule\obj\Release\net6.0-windows\BatteryRepairModule.Forms.Add_Forms.addStatusUpdateForm.resources
+C:\Users\FMustico\Documents\github\TWIG-BatteryRepairModule\BatteryRepairModule\bin\Release\net6.0-windows\Microsoft.Extensions.DependencyInjection.Abstractions.dll
+C:\Users\FMustico\Documents\github\TWIG-BatteryRepairModule\BatteryRepairModule\bin\Release\net6.0-windows\Microsoft.Extensions.Logging.Abstractions.dll
+C:\Users\FMustico\Documents\github\TWIG-BatteryRepairModule\BatteryRepairModule\bin\Release\net6.0-windows\Npgsql.dll
+C:\Users\FMustico\Documents\github\TWIG-BatteryRepairModule\BatteryRepairModule\bin\Release\net6.0-windows\System.Diagnostics.DiagnosticSource.dll
+C:\Users\FMustico\Documents\github\TWIG-BatteryRepairModule\BatteryRepairModule\bin\Release\net6.0-windows\System.Text.Encodings.Web.dll
+C:\Users\FMustico\Documents\github\TWIG-BatteryRepairModule\BatteryRepairModule\bin\Release\net6.0-windows\System.Text.Json.dll
+C:\Users\FMustico\Documents\github\TWIG-BatteryRepairModule\BatteryRepairModule\bin\Release\net6.0-windows\runtimes\browser\lib\net6.0\System.Text.Encodings.Web.dll
+C:\Users\FMustico\Documents\github\TWIG-BatteryRepairModule\BatteryRepairModule\obj\Release\net6.0-windows\BatteryRepairModule.csproj.AssemblyReference.cache
+C:\Users\FMustico\Documents\github\TWIG-BatteryRepairModule\BatteryRepairModule\obj\Release\net6.0-windows\BatteryRepairModule.Forms.Quality.qualityForm1.resources
+C:\Users\FMustico\Documents\github\TWIG-BatteryRepairModule\BatteryRepairModule\obj\Release\net6.0-windows\BatteryRepairModule.Forms.Quality.qualityForm2.resources
+C:\Users\FMustico\Documents\github\TWIG-BatteryRepairModule\BatteryRepairModule\obj\Release\net6.0-windows\BatteryR.9C265190.Up2Date
 C:\Users\FMustico\Documents\github\TWIG-BatteryRepairModule\BatteryRepairModule\bin\Release\net6.0-windows\BatteryRepairModule.dll.manifest
 C:\Users\FMustico\Documents\github\TWIG-BatteryRepairModule\BatteryRepairModule\bin\Release\net6.0-windows\BatteryRepairModule.application
 C:\Users\FMustico\Documents\github\TWIG-BatteryRepairModule\BatteryRepairModule\obj\Release\net6.0-windows\BatteryRepairModule.dll.manifest

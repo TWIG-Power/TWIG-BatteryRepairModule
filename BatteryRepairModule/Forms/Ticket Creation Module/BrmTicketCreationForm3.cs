@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Windows.Forms.Design;
 using BatteryRepairModule.Forms.Add_Repair_Action_Form;
 using BatteryRepairModule.Forms.BRM;
 
@@ -23,6 +24,15 @@ namespace BatteryRepairModule
 
         private void continueButton_Click(object sender, EventArgs e)
         {
+            try
+            {
+                var errorsArray = addedErrorsListBox.Items.Cast<string>().ToList();
+                BRMinformation.moduleReportedErrors.AddRange(errorsArray);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"The following exception was thrown: {ex}.", "Input Error", MessageBoxButtons.OK, MessageBoxIcon.Error); 
+            }
             this.Close();
         }
 
@@ -33,12 +43,15 @@ namespace BatteryRepairModule
 
         private void addCustomerReportButton_Click(object sender, EventArgs e)
         {
-
+            addedErrorsListBox.Items.Add(errorsListBox.SelectedItem); 
         }
 
         private void removeCustomerReportButton_Click(object sender, EventArgs e)
         {
-
+            if (addedErrorsListBox.SelectedItem != null)
+            {
+            addedErrorsListBox.Items.Remove(addedErrorsListBox.SelectedItem);
+            }
         }
     }
 }

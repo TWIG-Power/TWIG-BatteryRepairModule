@@ -33,25 +33,25 @@ namespace BatteryRepairModule.Forms.BRM
         private void InitializeComponent()
         {
             panel2 = new Panel();
-            radioButton3 = new RadioButton();
-            radioButton2 = new RadioButton();
-            radioButton1 = new RadioButton();
+            doesNotApplyShippingButton = new RadioButton();
+            unsafeShippingButton = new RadioButton();
+            safeShippingButton = new RadioButton();
             label3 = new Label();
             panel1 = new Panel();
-            checkBox5 = new CheckBox();
-            checkBox4 = new CheckBox();
-            checkBox3 = new CheckBox();
-            checkBox2 = new CheckBox();
-            checkBox1 = new CheckBox();
+            missingWiresCheckBox = new CheckBox();
+            housingDentsCheckBox = new CheckBox();
+            screwsMissingCheckBox = new CheckBox();
+            evidenceOfTamperingCheckBox = new CheckBox();
+            housingScrapesCheckBox = new CheckBox();
             label2 = new Label();
             panel3 = new Panel();
-            checkBox7 = new CheckBox();
-            checkBox6 = new CheckBox();
+            commPortCheckBox = new CheckBox();
+            goveVentCheckBox = new CheckBox();
             cableDamageCheckBox = new CheckBox();
             chargePortCheckBox = new CheckBox();
             panel4 = new Panel();
-            radioButton7 = new RadioButton();
-            radioButton6 = new RadioButton();
+            battLeadProtectNo = new RadioButton();
+            battLeadProtectYes = new RadioButton();
             label4 = new Label();
             continueButton = new Button();
             cancelButton = new Button();
@@ -64,9 +64,9 @@ namespace BatteryRepairModule.Forms.BRM
             // panel2
             // 
             panel2.AutoSizeMode = AutoSizeMode.GrowAndShrink;
-            panel2.Controls.Add(radioButton3);
-            panel2.Controls.Add(radioButton2);
-            panel2.Controls.Add(radioButton1);
+            panel2.Controls.Add(doesNotApplyShippingButton);
+            panel2.Controls.Add(unsafeShippingButton);
+            panel2.Controls.Add(safeShippingButton);
             panel2.Controls.Add(label3);
             panel2.Dock = DockStyle.Top;
             panel2.Location = new Point(0, 0);
@@ -75,47 +75,47 @@ namespace BatteryRepairModule.Forms.BRM
             panel2.Size = new Size(931, 78);
             panel2.TabIndex = 3;
             // 
-            // radioButton3
+            // doesNotApplyShippingButton
             // 
-            radioButton3.AutoSize = true;
-            radioButton3.Dock = DockStyle.Left;
-            radioButton3.Font = new Font("Segoe UI", 18F, FontStyle.Regular, GraphicsUnit.Point);
-            radioButton3.Location = new Point(562, 10);
-            radioButton3.Name = "radioButton3";
-            radioButton3.Padding = new Padding(20, 0, 20, 0);
-            radioButton3.Size = new Size(241, 63);
-            radioButton3.TabIndex = 3;
-            radioButton3.TabStop = true;
-            radioButton3.Text = "Does not apply ";
-            radioButton3.UseVisualStyleBackColor = true;
+            doesNotApplyShippingButton.AutoSize = true;
+            doesNotApplyShippingButton.Dock = DockStyle.Left;
+            doesNotApplyShippingButton.Font = new Font("Segoe UI", 18F, FontStyle.Regular, GraphicsUnit.Point);
+            doesNotApplyShippingButton.Location = new Point(562, 10);
+            doesNotApplyShippingButton.Name = "doesNotApplyShippingButton";
+            doesNotApplyShippingButton.Padding = new Padding(20, 0, 20, 0);
+            doesNotApplyShippingButton.Size = new Size(241, 63);
+            doesNotApplyShippingButton.TabIndex = 3;
+            doesNotApplyShippingButton.TabStop = true;
+            doesNotApplyShippingButton.Text = "Does not apply ";
+            doesNotApplyShippingButton.UseVisualStyleBackColor = true;
             // 
-            // radioButton2
+            // unsafeShippingButton
             // 
-            radioButton2.AutoSize = true;
-            radioButton2.Dock = DockStyle.Left;
-            radioButton2.Font = new Font("Segoe UI", 18F, FontStyle.Regular, GraphicsUnit.Point);
-            radioButton2.Location = new Point(417, 10);
-            radioButton2.Name = "radioButton2";
-            radioButton2.Padding = new Padding(20, 0, 20, 0);
-            radioButton2.Size = new Size(145, 63);
-            radioButton2.TabIndex = 2;
-            radioButton2.TabStop = true;
-            radioButton2.Text = "Unsafe";
-            radioButton2.UseVisualStyleBackColor = true;
+            unsafeShippingButton.AutoSize = true;
+            unsafeShippingButton.Dock = DockStyle.Left;
+            unsafeShippingButton.Font = new Font("Segoe UI", 18F, FontStyle.Regular, GraphicsUnit.Point);
+            unsafeShippingButton.Location = new Point(417, 10);
+            unsafeShippingButton.Name = "unsafeShippingButton";
+            unsafeShippingButton.Padding = new Padding(20, 0, 20, 0);
+            unsafeShippingButton.Size = new Size(145, 63);
+            unsafeShippingButton.TabIndex = 2;
+            unsafeShippingButton.TabStop = true;
+            unsafeShippingButton.Text = "Unsafe";
+            unsafeShippingButton.UseVisualStyleBackColor = true;
             // 
-            // radioButton1
+            // safeShippingButton
             // 
-            radioButton1.AutoSize = true;
-            radioButton1.Dock = DockStyle.Left;
-            radioButton1.Font = new Font("Segoe UI", 18F, FontStyle.Regular, GraphicsUnit.Point);
-            radioButton1.Location = new Point(299, 10);
-            radioButton1.Name = "radioButton1";
-            radioButton1.Padding = new Padding(20, 0, 20, 0);
-            radioButton1.Size = new Size(118, 63);
-            radioButton1.TabIndex = 1;
-            radioButton1.TabStop = true;
-            radioButton1.Text = "Safe";
-            radioButton1.UseVisualStyleBackColor = true;
+            safeShippingButton.AutoSize = true;
+            safeShippingButton.Dock = DockStyle.Left;
+            safeShippingButton.Font = new Font("Segoe UI", 18F, FontStyle.Regular, GraphicsUnit.Point);
+            safeShippingButton.Location = new Point(299, 10);
+            safeShippingButton.Name = "safeShippingButton";
+            safeShippingButton.Padding = new Padding(20, 0, 20, 0);
+            safeShippingButton.Size = new Size(118, 63);
+            safeShippingButton.TabIndex = 1;
+            safeShippingButton.TabStop = true;
+            safeShippingButton.Text = "Safe";
+            safeShippingButton.UseVisualStyleBackColor = true;
             // 
             // label3
             // 
@@ -132,11 +132,11 @@ namespace BatteryRepairModule.Forms.BRM
             // panel1
             // 
             panel1.AutoSizeMode = AutoSizeMode.GrowAndShrink;
-            panel1.Controls.Add(checkBox5);
-            panel1.Controls.Add(checkBox4);
-            panel1.Controls.Add(checkBox3);
-            panel1.Controls.Add(checkBox2);
-            panel1.Controls.Add(checkBox1);
+            panel1.Controls.Add(missingWiresCheckBox);
+            panel1.Controls.Add(housingDentsCheckBox);
+            panel1.Controls.Add(screwsMissingCheckBox);
+            panel1.Controls.Add(evidenceOfTamperingCheckBox);
+            panel1.Controls.Add(housingScrapesCheckBox);
             panel1.Controls.Add(label2);
             panel1.Dock = DockStyle.Left;
             panel1.Location = new Point(0, 0);
@@ -145,70 +145,70 @@ namespace BatteryRepairModule.Forms.BRM
             panel1.Size = new Size(578, 262);
             panel1.TabIndex = 4;
             // 
-            // checkBox5
+            // missingWiresCheckBox
             // 
-            checkBox5.AutoSize = true;
-            checkBox5.Dock = DockStyle.Top;
-            checkBox5.Font = new Font("Segoe UI", 20F, FontStyle.Regular, GraphicsUnit.Point);
-            checkBox5.Location = new Point(248, 206);
-            checkBox5.Name = "checkBox5";
-            checkBox5.Padding = new Padding(0, 0, 0, 8);
-            checkBox5.Size = new Size(320, 49);
-            checkBox5.TabIndex = 5;
-            checkBox5.Text = "Missing Wires";
-            checkBox5.UseVisualStyleBackColor = true;
+            missingWiresCheckBox.AutoSize = true;
+            missingWiresCheckBox.Dock = DockStyle.Top;
+            missingWiresCheckBox.Font = new Font("Segoe UI", 20F, FontStyle.Regular, GraphicsUnit.Point);
+            missingWiresCheckBox.Location = new Point(248, 206);
+            missingWiresCheckBox.Name = "missingWiresCheckBox";
+            missingWiresCheckBox.Padding = new Padding(0, 0, 0, 8);
+            missingWiresCheckBox.Size = new Size(320, 49);
+            missingWiresCheckBox.TabIndex = 5;
+            missingWiresCheckBox.Text = "Missing Wires";
+            missingWiresCheckBox.UseVisualStyleBackColor = true;
             // 
-            // checkBox4
+            // housingDentsCheckBox
             // 
-            checkBox4.AutoSize = true;
-            checkBox4.Dock = DockStyle.Top;
-            checkBox4.Font = new Font("Segoe UI", 20F, FontStyle.Regular, GraphicsUnit.Point);
-            checkBox4.Location = new Point(248, 157);
-            checkBox4.Name = "checkBox4";
-            checkBox4.Padding = new Padding(0, 0, 0, 8);
-            checkBox4.Size = new Size(320, 49);
-            checkBox4.TabIndex = 4;
-            checkBox4.Text = "Housing dents / holes";
-            checkBox4.UseVisualStyleBackColor = true;
+            housingDentsCheckBox.AutoSize = true;
+            housingDentsCheckBox.Dock = DockStyle.Top;
+            housingDentsCheckBox.Font = new Font("Segoe UI", 20F, FontStyle.Regular, GraphicsUnit.Point);
+            housingDentsCheckBox.Location = new Point(248, 157);
+            housingDentsCheckBox.Name = "housingDentsCheckBox";
+            housingDentsCheckBox.Padding = new Padding(0, 0, 0, 8);
+            housingDentsCheckBox.Size = new Size(320, 49);
+            housingDentsCheckBox.TabIndex = 4;
+            housingDentsCheckBox.Text = "Housing dents / holes";
+            housingDentsCheckBox.UseVisualStyleBackColor = true;
             // 
-            // checkBox3
+            // screwsMissingCheckBox
             // 
-            checkBox3.AutoSize = true;
-            checkBox3.Dock = DockStyle.Top;
-            checkBox3.Font = new Font("Segoe UI", 20F, FontStyle.Regular, GraphicsUnit.Point);
-            checkBox3.Location = new Point(248, 108);
-            checkBox3.Name = "checkBox3";
-            checkBox3.Padding = new Padding(0, 0, 0, 8);
-            checkBox3.Size = new Size(320, 49);
-            checkBox3.TabIndex = 3;
-            checkBox3.Text = "Screws missing";
-            checkBox3.UseVisualStyleBackColor = true;
+            screwsMissingCheckBox.AutoSize = true;
+            screwsMissingCheckBox.Dock = DockStyle.Top;
+            screwsMissingCheckBox.Font = new Font("Segoe UI", 20F, FontStyle.Regular, GraphicsUnit.Point);
+            screwsMissingCheckBox.Location = new Point(248, 108);
+            screwsMissingCheckBox.Name = "screwsMissingCheckBox";
+            screwsMissingCheckBox.Padding = new Padding(0, 0, 0, 8);
+            screwsMissingCheckBox.Size = new Size(320, 49);
+            screwsMissingCheckBox.TabIndex = 3;
+            screwsMissingCheckBox.Text = "Screws missing";
+            screwsMissingCheckBox.UseVisualStyleBackColor = true;
             // 
-            // checkBox2
+            // evidenceOfTamperingCheckBox
             // 
-            checkBox2.AutoSize = true;
-            checkBox2.Dock = DockStyle.Top;
-            checkBox2.Font = new Font("Segoe UI", 20F, FontStyle.Regular, GraphicsUnit.Point);
-            checkBox2.Location = new Point(248, 59);
-            checkBox2.Name = "checkBox2";
-            checkBox2.Padding = new Padding(0, 0, 0, 8);
-            checkBox2.Size = new Size(320, 49);
-            checkBox2.TabIndex = 2;
-            checkBox2.Text = "Evidence of tampering";
-            checkBox2.UseVisualStyleBackColor = true;
+            evidenceOfTamperingCheckBox.AutoSize = true;
+            evidenceOfTamperingCheckBox.Dock = DockStyle.Top;
+            evidenceOfTamperingCheckBox.Font = new Font("Segoe UI", 20F, FontStyle.Regular, GraphicsUnit.Point);
+            evidenceOfTamperingCheckBox.Location = new Point(248, 59);
+            evidenceOfTamperingCheckBox.Name = "evidenceOfTamperingCheckBox";
+            evidenceOfTamperingCheckBox.Padding = new Padding(0, 0, 0, 8);
+            evidenceOfTamperingCheckBox.Size = new Size(320, 49);
+            evidenceOfTamperingCheckBox.TabIndex = 2;
+            evidenceOfTamperingCheckBox.Text = "Evidence of tampering";
+            evidenceOfTamperingCheckBox.UseVisualStyleBackColor = true;
             // 
-            // checkBox1
+            // housingScrapesCheckBox
             // 
-            checkBox1.AutoSize = true;
-            checkBox1.Dock = DockStyle.Top;
-            checkBox1.Font = new Font("Segoe UI", 20F, FontStyle.Regular, GraphicsUnit.Point);
-            checkBox1.Location = new Point(248, 10);
-            checkBox1.Name = "checkBox1";
-            checkBox1.Padding = new Padding(0, 0, 0, 8);
-            checkBox1.Size = new Size(320, 49);
-            checkBox1.TabIndex = 1;
-            checkBox1.Text = "Housing Scrapes";
-            checkBox1.UseVisualStyleBackColor = true;
+            housingScrapesCheckBox.AutoSize = true;
+            housingScrapesCheckBox.Dock = DockStyle.Top;
+            housingScrapesCheckBox.Font = new Font("Segoe UI", 20F, FontStyle.Regular, GraphicsUnit.Point);
+            housingScrapesCheckBox.Location = new Point(248, 10);
+            housingScrapesCheckBox.Name = "housingScrapesCheckBox";
+            housingScrapesCheckBox.Padding = new Padding(0, 0, 0, 8);
+            housingScrapesCheckBox.Size = new Size(320, 49);
+            housingScrapesCheckBox.TabIndex = 1;
+            housingScrapesCheckBox.Text = "Housing Scrapes";
+            housingScrapesCheckBox.UseVisualStyleBackColor = true;
             // 
             // label2
             // 
@@ -224,8 +224,8 @@ namespace BatteryRepairModule.Forms.BRM
             // 
             // panel3
             // 
-            panel3.Controls.Add(checkBox7);
-            panel3.Controls.Add(checkBox6);
+            panel3.Controls.Add(commPortCheckBox);
+            panel3.Controls.Add(goveVentCheckBox);
             panel3.Controls.Add(cableDamageCheckBox);
             panel3.Controls.Add(chargePortCheckBox);
             panel3.Controls.Add(panel1);
@@ -235,31 +235,31 @@ namespace BatteryRepairModule.Forms.BRM
             panel3.Size = new Size(931, 262);
             panel3.TabIndex = 5;
             // 
-            // checkBox7
+            // commPortCheckBox
             // 
-            checkBox7.AutoSize = true;
-            checkBox7.Dock = DockStyle.Top;
-            checkBox7.Font = new Font("Segoe UI", 20F, FontStyle.Regular, GraphicsUnit.Point);
-            checkBox7.Location = new Point(578, 147);
-            checkBox7.Name = "checkBox7";
-            checkBox7.Padding = new Padding(0, 0, 0, 8);
-            checkBox7.Size = new Size(353, 49);
-            checkBox7.TabIndex = 8;
-            checkBox7.Text = "Communication Port";
-            checkBox7.UseVisualStyleBackColor = true;
+            commPortCheckBox.AutoSize = true;
+            commPortCheckBox.Dock = DockStyle.Top;
+            commPortCheckBox.Font = new Font("Segoe UI", 20F, FontStyle.Regular, GraphicsUnit.Point);
+            commPortCheckBox.Location = new Point(578, 147);
+            commPortCheckBox.Name = "commPortCheckBox";
+            commPortCheckBox.Padding = new Padding(0, 0, 0, 8);
+            commPortCheckBox.Size = new Size(353, 49);
+            commPortCheckBox.TabIndex = 8;
+            commPortCheckBox.Text = "Communication Port";
+            commPortCheckBox.UseVisualStyleBackColor = true;
             // 
-            // checkBox6
+            // goveVentCheckBox
             // 
-            checkBox6.AutoSize = true;
-            checkBox6.Dock = DockStyle.Top;
-            checkBox6.Font = new Font("Segoe UI", 20F, FontStyle.Regular, GraphicsUnit.Point);
-            checkBox6.Location = new Point(578, 98);
-            checkBox6.Name = "checkBox6";
-            checkBox6.Padding = new Padding(0, 0, 0, 8);
-            checkBox6.Size = new Size(353, 49);
-            checkBox6.TabIndex = 7;
-            checkBox6.Text = "Gove Vent ";
-            checkBox6.UseVisualStyleBackColor = true;
+            goveVentCheckBox.AutoSize = true;
+            goveVentCheckBox.Dock = DockStyle.Top;
+            goveVentCheckBox.Font = new Font("Segoe UI", 20F, FontStyle.Regular, GraphicsUnit.Point);
+            goveVentCheckBox.Location = new Point(578, 98);
+            goveVentCheckBox.Name = "goveVentCheckBox";
+            goveVentCheckBox.Padding = new Padding(0, 0, 0, 8);
+            goveVentCheckBox.Size = new Size(353, 49);
+            goveVentCheckBox.TabIndex = 7;
+            goveVentCheckBox.Text = "Gove Vent ";
+            goveVentCheckBox.UseVisualStyleBackColor = true;
             // 
             // cableDamageCheckBox
             // 
@@ -289,8 +289,8 @@ namespace BatteryRepairModule.Forms.BRM
             // 
             // panel4
             // 
-            panel4.Controls.Add(radioButton7);
-            panel4.Controls.Add(radioButton6);
+            panel4.Controls.Add(battLeadProtectNo);
+            panel4.Controls.Add(battLeadProtectYes);
             panel4.Controls.Add(label4);
             panel4.Dock = DockStyle.Top;
             panel4.Location = new Point(0, 340);
@@ -298,33 +298,33 @@ namespace BatteryRepairModule.Forms.BRM
             panel4.Size = new Size(931, 71);
             panel4.TabIndex = 6;
             // 
-            // radioButton7
+            // battLeadProtectNo
             // 
-            radioButton7.AutoSize = true;
-            radioButton7.Dock = DockStyle.Left;
-            radioButton7.Font = new Font("Segoe UI", 18F, FontStyle.Regular, GraphicsUnit.Point);
-            radioButton7.Location = new Point(497, 0);
-            radioButton7.Name = "radioButton7";
-            radioButton7.Padding = new Padding(20, 0, 20, 0);
-            radioButton7.Size = new Size(104, 71);
-            radioButton7.TabIndex = 14;
-            radioButton7.TabStop = true;
-            radioButton7.Text = "No";
-            radioButton7.UseVisualStyleBackColor = true;
+            battLeadProtectNo.AutoSize = true;
+            battLeadProtectNo.Dock = DockStyle.Left;
+            battLeadProtectNo.Font = new Font("Segoe UI", 18F, FontStyle.Regular, GraphicsUnit.Point);
+            battLeadProtectNo.Location = new Point(497, 0);
+            battLeadProtectNo.Name = "battLeadProtectNo";
+            battLeadProtectNo.Padding = new Padding(20, 0, 20, 0);
+            battLeadProtectNo.Size = new Size(104, 71);
+            battLeadProtectNo.TabIndex = 14;
+            battLeadProtectNo.TabStop = true;
+            battLeadProtectNo.Text = "No";
+            battLeadProtectNo.UseVisualStyleBackColor = true;
             // 
-            // radioButton6
+            // battLeadProtectYes
             // 
-            radioButton6.AutoSize = true;
-            radioButton6.Dock = DockStyle.Left;
-            radioButton6.Font = new Font("Segoe UI", 18F, FontStyle.Regular, GraphicsUnit.Point);
-            radioButton6.Location = new Point(391, 0);
-            radioButton6.Name = "radioButton6";
-            radioButton6.Padding = new Padding(20, 0, 20, 0);
-            radioButton6.Size = new Size(106, 71);
-            radioButton6.TabIndex = 13;
-            radioButton6.TabStop = true;
-            radioButton6.Text = "Yes";
-            radioButton6.UseVisualStyleBackColor = true;
+            battLeadProtectYes.AutoSize = true;
+            battLeadProtectYes.Dock = DockStyle.Left;
+            battLeadProtectYes.Font = new Font("Segoe UI", 18F, FontStyle.Regular, GraphicsUnit.Point);
+            battLeadProtectYes.Location = new Point(391, 0);
+            battLeadProtectYes.Name = "battLeadProtectYes";
+            battLeadProtectYes.Padding = new Padding(20, 0, 20, 0);
+            battLeadProtectYes.Size = new Size(106, 71);
+            battLeadProtectYes.TabIndex = 13;
+            battLeadProtectYes.TabStop = true;
+            battLeadProtectYes.Text = "Yes";
+            battLeadProtectYes.UseVisualStyleBackColor = true;
             // 
             // label4
             // 
@@ -395,26 +395,26 @@ namespace BatteryRepairModule.Forms.BRM
 
         #endregion
         private Panel panel2;
-        private RadioButton radioButton3;
-        private RadioButton radioButton2;
-        private RadioButton radioButton1;
+        private RadioButton doesNotApplyShippingButton;
+        private RadioButton unsafeShippingButton;
+        private RadioButton safeShippingButton;
         private Label label3;
         private Panel panel1;
-        private CheckBox checkBox5;
-        private CheckBox checkBox4;
-        private CheckBox checkBox3;
-        private CheckBox checkBox2;
-        private CheckBox checkBox1;
+        private CheckBox missingWiresCheckBox;
+        private CheckBox housingDentsCheckBox;
+        private CheckBox screwsMissingCheckBox;
+        private CheckBox evidenceOfTamperingCheckBox;
+        private CheckBox housingScrapesCheckBox;
         private Label label2;
         private Panel panel3;
         private CheckBox chargePortCheckBox;
         private CheckBox cableDamageCheckBox;
-        private CheckBox checkBox6;
-        private CheckBox checkBox7;
+        private CheckBox goveVentCheckBox;
+        private CheckBox commPortCheckBox;
         private Panel panel4;
         public Label label4;
-        private RadioButton radioButton6;
-        private RadioButton radioButton7;
+        private RadioButton battLeadProtectYes;
+        private RadioButton battLeadProtectNo;
         private Button continueButton;
         private Button cancelButton;
     }

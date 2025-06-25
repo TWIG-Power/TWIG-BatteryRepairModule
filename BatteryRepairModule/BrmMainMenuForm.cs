@@ -29,7 +29,7 @@ public partial class BrmMainMenuForm : Form
 
         button.FlatStyle = FlatStyle.Flat;
         button.BackColor = Color.LightBlue;
-        button.FlatAppearance.BorderSize = 3;
+        button.FlatAppearance.BorderSize = 6;
         button.FlatAppearance.BorderColor = Color.DarkRed;
         name = button.Text.ToString();
         titleLabel.Text = name;
