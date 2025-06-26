@@ -35,16 +35,16 @@
             staffDropDown = new ComboBox();
             label5 = new Label();
             panel5 = new Panel();
-            radioButton5 = new RadioButton();
-            radioButton6 = new RadioButton();
+            noCleanProcedButton = new RadioButton();
+            yesCleanProcButton = new RadioButton();
             label6 = new Label();
             panel2 = new Panel();
-            radioButton1 = new RadioButton();
-            radioButton2 = new RadioButton();
+            noDiagnosticButton = new RadioButton();
+            yesDiagnosticButton = new RadioButton();
             label3 = new Label();
             panel4 = new Panel();
             button1 = new Button();
-            maskedTextBox2 = new MaskedTextBox();
+            diagnosticReportPath = new MaskedTextBox();
             label2 = new Label();
             backButton = new Button();
             continueButton = new Button();
@@ -128,8 +128,8 @@
             // panel5
             // 
             panel5.AutoSizeMode = AutoSizeMode.GrowAndShrink;
-            panel5.Controls.Add(radioButton5);
-            panel5.Controls.Add(radioButton6);
+            panel5.Controls.Add(noCleanProcedButton);
+            panel5.Controls.Add(yesCleanProcButton);
             panel5.Controls.Add(label6);
             panel5.Dock = DockStyle.Top;
             panel5.Location = new Point(0, 172);
@@ -138,33 +138,33 @@
             panel5.Size = new Size(931, 87);
             panel5.TabIndex = 16;
             // 
-            // radioButton5
+            // noCleanProcedButton
             // 
-            radioButton5.AutoSize = true;
-            radioButton5.Dock = DockStyle.Left;
-            radioButton5.Font = new Font("Segoe UI", 20F, FontStyle.Regular, GraphicsUnit.Point);
-            radioButton5.Location = new Point(653, 20);
-            radioButton5.Name = "radioButton5";
-            radioButton5.Padding = new Padding(20, 0, 20, 0);
-            radioButton5.Size = new Size(118, 47);
-            radioButton5.TabIndex = 2;
-            radioButton5.TabStop = true;
-            radioButton5.Text = "No ";
-            radioButton5.UseVisualStyleBackColor = true;
+            noCleanProcedButton.AutoSize = true;
+            noCleanProcedButton.Dock = DockStyle.Left;
+            noCleanProcedButton.Font = new Font("Segoe UI", 20F, FontStyle.Regular, GraphicsUnit.Point);
+            noCleanProcedButton.Location = new Point(653, 20);
+            noCleanProcedButton.Name = "noCleanProcedButton";
+            noCleanProcedButton.Padding = new Padding(20, 0, 20, 0);
+            noCleanProcedButton.Size = new Size(118, 47);
+            noCleanProcedButton.TabIndex = 2;
+            noCleanProcedButton.TabStop = true;
+            noCleanProcedButton.Text = "No ";
+            noCleanProcedButton.UseVisualStyleBackColor = true;
             // 
-            // radioButton6
+            // yesCleanProcButton
             // 
-            radioButton6.AutoSize = true;
-            radioButton6.Dock = DockStyle.Left;
-            radioButton6.Font = new Font("Segoe UI", 20F, FontStyle.Regular, GraphicsUnit.Point);
-            radioButton6.Location = new Point(540, 20);
-            radioButton6.Name = "radioButton6";
-            radioButton6.Padding = new Padding(20, 0, 20, 0);
-            radioButton6.Size = new Size(113, 47);
-            radioButton6.TabIndex = 1;
-            radioButton6.TabStop = true;
-            radioButton6.Text = "Yes";
-            radioButton6.UseVisualStyleBackColor = true;
+            yesCleanProcButton.AutoSize = true;
+            yesCleanProcButton.Dock = DockStyle.Left;
+            yesCleanProcButton.Font = new Font("Segoe UI", 20F, FontStyle.Regular, GraphicsUnit.Point);
+            yesCleanProcButton.Location = new Point(540, 20);
+            yesCleanProcButton.Name = "yesCleanProcButton";
+            yesCleanProcButton.Padding = new Padding(20, 0, 20, 0);
+            yesCleanProcButton.Size = new Size(113, 47);
+            yesCleanProcButton.TabIndex = 1;
+            yesCleanProcButton.TabStop = true;
+            yesCleanProcButton.Text = "Yes";
+            yesCleanProcButton.UseVisualStyleBackColor = true;
             // 
             // label6
             // 
@@ -180,8 +180,8 @@
             // 
             // panel2
             // 
-            panel2.Controls.Add(radioButton1);
-            panel2.Controls.Add(radioButton2);
+            panel2.Controls.Add(noDiagnosticButton);
+            panel2.Controls.Add(yesDiagnosticButton);
             panel2.Controls.Add(label3);
             panel2.Dock = DockStyle.Top;
             panel2.Location = new Point(0, 259);
@@ -190,33 +190,33 @@
             panel2.Size = new Size(931, 88);
             panel2.TabIndex = 17;
             // 
-            // radioButton1
+            // noDiagnosticButton
             // 
-            radioButton1.AutoSize = true;
-            radioButton1.Dock = DockStyle.Left;
-            radioButton1.Font = new Font("Segoe UI", 20F, FontStyle.Regular, GraphicsUnit.Point);
-            radioButton1.Location = new Point(612, 20);
-            radioButton1.Name = "radioButton1";
-            radioButton1.Padding = new Padding(20, 0, 20, 0);
-            radioButton1.Size = new Size(118, 48);
-            radioButton1.TabIndex = 3;
-            radioButton1.TabStop = true;
-            radioButton1.Text = "No ";
-            radioButton1.UseVisualStyleBackColor = true;
+            noDiagnosticButton.AutoSize = true;
+            noDiagnosticButton.Dock = DockStyle.Left;
+            noDiagnosticButton.Font = new Font("Segoe UI", 20F, FontStyle.Regular, GraphicsUnit.Point);
+            noDiagnosticButton.Location = new Point(612, 20);
+            noDiagnosticButton.Name = "noDiagnosticButton";
+            noDiagnosticButton.Padding = new Padding(20, 0, 20, 0);
+            noDiagnosticButton.Size = new Size(118, 48);
+            noDiagnosticButton.TabIndex = 3;
+            noDiagnosticButton.TabStop = true;
+            noDiagnosticButton.Text = "No ";
+            noDiagnosticButton.UseVisualStyleBackColor = true;
             // 
-            // radioButton2
+            // yesDiagnosticButton
             // 
-            radioButton2.AutoSize = true;
-            radioButton2.Dock = DockStyle.Left;
-            radioButton2.Font = new Font("Segoe UI", 20F, FontStyle.Regular, GraphicsUnit.Point);
-            radioButton2.Location = new Point(499, 20);
-            radioButton2.Name = "radioButton2";
-            radioButton2.Padding = new Padding(20, 0, 20, 0);
-            radioButton2.Size = new Size(113, 48);
-            radioButton2.TabIndex = 2;
-            radioButton2.TabStop = true;
-            radioButton2.Text = "Yes";
-            radioButton2.UseVisualStyleBackColor = true;
+            yesDiagnosticButton.AutoSize = true;
+            yesDiagnosticButton.Dock = DockStyle.Left;
+            yesDiagnosticButton.Font = new Font("Segoe UI", 20F, FontStyle.Regular, GraphicsUnit.Point);
+            yesDiagnosticButton.Location = new Point(499, 20);
+            yesDiagnosticButton.Name = "yesDiagnosticButton";
+            yesDiagnosticButton.Padding = new Padding(20, 0, 20, 0);
+            yesDiagnosticButton.Size = new Size(113, 48);
+            yesDiagnosticButton.TabIndex = 2;
+            yesDiagnosticButton.TabStop = true;
+            yesDiagnosticButton.Text = "Yes";
+            yesDiagnosticButton.UseVisualStyleBackColor = true;
             // 
             // label3
             // 
@@ -234,7 +234,7 @@
             // 
             panel4.AutoSizeMode = AutoSizeMode.GrowAndShrink;
             panel4.Controls.Add(button1);
-            panel4.Controls.Add(maskedTextBox2);
+            panel4.Controls.Add(diagnosticReportPath);
             panel4.Controls.Add(label2);
             panel4.Dock = DockStyle.Top;
             panel4.Location = new Point(0, 347);
@@ -254,16 +254,16 @@
             button1.Text = "Attach";
             button1.UseVisualStyleBackColor = true;
             // 
-            // maskedTextBox2
+            // diagnosticReportPath
             // 
-            maskedTextBox2.Dock = DockStyle.Left;
-            maskedTextBox2.Font = new Font("Segoe UI", 20F, FontStyle.Regular, GraphicsUnit.Point);
-            maskedTextBox2.Location = new Point(326, 20);
-            maskedTextBox2.MaximumSize = new Size(500, 0);
-            maskedTextBox2.MinimumSize = new Size(0, 110);
-            maskedTextBox2.Name = "maskedTextBox2";
-            maskedTextBox2.Size = new Size(500, 110);
-            maskedTextBox2.TabIndex = 1;
+            diagnosticReportPath.Dock = DockStyle.Left;
+            diagnosticReportPath.Font = new Font("Segoe UI", 20F, FontStyle.Regular, GraphicsUnit.Point);
+            diagnosticReportPath.Location = new Point(326, 20);
+            diagnosticReportPath.MaximumSize = new Size(500, 0);
+            diagnosticReportPath.MinimumSize = new Size(0, 110);
+            diagnosticReportPath.Name = "diagnosticReportPath";
+            diagnosticReportPath.Size = new Size(500, 110);
+            diagnosticReportPath.TabIndex = 1;
             // 
             // label2
             // 
@@ -345,16 +345,16 @@
         private ComboBox staffDropDown;
         private Label label5;
         private Panel panel5;
-        private RadioButton radioButton5;
-        private RadioButton radioButton6;
+        private RadioButton noCleanProcedButton;
+        private RadioButton yesCleanProcButton;
         private Label label6;
         private Panel panel2;
-        private RadioButton radioButton1;
-        private RadioButton radioButton2;
+        private RadioButton noDiagnosticButton;
+        private RadioButton yesDiagnosticButton;
         private Label label3;
         private Panel panel4;
         private Button button1;
-        private MaskedTextBox maskedTextBox2;
+        private MaskedTextBox diagnosticReportPath;
         private Label label2;
         private Button backButton;
         private Button continueButton;

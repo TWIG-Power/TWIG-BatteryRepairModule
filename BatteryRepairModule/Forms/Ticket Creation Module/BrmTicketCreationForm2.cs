@@ -13,12 +13,75 @@ namespace BatteryRepairModule.Forms.BRM
 {
     public partial class BrmTicketCreationForm2 : Form
     {
+        // Temporary variables for form data
+        public static string? tempVerifyShippingChoice;
+        public static bool? tempBatteryLeadsProtected;
+        public static bool? tempCheckHousingScrape;
+        public static bool? tempCheckEvidenceOfTamp;
+        public static bool? tempCheckScrewsMissing;
+        public static bool? tempCheckHousingDentsHoles;
+        public static bool? tempCheckMissingWires;
+        public static bool? tempCheckChargePort;
+        public static bool? tempCheckCableDamage;
+        public static bool? tempCheckGoveVent;
+        public static bool? tempCheckCommPort;
 
         private BrmMainMenuForm parentForm;
         public BrmTicketCreationForm2(BrmMainMenuForm parent)
         {
             InitializeComponent();
             this.parentForm = parent;
+
+            // Load temp variables back into form controls
+            LoadTempVariables();
+        }
+
+        private void LoadTempVariables()
+        {
+            if (!string.IsNullOrEmpty(tempVerifyShippingChoice))
+            {
+                switch (tempVerifyShippingChoice)
+                {
+                    case "Safe":
+                        safeShippingButton.Checked = true;
+                        break;
+                    case "Unsafe":
+                        unsafeShippingButton.Checked = true;
+                        break;
+                    case "N/A":
+                        doesNotApplyShippingButton.Checked = true;
+                        break; 
+                    default:
+                        break;
+                }
+            }
+
+            if (tempBatteryLeadsProtected.HasValue)
+            {
+                if (tempBatteryLeadsProtected.Value)
+                    battLeadProtectYes.Checked = true;
+                else
+                    battLeadProtectNo.Checked = true;
+            }
+
+            if (tempCheckHousingScrape.HasValue)
+                housingScrapesCheckBox.Checked = tempCheckHousingScrape.Value;
+            if (tempCheckEvidenceOfTamp.HasValue)
+                evidenceOfTamperingCheckBox.Checked = tempCheckEvidenceOfTamp.Value;
+            if (tempCheckScrewsMissing.HasValue)
+                screwsMissingCheckBox.Checked = tempCheckScrewsMissing.Value;
+            if (tempCheckHousingDentsHoles.HasValue)
+                housingDentsCheckBox.Checked = tempCheckHousingDentsHoles.Value;
+            if (tempCheckMissingWires.HasValue)
+                missingWiresCheckBox.Checked = tempCheckMissingWires.Value;
+            if (tempCheckChargePort.HasValue)
+                chargePortCheckBox.Checked = tempCheckChargePort.Value;
+            if (tempCheckCableDamage.HasValue)
+                cableDamageCheckBox.Checked = tempCheckCableDamage.Value;
+            if (tempCheckGoveVent.HasValue)
+                goveVentCheckBox.Checked = tempCheckGoveVent.Value;
+            if (tempCheckCommPort.HasValue)
+                commPortCheckBox.Checked = tempCheckCommPort.Value;
         }
 
         private void backButton_Click(object sender, EventArgs e)
@@ -30,66 +93,45 @@ namespace BatteryRepairModule.Forms.BRM
         {
             try
             {
-                shippingCheck();
+                // Store form data in temporary variables
+                tempVerifyShippingChoice = safeShippingButton.Checked ? "Safe" : (unsafeShippingButton.Checked ? "Unsafe" : "N/A");
+                tempBatteryLeadsProtected = battLeadProtectYes.Checked ? true : (battLeadProtectNo.Checked ? false : null);
+                
+                // Store battery check data
+                tempCheckHousingScrape = housingScrapesCheckBox.Checked;
+                tempCheckEvidenceOfTamp = evidenceOfTamperingCheckBox.Checked;
+                tempCheckScrewsMissing = screwsMissingCheckBox.Checked;
+                tempCheckHousingDentsHoles = housingDentsCheckBox.Checked;
+                tempCheckMissingWires = missingWiresCheckBox.Checked;
+                tempCheckChargePort = chargePortCheckBox.Checked;
+                tempCheckCableDamage = cableDamageCheckBox.Checked;
+                tempCheckGoveVent = goveVentCheckBox.Checked;
+                tempCheckCommPort = commPortCheckBox.Checked;
 
-                batteryCheck();
-
-                BRMinformation.batteryLeadsProtected = battLeadProtectYes.Checked ? true : false;
-
-                if (string.IsNullOrEmpty(BRMinformation.verifyShippingChoice))
+                // Validation using temp variables
+                if (string.IsNullOrEmpty(tempVerifyShippingChoice))
                 {
                     MessageBox.Show("Please select an option regarding shipping verification", "Input Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return;
                 }
 
-                if (BRMinformation.batteryLeadsProtected == null)
+                if (tempBatteryLeadsProtected == null)
                 {
                     MessageBox.Show("Please select an option regarding battery leads protection.", "Input Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return; 
                 }
+                
                 parentForm.OpenChildForm(new BrmTicketCreationForm3(parentForm));
             }
             catch (Exception ex)
             {
-
+                MessageBox.Show($"The following exception was thrown: {ex}.", "Input Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
         private void cancelButton_Click(object sender, EventArgs e)
         {
             parentForm.OpenChildForm(new BrmTicketCreationForm(parentForm));
-        }
-
-        private void shippingCheck()
-        {
-            if (safeShippingButton.Checked == true)
-                BRMinformation.verifyShippingChoice = "Safe";
-            else if (unsafeShippingButton.Checked == true)
-                BRMinformation.verifyShippingChoice = "Unsafe";
-            else
-                BRMinformation.verifyShippingChoice = "N/A";
-        }
-
-        private void batteryCheck()
-        {
-            if (housingScrapesCheckBox.Checked)
-                BRMinformation.checkHousingScrape = true;
-            if (evidenceOfTamperingCheckBox.Checked)
-                BRMinformation.checkEvidenceOfTamp = true;
-            if (screwsMissingCheckBox.Checked)
-                BRMinformation.checkScrewsMissing = true;
-            if (housingDentsCheckBox.Checked)
-                BRMinformation.checkHousingDentsHoles = true;
-            if (missingWiresCheckBox.Checked)
-                BRMinformation.checkMissingWires = true;
-            if (chargePortCheckBox.Checked)
-                BRMinformation.checkChargePort = true;
-            if (cableDamageCheckBox.Checked)
-                BRMinformation.checkCableDamage = true;
-            if (goveVentCheckBox.Checked)
-                BRMinformation.checkGoveVent = true;
-            if (commPortCheckBox.Checked)
-                BRMinformation.checkCommPort = true;
         }
     }
 }

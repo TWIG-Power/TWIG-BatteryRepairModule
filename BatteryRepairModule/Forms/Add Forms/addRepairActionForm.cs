@@ -17,8 +17,8 @@ namespace BatteryRepairModule.Forms.BRM
         {
             InitializeComponent();
             modifiedListBox = listboxRef; 
-            BRMinformation.InitializeStaffOptions();
-            listBox1.Items.AddRange(BRMinformation.staffOptions.ToArray());
+
+            listBox1.Items.AddRange(dbInformation.repairActionOptions.Select(kvp => $"{kvp.Key} - {kvp.Value}").ToArray());
         }
 
         private void addRepairActionForm_Load(object sender, EventArgs e)

@@ -48,7 +48,6 @@ C:\Users\FMustico\Documents\github\TWIG-BatteryRepairModule\BatteryRepairModule\
 C:\Users\FMustico\Documents\github\TWIG-BatteryRepairModule\BatteryRepairModule\obj\Debug\net6.0-windows\BatteryRepairModule.BrmTicketCreationForm3.resources
 C:\Users\FMustico\Documents\github\TWIG-BatteryRepairModule\BatteryRepairModule\obj\Debug\net6.0-windows\BatteryRepairModule.Forms.Service_Inspection_Forms.serviceInspectionForm1.resources
 C:\Users\FMustico\Documents\github\TWIG-BatteryRepairModule\BatteryRepairModule\obj\Debug\net6.0-windows\BatteryRepairModule.Forms.Service_Inspection_Forms.serviceInspectionForm2.resources
-C:\Users\FMustico\Documents\github\TWIG-BatteryRepairModule\BatteryRepairModule\obj\Debug\net6.0-windows\BatteryRepairModule.Forms.Add_Repair_Action_Form.addCustomerReportForm.resources
 C:\Users\FMustico\Documents\github\TWIG-BatteryRepairModule\BatteryRepairModule\obj\Debug\net6.0-windows\BatteryRepairModule.Forms.Add_Forms.addStatusUpdateForm.resources
 C:\Users\FMustico\Documents\github\TWIG-BatteryRepairModule\BatteryRepairModule\obj\Debug\net6.0-windows\BatteryRepairModule.Forms.Quality.qualityForm1.resources
 c:\Users\FMustico\Documents\github\TWIG-BatteryRepairModule\BatteryRepairModule\obj\Debug\net6.0-windows\BatteryRepairModule.Forms.Quality.qualityForm2.resources

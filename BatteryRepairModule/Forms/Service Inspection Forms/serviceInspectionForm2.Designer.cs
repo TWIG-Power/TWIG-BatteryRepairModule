@@ -82,6 +82,7 @@
             repairCompletedButton.TabIndex = 18;
             repairCompletedButton.Text = "Remove Repair Action";
             repairCompletedButton.UseVisualStyleBackColor = true;
+            repairCompletedButton.Click += repairCompletedButton_Click;
             // 
             // panel8
             // 
@@ -166,7 +167,7 @@
             label2.AutoSize = true;
             label2.Dock = DockStyle.Left;
             label2.Font = new Font("Segoe UI", 22F, FontStyle.Bold, GraphicsUnit.Point);
-            label2.Location = new Point(434, 15);
+            label2.Location = new Point(459, 15);
             label2.Name = "label2";
             label2.Padding = new Padding(10);
             label2.Size = new Size(258, 61);
@@ -178,7 +179,7 @@
             panel1.Dock = DockStyle.Left;
             panel1.Location = new Point(284, 15);
             panel1.Name = "panel1";
-            panel1.Size = new Size(150, 54);
+            panel1.Size = new Size(175, 54);
             panel1.TabIndex = 2;
             // 
             // label3

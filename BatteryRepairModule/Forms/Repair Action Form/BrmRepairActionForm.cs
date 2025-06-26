@@ -17,7 +17,6 @@ namespace BatteryRepairModule.Forms.BRM
         public BrmRepairActionForm()
         {
             InitializeComponent();
-            BRMinformation.InitializeStaffOptions();
         }
 
         private void continueButton_Click_1(object sender, EventArgs e)
