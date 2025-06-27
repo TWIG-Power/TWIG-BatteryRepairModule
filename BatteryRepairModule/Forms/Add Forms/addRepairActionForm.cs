@@ -16,8 +16,10 @@ namespace BatteryRepairModule.Forms.BRM
         public addRepairActionForm(ListBox listboxRef)
         {
             InitializeComponent();
-            modifiedListBox = listboxRef; 
+            modifiedListBox = listboxRef;
 
+            dbMethods.getRepairOptions();
+            listBox1.Items.Clear(); 
             listBox1.Items.AddRange(dbInformation.repairActionOptions.Select(kvp => $"{kvp.Key} - {kvp.Value}").ToArray());
         }
 
@@ -28,7 +30,8 @@ namespace BatteryRepairModule.Forms.BRM
 
         private void continueButton_Click(object sender, EventArgs e)
         {
-            modifiedListBox.Items.Add(listBox1.SelectedItem.ToString()); 
+            if (!modifiedListBox.Items.Contains(listBox1.SelectedItem.ToString()))
+                modifiedListBox.Items.Add(listBox1.SelectedItem.ToString()); 
             this.Close();
         }
 

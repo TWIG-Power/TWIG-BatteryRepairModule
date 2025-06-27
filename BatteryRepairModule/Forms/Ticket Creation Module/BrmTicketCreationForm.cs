@@ -13,7 +13,7 @@ namespace BatteryRepairModule.Forms.BRM
 {
     public partial class BrmTicketCreationForm : Form
     {
-        public static int? tempTwigCaseNum; 
+        public static int tempTwigCaseNum; 
         public static string? tempBattType;
         public static int? tempSerialNum;
         public static string? tempVinNum;
@@ -24,11 +24,16 @@ namespace BatteryRepairModule.Forms.BRM
             InitializeComponent();
             this.parentForm = parentRef;
 
+            // Load staff names
             dbMethods.loadStaffNames();
+            staffInitiatingReportDropDown.Items.AddRange(dbInformation.staffOptions.ToArray());
+
+            // Load new ticket number
             dbInformation.TWIGCaseNumber = dbMethods.getLastTwigTicketNumber() + 1;
             twigTicketNumberTextBox.Text = dbInformation.TWIGCaseNumber.ToString();
             twigTicketNumberTextBox.Enabled = false; 
-            staffInitiatingReportDropDown.Items.AddRange(dbInformation.staffOptions.ToArray());
+
+            // MODIFY Load module options
             batteryTypeDropDown.Items.AddRange(dbInformation.staffOptions.ToArray());
 
             LoadTempVariables();
@@ -36,7 +41,7 @@ namespace BatteryRepairModule.Forms.BRM
 
         private void LoadTempVariables()
         {
-            if (tempTwigCaseNum.HasValue && tempTwigCaseNum != 0)
+            if ( tempTwigCaseNum != 0)
                 twigTicketNumberTextBox.Text = tempTwigCaseNum.ToString();
 
             if (!string.IsNullOrEmpty(tempBattType))
@@ -52,18 +57,13 @@ namespace BatteryRepairModule.Forms.BRM
                 staffInitiatingReportDropDown.SelectedItem = tempStaffCreateReport;
         }
 
-        private void panel3_Paint(object sender, PaintEventArgs e)
-        {
-
-        }
-
         private void continueButton_Click(object sender, EventArgs e)
         {
             try
             {
                 tempTwigCaseNum = Int32.Parse(twigTicketNumberTextBox.Text);
 
-                dbInformation.TWIGTicketOptions.Add(dbInformation.TWIGCaseNumber.ToString()); 
+                //dbInformation.TWIGTicketOptions.Add(dbInformation.TWIGCaseNumber.ToString()); 
 
                 tempBattType = batteryTypeDropDown.SelectedItem.ToString();
                 tempSerialNum = Int32.Parse(batterySerialNumberTextBox.Text);

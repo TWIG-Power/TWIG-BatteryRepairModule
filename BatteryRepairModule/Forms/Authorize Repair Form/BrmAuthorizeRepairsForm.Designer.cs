@@ -100,6 +100,7 @@ namespace BatteryRepairModule.Forms.BRM
             staffDropDown.Name = "staffDropDown";
             staffDropDown.Size = new Size(500, 45);
             staffDropDown.TabIndex = 2;
+            staffDropDown.SelectedIndexChanged += staffDropDown_SelectedIndexChanged;
             // 
             // label4
             // 
@@ -133,6 +134,7 @@ namespace BatteryRepairModule.Forms.BRM
             twigTicketNumberDropDown.Name = "twigTicketNumberDropDown";
             twigTicketNumberDropDown.Size = new Size(500, 45);
             twigTicketNumberDropDown.TabIndex = 2;
+            twigTicketNumberDropDown.SelectedIndexChanged += twigTicketNumberDropDown_SelectedIndexChanged_1;
             // 
             // label1
             // 
@@ -362,6 +364,7 @@ namespace BatteryRepairModule.Forms.BRM
             continueButton.TabIndex = 15;
             continueButton.Text = "Continue";
             continueButton.UseVisualStyleBackColor = true;
+            continueButton.Click += continueButton_Click;
             // 
             // BrmAuthorizeRepairsForm
             // 

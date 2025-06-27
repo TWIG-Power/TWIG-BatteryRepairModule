@@ -174,7 +174,6 @@ namespace BatteryRepairModule.Forms.BRM
             panel3.Padding = new Padding(10, 10, 10, 5);
             panel3.Size = new Size(931, 80);
             panel3.TabIndex = 3;
-            panel3.Paint += panel3_Paint;
             // 
             // batterySerialNumberTextBox
             // 

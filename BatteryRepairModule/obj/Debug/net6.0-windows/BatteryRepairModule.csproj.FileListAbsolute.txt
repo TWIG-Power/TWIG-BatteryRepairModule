@@ -60,3 +60,4 @@ c:\Users\FMustico\Documents\github\TWIG-BatteryRepairModule\BatteryRepairModule\
 c:\Users\FMustico\Documents\github\TWIG-BatteryRepairModule\BatteryRepairModule\bin\Debug\net6.0-windows\runtimes\browser\lib\net6.0\System.Text.Encodings.Web.dll
 c:\Users\FMustico\Documents\github\TWIG-BatteryRepairModule\BatteryRepairModule\obj\Debug\net6.0-windows\BatteryRepairModule.csproj.AssemblyReference.cache
 c:\Users\FMustico\Documents\github\TWIG-BatteryRepairModule\BatteryRepairModule\obj\Debug\net6.0-windows\BatteryR.9C265190.Up2Date
+c:\Users\FMustico\Documents\github\TWIG-BatteryRepairModule\BatteryRepairModule\obj\Debug\net6.0-windows\BatteryRepairModule.Forms.Ticket_Creation_Module.addCustomerReport.resources

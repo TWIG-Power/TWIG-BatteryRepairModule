@@ -86,14 +86,14 @@ namespace BatteryRepairModule.Forms.Service_Inspection_Forms
                 tempCleaningProcedures = yesCleanProcButton.Checked ? true : false; 
                 tempCheckPluggedIntoDiagTool = yesDiagnosticButton.Checked ? true : false; 
                 tempDiagnosticReportPath = diagnosticReportPath.Text;
-                dbInformation.TWIGCaseNumber = tempSelectedTwigTicketKeyPair.Values.First(); 
+                dbInformation.selectedTwigTicketKeyPair = tempSelectedTwigTicketKeyPair; 
 
                 if (!tempSelectedTwigTicketKeyPair.Any())
                 {
                     MessageBox.Show("Please select a TWIG ticket number.", "Input Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return;
                 }
-                if (dbInformation.TWIGCaseNumber == null)
+                if (dbInformation.selectedTwigTicketKeyPair == null)
                 {
                     MessageBox.Show("Please select a TWIG ticket number.", "Input Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return; 

@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Windows.Forms.Design;
 using BatteryRepairModule.Forms.BRM;
+using BatteryRepairModule.Forms.Ticket_Creation_Module;
 
 namespace BatteryRepairModule
 {
@@ -21,7 +22,7 @@ namespace BatteryRepairModule
             this.parentForm = parentRef;
 
             // FOR TESTING PURPOSES ONLY 
-            dbMethods.loadreportTypeOptions(); 
+            dbMethods.loadreportTypeOptions();
             errorsListBox.Items.AddRange(dbInformation.reportTypeKeyPair.Select(kvp => $"{kvp.Key} - {kvp.Value}").ToArray());
 
         }
@@ -30,7 +31,7 @@ namespace BatteryRepairModule
         {
             try
             {
-                dbInformation.TWIGCaseNumber = BrmTicketCreationForm.tempTwigCaseNum;
+                dbInformation.selectedTwigTicketKeyPair.Add(0, BrmTicketCreationForm.tempTwigCaseNum);
                 dbInformation.selectedBatteryType = BrmTicketCreationForm.tempBattType;
                 dbInformation.batterySerialNumber = BrmTicketCreationForm.tempSerialNum;
                 dbInformation.vehicleVINNumber = BrmTicketCreationForm.tempVinNum;
@@ -53,7 +54,7 @@ namespace BatteryRepairModule
                     var str = item as string;
                     if (!string.IsNullOrEmpty(str))
                     {
-                        var parts = str.Split(new[] {" - "}, 2, StringSplitOptions.None);
+                        var parts = str.Split(new[] { " - " }, 2, StringSplitOptions.None);
                         if (parts.Length == 2)
                         {
                             dbInformation.moduleReportedErrorsKeyPair[Int16.Parse(parts[0])] = parts[1];
@@ -61,9 +62,9 @@ namespace BatteryRepairModule
                     }
                 }
 
-                dbMethods.createDatabaseTicket();
+                dbMethods.createDatabaseTicket(dbInformation.staffCreatedReport);
                 dbMethods.insertInitialAssessment();
-                dbMethods.insertCustomerReport(); 
+                dbMethods.insertCustomerReport();
             }
             catch (Exception ex)
             {
@@ -82,7 +83,7 @@ namespace BatteryRepairModule
             if (errorsListBox.SelectedItem != null)
             {
                 if (!addedErrorsListBox.Items.Contains(errorsListBox.SelectedItem))
-                    addedErrorsListBox.Items.Add(errorsListBox.SelectedItem); 
+                    addedErrorsListBox.Items.Add(errorsListBox.SelectedItem);
             }
         }
 
@@ -90,8 +91,14 @@ namespace BatteryRepairModule
         {
             if (addedErrorsListBox.SelectedItem != null)
             {
-            addedErrorsListBox.Items.Remove(addedErrorsListBox.SelectedItem);
+                addedErrorsListBox.Items.Remove(addedErrorsListBox.SelectedItem);
             }
+        }
+
+        private void addReportOption_Click(object sender, EventArgs e)
+        {
+            var newform = new addCustomerReport(errorsListBox);
+            newform.ShowDialog(this);
         }
     }
 }

@@ -34,7 +34,7 @@ public static partial class dbMethods
     public static void loadreportTypeOptions()
     {
         using (var conn = new NpgsqlConnection(dbConnection.connectionPath))
-        using (var cmd = new NpgsqlCommand("SELECT DISTINCT \"id\", \"description\" FROM public.report_types", conn))
+        using (var cmd = new NpgsqlCommand("SELECT DISTINCT \"id\", \"description\" FROM public.report_types ORDER BY id ASC", conn))
         {
             conn.Open();
             using (var reader = cmd.ExecuteReader())
@@ -54,10 +54,10 @@ public static partial class dbMethods
     public static int getTicketSurrogateKey()
     {
         using (var conn = new NpgsqlConnection(dbConnection.connectionPath))
-        using (var cmd = new NpgsqlCommand("SELECT DISTINCT \"id\" FROM public.ticket WHERE \"twig_ticket_number\" = @ticketNum", conn))
+        using (var cmd = new NpgsqlCommand("SELECT DISTINCT \"id\" FROM public.ticket WHERE \"twig_ticket_number\" = @ticketNum ORDER BY id ASC" , conn))
         {
             conn.Open();
-            cmd.Parameters.AddWithValue("@ticketNum", dbInformation.TWIGCaseNumber ?? (object)DBNull.Value);
+            cmd.Parameters.AddWithValue("@ticketNum", dbInformation.selectedTwigTicketKeyPair.Values.First());
             using (var reader = cmd.ExecuteReader())
             {
                 if (reader.Read())
@@ -70,13 +70,13 @@ public static partial class dbMethods
         return 0;
     }
 
-    public static int getStaffSurrogateKey()
+    public static int getStaffSurrogateKey(string staff)
     {
         using (var conn = new NpgsqlConnection(dbConnection.connectionPath))
         using (var cmd = new NpgsqlCommand("SELECT DISTINCT \"id\" FROM public.staff WHERE \"name\" = @name", conn))
         {
             conn.Open();
-            cmd.Parameters.AddWithValue("@name", dbInformation.staffCreatedReport);
+            cmd.Parameters.AddWithValue("@name", staff);
             using (var reader = cmd.ExecuteReader())
             {
                 while (reader.Read())
@@ -103,14 +103,14 @@ public static partial class dbMethods
                         return reader.GetInt32(0);
                 }
             }
-        } 
+        }
         return 0;
     }
 
     #endregion
 
     #region INSERT QUERIES
-    public static void createDatabaseTicket()
+    public static void createDatabaseTicket(string staff)
     {
         using (var conn = new NpgsqlConnection(dbConnection.connectionPath))
         using (var cmd = new NpgsqlCommand("INSERT INTO public.ticket (twig_ticket_number, vehicle_vin_number, staff_starting_report_fk, status_fk) VALUES (@ticketNum, @vehicleVin, @staffStarting, 1)", conn))
@@ -118,7 +118,7 @@ public static partial class dbMethods
             conn.Open();
             cmd.Parameters.AddWithValue("@ticketNum", dbInformation.TWIGCaseNumber);
             cmd.Parameters.AddWithValue("@vehicleVin", dbInformation.vehicleVINNumber);
-            cmd.Parameters.AddWithValue("@staffStarting", getStaffSurrogateKey());
+            cmd.Parameters.AddWithValue("@staffStarting", getStaffSurrogateKey(staff));
             cmd.ExecuteNonQuery();
         }
     }
@@ -168,6 +168,24 @@ public static partial class dbMethods
             }
         }
     }
-    
+
+    public static bool insertNewReportOption(string newOption)
+    {
+        try
+        {
+            using (var conn = new NpgsqlConnection(dbConnection.connectionPath))
+            using (var cmd = new NpgsqlCommand("INSERT INTO public.report_types (description) VALUES (@description)", conn))
+            {
+                conn.Open();
+                cmd.Parameters.AddWithValue("@description", newOption);
+                cmd.ExecuteNonQuery();
+                return true; 
+            }
+        }
+        catch (Exception ex)
+        {
+            return false; 
+        }
+    }
     #endregion
 }

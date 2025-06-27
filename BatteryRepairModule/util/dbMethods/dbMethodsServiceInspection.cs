@@ -38,7 +38,7 @@ public static partial class dbMethods
             WHERE rcr.ticket_fk = @ticketFk", conn))
         {
             conn.Open();
-            cmd.Parameters.AddWithValue("@ticketFk", serviceInspectionForm1.tempSelectedTwigTicketKeyPair.Keys.First());
+            cmd.Parameters.AddWithValue("@ticketFk", dbInformation.selectedTwigTicketKeyPair.Keys.First());
 
             dbInformation.reportedIssuesList.Clear();
 
@@ -49,6 +49,34 @@ public static partial class dbMethods
                     if (!reader.IsDBNull(0) && !reader.IsDBNull(1))
                     {
                         dbInformation.reportedIssuesList[reader.GetInt32(0)] = reader.GetString(1);
+                    }
+                }
+            }
+        }
+    }
+    
+    public static void LoadSuggestedRepairs()
+    {
+        using (var conn = new NpgsqlConnection(dbConnection.connectionPath))
+        using (var cmd = new NpgsqlCommand(@"
+            SELECT pr.repair_id_fk, r.description
+            FROM public.proposed_repairs pr
+            INNER JOIN public.repair_options r ON pr.repair_id_fk = r.id
+            WHERE pr.ticket_fk = @ticketId", conn))
+        {
+            conn.Open();
+            int ticketSurroKey = dbMethods.getTicketSurrogateKey();
+            cmd.Parameters.AddWithValue("@ticketId", ticketSurroKey);
+
+            dbInformation.proposedRepairsKeyPair.Clear();
+
+            using (var reader = cmd.ExecuteReader())
+            {
+                while (reader.Read())
+                {
+                    if (!reader.IsDBNull(0) && !reader.IsDBNull(1))
+                    {
+                        dbInformation.proposedRepairsKeyPair[reader.GetInt32(0)] = reader.GetString(1);
                     }
                 }
             }
@@ -66,13 +94,13 @@ public static partial class dbMethods
         {
             conn.Open();
             int ticketSurroKey = dbMethods.getTicketSurrogateKey();
-            
-            foreach (var repair in dbInformation.proposedRepairsList)
+
+            foreach (var repair in dbInformation.proposedRepairsKeyPair)
             {
-                cmd.Parameters.Clear(); 
+                cmd.Parameters.Clear();
                 cmd.Parameters.AddWithValue("@repairId", repair.Key);
                 cmd.Parameters.AddWithValue("@ticketId", ticketSurroKey);
-                cmd.ExecuteNonQuery(); 
+                cmd.ExecuteNonQuery();
             }
         }
     }

@@ -41,7 +41,7 @@ namespace BatteryRepairModule.Forms.Service_Inspection_Forms
                         var parts = str.Split(new[] { " - " }, 2, StringSplitOptions.None);
                         if (parts.Length == 2)
                         {
-                            dbInformation.proposedRepairsList[Int16.Parse(parts[0])] = parts[1];
+                            dbInformation.proposedRepairsKeyPair[Int16.Parse(parts[0])] = parts[1];
                         }
                     }
                 }

@@ -43,11 +43,14 @@
             addCustomerReportButton = new Button();
             cancelButton = new Button();
             continueButton = new Button();
+            panel1 = new Panel();
+            addReportOption = new Button();
             panel5.SuspendLayout();
             panel7.SuspendLayout();
             panel12.SuspendLayout();
             panel14.SuspendLayout();
             panel13.SuspendLayout();
+            panel1.SuspendLayout();
             SuspendLayout();
             // 
             // panel5
@@ -219,12 +222,37 @@
             continueButton.UseVisualStyleBackColor = true;
             continueButton.Click += continueButton_Click;
             // 
+            // panel1
+            // 
+            panel1.Controls.Add(addReportOption);
+            panel1.Dock = DockStyle.Left;
+            panel1.Location = new Point(0, 391);
+            panel1.Name = "panel1";
+            panel1.Padding = new Padding(10);
+            panel1.Size = new Size(460, 120);
+            panel1.TabIndex = 20;
+            // 
+            // addReportOption
+            // 
+            addReportOption.AutoSize = true;
+            addReportOption.Dock = DockStyle.Fill;
+            addReportOption.Font = new Font("Segoe UI", 18F, FontStyle.Regular, GraphicsUnit.Point);
+            addReportOption.Location = new Point(10, 10);
+            addReportOption.MaximumSize = new Size(445, 65);
+            addReportOption.Name = "addReportOption";
+            addReportOption.Size = new Size(440, 65);
+            addReportOption.TabIndex = 19;
+            addReportOption.Text = "Add Report Option";
+            addReportOption.UseVisualStyleBackColor = true;
+            addReportOption.Click += addReportOption_Click;
+            // 
             // BrmTicketCreationForm3
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.Gainsboro;
             ClientSize = new Size(931, 511);
+            Controls.Add(panel1);
             Controls.Add(cancelButton);
             Controls.Add(continueButton);
             Controls.Add(panel12);
@@ -240,6 +268,8 @@
             panel14.PerformLayout();
             panel13.ResumeLayout(false);
             panel13.PerformLayout();
+            panel1.ResumeLayout(false);
+            panel1.PerformLayout();
             ResumeLayout(false);
         }
 
@@ -260,5 +290,7 @@
         private Button addCustomerReportButton;
         private Button cancelButton;
         private Button continueButton;
+        private Panel panel1;
+        private Button addReportOption;
     }
 }
