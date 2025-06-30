@@ -7,7 +7,7 @@ namespace BatteryRepairModule;
 public static partial class dbMethods
 {
     #region LOAD METHODS
-    public static void loadActiveTwigTickets()
+    public static void loadAwaitingServiceInspectionTickets()
     {
         using (var conn = new NpgsqlConnection(dbConnection.connectionPath))
         using (var cmd = new NpgsqlCommand("SELECT \"id\", \"twig_ticket_number\" FROM public.ticket WHERE \"status_fk\" = 1", conn))
@@ -27,6 +27,27 @@ public static partial class dbMethods
         }
     }
 
+
+
+    public static void loadAwaitingRepairActionsStatus()
+    {
+        using (var conn = new NpgsqlConnection(dbConnection.connectionPath))
+        using (var cmd = new NpgsqlCommand("SELECT \"id\", \"twig_ticket_number\" FROM public.ticket WHERE \"status_fk\" = 3", conn))
+        {
+            conn.Open();
+            using (var reader = cmd.ExecuteReader())
+            {
+                dbInformation.activeTwigCaseNumbers.Clear();
+                while (reader.Read())
+                {
+                    if (!reader.IsDBNull(0) && !reader.IsDBNull(1))
+                    {
+                        dbInformation.activeTwigCaseNumbers.Add(reader.GetInt16(0), reader.GetInt32(1));
+                    }
+                }
+            }
+        }
+    }
 
     public static void LoadRegisteredCustomerReport()
     {
@@ -54,7 +75,7 @@ public static partial class dbMethods
             }
         }
     }
-    
+
     public static void LoadSuggestedRepairs()
     {
         using (var conn = new NpgsqlConnection(dbConnection.connectionPath))
@@ -90,18 +111,40 @@ public static partial class dbMethods
     public static void insertSuggestedRepairs()
     {
         using (var conn = new NpgsqlConnection(dbConnection.connectionPath))
-        using (var cmd = new NpgsqlCommand("INSERT INTO public.proposed_repairs (repair_id_fk, ticket_fk) VALUES (@repairId, @ticketId)", conn))
+        using (var cmd = new NpgsqlCommand("INSERT INTO public.proposed_repairs (repair_id_fk, ticket_fk, staff_fk) VALUES (@repairId, @ticketId, @staff_fk)", conn))
         {
             conn.Open();
-            int ticketSurroKey = dbMethods.getTicketSurrogateKey();
-
             foreach (var repair in dbInformation.proposedRepairsKeyPair)
             {
                 cmd.Parameters.Clear();
                 cmd.Parameters.AddWithValue("@repairId", repair.Key);
-                cmd.Parameters.AddWithValue("@ticketId", ticketSurroKey);
+                cmd.Parameters.AddWithValue("@ticketId", dbInformation.selectedTwigTicketKeyPair.Keys.First());
+                cmd.Parameters.AddWithValue("@staff_fk", dbInformation.selectedStaffKeyValue.Keys.First());
                 cmd.ExecuteNonQuery();
             }
+        }
+        
+        using (var conn = new NpgsqlConnection(dbConnection.connectionPath))
+        using (var cmd = new NpgsqlCommand("UPDATE public.ticket SET status_fk = 2 WHERE id = @ticketId", conn))
+        {
+            conn.Open();
+            cmd.Parameters.AddWithValue("@ticketId", dbInformation.selectedTwigTicketKeyPair.Keys.First());
+            cmd.ExecuteNonQuery();
+        }
+    }
+
+    public static void createServiceInpsection()
+    {
+        using (var conn = new NpgsqlConnection(dbConnection.connectionPath))
+        using (var cmd = new NpgsqlCommand("INSERT INTO public.service_inspection (staff_fk, cleaning_procedures, diagnostic_tool_plugged, diagnostic_report, ticket_fk) VALUES (@staff_fk, @cleaningProcedures, @diagnostic_tool_plugged, @diagnostic_report, @ticket_fk)", conn))
+        {
+            conn.Open();
+            cmd.Parameters.AddWithValue("@staff_fk", dbInformation.selectedStaffKeyValue.Keys.First());
+            cmd.Parameters.AddWithValue("@cleaningProcedures", dbInformation.cleaningProcedures ?? (object)DBNull.Value);
+            cmd.Parameters.AddWithValue("@diagnostic_tool_plugged", dbInformation.checkPluggedIntoDiagTool ?? (object)DBNull.Value);
+            cmd.Parameters.AddWithValue("@diagnostic_report", DBNull.Value);
+            cmd.Parameters.AddWithValue("@ticket_fk", dbInformation.selectedTwigTicketKeyPair.Keys.First());
+            cmd.ExecuteNonQuery(); 
         }
     }
 

@@ -133,5 +133,7 @@ namespace BatteryRepairModule.Forms.BRM
         {
             parentForm.OpenChildForm(new BrmTicketCreationForm(parentForm));
         }
+
+        
     }
 }

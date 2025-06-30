@@ -19,7 +19,8 @@ namespace BatteryRepairModule.Forms.BRM
         {
             InitializeComponent();
 
-            dbMethods.loadActiveTwigTickets();
+            dbMethods.loadAwaitingAuthorizeRepairTickets();
+            
             foreach (var kvp in dbInformation.activeTwigCaseNumbers)
             {
                 twigTicketNumberDropDown.Items.Add(kvp.Value);
@@ -27,7 +28,7 @@ namespace BatteryRepairModule.Forms.BRM
             }
 
             dbMethods.loadStaffNames();
-            staffDropDown.Items.AddRange(dbInformation.staffOptions.ToArray());
+            staffDropDown.Items.AddRange(dbInformation.staffKeyPairOptions.Values.ToArray());
 
             addAuthorizedRepairAction.Enabled = false;
             removeAuthorizedRepairAction.Enabled = false;
@@ -92,45 +93,44 @@ namespace BatteryRepairModule.Forms.BRM
 
         private void continueButton_Click(object sender, EventArgs e)
         {
-            //try
-            //{
-                if (reportedIssuesListBox.Items.Count > authorizedRepairsListBox.Items.Count)
+            if (reportedIssuesListBox.Items.Count > authorizedRepairsListBox.Items.Count)
+            {
+                var result = MessageBox.Show("The amount of repair actions is less than the amount of reported issues. Are you sure you wish to proceed?", "Warning!", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Warning);
+                if (result == DialogResult.No || result == DialogResult.Cancel)
                 {
-                    var result = MessageBox.Show("The amount of repair actions is less than the amount of reported issues. Are you sure you wish to proceed?", "Warning!", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Warning);
-                    if (result == DialogResult.No || result == DialogResult.Cancel)
-                    {
-                        return;
-                    }
-                }
-                else if (reportedIssuesListBox.Items.Count == 0)
-                {
-                    MessageBox.Show("You have no authorized repairs selected. Please try again!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return;
                 }
+            }
+            else if (reportedIssuesListBox.Items.Count == 0)
+            {
+                MessageBox.Show("You have no authorized repairs selected. Please try again!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
 
-                foreach (var item in authorizedRepairsListBox.Items)
+            foreach (var item in authorizedRepairsListBox.Items)
+            {
+                var str = item as string;
+                if (!string.IsNullOrEmpty(str))
                 {
-                    var str = item as string;
-                    if (!string.IsNullOrEmpty(str))
+                    var parts = str.Split(new[] { " - " }, 2, StringSplitOptions.None);
+                    if (parts.Length == 2)
                     {
-                        var parts = str.Split(new[] { " - " }, 2, StringSplitOptions.None);
-                        if (parts.Length == 2)
-                        {
-                            dbInformation.clearedRepairsKeyValPair[Int16.Parse(parts[0])] = parts[1];
-                        }
+                        dbInformation.clearedRepairsKeyValPair[Int16.Parse(parts[0])] = parts[1];
                     }
                 }
-                dbInformation.staffAuthorized = staffDropDown.SelectedItem.ToString();
-                dbMethods.insertAuthorizedRepairs(dbInformation.staffAuthorized);
+            }
+
+            if (staffDropDown.SelectedItem.ToString() != null)
+            {
+                string selectedValue = staffDropDown.SelectedItem.ToString();
+                var selectedKvp = dbInformation.staffKeyPairOptions.FirstOrDefault(kvp => kvp.Value == selectedValue);
+                dbInformation.selectedStaffKeyValue.Clear();
+                dbInformation.selectedStaffKeyValue[selectedKvp.Key] = selectedKvp.Value; 
+            }
+
+                dbMethods.insertAuthorizedRepairs();
                 this.Close();
             }
-            /*
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message); 
-            }
-            */
-        //}
 
         private void staffDropDown_SelectedIndexChanged(object sender, EventArgs e)
         {

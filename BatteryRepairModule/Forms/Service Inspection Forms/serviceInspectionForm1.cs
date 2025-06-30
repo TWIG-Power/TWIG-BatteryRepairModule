@@ -14,8 +14,9 @@ namespace BatteryRepairModule.Forms.Service_Inspection_Forms
     public partial class serviceInspectionForm1 : Form
     {
         public static int? tempTwigCaseNumber;
-        public static Dictionary<int, int> tempSelectedTwigTicketKeyPair = new Dictionary<int, int>(); 
-        public static string? tempStaffServiceInspection;
+        public static Dictionary<int, int> tempSelectedTwigTicketKeyPair = new Dictionary<int, int>();
+        public static Dictionary<int, string> tempSelectedStaffKeyPair = new Dictionary<int, string>(); 
+
         public static bool? tempCleaningProcedures;
         public static bool? tempCheckPluggedIntoDiagTool;
         public static string? tempDiagnosticReportPath;
@@ -26,16 +27,16 @@ namespace BatteryRepairModule.Forms.Service_Inspection_Forms
             InitializeComponent();
             this.parentForm = parentRef;
 
-            dbMethods.loadActiveTwigTickets();
+            dbMethods.loadAwaitingServiceInspectionTickets();
             dbMethods.loadStaffNames();
             dbMethods.getRepairOptions();
 
             twigTicketNumberDropDown.Items.AddRange(dbInformation.activeTwigCaseNumbers.Select(kvp => kvp.Value.ToString()).ToArray());
-            staffDropDown.Items.AddRange(dbInformation.staffOptions.ToArray());
+            staffDropDown.Items.AddRange(dbInformation.staffKeyPairOptions.Values.ToArray());
 
             dbInformation.selectedTwigTicketKeyPair.Clear();
             LoadTempVariables();
-            dbInformation.TWIGCaseNumber = null; 
+            dbInformation.TWIGCaseNumber = null;
         }
 
         private void LoadTempVariables()
@@ -47,15 +48,16 @@ namespace BatteryRepairModule.Forms.Service_Inspection_Forms
                     twigTicketNumberDropDown.SelectedItem = twigValue;
             }
 
+/*
             if (!string.IsNullOrEmpty(tempStaffServiceInspection))
                 staffDropDown.SelectedItem = tempStaffServiceInspection;
-
+*/
             if (tempCleaningProcedures.HasValue)
             {
                 if (tempCleaningProcedures.Value)
                     yesCleanProcButton.Checked = true;
                 else
-                    noCleanProcedButton.Checked = true; 
+                    noCleanProcedButton.Checked = true;
             }
 
             if (tempCheckPluggedIntoDiagTool.HasValue)
@@ -63,7 +65,7 @@ namespace BatteryRepairModule.Forms.Service_Inspection_Forms
                 if (tempCheckPluggedIntoDiagTool.Value)
                     yesDiagnosticButton.Checked = true;
                 else
-                    noDiagnosticButton.Checked = true; 
+                    noDiagnosticButton.Checked = true;
             }
 
             if (!string.IsNullOrEmpty(tempDiagnosticReportPath))
@@ -81,12 +83,19 @@ namespace BatteryRepairModule.Forms.Service_Inspection_Forms
                     tempSelectedTwigTicketKeyPair.Clear();
                     tempSelectedTwigTicketKeyPair[selectedKvp.Key] = selectedKvp.Value;
                 }
-                
-                tempStaffServiceInspection = staffDropDown.SelectedItem?.ToString();
-                tempCleaningProcedures = yesCleanProcButton.Checked ? true : false; 
-                tempCheckPluggedIntoDiagTool = yesDiagnosticButton.Checked ? true : false; 
+
+                if (staffDropDown.SelectedItem != null)
+                {
+                    var selectedValue = staffDropDown.SelectedItem.ToString();
+                    var selectedKvp = dbInformation.staffKeyPairOptions.FirstOrDefault(kvp => kvp.Value.ToString() == selectedValue);
+                    tempSelectedStaffKeyPair.Clear();
+                    tempSelectedStaffKeyPair[selectedKvp.Key] = selectedKvp.Value; 
+                }
+
+                tempCleaningProcedures = yesCleanProcButton.Checked ? true : false;
+                tempCheckPluggedIntoDiagTool = yesDiagnosticButton.Checked ? true : false;
                 tempDiagnosticReportPath = diagnosticReportPath.Text;
-                dbInformation.selectedTwigTicketKeyPair = tempSelectedTwigTicketKeyPair; 
+                dbInformation.selectedTwigTicketKeyPair = tempSelectedTwigTicketKeyPair;
 
                 if (!tempSelectedTwigTicketKeyPair.Any())
                 {
@@ -96,21 +105,21 @@ namespace BatteryRepairModule.Forms.Service_Inspection_Forms
                 if (dbInformation.selectedTwigTicketKeyPair == null)
                 {
                     MessageBox.Show("Please select a TWIG ticket number.", "Input Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    return; 
+                    return;
                 }
 
-                if (string.IsNullOrEmpty(tempStaffServiceInspection))
+                if (!tempSelectedStaffKeyPair.Any())
                 {
                     MessageBox.Show("Please select a staff member.", "Input Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return;
                 }
-                
+
                 if (tempCleaningProcedures == null)
                 {
                     MessageBox.Show("Please select whether cleaning procedures were followed.", "Input Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return;
                 }
-                
+
                 if (tempCheckPluggedIntoDiagTool == null)
                 {
                     MessageBox.Show("Please select whether diagnostic tool was used.", "Input Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -129,5 +138,6 @@ namespace BatteryRepairModule.Forms.Service_Inspection_Forms
         {
             this.Close();
         }
+    
     }
 }
