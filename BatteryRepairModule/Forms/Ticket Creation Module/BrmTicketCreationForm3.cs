@@ -31,6 +31,7 @@ namespace BatteryRepairModule
         {
             try
             {
+                
                 dbInformation.selectedTwigTicketKeyPair.Add(0, BrmTicketCreationForm.tempTwigCaseNum);
 
                 dbInformation.selectedModuleType.Add(
@@ -40,7 +41,7 @@ namespace BatteryRepairModule
 
                 dbInformation.batterySerialNumber = BrmTicketCreationForm.tempSerialNum;
                 dbInformation.vehicleVINNumber = BrmTicketCreationForm.tempVinNum;
-                dbInformation.staffCreatedReport = BrmTicketCreationForm.tempStaffCreateReport;
+                dbInformation.selectedStaffKeyValue = BrmTicketCreationForm.tempSelectedStaff;
 
                 dbInformation.verifyShippingChoice = BrmTicketCreationForm2.tempVerifyShippingChoice;
                 dbInformation.batteryLeadsProtected = BrmTicketCreationForm2.tempBatteryLeadsProtected;
@@ -67,7 +68,7 @@ namespace BatteryRepairModule
                     }
                 }
 
-                dbMethods.createDatabaseTicket(dbInformation.staffCreatedReport);
+                dbMethods.createDatabaseTicket(dbInformation.selectedStaffKeyValue);
                 dbMethods.insertInitialAssessment();
                 dbMethods.insertCustomerReport();
 
@@ -107,16 +108,29 @@ namespace BatteryRepairModule
             var newform = new addCustomerReport(errorsListBox);
             newform.ShowDialog(this);
         }
-        
+
         public static void ClearTempValues()
         {
+            dbInformation.selectedTwigTicketKeyPair.Clear();
             BrmTicketCreationForm.tempTwigCaseNum = 0;
             BrmTicketCreationForm.tempSerialNum = null;
             BrmTicketCreationForm.tempVinNum = null;
-            BrmTicketCreationForm.tempStaffCreateReport = null;
+            BrmTicketCreationForm.tempSelectedStaff.Clear();
             BrmTicketCreationForm.keys.Clear();
             BrmTicketCreationForm.table.Clear();
             BrmTicketCreationForm.tempSelectedMod.Clear();
+            
+            BrmTicketCreationForm2.tempVerifyShippingChoice = null;
+            BrmTicketCreationForm2.tempBatteryLeadsProtected = null;
+            BrmTicketCreationForm2.tempCheckHousingScrape = null;
+            BrmTicketCreationForm2.tempCheckEvidenceOfTamp = null;
+            BrmTicketCreationForm2.tempCheckScrewsMissing = null;
+            BrmTicketCreationForm2.tempCheckHousingDentsHoles = null;
+            BrmTicketCreationForm2.tempCheckMissingWires = null;
+            BrmTicketCreationForm2.tempCheckChargePort = null;
+            BrmTicketCreationForm2.tempCheckCableDamage = null;
+            BrmTicketCreationForm2.tempCheckGoveVent = null;
+            BrmTicketCreationForm2.tempCheckCommPort = null;
         }
     }
 }

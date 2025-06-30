@@ -20,15 +20,18 @@ public static partial class dbMethods
     public static void loadStaffNames()
     {
         using (var conn = new NpgsqlConnection(dbConnection.connectionPath))
-        using (var cmd = new NpgsqlCommand("SELECT DISTINCT \"name\" FROM public.staff", conn))
+        using (var cmd = new NpgsqlCommand("SELECT DISTINCT \"id\", \"name\" FROM public.staff ORDER by name ASC", conn))
         {
             conn.Open();
+            dbInformation.staffKeyPairOptions.Clear(); 
             using (var reader = cmd.ExecuteReader())
             {
-                AddOptionsFromReader(reader, dbInformation.staffOptions);
+                while (reader.Read())
+                {
+                    dbInformation.staffKeyPairOptions.Add(reader.GetInt16(0), reader.GetString(1));
+                }
             }
         }
-        dbInformation.staffOptions.Sort();
     }
 
     public static void loadreportTypeOptions()
@@ -136,7 +139,7 @@ public static partial class dbMethods
     #endregion
 
     #region INSERT QUERIES
-    public static void createDatabaseTicket(string staff)
+    public static void createDatabaseTicket(Dictionary<int, string> staff)
     {
         using (var conn = new NpgsqlConnection(dbConnection.connectionPath))
             if (dbInformation.selectedModuleType.Keys.First() == 0)
@@ -146,7 +149,7 @@ public static partial class dbMethods
                     conn.Open();
                     cmd.Parameters.AddWithValue("@ticketNum", dbInformation.TWIGCaseNumber ?? (object)DBNull.Value);
                     cmd.Parameters.AddWithValue("@vehicleVin", dbInformation.vehicleVINNumber ?? (object)DBNull.Value);
-                    cmd.Parameters.AddWithValue("@staffStarting", getStaffSurrogateKey(staff));
+                    cmd.Parameters.AddWithValue("@staffStarting", staff.Keys.First());
                     cmd.Parameters.AddWithValue("@cobra_fk", dbInformation.moduleTypesByOEM[0].Keys.First());
                     cmd.ExecuteNonQuery();
                 }
@@ -159,7 +162,7 @@ public static partial class dbMethods
                     conn.Open();
                     cmd.Parameters.AddWithValue("@ticketNum", dbInformation.TWIGCaseNumber ?? (object)DBNull.Value);
                     cmd.Parameters.AddWithValue("@vehicleVin", dbInformation.vehicleVINNumber ?? (object)DBNull.Value);
-                    cmd.Parameters.AddWithValue("@staffStarting", getStaffSurrogateKey(staff));
+                    cmd.Parameters.AddWithValue("@staffStarting", dbInformation.selectedStaffKeyValue.Keys.First());
                     cmd.Parameters.AddWithValue("@ktm_fk", dbInformation.moduleTypesByOEM[0].Keys.First());
                     cmd.ExecuteNonQuery();
                 }
@@ -172,7 +175,7 @@ public static partial class dbMethods
             conn.Open();
             cmd.Parameters.AddWithValue("@ticketNum", dbInformation.TWIGCaseNumber ?? (object)DBNull.Value);
             cmd.Parameters.AddWithValue("@vehicleVin", dbInformation.vehicleVINNumber ?? (object)DBNull.Value);
-            cmd.Parameters.AddWithValue("@staffStarting", getStaffSurrogateKey(staff));
+                    cmd.Parameters.AddWithValue("@staffStarting", dbInformation.selectedStaffKeyValue.Keys.First());
             cmd.Parameters.AddWithValue("@misc_fk", dbInformation.moduleTypesByOEM[0].Keys.First()); 
             cmd.ExecuteNonQuery();
         }
@@ -183,7 +186,7 @@ public static partial class dbMethods
     public static void insertInitialAssessment()
     {
         using (var conn = new NpgsqlConnection(dbConnection.connectionPath))
-        using (var cmd = new NpgsqlCommand("INSERT INTO public.initial_assessment (report_fk, battery_leads_protected, cable_damage, charge_port, comm_port, evidence_of_tamp, gove_vent, housing_dents, housing_scrapes, missing_wires, screws_missing, verify_shipping) VALUES (@reportFk, @battLeads, @cableDamage, @chargePort, @commPort, @evidenceTamp, @goveVent, @housingDents, @housingScrapes, @missingWires, @screwsMissing, @verifyShipping)", conn))
+        using (var cmd = new NpgsqlCommand("INSERT INTO public.initial_assessment (report_fk, battery_leads_protected, cable_damage, charge_port, comm_port, evidence_of_tamp, gove_vent, housing_dents, housing_scrapes, missing_wires, screws_missing, verify_shipping, staff_fk) VALUES (@reportFk, @battLeads, @cableDamage, @chargePort, @commPort, @evidenceTamp, @goveVent, @housingDents, @housingScrapes, @missingWires, @screwsMissing, @verifyShipping, @staff_fk)", conn))
         {
             conn.Open();
             cmd.Parameters.AddWithValue("@reportFk", dbMethods.getTicketSurrogateKey());
@@ -198,6 +201,7 @@ public static partial class dbMethods
             cmd.Parameters.AddWithValue("@missingWires", dbInformation.checkMissingWires ?? (object)DBNull.Value);
             cmd.Parameters.AddWithValue("@screwsMissing", dbInformation.checkScrewsMissing ?? (object)DBNull.Value);
             cmd.Parameters.AddWithValue("@verifyShipping", dbInformation.verifyShippingChoice ?? (object)DBNull.Value);
+            cmd.Parameters.AddWithValue("@staff_fk", dbInformation.selectedStaffKeyValue.Keys.First());
             cmd.ExecuteNonQuery();
 
         }

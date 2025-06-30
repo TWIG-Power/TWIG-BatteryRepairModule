@@ -17,11 +17,12 @@ namespace BatteryRepairModule.Forms.BRM
         public static int tempTwigCaseNum;
         public static int? tempSerialNum;
         public static string? tempVinNum;
-        public static string? tempStaffCreateReport;
         private BrmMainMenuForm parentForm;
         public static List<int> keys = new List<int>();
         public static List<int> table = new List<int>();
+        public static List<int> staffKeys = new List<int>(); 
         public static Dictionary<int, Dictionary<int, string>> tempSelectedMod = new Dictionary<int, Dictionary<int, string>>();
+        public static Dictionary<int, string> tempSelectedStaff = new Dictionary<int, string>();
         public BrmTicketCreationForm(BrmMainMenuForm parentRef)
         {
             InitializeComponent();
@@ -29,7 +30,7 @@ namespace BatteryRepairModule.Forms.BRM
 
             // Load staff names
             dbMethods.loadStaffNames();
-            staffInitiatingReportDropDown.Items.AddRange(dbInformation.staffOptions.ToArray());
+            staffInitiatingReportDropDown.Items.AddRange(dbInformation.staffKeyPairOptions.Values.ToArray());
 
             // Load new ticket number
             dbInformation.TWIGCaseNumber = dbMethods.getLastTwigTicketNumber() + 1;
@@ -50,6 +51,9 @@ namespace BatteryRepairModule.Forms.BRM
             }
 
             LoadTempVariables();
+
+            tempSelectedMod.Clear();
+            tempSelectedStaff.Clear(); 
         }
 
         private void LoadTempVariables()
@@ -63,8 +67,6 @@ namespace BatteryRepairModule.Forms.BRM
             if (!string.IsNullOrEmpty(tempVinNum))
                 vehicleVinNumberTextBox.Text = tempVinNum;
 
-            if (!string.IsNullOrEmpty(tempStaffCreateReport))
-                staffInitiatingReportDropDown.SelectedItem = tempStaffCreateReport;
         }
 
         private void continueButton_Click(object sender, EventArgs e)
@@ -87,7 +89,16 @@ namespace BatteryRepairModule.Forms.BRM
 
                 tempSerialNum = Int32.Parse(batterySerialNumberTextBox.Text);
                 tempVinNum = vehicleVinNumberTextBox.Text;
-                tempStaffCreateReport = staffInitiatingReportDropDown.SelectedItem.ToString();
+
+                if (staffInitiatingReportDropDown.SelectedItem != null)
+                {
+                    var selectedValue = staffInitiatingReportDropDown.SelectedItem.ToString();
+                    var selectedKvp = dbInformation.staffKeyPairOptions.FirstOrDefault(kvp => kvp.Value.ToString() == selectedValue);
+                    tempSelectedStaff.Clear();
+                    tempSelectedStaff[selectedKvp.Key] = selectedKvp.Value;
+                }
+                
+
 
                 if (tempTwigCaseNum == 0)
                 {
@@ -109,7 +120,7 @@ namespace BatteryRepairModule.Forms.BRM
                     MessageBox.Show($"Please fill the vehicle vin number in order to continue.", "Input Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return;
                 }
-                if (string.IsNullOrEmpty(tempStaffCreateReport))
+                if (!tempSelectedStaff.Any())
                 {
                     MessageBox.Show($"Please identify yourself in the respective dropdown in order to continue.", "Input Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return;
