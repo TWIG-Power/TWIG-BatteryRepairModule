@@ -8,11 +8,13 @@ public static class dbInformation
     public static int? batterySerialNumber = 0;
     public static string? vehicleVINNumber = string.Empty;
     public static string? selectedBatteryType = string.Empty;
-    public static List<string> batteryTypeOptions = new List<string>();
     public static List<string> staffOptions = new List<string>();
     public static string? staffCreatedReport = string.Empty;
     public static Dictionary<int, string> moduleReportedErrorsKeyPair = new Dictionary<int, string>();
     public static Dictionary<int, int> activeTwigCaseNumbers = new Dictionary<int, int>();
+    public static Dictionary<int, Dictionary<int, string>> moduleTypesByOEM = new Dictionary<int, Dictionary<int, string>>();
+    public static Dictionary<int, Dictionary<int, string>> selectedModuleType = new Dictionary<int, Dictionary<int, string>>(); 
+
 
     #endregion
 
@@ -60,7 +62,6 @@ public static class dbInformation
     {
         // Ticket Creation Form 1 variables
         TWIGCaseNumber = 0;
-        batteryTypeOptions.Clear();
         selectedBatteryType = string.Empty;
         batterySerialNumber = 0;
         vehicleVINNumber = string.Empty;

@@ -54,7 +54,7 @@ public static partial class dbMethods
             }
         }
     }
-    
+
     public static void LoadSuggestedRepairs()
     {
         using (var conn = new NpgsqlConnection(dbConnection.connectionPath))
@@ -104,6 +104,16 @@ public static partial class dbMethods
             }
         }
     }
-
+/*
+    public static void createServiceInpsection()
+    {
+        using (var conn = new NpgsqlConnection(dbConnection.connectionPath))
+        using (var cmd = new NpgsqlCommand("INSERT INTO public.service_inspection (staff_fk, cleaning_procedures, diagnostic_tool_plugged, diagnostic_report) VALUES (@staff_fk, @cleaningProcedures, @diagnostic_tool_plugged, @diagnostic_report)", conn))
+        {
+            conn.Open(); 
+            cmd.Parameters.AddWithValue("@staff_fk", dbInformatio)
+        }
+    }
+*/
     #endregion
 }

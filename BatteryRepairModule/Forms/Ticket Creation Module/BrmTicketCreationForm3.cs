@@ -32,7 +32,12 @@ namespace BatteryRepairModule
             try
             {
                 dbInformation.selectedTwigTicketKeyPair.Add(0, BrmTicketCreationForm.tempTwigCaseNum);
-                dbInformation.selectedBatteryType = BrmTicketCreationForm.tempBattType;
+
+                dbInformation.selectedModuleType.Add(
+                    BrmTicketCreationForm.tempSelectedMod.Keys.First(),
+                    BrmTicketCreationForm.tempSelectedMod.Values.First()
+                );
+
                 dbInformation.batterySerialNumber = BrmTicketCreationForm.tempSerialNum;
                 dbInformation.vehicleVINNumber = BrmTicketCreationForm.tempVinNum;
                 dbInformation.staffCreatedReport = BrmTicketCreationForm.tempStaffCreateReport;
@@ -65,6 +70,8 @@ namespace BatteryRepairModule
                 dbMethods.createDatabaseTicket(dbInformation.staffCreatedReport);
                 dbMethods.insertInitialAssessment();
                 dbMethods.insertCustomerReport();
+
+                ClearTempValues(); 
             }
             catch (Exception ex)
             {
@@ -99,6 +106,17 @@ namespace BatteryRepairModule
         {
             var newform = new addCustomerReport(errorsListBox);
             newform.ShowDialog(this);
+        }
+        
+        public static void ClearTempValues()
+        {
+            BrmTicketCreationForm.tempTwigCaseNum = 0;
+            BrmTicketCreationForm.tempSerialNum = null;
+            BrmTicketCreationForm.tempVinNum = null;
+            BrmTicketCreationForm.tempStaffCreateReport = null;
+            BrmTicketCreationForm.keys.Clear();
+            BrmTicketCreationForm.table.Clear();
+            BrmTicketCreationForm.tempSelectedMod.Clear();
         }
     }
 }

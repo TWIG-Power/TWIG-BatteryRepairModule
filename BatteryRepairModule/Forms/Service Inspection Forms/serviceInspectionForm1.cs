@@ -14,7 +14,7 @@ namespace BatteryRepairModule.Forms.Service_Inspection_Forms
     public partial class serviceInspectionForm1 : Form
     {
         public static int? tempTwigCaseNumber;
-        public static Dictionary<int, int> tempSelectedTwigTicketKeyPair = new Dictionary<int, int>(); 
+        public static Dictionary<int, int> tempSelectedTwigTicketKeyPair = new Dictionary<int, int>();
         public static string? tempStaffServiceInspection;
         public static bool? tempCleaningProcedures;
         public static bool? tempCheckPluggedIntoDiagTool;
@@ -35,7 +35,7 @@ namespace BatteryRepairModule.Forms.Service_Inspection_Forms
 
             dbInformation.selectedTwigTicketKeyPair.Clear();
             LoadTempVariables();
-            dbInformation.TWIGCaseNumber = null; 
+            dbInformation.TWIGCaseNumber = null;
         }
 
         private void LoadTempVariables()
@@ -55,7 +55,7 @@ namespace BatteryRepairModule.Forms.Service_Inspection_Forms
                 if (tempCleaningProcedures.Value)
                     yesCleanProcButton.Checked = true;
                 else
-                    noCleanProcedButton.Checked = true; 
+                    noCleanProcedButton.Checked = true;
             }
 
             if (tempCheckPluggedIntoDiagTool.HasValue)
@@ -63,7 +63,7 @@ namespace BatteryRepairModule.Forms.Service_Inspection_Forms
                 if (tempCheckPluggedIntoDiagTool.Value)
                     yesDiagnosticButton.Checked = true;
                 else
-                    noDiagnosticButton.Checked = true; 
+                    noDiagnosticButton.Checked = true;
             }
 
             if (!string.IsNullOrEmpty(tempDiagnosticReportPath))
@@ -81,12 +81,12 @@ namespace BatteryRepairModule.Forms.Service_Inspection_Forms
                     tempSelectedTwigTicketKeyPair.Clear();
                     tempSelectedTwigTicketKeyPair[selectedKvp.Key] = selectedKvp.Value;
                 }
-                
+
                 tempStaffServiceInspection = staffDropDown.SelectedItem?.ToString();
-                tempCleaningProcedures = yesCleanProcButton.Checked ? true : false; 
-                tempCheckPluggedIntoDiagTool = yesDiagnosticButton.Checked ? true : false; 
+                tempCleaningProcedures = yesCleanProcButton.Checked ? true : false;
+                tempCheckPluggedIntoDiagTool = yesDiagnosticButton.Checked ? true : false;
                 tempDiagnosticReportPath = diagnosticReportPath.Text;
-                dbInformation.selectedTwigTicketKeyPair = tempSelectedTwigTicketKeyPair; 
+                dbInformation.selectedTwigTicketKeyPair = tempSelectedTwigTicketKeyPair;
 
                 if (!tempSelectedTwigTicketKeyPair.Any())
                 {
@@ -96,7 +96,7 @@ namespace BatteryRepairModule.Forms.Service_Inspection_Forms
                 if (dbInformation.selectedTwigTicketKeyPair == null)
                 {
                     MessageBox.Show("Please select a TWIG ticket number.", "Input Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    return; 
+                    return;
                 }
 
                 if (string.IsNullOrEmpty(tempStaffServiceInspection))
@@ -104,13 +104,13 @@ namespace BatteryRepairModule.Forms.Service_Inspection_Forms
                     MessageBox.Show("Please select a staff member.", "Input Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return;
                 }
-                
+
                 if (tempCleaningProcedures == null)
                 {
                     MessageBox.Show("Please select whether cleaning procedures were followed.", "Input Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return;
                 }
-                
+
                 if (tempCheckPluggedIntoDiagTool == null)
                 {
                     MessageBox.Show("Please select whether diagnostic tool was used.", "Input Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -129,5 +129,6 @@ namespace BatteryRepairModule.Forms.Service_Inspection_Forms
         {
             this.Close();
         }
+    
     }
 }

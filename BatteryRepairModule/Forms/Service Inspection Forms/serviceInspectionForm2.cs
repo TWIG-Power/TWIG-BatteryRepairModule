@@ -46,13 +46,14 @@ namespace BatteryRepairModule.Forms.Service_Inspection_Forms
                     }
                 }
 
-                dbMethods.insertSuggestedRepairs(); 
+                dbMethods.insertSuggestedRepairs();
+                ClearTempValues(); 
             }
             catch (Exception ex)
             {
                 MessageBox.Show($"The following exception was thrown: {ex}.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-            
+
             this.Close();
         }
 
@@ -72,7 +73,17 @@ namespace BatteryRepairModule.Forms.Service_Inspection_Forms
         private void repairCompletedButton_Click(object sender, EventArgs e)
         {
             if (repairActionsListBox.SelectedItem != null)
-                repairActionsListBox.Items.Remove(repairActionsListBox.SelectedItem); 
+                repairActionsListBox.Items.Remove(repairActionsListBox.SelectedItem);
+        }
+        
+        public static void ClearTempValues()
+        {
+            serviceInspectionForm1.tempTwigCaseNumber = null;
+            serviceInspectionForm1.tempSelectedTwigTicketKeyPair.Clear();
+            serviceInspectionForm1.tempStaffServiceInspection = null;
+            serviceInspectionForm1.tempCleaningProcedures = null;
+            serviceInspectionForm1.tempCheckPluggedIntoDiagTool = null;
+            serviceInspectionForm1.tempDiagnosticReportPath = null;
         }
     }
 }

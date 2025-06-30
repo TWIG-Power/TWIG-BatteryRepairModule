@@ -7,6 +7,9 @@
     <Compile Update="BrmMainMenuForm.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Update="Forms\Add Forms\addCustomerReport.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Update="Forms\Add Forms\addRepairActionForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -29,9 +32,6 @@
       <SubType>Form</SubType>
     </Compile>
     <Compile Update="Forms\Service Inspection Forms\serviceInspectionForm2.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Update="Forms\Ticket Creation Module\addCustomerReport.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Update="Forms\Ticket Creation Module\BrmTicketCreationForm.cs">

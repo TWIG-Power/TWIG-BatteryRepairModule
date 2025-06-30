@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
+using System.Reflection;
 using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
@@ -13,12 +14,14 @@ namespace BatteryRepairModule.Forms.BRM
 {
     public partial class BrmTicketCreationForm : Form
     {
-        public static int tempTwigCaseNum; 
-        public static string? tempBattType;
+        public static int tempTwigCaseNum;
         public static int? tempSerialNum;
         public static string? tempVinNum;
         public static string? tempStaffCreateReport;
         private BrmMainMenuForm parentForm;
+        public static List<int> keys = new List<int>();
+        public static List<int> table = new List<int>();
+        public static Dictionary<int, Dictionary<int, string>> tempSelectedMod = new Dictionary<int, Dictionary<int, string>>();
         public BrmTicketCreationForm(BrmMainMenuForm parentRef)
         {
             InitializeComponent();
@@ -31,21 +34,28 @@ namespace BatteryRepairModule.Forms.BRM
             // Load new ticket number
             dbInformation.TWIGCaseNumber = dbMethods.getLastTwigTicketNumber() + 1;
             twigTicketNumberTextBox.Text = dbInformation.TWIGCaseNumber.ToString();
-            twigTicketNumberTextBox.Enabled = false; 
+            twigTicketNumberTextBox.Enabled = false;
 
-            // MODIFY Load module options
-            batteryTypeDropDown.Items.AddRange(dbInformation.staffOptions.ToArray());
+            // Load Module Types
+            dbMethods.loadAllModuleTypes();
+            batteryTypeDropDown.Items.Clear();
+            foreach (var keyPair in dbInformation.moduleTypesByOEM)
+            {
+                table.Add(keyPair.Key);
+                foreach (var intKeyPair in keyPair.Value)
+                {
+                    keys.Add(intKeyPair.Key);
+                    batteryTypeDropDown.Items.Add(intKeyPair.Value);
+                }
+            }
 
             LoadTempVariables();
         }
 
         private void LoadTempVariables()
         {
-            if ( tempTwigCaseNum != 0)
+            if (tempTwigCaseNum != 0)
                 twigTicketNumberTextBox.Text = tempTwigCaseNum.ToString();
-
-            if (!string.IsNullOrEmpty(tempBattType))
-                batteryTypeDropDown.SelectedItem = tempBattType;
 
             if (tempSerialNum.HasValue && tempSerialNum != 0)
                 batterySerialNumberTextBox.Text = tempSerialNum.ToString();
@@ -63,9 +73,18 @@ namespace BatteryRepairModule.Forms.BRM
             {
                 tempTwigCaseNum = Int32.Parse(twigTicketNumberTextBox.Text);
 
-                //dbInformation.TWIGTicketOptions.Add(dbInformation.TWIGCaseNumber.ToString()); 
+                foreach (var keyPair in dbInformation.moduleTypesByOEM)
+                {
+                    foreach (var intKeyPair in keyPair.Value)
+                    {
+                        if (batteryTypeDropDown.SelectedItem.ToString() == intKeyPair.Value)
+                        {
+                            dbInformation.selectedModuleType.Clear();
+                            tempSelectedMod.Add(keyPair.Key, new Dictionary<int, string> { { intKeyPair.Key, intKeyPair.Value } });
+                        }
+                    }
+                }
 
-                tempBattType = batteryTypeDropDown.SelectedItem.ToString();
                 tempSerialNum = Int32.Parse(batterySerialNumberTextBox.Text);
                 tempVinNum = vehicleVinNumberTextBox.Text;
                 tempStaffCreateReport = staffInitiatingReportDropDown.SelectedItem.ToString();
@@ -75,7 +94,7 @@ namespace BatteryRepairModule.Forms.BRM
                     MessageBox.Show($"Please fill the TWIG Ticket Number text box in order to continue.", "Input Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return;
                 }
-                if (string.IsNullOrEmpty(tempBattType))
+                if (!dbInformation.moduleTypesByOEM.Any())
                 {
                     MessageBox.Show($"Please select a module type in order to continue.", "Input Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return;
@@ -95,7 +114,7 @@ namespace BatteryRepairModule.Forms.BRM
                     MessageBox.Show($"Please identify yourself in the respective dropdown in order to continue.", "Input Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return;
                 }
-                
+
                 parentForm.OpenChildForm(new BrmTicketCreationForm2(parentForm));
             }
             catch (Exception ex)
@@ -106,9 +125,9 @@ namespace BatteryRepairModule.Forms.BRM
 
         private void cancelButton_Click(object sender, EventArgs e)
         {
-            dbInformation.ClearTicketCreation(); 
+            dbInformation.ClearTicketCreation();
             this.Close();
         }
-        
+
     }
 }
