@@ -65,7 +65,7 @@ namespace BatteryRepairModule.Forms.Service_Inspection_Forms
 
         private void addRepairActionButton_Click(object sender, EventArgs e)
         {
-            using (var newForm = new addRepairActionForm(repairActionsListBox))
+            using (var newForm = new addRepairActionForm(repairActionsListBox, false))
             {
                 newForm.ShowDialog(this);
             }

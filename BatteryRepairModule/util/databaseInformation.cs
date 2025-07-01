@@ -1,3 +1,5 @@
+using BatteryRepairModule.Forms.BRM;
+
 namespace BatteryRepairModule;
 
 public static class dbInformation
@@ -46,8 +48,27 @@ public static class dbInformation
     #endregion
 
     #region Authorize Repairs 
-    public static string? staffAuthorized = string.Empty; 
+    public static string? staffAuthorized = string.Empty;
     public static Dictionary<int, string> clearedRepairsKeyValPair = new Dictionary<int, string>();
+    public static Dictionary<int, string> clearedRepairsKeyStatusPair = new Dictionary<int, string>();
+    public static Dictionary<string, string> clearedRepairsValueStatusPair = new Dictionary<string, string>();
+
+    #endregion
+
+    #region REPAIR ACTIONS
+    public static string repairNotes;
+    public static Dictionary<int, string> repairActionKeyStatus = new Dictionary<int, string>();
+    public static Dictionary<int, string> newRepairActionInRepairFormKeyValue = new Dictionary<int, string>();
+    public static Dictionary<int, string> reportedIssueKeyValue = new Dictionary<int, string>();
+    public static Dictionary<int, string> reportedIssueKeyStatus = new Dictionary<int, string>();
+    public static Dictionary<string, string> reportedIssuesValueStatus = new Dictionary<string, string>();
+    public static Dictionary<int, string> issueStatusOptionsKeyValue = new Dictionary<int, string>();
+    public static Dictionary<int, string> repairStatusOptionKeyValue = new Dictionary<int, string>();
+    public static Dictionary<int, string> tempUpdateIssueIssueHolder = new Dictionary<int, string>();
+    public static Dictionary<int, string> tempUpdateIssueStatusHolder = new Dictionary<int, string>();
+    public static Dictionary<int, string> tempUpdateRepairRepairHolder = new Dictionary<int, string>();
+    public static Dictionary<int, string> tempUpdateRepairStatusHolder = new Dictionary<int, string>();
+    public static Dictionary<int, string> tempUpdateNotesRepairHolder = new Dictionary<int, string>(); 
 
     #endregion
 

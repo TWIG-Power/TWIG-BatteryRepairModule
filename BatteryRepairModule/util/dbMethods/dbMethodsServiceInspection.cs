@@ -27,28 +27,6 @@ public static partial class dbMethods
         }
     }
 
-
-
-    public static void loadAwaitingRepairActionsStatus()
-    {
-        using (var conn = new NpgsqlConnection(dbConnection.connectionPath))
-        using (var cmd = new NpgsqlCommand("SELECT \"id\", \"twig_ticket_number\" FROM public.ticket WHERE \"status_fk\" = 3", conn))
-        {
-            conn.Open();
-            using (var reader = cmd.ExecuteReader())
-            {
-                dbInformation.activeTwigCaseNumbers.Clear();
-                while (reader.Read())
-                {
-                    if (!reader.IsDBNull(0) && !reader.IsDBNull(1))
-                    {
-                        dbInformation.activeTwigCaseNumbers.Add(reader.GetInt16(0), reader.GetInt32(1));
-                    }
-                }
-            }
-        }
-    }
-
     public static void LoadRegisteredCustomerReport()
     {
         using (var conn = new NpgsqlConnection(dbConnection.connectionPath))

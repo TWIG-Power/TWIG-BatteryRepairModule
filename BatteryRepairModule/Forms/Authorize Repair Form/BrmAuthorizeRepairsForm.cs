@@ -41,7 +41,7 @@ namespace BatteryRepairModule.Forms.BRM
 
         private void addAuthorizedRepairAction_Click(object sender, EventArgs e)
         {
-            using (var neForm = new addRepairActionForm(authorizedRepairsListBox))
+            using (var neForm = new addRepairActionForm(authorizedRepairsListBox, false))
             {
                 neForm.ShowDialog(this);
             }
@@ -101,7 +101,7 @@ namespace BatteryRepairModule.Forms.BRM
                     return;
                 }
             }
-            else if (reportedIssuesListBox.Items.Count == 0)
+            else if (authorizedRepairsListBox.Items.Count == 0)
             {
                 MessageBox.Show("You have no authorized repairs selected. Please try again!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;

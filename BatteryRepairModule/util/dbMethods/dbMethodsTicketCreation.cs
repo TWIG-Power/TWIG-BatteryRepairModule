@@ -216,7 +216,7 @@ public static partial class dbMethods
             conn.Open();
             int ticketSurrogateKey = getTicketSurrogateKey();
 
-            using (var cmd = new NpgsqlCommand("INSERT INTO public.registered_customer_report (report_type_fk, ticket_fk) VALUES (@reportTypeFk, @ticketFk)", conn))
+            using (var cmd = new NpgsqlCommand("INSERT INTO public.registered_customer_report (report_type_fk, ticket_fk, report_status_fk) VALUES (@reportTypeFk, @ticketFk, 1)", conn))
             {
                 foreach (var reportedError in dbInformation.moduleReportedErrorsKeyPair)
                 {
