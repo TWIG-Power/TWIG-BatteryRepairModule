@@ -94,6 +94,7 @@
             continueButton.TabIndex = 14;
             continueButton.Text = "Continue";
             continueButton.UseVisualStyleBackColor = true;
+            continueButton.Click += continueButton_Click;
             // 
             // panel3
             // 
@@ -117,6 +118,7 @@
             cancelButton.TabIndex = 15;
             cancelButton.Text = "Cancel";
             cancelButton.UseVisualStyleBackColor = true;
+            cancelButton.Click += cancelButton_Click;
             // 
             // addStatusUpdateForm
             // 
@@ -125,6 +127,8 @@
             ClientSize = new Size(374, 461);
             Controls.Add(panel2);
             Controls.Add(panel1);
+            MaximizeBox = false;
+            MinimumSize = new Size(390, 500);
             Name = "addStatusUpdateForm";
             Text = "addStatusUpdateForm";
             panel1.ResumeLayout(false);

@@ -12,9 +12,90 @@ namespace BatteryRepairModule.Forms.Add_Forms
 {
     public partial class addStatusUpdateForm : Form
     {
-        public addStatusUpdateForm()
+        private string statusType;
+        private ListBox modifiedListBox; 
+        public addStatusUpdateForm(ListBox listBoxRef, string typeRef)
         {
             InitializeComponent();
+            this.modifiedListBox = listBoxRef; 
+            this.statusType = typeRef;
+
+            switch (statusType)
+            {
+                case "Repair":
+                    dbMethods.loadRepairStatusOptions();
+                    listBox1.Items.AddRange(dbInformation.repairStatusOptionKeyValue.Select(kvp => $"{kvp.Value}").ToArray()); 
+                    break;
+                case "Issue":
+                    dbMethods.loadIssueStatusOptions();
+                    listBox1.Items.AddRange(dbInformation.issueStatusOptionsKeyValue.Select(kvp => $"{kvp.Value}").ToArray()); 
+                    break;
+                default:
+                    break;
+            }
+        }
+
+        private void continueButton_Click(object sender, EventArgs e)
+        {
+            switch (statusType)
+            {
+                case "Repair":
+                    if (listBox1.SelectedItem != null)
+                    {
+
+                        var selectedRepair = modifiedListBox.SelectedItem as string;
+                        var selectedRepaired = selectedRepair?.Split('(')[0].Trim();
+                        var selectedKvpp = dbInformation.clearedRepairsKeyValPair.FirstOrDefault(kvp => kvp.Value == (string?)selectedRepaired);
+                        dbInformation.tempUpdateRepairRepairHolder.Clear();
+                        dbInformation.tempUpdateRepairRepairHolder[selectedKvpp.Key] = selectedKvpp.Value;
+
+                        var selectedStatus2 = listBox1.SelectedItem as string;
+                        var selectedKvp22 = dbInformation.repairStatusOptionKeyValue.FirstOrDefault(kvp => kvp.Value == selectedStatus2);
+                        dbInformation.tempUpdateRepairStatusHolder.Clear();
+                        dbInformation.tempUpdateRepairStatusHolder[selectedKvp22.Key] = selectedKvp22.Value;
+
+                        dbMethods.updateRepairStatus();
+                        dbMethods.loadRepairActionKeyValueStatus();
+                        modifiedListBox.Items.Clear(); 
+                        modifiedListBox.Items.AddRange(dbInformation.clearedRepairsValueStatusPair.Select(kvp => $"{kvp.Key} ({kvp.Value})").ToArray());
+
+                        this.Close(); 
+                    }
+                    break;
+
+                case "Issue":
+                    if (listBox1.SelectedItem != null)
+                    {
+                        var selectedIssueString = modifiedListBox.SelectedItem as string;
+                        var selectedIssue = selectedIssueString?.Split('(')[0].Trim();
+                        var selectedKvp = dbInformation.reportedIssueKeyValue.FirstOrDefault(kvp => kvp.Value == (string?)selectedIssue);
+                        dbInformation.tempUpdateIssueIssueHolder.Clear();
+                        dbInformation.tempUpdateIssueIssueHolder[selectedKvp.Key] = selectedKvp.Value;
+
+                        var selectedStatus = listBox1.SelectedItem;
+                        var selectedKvp2 = dbInformation.issueStatusOptionsKeyValue.FirstOrDefault(kvp => kvp.Value == selectedStatus);
+                        dbInformation.tempUpdateIssueStatusHolder.Clear();
+                        dbInformation.tempUpdateIssueStatusHolder[selectedKvp2.Key] = selectedKvp2.Value;
+
+                        dbMethods.updateIssueStatus();
+                        dbMethods.loadReportedIssuesAndStatus();
+                        modifiedListBox.Items.Clear(); 
+                        modifiedListBox.Items.AddRange(dbInformation.reportedIssuesValueStatus.Select(kvp => $"{kvp.Key} ({kvp.Value})").ToArray());
+
+                        this.Close(); 
+                    }
+                    break;
+
+                default:
+                    break;
+            }
+            
+
+        }
+
+        private void cancelButton_Click(object sender, EventArgs e)
+        {
+            this.Close();
         }
     }
 }

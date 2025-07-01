@@ -34,38 +34,36 @@ namespace BatteryRepairModule.Forms.BRM
         {
             twigTicketNumContainer = new Panel();
             panel12 = new Panel();
-            comboBox1 = new ComboBox();
+            staffDropDown = new ComboBox();
             label5 = new Label();
             panel8 = new Panel();
             twigTicketNumberDropDown = new ComboBox();
             label1 = new Label();
             panel3 = new Panel();
-            label4 = new Label();
-            panel6 = new Panel();
             label2 = new Label();
             panel1 = new Panel();
             label3 = new Label();
             panel5 = new Panel();
             panel9 = new Panel();
-            notesTextBox = new RichTextBox();
-            panel2 = new Panel();
             repairActionsListBox = new ListBox();
             panel4 = new Panel();
             reportedIssuesListBox = new ListBox();
             panel7 = new Panel();
+            panel2 = new Panel();
+            addRepairNotesButton = new Button();
             panel11 = new Panel();
-            updateStatusButton = new Button();
+            viewRepairNotesButton = new Button();
             panel10 = new Panel();
             addRepairActionButton = new Button();
-            backButton = new Button();
-            continueButton = new Button();
+            updateRepairStatus = new Button();
+            updateIssueStatus = new Button();
             twigTicketNumContainer.SuspendLayout();
             panel12.SuspendLayout();
             panel8.SuspendLayout();
             panel3.SuspendLayout();
             panel5.SuspendLayout();
-            panel9.SuspendLayout();
             panel7.SuspendLayout();
+            panel2.SuspendLayout();
             panel11.SuspendLayout();
             panel10.SuspendLayout();
             SuspendLayout();
@@ -84,7 +82,7 @@ namespace BatteryRepairModule.Forms.BRM
             // 
             // panel12
             // 
-            panel12.Controls.Add(comboBox1);
+            panel12.Controls.Add(staffDropDown);
             panel12.Controls.Add(label5);
             panel12.Dock = DockStyle.Top;
             panel12.Location = new Point(10, 64);
@@ -92,16 +90,17 @@ namespace BatteryRepairModule.Forms.BRM
             panel12.Size = new Size(911, 54);
             panel12.TabIndex = 5;
             // 
-            // comboBox1
+            // staffDropDown
             // 
-            comboBox1.Dock = DockStyle.Left;
-            comboBox1.Font = new Font("Segoe UI", 20F, FontStyle.Regular, GraphicsUnit.Point);
-            comboBox1.FormattingEnabled = true;
-            comboBox1.Location = new Point(391, 0);
-            comboBox1.MaximumSize = new Size(500, 0);
-            comboBox1.Name = "comboBox1";
-            comboBox1.Size = new Size(500, 45);
-            comboBox1.TabIndex = 2;
+            staffDropDown.Dock = DockStyle.Left;
+            staffDropDown.Font = new Font("Segoe UI", 20F, FontStyle.Regular, GraphicsUnit.Point);
+            staffDropDown.FormattingEnabled = true;
+            staffDropDown.Location = new Point(391, 0);
+            staffDropDown.MaximumSize = new Size(500, 0);
+            staffDropDown.Name = "staffDropDown";
+            staffDropDown.Size = new Size(500, 45);
+            staffDropDown.TabIndex = 2;
+            staffDropDown.SelectedIndexChanged += staffDropDown_SelectedIndexChanged;
             // 
             // label5
             // 
@@ -135,6 +134,7 @@ namespace BatteryRepairModule.Forms.BRM
             twigTicketNumberDropDown.Name = "twigTicketNumberDropDown";
             twigTicketNumberDropDown.Size = new Size(500, 45);
             twigTicketNumberDropDown.TabIndex = 2;
+            twigTicketNumberDropDown.SelectedIndexChanged += twigTicketNumberDropDown_SelectedIndexChanged;
             // 
             // label1
             // 
@@ -151,8 +151,6 @@ namespace BatteryRepairModule.Forms.BRM
             // panel3
             // 
             panel3.AutoSizeMode = AutoSizeMode.GrowAndShrink;
-            panel3.Controls.Add(label4);
-            panel3.Controls.Add(panel6);
             panel3.Controls.Add(label2);
             panel3.Controls.Add(panel1);
             panel3.Controls.Add(label3);
@@ -163,32 +161,12 @@ namespace BatteryRepairModule.Forms.BRM
             panel3.Size = new Size(931, 57);
             panel3.TabIndex = 11;
             // 
-            // label4
-            // 
-            label4.AutoSize = true;
-            label4.Dock = DockStyle.Left;
-            label4.Font = new Font("Segoe UI", 22F, FontStyle.Bold, GraphicsUnit.Point);
-            label4.Location = new Point(631, 10);
-            label4.Name = "label4";
-            label4.Padding = new Padding(5);
-            label4.Size = new Size(127, 51);
-            label4.TabIndex = 5;
-            label4.Text = "Notes: ";
-            // 
-            // panel6
-            // 
-            panel6.Dock = DockStyle.Left;
-            panel6.Location = new Point(555, 10);
-            panel6.Name = "panel6";
-            panel6.Size = new Size(76, 42);
-            panel6.TabIndex = 4;
-            // 
             // label2
             // 
             label2.AutoSize = true;
             label2.Dock = DockStyle.Left;
             label2.Font = new Font("Segoe UI", 22F, FontStyle.Bold, GraphicsUnit.Point);
-            label2.Location = new Point(307, 10);
+            label2.Location = new Point(475, 10);
             label2.Name = "label2";
             label2.Padding = new Padding(5);
             label2.Size = new Size(248, 51);
@@ -200,7 +178,7 @@ namespace BatteryRepairModule.Forms.BRM
             panel1.Dock = DockStyle.Left;
             panel1.Location = new Point(269, 10);
             panel1.Name = "panel1";
-            panel1.Size = new Size(38, 42);
+            panel1.Size = new Size(206, 42);
             panel1.TabIndex = 2;
             // 
             // label3
@@ -218,7 +196,6 @@ namespace BatteryRepairModule.Forms.BRM
             // panel5
             // 
             panel5.Controls.Add(panel9);
-            panel5.Controls.Add(panel2);
             panel5.Controls.Add(repairActionsListBox);
             panel5.Controls.Add(panel4);
             panel5.Controls.Add(reportedIssuesListBox);
@@ -230,30 +207,11 @@ namespace BatteryRepairModule.Forms.BRM
             // 
             // panel9
             // 
-            panel9.Controls.Add(notesTextBox);
             panel9.Dock = DockStyle.Left;
-            panel9.Location = new Point(642, 0);
+            panel9.Location = new Point(933, 0);
             panel9.Name = "panel9";
             panel9.Size = new Size(296, 215);
             panel9.TabIndex = 16;
-            // 
-            // notesTextBox
-            // 
-            notesTextBox.Dock = DockStyle.Fill;
-            notesTextBox.Font = new Font("Segoe UI", 18F, FontStyle.Regular, GraphicsUnit.Point);
-            notesTextBox.Location = new Point(0, 0);
-            notesTextBox.Name = "notesTextBox";
-            notesTextBox.Size = new Size(296, 215);
-            notesTextBox.TabIndex = 0;
-            notesTextBox.Text = "";
-            // 
-            // panel2
-            // 
-            panel2.Dock = DockStyle.Left;
-            panel2.Location = new Point(631, 0);
-            panel2.Name = "panel2";
-            panel2.Size = new Size(11, 215);
-            panel2.TabIndex = 3;
             // 
             // repairActionsListBox
             // 
@@ -261,15 +219,15 @@ namespace BatteryRepairModule.Forms.BRM
             repairActionsListBox.Font = new Font("Segoe UI", 18F, FontStyle.Regular, GraphicsUnit.Point);
             repairActionsListBox.FormattingEnabled = true;
             repairActionsListBox.ItemHeight = 32;
-            repairActionsListBox.Location = new Point(324, 0);
+            repairActionsListBox.Location = new Point(475, 0);
             repairActionsListBox.Name = "repairActionsListBox";
-            repairActionsListBox.Size = new Size(307, 215);
+            repairActionsListBox.Size = new Size(458, 215);
             repairActionsListBox.TabIndex = 2;
             // 
             // panel4
             // 
             panel4.Dock = DockStyle.Left;
-            panel4.Location = new Point(307, 0);
+            panel4.Location = new Point(458, 0);
             panel4.Name = "panel4";
             panel4.Size = new Size(17, 215);
             panel4.TabIndex = 1;
@@ -282,12 +240,13 @@ namespace BatteryRepairModule.Forms.BRM
             reportedIssuesListBox.ItemHeight = 32;
             reportedIssuesListBox.Location = new Point(0, 0);
             reportedIssuesListBox.Name = "reportedIssuesListBox";
-            reportedIssuesListBox.Size = new Size(307, 215);
+            reportedIssuesListBox.Size = new Size(458, 215);
             reportedIssuesListBox.TabIndex = 0;
             // 
             // panel7
             // 
             panel7.AutoSizeMode = AutoSizeMode.GrowAndShrink;
+            panel7.Controls.Add(panel2);
             panel7.Controls.Add(panel11);
             panel7.Controls.Add(panel10);
             panel7.Dock = DockStyle.Top;
@@ -296,30 +255,55 @@ namespace BatteryRepairModule.Forms.BRM
             panel7.Size = new Size(931, 63);
             panel7.TabIndex = 22;
             // 
+            // panel2
+            // 
+            panel2.AutoSizeMode = AutoSizeMode.GrowAndShrink;
+            panel2.Controls.Add(addRepairNotesButton);
+            panel2.Dock = DockStyle.Left;
+            panel2.Location = new Point(620, 0);
+            panel2.Name = "panel2";
+            panel2.Padding = new Padding(2);
+            panel2.Size = new Size(310, 63);
+            panel2.TabIndex = 17;
+            // 
+            // addRepairNotesButton
+            // 
+            addRepairNotesButton.AutoSize = true;
+            addRepairNotesButton.Dock = DockStyle.Fill;
+            addRepairNotesButton.Font = new Font("Segoe UI", 15.75F, FontStyle.Regular, GraphicsUnit.Point);
+            addRepairNotesButton.Location = new Point(2, 2);
+            addRepairNotesButton.Name = "addRepairNotesButton";
+            addRepairNotesButton.Padding = new Padding(3);
+            addRepairNotesButton.Size = new Size(306, 59);
+            addRepairNotesButton.TabIndex = 18;
+            addRepairNotesButton.Text = "Add Repair Notes";
+            addRepairNotesButton.UseVisualStyleBackColor = true;
+            addRepairNotesButton.Click += button1_Click;
+            // 
             // panel11
             // 
             panel11.AutoSizeMode = AutoSizeMode.GrowAndShrink;
-            panel11.Controls.Add(updateStatusButton);
+            panel11.Controls.Add(viewRepairNotesButton);
             panel11.Dock = DockStyle.Left;
-            panel11.Location = new Point(500, 0);
+            panel11.Location = new Point(310, 0);
             panel11.Name = "panel11";
             panel11.Padding = new Padding(2);
-            panel11.Size = new Size(447, 63);
+            panel11.Size = new Size(310, 63);
             panel11.TabIndex = 16;
             // 
-            // updateStatusButton
+            // viewRepairNotesButton
             // 
-            updateStatusButton.AutoSize = true;
-            updateStatusButton.Dock = DockStyle.Fill;
-            updateStatusButton.Font = new Font("Segoe UI", 15.75F, FontStyle.Regular, GraphicsUnit.Point);
-            updateStatusButton.Location = new Point(2, 2);
-            updateStatusButton.Name = "updateStatusButton";
-            updateStatusButton.Padding = new Padding(3);
-            updateStatusButton.Size = new Size(443, 59);
-            updateStatusButton.TabIndex = 18;
-            updateStatusButton.Text = "Update Status ";
-            updateStatusButton.UseVisualStyleBackColor = true;
-            updateStatusButton.Click += updateStatusButton_Click;
+            viewRepairNotesButton.AutoSize = true;
+            viewRepairNotesButton.Dock = DockStyle.Fill;
+            viewRepairNotesButton.Font = new Font("Segoe UI", 15.75F, FontStyle.Regular, GraphicsUnit.Point);
+            viewRepairNotesButton.Location = new Point(2, 2);
+            viewRepairNotesButton.Name = "viewRepairNotesButton";
+            viewRepairNotesButton.Padding = new Padding(3);
+            viewRepairNotesButton.Size = new Size(306, 59);
+            viewRepairNotesButton.TabIndex = 18;
+            viewRepairNotesButton.Text = "View Repair Notes";
+            viewRepairNotesButton.UseVisualStyleBackColor = true;
+            viewRepairNotesButton.Click += updateStatusButton_Click;
             // 
             // panel10
             // 
@@ -329,7 +313,7 @@ namespace BatteryRepairModule.Forms.BRM
             panel10.Location = new Point(0, 0);
             panel10.Name = "panel10";
             panel10.Padding = new Padding(3);
-            panel10.Size = new Size(500, 63);
+            panel10.Size = new Size(310, 63);
             panel10.TabIndex = 15;
             // 
             // addRepairActionButton
@@ -339,41 +323,41 @@ namespace BatteryRepairModule.Forms.BRM
             addRepairActionButton.Font = new Font("Segoe UI", 15.75F, FontStyle.Regular, GraphicsUnit.Point);
             addRepairActionButton.Location = new Point(3, 3);
             addRepairActionButton.Name = "addRepairActionButton";
-            addRepairActionButton.Size = new Size(494, 57);
+            addRepairActionButton.Size = new Size(304, 57);
             addRepairActionButton.TabIndex = 17;
             addRepairActionButton.Text = "Add Repair Action ";
             addRepairActionButton.UseVisualStyleBackColor = true;
             addRepairActionButton.Click += addRepairActionButton_Click_2;
             // 
-            // backButton
+            // updateRepairStatus
             // 
-            backButton.AutoSize = true;
-            backButton.Dock = DockStyle.Right;
-            backButton.Font = new Font("Segoe UI", 18F, FontStyle.Regular, GraphicsUnit.Point);
-            backButton.Location = new Point(581, 457);
-            backButton.MaximumSize = new Size(175, 80);
-            backButton.MinimumSize = new Size(175, 50);
-            backButton.Name = "backButton";
-            backButton.Size = new Size(175, 54);
-            backButton.TabIndex = 24;
-            backButton.Text = "Back";
-            backButton.UseVisualStyleBackColor = true;
-            backButton.Click += backButton_Click;
+            updateRepairStatus.AutoSize = true;
+            updateRepairStatus.Dock = DockStyle.Left;
+            updateRepairStatus.Font = new Font("Segoe UI", 18F, FontStyle.Regular, GraphicsUnit.Point);
+            updateRepairStatus.Location = new Point(464, 457);
+            updateRepairStatus.MaximumSize = new Size(464, 54);
+            updateRepairStatus.MinimumSize = new Size(175, 50);
+            updateRepairStatus.Name = "updateRepairStatus";
+            updateRepairStatus.Size = new Size(464, 54);
+            updateRepairStatus.TabIndex = 24;
+            updateRepairStatus.Text = "Update Repair Status";
+            updateRepairStatus.UseVisualStyleBackColor = true;
+            updateRepairStatus.Click += backButton_Click;
             // 
-            // continueButton
+            // updateIssueStatus
             // 
-            continueButton.AutoSize = true;
-            continueButton.Dock = DockStyle.Right;
-            continueButton.Font = new Font("Segoe UI", 18F, FontStyle.Regular, GraphicsUnit.Point);
-            continueButton.Location = new Point(756, 457);
-            continueButton.MaximumSize = new Size(175, 80);
-            continueButton.MinimumSize = new Size(175, 50);
-            continueButton.Name = "continueButton";
-            continueButton.Size = new Size(175, 54);
-            continueButton.TabIndex = 23;
-            continueButton.Text = "Continue";
-            continueButton.UseVisualStyleBackColor = true;
-            continueButton.Click += continueButton_Click_1;
+            updateIssueStatus.AutoSize = true;
+            updateIssueStatus.Dock = DockStyle.Left;
+            updateIssueStatus.Font = new Font("Segoe UI", 18F, FontStyle.Regular, GraphicsUnit.Point);
+            updateIssueStatus.Location = new Point(0, 457);
+            updateIssueStatus.MaximumSize = new Size(464, 54);
+            updateIssueStatus.MinimumSize = new Size(175, 50);
+            updateIssueStatus.Name = "updateIssueStatus";
+            updateIssueStatus.Size = new Size(464, 54);
+            updateIssueStatus.TabIndex = 23;
+            updateIssueStatus.Text = "Update Issue Status";
+            updateIssueStatus.UseVisualStyleBackColor = true;
+            updateIssueStatus.Click += continueButton_Click_1;
             // 
             // BrmRepairActionForm
             // 
@@ -381,8 +365,8 @@ namespace BatteryRepairModule.Forms.BRM
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.Gainsboro;
             ClientSize = new Size(931, 511);
-            Controls.Add(backButton);
-            Controls.Add(continueButton);
+            Controls.Add(updateRepairStatus);
+            Controls.Add(updateIssueStatus);
             Controls.Add(panel7);
             Controls.Add(panel5);
             Controls.Add(panel3);
@@ -397,8 +381,9 @@ namespace BatteryRepairModule.Forms.BRM
             panel3.ResumeLayout(false);
             panel3.PerformLayout();
             panel5.ResumeLayout(false);
-            panel9.ResumeLayout(false);
             panel7.ResumeLayout(false);
+            panel2.ResumeLayout(false);
+            panel2.PerformLayout();
             panel11.ResumeLayout(false);
             panel11.PerformLayout();
             panel10.ResumeLayout(false);
@@ -411,8 +396,6 @@ namespace BatteryRepairModule.Forms.BRM
 
         private Panel twigTicketNumContainer;
         private Panel panel3;
-        private Label label4;
-        private Panel panel6;
         private Label label2;
         private Panel panel1;
         private Label label3;
@@ -420,23 +403,22 @@ namespace BatteryRepairModule.Forms.BRM
         private ListBox repairActionsListBox;
         private Panel panel4;
         private ListBox reportedIssuesListBox;
-        private Panel panel2;
         private Panel panel9;
-        private RichTextBox notesTextBox;
         private Button button3;
-        private Button button1;
+        private Button addRepairNotesButton;
         private Panel panel7;
         private Panel panel11;
-        private Button updateStatusButton;
+        private Button viewRepairNotesButton;
         private Panel panel10;
         private Button addRepairActionButton;
-        private Button backButton;
-        private Button continueButton;
+        private Button updateRepairStatus;
+        private Button updateIssueStatus;
         private Panel panel8;
         private ComboBox twigTicketNumberDropDown;
         private Label label1;
         private Panel panel12;
-        private ComboBox comboBox1;
+        private ComboBox staffDropDown;
         private Label label5;
+        private Panel panel2;
     }
 }
