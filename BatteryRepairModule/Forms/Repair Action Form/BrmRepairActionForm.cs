@@ -29,7 +29,8 @@ namespace BatteryRepairModule.Forms.BRM
             addRepairNotesButton.Enabled = false;
             updateIssueStatus.Enabled = false;
             updateRepairStatus.Enabled = false;
-        
+            addTestButton.Enabled = false; 
+
         }
 
         // Update Issue Status
@@ -39,13 +40,6 @@ namespace BatteryRepairModule.Forms.BRM
             {
                 newForm.ShowDialog(this);
             }
-        }
-
-        // Update Repair Status
-        private void backButton_Click(object sender, EventArgs e)
-        {
-            using (var newForm = new addStatusUpdateForm(repairActionsListBox, "Repair"))
-                newForm.ShowDialog(this); 
         }
 
         // Add Repair Actions
@@ -58,8 +52,8 @@ namespace BatteryRepairModule.Forms.BRM
         // CHANGED TO VIEW REPAIR NOTES
         private void updateStatusButton_Click(object sender, EventArgs e)
         {
-            using (var newForm = new addNotesForm(repairActionsListBox, true))
-                newForm.ShowDialog(this); 
+            using (var newForm = new addNotesForm(repairActionsListBox, true, "repair"))
+                newForm.ShowDialog(this);
         }
 
         private void twigTicketNumberDropDown_SelectedIndexChanged(object sender, EventArgs e)
@@ -77,7 +71,7 @@ namespace BatteryRepairModule.Forms.BRM
 
 
             dbMethods.loadReportedIssuesAndStatus();
-            reportedIssuesListBox.Items.AddRange(dbInformation.reportedIssuesValueStatus.Select(kvp => $"{kvp.Key} ({kvp.Value})").ToArray()); 
+            reportedIssuesListBox.Items.AddRange(dbInformation.reportedIssuesValueStatus.Select(kvp => $"{kvp.Key} ({kvp.Value})").ToArray());
 
             dbMethods.loadRepairActionKeyValueStatus();
             repairActionsListBox.Items.AddRange(dbInformation.clearedRepairsValueStatusPair.Select(kvp => $"{kvp.Key} ({kvp.Value})").ToArray());
@@ -95,14 +89,27 @@ namespace BatteryRepairModule.Forms.BRM
             addRepairNotesButton.Enabled = true;
             updateIssueStatus.Enabled = true;
             updateRepairStatus.Enabled = true;
-            
+            addTestButton.Enabled = true; 
+
         }
 
         // Add Repair Notes
         private void button1_Click(object sender, EventArgs e)
         {
-            using (var newForm = new addNotesForm(repairActionsListBox, false))
-                newForm.ShowDialog(this); 
+            using (var newForm = new addNotesForm(repairActionsListBox, false, "repair"))
+                newForm.ShowDialog(this);
+        }
+
+        private void updateRepairStatus_Click(object sender, EventArgs e)
+        {
+            using (var newForm = new addStatusUpdateForm(repairActionsListBox, "Repair"))
+                newForm.ShowDialog(this);
+        }
+
+        private void addTestButton_Click(object sender, EventArgs e)
+        {
+            using (var newForm = new addTestForm())
+                newForm.ShowDialog(this);
         }
     }
 }

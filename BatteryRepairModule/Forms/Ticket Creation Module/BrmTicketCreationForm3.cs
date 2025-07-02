@@ -31,7 +31,7 @@ namespace BatteryRepairModule
         {
             try
             {
-                
+                dbInformation.selectedTwigTicketKeyPair.Clear(); 
                 dbInformation.selectedTwigTicketKeyPair.Add(0, BrmTicketCreationForm.tempTwigCaseNum);
 
                 dbInformation.selectedModuleType.Add(

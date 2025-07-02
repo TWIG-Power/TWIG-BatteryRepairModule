@@ -1,4 +1,5 @@
-﻿using BatteryRepairModule.Forms.BRM;
+﻿using BatteryRepairModule.Forms.Add_Forms;
+using BatteryRepairModule.Forms.BRM;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -20,7 +21,7 @@ namespace BatteryRepairModule.Forms.BRM
             InitializeComponent();
 
             dbMethods.loadAwaitingAuthorizeRepairTickets();
-            
+
             foreach (var kvp in dbInformation.activeTwigCaseNumbers)
             {
                 twigTicketNumberDropDown.Items.Add(kvp.Value);
@@ -32,6 +33,7 @@ namespace BatteryRepairModule.Forms.BRM
 
             addAuthorizedRepairAction.Enabled = false;
             removeAuthorizedRepairAction.Enabled = false;
+            addTestButton.Enabled = false;
         }
 
         private void backButton_Click(object sender, EventArgs e)
@@ -125,17 +127,29 @@ namespace BatteryRepairModule.Forms.BRM
                 string selectedValue = staffDropDown.SelectedItem.ToString();
                 var selectedKvp = dbInformation.staffKeyPairOptions.FirstOrDefault(kvp => kvp.Value == selectedValue);
                 dbInformation.selectedStaffKeyValue.Clear();
-                dbInformation.selectedStaffKeyValue[selectedKvp.Key] = selectedKvp.Value; 
+                dbInformation.selectedStaffKeyValue[selectedKvp.Key] = selectedKvp.Value;
             }
 
-                dbMethods.insertAuthorizedRepairs();
-                this.Close();
-            }
+            dbMethods.insertAuthorizedRepairs();
+            this.Close();
+        }
 
         private void staffDropDown_SelectedIndexChanged(object sender, EventArgs e)
         {
+            string selectedValue = staffDropDown.SelectedItem.ToString();
+            var selectedKvp = dbInformation.staffKeyPairOptions.FirstOrDefault(kvp => kvp.Value == selectedValue);
+            dbInformation.selectedStaffKeyValue.Clear();
+            dbInformation.selectedStaffKeyValue[selectedKvp.Key] = selectedKvp.Value;
+
             addAuthorizedRepairAction.Enabled = true;
-            removeAuthorizedRepairAction.Enabled = true; 
+            removeAuthorizedRepairAction.Enabled = true;
+            addTestButton.Enabled = true;
+        }
+
+        private void addTestButton_Click(object sender, EventArgs e)
+        {
+            using (var newForm = new addTestForm())
+                newForm.ShowDialog(this); 
         }
     }
 }

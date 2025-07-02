@@ -19,6 +19,9 @@
     <Compile Update="Forms\Add Forms\addStatusUpdateForm.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Update="Forms\Add Forms\addTestForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Update="Forms\Authorize Repair Form\BrmAuthorizeRepairsForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -35,6 +38,9 @@
       <SubType>Form</SubType>
     </Compile>
     <Compile Update="Forms\Service Inspection Forms\serviceInspectionForm2.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Forms\Testing\testingForm.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Update="Forms\Ticket Creation Module\BrmTicketCreationForm.cs">
