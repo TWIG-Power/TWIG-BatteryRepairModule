@@ -58,6 +58,8 @@ namespace BatteryRepairModule.Forms.BRM
             addAuthorizedRepairAction = new Button();
             backButton = new Button();
             continueButton = new Button();
+            addTestButton = new Button();
+            panel12 = new Panel();
             twigTicketNumContainer.SuspendLayout();
             panel6.SuspendLayout();
             panel1.SuspendLayout();
@@ -66,6 +68,7 @@ namespace BatteryRepairModule.Forms.BRM
             panel9.SuspendLayout();
             panel11.SuspendLayout();
             panel10.SuspendLayout();
+            panel12.SuspendLayout();
             SuspendLayout();
             // 
             // twigTicketNumContainer
@@ -366,12 +369,38 @@ namespace BatteryRepairModule.Forms.BRM
             continueButton.UseVisualStyleBackColor = true;
             continueButton.Click += continueButton_Click;
             // 
+            // addTestButton
+            // 
+            addTestButton.AutoSize = true;
+            addTestButton.Dock = DockStyle.Fill;
+            addTestButton.Font = new Font("Segoe UI", 18F, FontStyle.Regular, GraphicsUnit.Point);
+            addTestButton.Location = new Point(3, 3);
+            addTestButton.MinimumSize = new Size(175, 40);
+            addTestButton.Name = "addTestButton";
+            addTestButton.Size = new Size(494, 56);
+            addTestButton.TabIndex = 17;
+            addTestButton.Text = "Add Required Test";
+            addTestButton.UseVisualStyleBackColor = true;
+            addTestButton.Click += addTestButton_Click;
+            // 
+            // panel12
+            // 
+            panel12.Controls.Add(addTestButton);
+            panel12.Dock = DockStyle.Left;
+            panel12.Location = new Point(0, 446);
+            panel12.MaximumSize = new Size(500, 62);
+            panel12.Name = "panel12";
+            panel12.Padding = new Padding(3);
+            panel12.Size = new Size(500, 62);
+            panel12.TabIndex = 18;
+            // 
             // BrmAuthorizeRepairsForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.Gainsboro;
             ClientSize = new Size(931, 511);
+            Controls.Add(panel12);
             Controls.Add(backButton);
             Controls.Add(continueButton);
             Controls.Add(panel9);
@@ -394,6 +423,8 @@ namespace BatteryRepairModule.Forms.BRM
             panel11.PerformLayout();
             panel10.ResumeLayout(false);
             panel10.PerformLayout();
+            panel12.ResumeLayout(false);
+            panel12.PerformLayout();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -426,5 +457,7 @@ namespace BatteryRepairModule.Forms.BRM
         private Panel panel6;
         private ComboBox staffDropDown;
         private Label label4;
+        private Button addTestButton;
+        private Panel panel12;
     }
 }

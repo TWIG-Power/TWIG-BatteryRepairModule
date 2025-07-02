@@ -152,7 +152,7 @@ public static partial class dbMethods
         }
     }
 
-    public static void updateNotes()
+    public static void updateRepairNotes()
     {
         using (var conn = new NpgsqlConnection(dbConnection.connectionPath))
         using (var cmd = new NpgsqlCommand("UPDATE public.authorized_repairs SET note = @note WHERE ticket_fk = @ticketId AND id = @authorizedId", conn))
@@ -165,13 +165,12 @@ public static partial class dbMethods
         }
     }
 
-    public static void getNotes()
+    public static void getRepairNotes()
     {
         using (var conn = new NpgsqlConnection(dbConnection.connectionPath))
         using (var cmd = new NpgsqlCommand(
             "SELECT note FROM public.authorized_repairs WHERE ticket_fk = @ticketId AND id = @authorizedId", conn))
         {
-            // Validate parameters
             if (!dbInformation.selectedTwigTicketKeyPair.Keys.Any() || !dbInformation.tempUpdateNotesRepairHolder.Keys.Any())
             {
                 throw new InvalidOperationException("Required keys are missing in the dictionaries.");
@@ -192,7 +191,7 @@ public static partial class dbMethods
                 }
                 else
                 {
-                    dbInformation.repairNotes = string.Empty; // Handle empty result set
+                    dbInformation.repairNotes = string.Empty; 
                 }
             }
         }

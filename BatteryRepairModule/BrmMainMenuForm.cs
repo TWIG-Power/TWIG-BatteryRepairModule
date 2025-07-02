@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using BatteryRepairModule.Forms.Service_Inspection_Forms;
+using BatteryRepairModule.Forms.Testing;
 
 namespace BatteryRepairModule.Forms.BRM;
 
@@ -85,6 +86,7 @@ public partial class BrmMainMenuForm : Form
     private void testingQualityModButton_Click(object sender, EventArgs e)
     {
         SelectButton(testingQualityModButton);
+        OpenChildForm(new testingForm()); 
     }
 
     private void qualityButton_Click(object sender, EventArgs e)

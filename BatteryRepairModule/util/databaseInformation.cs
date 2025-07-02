@@ -1,3 +1,4 @@
+using System.Diagnostics;
 using BatteryRepairModule.Forms.BRM;
 
 namespace BatteryRepairModule;
@@ -68,11 +69,20 @@ public static class dbInformation
     public static Dictionary<int, string> tempUpdateIssueStatusHolder = new Dictionary<int, string>();
     public static Dictionary<int, string> tempUpdateRepairRepairHolder = new Dictionary<int, string>();
     public static Dictionary<int, string> tempUpdateRepairStatusHolder = new Dictionary<int, string>();
-    public static Dictionary<int, string> tempUpdateNotesRepairHolder = new Dictionary<int, string>(); 
+    public static Dictionary<int, string> tempUpdateNotesRepairHolder = new Dictionary<int, string>();
 
     #endregion
 
-    #region TESTING ONLY 
+    #region TESTING 
+
+    public static string testNotes; 
+    public static Dictionary<int, string> testingOptionsKeyValue = new Dictionary<int, string>();
+    public static Dictionary<int, string> addedTestsKeyValue = new Dictionary<int, string>();
+    public static Dictionary<int, string> tempAddNewTest = new Dictionary<int, string>();
+    public static Dictionary<int, string> addedTestsKeyStatus = new Dictionary<int, string>();
+    public static Dictionary<string, string> addedTestValueStatus = new Dictionary<string, string>();
+    public static Dictionary<int, string> tempTestNoteHolder = new Dictionary<int, string>();
+    public static Dictionary<int, string> tempUpdateTestStatusHolder = new Dictionary<int, string>(); 
 
     public static void ClearTicketCreation()
     {
