@@ -57,6 +57,8 @@
             clearBatteryForQualityButton = new Button();
             panel14 = new Panel();
             returnBatteryToRepairButton = new Button();
+            panel16 = new Panel();
+            viewRepairNoteButton = new Button();
             panel15 = new Panel();
             updateTestStatus = new Button();
             panel10.SuspendLayout();
@@ -71,6 +73,7 @@
             panel6.SuspendLayout();
             panel13.SuspendLayout();
             panel14.SuspendLayout();
+            panel16.SuspendLayout();
             panel15.SuspendLayout();
             SuspendLayout();
             // 
@@ -226,7 +229,6 @@
             repairActionsListBox.Name = "repairActionsListBox";
             repairActionsListBox.Size = new Size(458, 215);
             repairActionsListBox.TabIndex = 0;
-            
             // 
             // panel1
             // 
@@ -358,6 +360,7 @@
             panel6.AutoSizeMode = AutoSizeMode.GrowAndShrink;
             panel6.Controls.Add(panel13);
             panel6.Controls.Add(panel14);
+            panel6.Controls.Add(panel16);
             panel6.Controls.Add(panel15);
             panel6.Dock = DockStyle.Top;
             panel6.Location = new Point(0, 457);
@@ -370,49 +373,75 @@
             panel13.AutoSizeMode = AutoSizeMode.GrowAndShrink;
             panel13.Controls.Add(clearBatteryForQualityButton);
             panel13.Dock = DockStyle.Left;
-            panel13.Location = new Point(620, 0);
+            panel13.Location = new Point(699, 0);
             panel13.Name = "panel13";
             panel13.Padding = new Padding(2);
-            panel13.Size = new Size(310, 63);
-            panel13.TabIndex = 17;
+            panel13.Size = new Size(235, 63);
+            panel13.TabIndex = 20;
             // 
             // clearBatteryForQualityButton
             // 
             clearBatteryForQualityButton.AutoSize = true;
             clearBatteryForQualityButton.Dock = DockStyle.Fill;
-            clearBatteryForQualityButton.Font = new Font("Segoe UI", 15.75F, FontStyle.Regular, GraphicsUnit.Point);
+            clearBatteryForQualityButton.Font = new Font("Segoe UI", 14F, FontStyle.Regular, GraphicsUnit.Point);
             clearBatteryForQualityButton.Location = new Point(2, 2);
             clearBatteryForQualityButton.Name = "clearBatteryForQualityButton";
             clearBatteryForQualityButton.Padding = new Padding(3);
-            clearBatteryForQualityButton.Size = new Size(306, 59);
+            clearBatteryForQualityButton.Size = new Size(231, 59);
             clearBatteryForQualityButton.TabIndex = 18;
             clearBatteryForQualityButton.Text = "Clear Battery for Quality";
             clearBatteryForQualityButton.UseVisualStyleBackColor = true;
+            clearBatteryForQualityButton.Click += clearBatteryForQualityButton_Click;
             // 
             // panel14
             // 
             panel14.AutoSizeMode = AutoSizeMode.GrowAndShrink;
             panel14.Controls.Add(returnBatteryToRepairButton);
             panel14.Dock = DockStyle.Left;
-            panel14.Location = new Point(310, 0);
+            panel14.Location = new Point(466, 0);
             panel14.Name = "panel14";
             panel14.Padding = new Padding(2);
-            panel14.Size = new Size(310, 63);
-            panel14.TabIndex = 16;
+            panel14.Size = new Size(233, 63);
+            panel14.TabIndex = 19;
             // 
             // returnBatteryToRepairButton
             // 
             returnBatteryToRepairButton.AutoSize = true;
             returnBatteryToRepairButton.Dock = DockStyle.Fill;
-            returnBatteryToRepairButton.Font = new Font("Segoe UI", 15.75F, FontStyle.Regular, GraphicsUnit.Point);
+            returnBatteryToRepairButton.Font = new Font("Segoe UI", 13F, FontStyle.Regular, GraphicsUnit.Point);
             returnBatteryToRepairButton.Location = new Point(2, 2);
             returnBatteryToRepairButton.Name = "returnBatteryToRepairButton";
             returnBatteryToRepairButton.Padding = new Padding(3);
-            returnBatteryToRepairButton.Size = new Size(306, 59);
+            returnBatteryToRepairButton.Size = new Size(229, 59);
             returnBatteryToRepairButton.TabIndex = 18;
             returnBatteryToRepairButton.Text = "Return Battery To Repair";
             returnBatteryToRepairButton.UseVisualStyleBackColor = true;
             returnBatteryToRepairButton.Click += returnBatteryToRepairButton_Click;
+            // 
+            // panel16
+            // 
+            panel16.AutoSizeMode = AutoSizeMode.GrowAndShrink;
+            panel16.Controls.Add(viewRepairNoteButton);
+            panel16.Dock = DockStyle.Left;
+            panel16.Location = new Point(236, 0);
+            panel16.Name = "panel16";
+            panel16.Padding = new Padding(2);
+            panel16.Size = new Size(230, 63);
+            panel16.TabIndex = 18;
+            // 
+            // viewRepairNoteButton
+            // 
+            viewRepairNoteButton.AutoSize = true;
+            viewRepairNoteButton.Dock = DockStyle.Fill;
+            viewRepairNoteButton.Font = new Font("Segoe UI", 15.75F, FontStyle.Regular, GraphicsUnit.Point);
+            viewRepairNoteButton.Location = new Point(2, 2);
+            viewRepairNoteButton.Name = "viewRepairNoteButton";
+            viewRepairNoteButton.Padding = new Padding(3);
+            viewRepairNoteButton.Size = new Size(226, 59);
+            viewRepairNoteButton.TabIndex = 18;
+            viewRepairNoteButton.Text = "View Repair Note";
+            viewRepairNoteButton.UseVisualStyleBackColor = true;
+            viewRepairNoteButton.Click += viewRepairNoteButton_Click;
             // 
             // panel15
             // 
@@ -422,7 +451,7 @@
             panel15.Location = new Point(0, 0);
             panel15.Name = "panel15";
             panel15.Padding = new Padding(3);
-            panel15.Size = new Size(310, 63);
+            panel15.Size = new Size(236, 63);
             panel15.TabIndex = 15;
             // 
             // updateTestStatus
@@ -432,7 +461,7 @@
             updateTestStatus.Font = new Font("Segoe UI", 15.75F, FontStyle.Regular, GraphicsUnit.Point);
             updateTestStatus.Location = new Point(3, 3);
             updateTestStatus.Name = "updateTestStatus";
-            updateTestStatus.Size = new Size(304, 57);
+            updateTestStatus.Size = new Size(230, 57);
             updateTestStatus.TabIndex = 17;
             updateTestStatus.Text = "Update Test Status";
             updateTestStatus.UseVisualStyleBackColor = true;
@@ -472,6 +501,8 @@
             panel13.PerformLayout();
             panel14.ResumeLayout(false);
             panel14.PerformLayout();
+            panel16.ResumeLayout(false);
+            panel16.PerformLayout();
             panel15.ResumeLayout(false);
             panel15.PerformLayout();
             ResumeLayout(false);
@@ -503,12 +534,14 @@
         private Button updateIssueStatus;
         private Button addRequiredTestButton;
         private Panel panel6;
+        private Panel panel15;
+        private Button updateTestStatus;
+        private Button calculateStateOfHealthButton;
         private Panel panel13;
         private Button clearBatteryForQualityButton;
         private Panel panel14;
         private Button returnBatteryToRepairButton;
-        private Panel panel15;
-        private Button updateTestStatus;
-        private Button calculateStateOfHealthButton;
+        private Panel panel16;
+        private Button viewRepairNoteButton;
     }
 }

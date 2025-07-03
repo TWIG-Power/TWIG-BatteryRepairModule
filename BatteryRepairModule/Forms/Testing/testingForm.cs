@@ -32,20 +32,21 @@ namespace BatteryRepairModule.Forms.Testing
             returnBatteryToRepairButton.Enabled = false;
             clearBatteryForQualityButton.Enabled = false;
             calculateStateOfHealthButton.Enabled = false;
+            viewRepairNoteButton.Enabled = false; 
 
         }
 
         private void addTestNoteButton_Click(object sender, EventArgs e)
         {
             using (var newForm = new addNotesForm(testStatusListBox, false, "test"))
-            if (testStatusListBox.SelectedItem != null)
-            {
-                newForm.ShowDialog(this);
-            }
-            else
-            {
-                MessageBox.Show("Please select a test to add a note.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
+                if (testStatusListBox.SelectedItem != null)
+                {
+                    newForm.ShowDialog(this);
+                }
+                else
+                {
+                    MessageBox.Show("Please select a test to add a note.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
         }
 
         private void testStatusListBox_SelectedIndexChanged(object sender, EventArgs e)
@@ -57,12 +58,12 @@ namespace BatteryRepairModule.Forms.Testing
         {
             if (testStatusListBox.SelectedItem != null)
             {
-            using (var newForm = new addNotesForm(testStatusListBox, true, "test"))
-                newForm.ShowDialog(this);
+                using (var newForm = new addNotesForm(testStatusListBox, true, "test"))
+                    newForm.ShowDialog(this);
             }
             else
             {
-            MessageBox.Show("Please select a test to view its note.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Please select a test to view its note.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -115,6 +116,7 @@ namespace BatteryRepairModule.Forms.Testing
             returnBatteryToRepairButton.Enabled = true;
             clearBatteryForQualityButton.Enabled = true;
             calculateStateOfHealthButton.Enabled = true;
+            viewRepairNoteButton.Enabled = true; 
         }
 
         private void viewRepairActionNotesButton_Click(object sender, EventArgs e)
@@ -151,12 +153,30 @@ namespace BatteryRepairModule.Forms.Testing
         {
             if (testStatusListBox.SelectedItem == null)
             {
-            MessageBox.Show("Please select a test from the list to update its status.", "No Test Selected", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-            return;
+                MessageBox.Show("Please select a test from the list to update its status.", "No Test Selected", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
             }
 
             using (var newForm = new addStatusUpdateForm(testStatusListBox, "Test"))
-            newForm.ShowDialog(this); 
+                newForm.ShowDialog(this);
+        }
+
+        private void clearBatteryForQualityButton_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void viewRepairNoteButton_Click(object sender, EventArgs e)
+        {
+            if (repairActionsListBox.SelectedItem != null)
+            {
+            using (var newForm = new addNotesForm(repairActionsListBox, true, "repair"))
+                newForm.ShowDialog(this);
+            }
+            else
+            {
+            MessageBox.Show("Please select a repair action to view its note.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
     }
 }
