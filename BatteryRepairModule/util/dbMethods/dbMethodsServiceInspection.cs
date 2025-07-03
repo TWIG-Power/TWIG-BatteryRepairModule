@@ -111,7 +111,7 @@ public static partial class dbMethods
         }
     }
 
-    public static void createServiceInpsection()
+    public static void createServiceInpsection(byte[] fileByte)
     {
         using (var conn = new NpgsqlConnection(dbConnection.connectionPath))
         using (var cmd = new NpgsqlCommand("INSERT INTO public.service_inspection (staff_fk, cleaning_procedures, diagnostic_tool_plugged, diagnostic_report, ticket_fk) VALUES (@staff_fk, @cleaningProcedures, @diagnostic_tool_plugged, @diagnostic_report, @ticket_fk)", conn))
@@ -120,7 +120,7 @@ public static partial class dbMethods
             cmd.Parameters.AddWithValue("@staff_fk", dbInformation.selectedStaffKeyValue.Keys.First());
             cmd.Parameters.AddWithValue("@cleaningProcedures", dbInformation.cleaningProcedures ?? (object)DBNull.Value);
             cmd.Parameters.AddWithValue("@diagnostic_tool_plugged", dbInformation.checkPluggedIntoDiagTool ?? (object)DBNull.Value);
-            cmd.Parameters.AddWithValue("@diagnostic_report", DBNull.Value);
+            cmd.Parameters.AddWithValue("@diagnostic_report", fileByte ?? (object)DBNull.Value);
             cmd.Parameters.AddWithValue("@ticket_fk", dbInformation.selectedTwigTicketKeyPair.Keys.First());
             cmd.ExecuteNonQuery(); 
         }

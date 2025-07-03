@@ -14,6 +14,7 @@ namespace BatteryRepairModule.Forms.Service_Inspection_Forms
     public partial class serviceInspectionForm2 : Form
     {
         private BrmMainMenuForm parentForm;
+        public byte[] fileBytes; 
         public serviceInspectionForm2(BrmMainMenuForm parentRef)
         {
             InitializeComponent();
@@ -46,7 +47,16 @@ namespace BatteryRepairModule.Forms.Service_Inspection_Forms
                         }
                     }
                 }
-                dbMethods.createServiceInpsection(); 
+                if (!string.IsNullOrEmpty(dbInformation.diagnosticReportPath))
+                {
+                    fileBytes = File.ReadAllBytes(dbInformation.diagnosticReportPath);
+                }
+                else
+                {
+                    fileBytes = null;
+                }
+
+                dbMethods.createServiceInpsection(fileBytes); 
                 dbMethods.insertSuggestedRepairs();
                 ClearTempValues(); 
             }

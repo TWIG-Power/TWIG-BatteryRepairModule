@@ -43,7 +43,7 @@
             yesDiagnosticButton = new RadioButton();
             label3 = new Label();
             panel4 = new Panel();
-            button1 = new Button();
+            attachFileButton = new Button();
             diagnosticReportPath = new MaskedTextBox();
             label2 = new Label();
             backButton = new Button();
@@ -233,7 +233,7 @@
             // panel4
             // 
             panel4.AutoSizeMode = AutoSizeMode.GrowAndShrink;
-            panel4.Controls.Add(button1);
+            panel4.Controls.Add(attachFileButton);
             panel4.Controls.Add(diagnosticReportPath);
             panel4.Controls.Add(label2);
             panel4.Dock = DockStyle.Top;
@@ -243,16 +243,17 @@
             panel4.Size = new Size(931, 80);
             panel4.TabIndex = 18;
             // 
-            // button1
+            // attachFileButton
             // 
-            button1.Dock = DockStyle.Left;
-            button1.Font = new Font("Segoe UI", 15F, FontStyle.Regular, GraphicsUnit.Point);
-            button1.Location = new Point(826, 20);
-            button1.Name = "button1";
-            button1.Size = new Size(105, 40);
-            button1.TabIndex = 2;
-            button1.Text = "Attach";
-            button1.UseVisualStyleBackColor = true;
+            attachFileButton.Dock = DockStyle.Left;
+            attachFileButton.Font = new Font("Segoe UI", 15F, FontStyle.Regular, GraphicsUnit.Point);
+            attachFileButton.Location = new Point(826, 20);
+            attachFileButton.Name = "attachFileButton";
+            attachFileButton.Size = new Size(105, 40);
+            attachFileButton.TabIndex = 2;
+            attachFileButton.Text = "Attach";
+            attachFileButton.UseVisualStyleBackColor = true;
+            attachFileButton.Click += attachFileButton_Click;
             // 
             // diagnosticReportPath
             // 
@@ -353,7 +354,7 @@
         private RadioButton yesDiagnosticButton;
         private Label label3;
         private Panel panel4;
-        private Button button1;
+        private Button attachFileButton;
         private MaskedTextBox diagnosticReportPath;
         private Label label2;
         private Button backButton;
