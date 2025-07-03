@@ -49,11 +49,6 @@ namespace BatteryRepairModule.Forms.Testing
                 }
         }
 
-        private void testStatusListBox_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
-        }
-
         private void viewTestNoteButton_Click(object sender, EventArgs e)
         {
             if (testStatusListBox.SelectedItem != null)

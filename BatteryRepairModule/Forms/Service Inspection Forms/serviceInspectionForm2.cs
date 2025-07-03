@@ -46,7 +46,10 @@ namespace BatteryRepairModule.Forms.Service_Inspection_Forms
                         }
                     }
                 }
-                dbMethods.createServiceInpsection(); 
+
+                byte[] fileBytes = File.ReadAllBytes(dbInformation.diagnosticReportPath); 
+
+                dbMethods.createServiceInpsection(fileBytes); 
                 dbMethods.insertSuggestedRepairs();
                 ClearTempValues(); 
             }

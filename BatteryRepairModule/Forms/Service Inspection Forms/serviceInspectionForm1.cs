@@ -15,7 +15,7 @@ namespace BatteryRepairModule.Forms.Service_Inspection_Forms
     {
         public static int? tempTwigCaseNumber;
         public static Dictionary<int, int> tempSelectedTwigTicketKeyPair = new Dictionary<int, int>();
-        public static Dictionary<int, string> tempSelectedStaffKeyPair = new Dictionary<int, string>(); 
+        public static Dictionary<int, string> tempSelectedStaffKeyPair = new Dictionary<int, string>();
 
         public static bool? tempCleaningProcedures;
         public static bool? tempCheckPluggedIntoDiagTool;
@@ -47,11 +47,6 @@ namespace BatteryRepairModule.Forms.Service_Inspection_Forms
                 if (twigValue != null && twigTicketNumberDropDown.Items.Contains(twigValue))
                     twigTicketNumberDropDown.SelectedItem = twigValue;
             }
-
-/*
-            if (!string.IsNullOrEmpty(tempStaffServiceInspection))
-                staffDropDown.SelectedItem = tempStaffServiceInspection;
-*/
             if (tempCleaningProcedures.HasValue)
             {
                 if (tempCleaningProcedures.Value)
@@ -89,7 +84,7 @@ namespace BatteryRepairModule.Forms.Service_Inspection_Forms
                     var selectedValue = staffDropDown.SelectedItem.ToString();
                     var selectedKvp = dbInformation.staffKeyPairOptions.FirstOrDefault(kvp => kvp.Value.ToString() == selectedValue);
                     tempSelectedStaffKeyPair.Clear();
-                    tempSelectedStaffKeyPair[selectedKvp.Key] = selectedKvp.Value; 
+                    tempSelectedStaffKeyPair[selectedKvp.Key] = selectedKvp.Value;
                 }
 
                 tempCleaningProcedures = yesCleanProcButton.Checked ? true : false;
@@ -138,6 +133,24 @@ namespace BatteryRepairModule.Forms.Service_Inspection_Forms
         {
             this.Close();
         }
-    
+
+        private void attachFileButton_Click(object sender, EventArgs e)
+        {
+            string filePath = string.Empty;
+
+            using (OpenFileDialog openFileDialog = new OpenFileDialog())
+            {
+                openFileDialog.InitialDirectory = "C:\\";
+                openFileDialog.Filter = "All files (*.*)|*.*|Text files (*.txt)|*.txt";
+                openFileDialog.FilterIndex = 1;
+                openFileDialog.RestoreDirectory = true;
+
+                if (openFileDialog.ShowDialog() == DialogResult.OK)
+                {
+                    dbInformation.diagnosticReportPath = openFileDialog.FileName;
+                }
+                diagnosticReportPath.Text = dbInformation.diagnosticReportPath; 
+            }
+        }
     }
 }

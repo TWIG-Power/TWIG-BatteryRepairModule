@@ -20,7 +20,7 @@ namespace BatteryRepairModule.Forms.BRM
         private BrmMainMenuForm parentForm;
         public static List<int> keys = new List<int>();
         public static List<int> table = new List<int>();
-        public static List<int> staffKeys = new List<int>(); 
+        public static List<int> staffKeys = new List<int>();
         public static Dictionary<int, Dictionary<int, string>> tempSelectedMod = new Dictionary<int, Dictionary<int, string>>();
         public static Dictionary<int, string> tempSelectedStaff = new Dictionary<int, string>();
         public BrmTicketCreationForm(BrmMainMenuForm parentRef)
@@ -28,16 +28,13 @@ namespace BatteryRepairModule.Forms.BRM
             InitializeComponent();
             this.parentForm = parentRef;
 
-            // Load staff names
             dbMethods.loadStaffNames();
             staffInitiatingReportDropDown.Items.AddRange(dbInformation.staffKeyPairOptions.Values.ToArray());
 
-            // Load new ticket number
             dbInformation.TWIGCaseNumber = dbMethods.getLastTwigTicketNumber() + 1;
             twigTicketNumberTextBox.Text = dbInformation.TWIGCaseNumber.ToString();
             twigTicketNumberTextBox.Enabled = false;
 
-            // Load Module Types
             dbMethods.loadAllModuleTypes();
             batteryTypeDropDown.Items.Clear();
             foreach (var keyPair in dbInformation.moduleTypesByOEM)
@@ -53,7 +50,7 @@ namespace BatteryRepairModule.Forms.BRM
             LoadTempVariables();
 
             tempSelectedMod.Clear();
-            tempSelectedStaff.Clear(); 
+            tempSelectedStaff.Clear();
         }
 
         private void LoadTempVariables()
@@ -82,6 +79,7 @@ namespace BatteryRepairModule.Forms.BRM
                         if (batteryTypeDropDown.SelectedItem.ToString() == intKeyPair.Value)
                         {
                             dbInformation.selectedModuleType.Clear();
+                            tempSelectedMod.Clear(); 
                             tempSelectedMod.Add(keyPair.Key, new Dictionary<int, string> { { intKeyPair.Key, intKeyPair.Value } });
                         }
                     }
@@ -97,7 +95,7 @@ namespace BatteryRepairModule.Forms.BRM
                     tempSelectedStaff.Clear();
                     tempSelectedStaff[selectedKvp.Key] = selectedKvp.Value;
                 }
-                
+
 
 
                 if (tempTwigCaseNum == 0)
@@ -140,5 +138,6 @@ namespace BatteryRepairModule.Forms.BRM
             this.Close();
         }
 
+        
     }
 }

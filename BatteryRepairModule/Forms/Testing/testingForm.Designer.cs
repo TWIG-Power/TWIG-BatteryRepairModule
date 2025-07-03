@@ -209,7 +209,6 @@
             testStatusListBox.Name = "testStatusListBox";
             testStatusListBox.Size = new Size(458, 215);
             testStatusListBox.TabIndex = 2;
-            testStatusListBox.SelectedIndexChanged += testStatusListBox_SelectedIndexChanged;
             // 
             // panel4
             // 
