@@ -58,6 +58,7 @@ namespace BatteryRepairModule.Forms.BRM
             updateIssueStatus = new Button();
             addTestButton = new Button();
             updateRepairStatus = new Button();
+            clearModuleForTestingButton = new Button();
             twigTicketNumContainer.SuspendLayout();
             panel12.SuspendLayout();
             panel8.SuspendLayout();
@@ -339,7 +340,7 @@ namespace BatteryRepairModule.Forms.BRM
             updateIssueStatus.MaximumSize = new Size(464, 54);
             updateIssueStatus.MinimumSize = new Size(175, 50);
             updateIssueStatus.Name = "updateIssueStatus";
-            updateIssueStatus.Size = new Size(310, 54);
+            updateIssueStatus.Size = new Size(232, 54);
             updateIssueStatus.TabIndex = 23;
             updateIssueStatus.Text = "Update Issue Status";
             updateIssueStatus.UseVisualStyleBackColor = true;
@@ -350,12 +351,12 @@ namespace BatteryRepairModule.Forms.BRM
             addTestButton.AutoSize = true;
             addTestButton.Dock = DockStyle.Left;
             addTestButton.Font = new Font("Segoe UI", 18F, FontStyle.Regular, GraphicsUnit.Point);
-            addTestButton.Location = new Point(310, 457);
+            addTestButton.Location = new Point(232, 457);
             addTestButton.Margin = new Padding(5);
             addTestButton.MaximumSize = new Size(464, 54);
             addTestButton.MinimumSize = new Size(175, 40);
             addTestButton.Name = "addTestButton";
-            addTestButton.Size = new Size(311, 54);
+            addTestButton.Size = new Size(218, 54);
             addTestButton.TabIndex = 25;
             addTestButton.Text = "Add Required Test";
             addTestButton.UseVisualStyleBackColor = true;
@@ -366,15 +367,30 @@ namespace BatteryRepairModule.Forms.BRM
             updateRepairStatus.AutoSize = true;
             updateRepairStatus.Dock = DockStyle.Left;
             updateRepairStatus.Font = new Font("Segoe UI", 18F, FontStyle.Regular, GraphicsUnit.Point);
-            updateRepairStatus.Location = new Point(621, 457);
+            updateRepairStatus.Location = new Point(450, 457);
             updateRepairStatus.MaximumSize = new Size(464, 54);
             updateRepairStatus.MinimumSize = new Size(175, 50);
             updateRepairStatus.Name = "updateRepairStatus";
-            updateRepairStatus.Size = new Size(310, 54);
+            updateRepairStatus.Size = new Size(245, 54);
             updateRepairStatus.TabIndex = 26;
             updateRepairStatus.Text = "Update Repair Status";
             updateRepairStatus.UseVisualStyleBackColor = true;
             updateRepairStatus.Click += updateRepairStatus_Click;
+            // 
+            // clearModuleForTestingButton
+            // 
+            clearModuleForTestingButton.AutoSize = true;
+            clearModuleForTestingButton.Dock = DockStyle.Left;
+            clearModuleForTestingButton.Font = new Font("Segoe UI", 18F, FontStyle.Regular, GraphicsUnit.Point);
+            clearModuleForTestingButton.Location = new Point(695, 457);
+            clearModuleForTestingButton.MaximumSize = new Size(464, 54);
+            clearModuleForTestingButton.MinimumSize = new Size(175, 50);
+            clearModuleForTestingButton.Name = "clearModuleForTestingButton";
+            clearModuleForTestingButton.Size = new Size(292, 54);
+            clearModuleForTestingButton.TabIndex = 27;
+            clearModuleForTestingButton.Text = "Clear Module For Testing";
+            clearModuleForTestingButton.UseVisualStyleBackColor = true;
+            clearModuleForTestingButton.Click += clearModuleForTestingButton_Click;
             // 
             // BrmRepairActionForm
             // 
@@ -382,6 +398,7 @@ namespace BatteryRepairModule.Forms.BRM
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.Gainsboro;
             ClientSize = new Size(931, 511);
+            Controls.Add(clearModuleForTestingButton);
             Controls.Add(updateRepairStatus);
             Controls.Add(addTestButton);
             Controls.Add(updateIssueStatus);
@@ -439,5 +456,6 @@ namespace BatteryRepairModule.Forms.BRM
         private Panel panel2;
         private Button addTestButton;
         private Button updateRepairStatus;
+        private Button clearModuleForTestingButton;
     }
 }

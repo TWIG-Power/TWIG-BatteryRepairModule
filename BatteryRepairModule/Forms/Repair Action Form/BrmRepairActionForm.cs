@@ -29,7 +29,8 @@ namespace BatteryRepairModule.Forms.BRM
             addRepairNotesButton.Enabled = false;
             updateIssueStatus.Enabled = false;
             updateRepairStatus.Enabled = false;
-            addTestButton.Enabled = false; 
+            addTestButton.Enabled = false;
+            clearModuleForTestingButton.Enabled = false;
 
         }
 
@@ -89,7 +90,8 @@ namespace BatteryRepairModule.Forms.BRM
             addRepairNotesButton.Enabled = true;
             updateIssueStatus.Enabled = true;
             updateRepairStatus.Enabled = true;
-            addTestButton.Enabled = true; 
+            addTestButton.Enabled = true;
+            clearModuleForTestingButton.Enabled = true;
 
         }
 
@@ -110,6 +112,44 @@ namespace BatteryRepairModule.Forms.BRM
         {
             using (var newForm = new addTestForm())
                 newForm.ShowDialog(this);
+        }
+
+        private void clearModuleForTestingButton_Click(object sender, EventArgs e)
+        {
+            foreach (string item2 in reportedIssuesListBox.Items)
+            {
+                if (string.IsNullOrEmpty(item2)) continue;
+                int parentIndex = item2.LastIndexOf('(');
+                string status = string.Empty;
+                if (parentIndex > 0)
+                {
+                    status = item2.Substring(parentIndex + 1).TrimEnd(')', ' ');
+                }
+                if (status != "Resolved")
+                {
+                    MessageBox.Show("This module has issues that haven't been resolved yet.", "Unresolved Issues", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+            }
+            foreach (string item in repairActionsListBox.Items)
+            {
+                if (string.IsNullOrEmpty(item)) continue;
+                int parenIndex = item.LastIndexOf('(');
+                string status = string.Empty;
+                if (parenIndex > 0)
+                {
+                    status = item.Substring(parenIndex + 1).TrimEnd(')', ' ');
+                }
+                if (status != "Complete")
+                {
+                    MessageBox.Show("This module has repairs that haven't been completed yet.", "Unresolved Repairs", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+            }
+
+            dbMethods.clearModuleForTesting();
+            MessageBox.Show("Module has been cleared for testing", "Cleared For Testing", MessageBoxButtons.OK, MessageBoxIcon.Information); 
+            this.Close(); 
         }
     }
 }

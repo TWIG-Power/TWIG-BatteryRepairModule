@@ -62,22 +62,22 @@
       <dsig:DigestValue>N7PhgulQTT+meR4HF5Yyhz4+d0J2geHhhGbWaoEqV/w=</dsig:DigestValue>
     </hash>
   </file>
-  <file name="BatteryRepairModule.dll" size="314368">
+  <file name="BatteryRepairModule.dll" size="329216">
     <hash>
       <dsig:Transforms>
         <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
       </dsig:Transforms>
       <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-      <dsig:DigestValue>QY1iyC+Ddk4JypfpsFMkhMgtnIr6lzhYjknnbAGsecA=</dsig:DigestValue>
+      <dsig:DigestValue>kuMGslQPrUTbkr7zYvsBxwnwCzHGRDxx6lw5x9oiqCk=</dsig:DigestValue>
     </hash>
   </file>
-  <file name="BatteryRepairModule.exe" size="151552">
+  <file name="BatteryRepairModule.exe" size="150528">
     <hash>
       <dsig:Transforms>
         <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
       </dsig:Transforms>
       <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-      <dsig:DigestValue>q4BD89Z8rx1aZB3ZcPbKBFwc0ydPjw4bXvIsKB9Q178=</dsig:DigestValue>
+      <dsig:DigestValue>nznM6Jvn63F3O++g02FAcGVfpfWzLF/z8KqB/0cAb70=</dsig:DigestValue>
     </hash>
   </file>
   <file name="BatteryRepairModule.runtimeconfig.json" size="372">

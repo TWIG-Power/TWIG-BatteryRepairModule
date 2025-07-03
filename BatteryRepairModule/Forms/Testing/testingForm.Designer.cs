@@ -35,6 +35,7 @@
             addTestNoteButton = new Button();
             panel2 = new Panel();
             panel7 = new Panel();
+            calculateStateOfHealthButton = new Button();
             panel5 = new Panel();
             panel9 = new Panel();
             testStatusListBox = new ListBox();
@@ -81,7 +82,7 @@
             panel10.Location = new Point(0, 0);
             panel10.Name = "panel10";
             panel10.Padding = new Padding(3);
-            panel10.Size = new Size(310, 63);
+            panel10.Size = new Size(236, 63);
             panel10.TabIndex = 15;
             // 
             // addRequiredTestButton
@@ -91,7 +92,7 @@
             addRequiredTestButton.Font = new Font("Segoe UI", 15.75F, FontStyle.Regular, GraphicsUnit.Point);
             addRequiredTestButton.Location = new Point(3, 3);
             addRequiredTestButton.Name = "addRequiredTestButton";
-            addRequiredTestButton.Size = new Size(304, 57);
+            addRequiredTestButton.Size = new Size(230, 57);
             addRequiredTestButton.TabIndex = 17;
             addRequiredTestButton.Text = "Add Required Test ";
             addRequiredTestButton.UseVisualStyleBackColor = true;
@@ -105,7 +106,7 @@
             viewTestNoteButton.Location = new Point(2, 2);
             viewTestNoteButton.Name = "viewTestNoteButton";
             viewTestNoteButton.Padding = new Padding(3);
-            viewTestNoteButton.Size = new Size(306, 59);
+            viewTestNoteButton.Size = new Size(226, 59);
             viewTestNoteButton.TabIndex = 18;
             viewTestNoteButton.Text = "View Test Note";
             viewTestNoteButton.UseVisualStyleBackColor = true;
@@ -116,10 +117,10 @@
             panel11.AutoSizeMode = AutoSizeMode.GrowAndShrink;
             panel11.Controls.Add(viewTestNoteButton);
             panel11.Dock = DockStyle.Left;
-            panel11.Location = new Point(310, 0);
+            panel11.Location = new Point(236, 0);
             panel11.Name = "panel11";
             panel11.Padding = new Padding(2);
-            panel11.Size = new Size(310, 63);
+            panel11.Size = new Size(230, 63);
             panel11.TabIndex = 16;
             // 
             // addTestNoteButton
@@ -130,7 +131,7 @@
             addTestNoteButton.Location = new Point(2, 2);
             addTestNoteButton.Name = "addTestNoteButton";
             addTestNoteButton.Padding = new Padding(3);
-            addTestNoteButton.Size = new Size(306, 59);
+            addTestNoteButton.Size = new Size(229, 59);
             addTestNoteButton.TabIndex = 18;
             addTestNoteButton.Text = "Add Test Note";
             addTestNoteButton.UseVisualStyleBackColor = true;
@@ -141,15 +142,16 @@
             panel2.AutoSizeMode = AutoSizeMode.GrowAndShrink;
             panel2.Controls.Add(addTestNoteButton);
             panel2.Dock = DockStyle.Left;
-            panel2.Location = new Point(620, 0);
+            panel2.Location = new Point(466, 0);
             panel2.Name = "panel2";
             panel2.Padding = new Padding(2);
-            panel2.Size = new Size(310, 63);
+            panel2.Size = new Size(233, 63);
             panel2.TabIndex = 17;
             // 
             // panel7
             // 
             panel7.AutoSizeMode = AutoSizeMode.GrowAndShrink;
+            panel7.Controls.Add(calculateStateOfHealthButton);
             panel7.Controls.Add(panel2);
             panel7.Controls.Add(panel11);
             panel7.Controls.Add(panel10);
@@ -158,6 +160,21 @@
             panel7.Name = "panel7";
             panel7.Size = new Size(931, 63);
             panel7.TabIndex = 30;
+            // 
+            // calculateStateOfHealthButton
+            // 
+            calculateStateOfHealthButton.AutoSize = true;
+            calculateStateOfHealthButton.Dock = DockStyle.Fill;
+            calculateStateOfHealthButton.Font = new Font("Segoe UI", 14F, FontStyle.Regular, GraphicsUnit.Point);
+            calculateStateOfHealthButton.Location = new Point(699, 0);
+            calculateStateOfHealthButton.MaximumSize = new Size(232, 63);
+            calculateStateOfHealthButton.MinimumSize = new Size(232, 63);
+            calculateStateOfHealthButton.Name = "calculateStateOfHealthButton";
+            calculateStateOfHealthButton.Size = new Size(232, 63);
+            calculateStateOfHealthButton.TabIndex = 18;
+            calculateStateOfHealthButton.Text = "Calculate State of Health";
+            calculateStateOfHealthButton.UseVisualStyleBackColor = true;
+            calculateStateOfHealthButton.Click += calculateStateOfHealthButton_Click;
             // 
             // panel5
             // 
@@ -209,7 +226,7 @@
             repairActionsListBox.Name = "repairActionsListBox";
             repairActionsListBox.Size = new Size(458, 215);
             repairActionsListBox.TabIndex = 0;
-            repairActionsListBox.SelectedIndexChanged += repairActionsListBox_SelectedIndexChanged;
+            
             // 
             // panel1
             // 
@@ -419,6 +436,7 @@
             updateTestStatus.TabIndex = 17;
             updateTestStatus.Text = "Update Test Status";
             updateTestStatus.UseVisualStyleBackColor = true;
+            updateTestStatus.Click += updateTestStatus_Click_1;
             // 
             // testingForm
             // 
@@ -440,6 +458,7 @@
             panel2.ResumeLayout(false);
             panel2.PerformLayout();
             panel7.ResumeLayout(false);
+            panel7.PerformLayout();
             panel5.ResumeLayout(false);
             panel3.ResumeLayout(false);
             panel3.PerformLayout();
@@ -490,5 +509,6 @@
         private Button returnBatteryToRepairButton;
         private Panel panel15;
         private Button updateTestStatus;
+        private Button calculateStateOfHealthButton;
     }
 }

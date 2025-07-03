@@ -57,7 +57,7 @@ public static class dbInformation
     #endregion
 
     #region REPAIR ACTIONS
-    public static string repairNotes;
+    public static string repairNotes = string.Empty;
     public static Dictionary<int, string> repairActionKeyStatus = new Dictionary<int, string>();
     public static Dictionary<int, string> newRepairActionInRepairFormKeyValue = new Dictionary<int, string>();
     public static Dictionary<int, string> reportedIssueKeyValue = new Dictionary<int, string>();
@@ -75,14 +75,20 @@ public static class dbInformation
 
     #region TESTING 
 
-    public static string testNotes; 
+    public static string testNotes = string.Empty;
     public static Dictionary<int, string> testingOptionsKeyValue = new Dictionary<int, string>();
     public static Dictionary<int, string> addedTestsKeyValue = new Dictionary<int, string>();
     public static Dictionary<int, string> tempAddNewTest = new Dictionary<int, string>();
     public static Dictionary<int, string> addedTestsKeyStatus = new Dictionary<int, string>();
     public static Dictionary<string, string> addedTestValueStatus = new Dictionary<string, string>();
     public static Dictionary<int, string> tempTestNoteHolder = new Dictionary<int, string>();
-    public static Dictionary<int, string> tempUpdateTestStatusHolder = new Dictionary<int, string>(); 
+    public static Dictionary<int, string> moduleTypeKeyValue = new Dictionary<int, string>(); 
+    public static Dictionary<int, int> raceGradeHighLowKeyPair = new Dictionary<int, int>();
+    public static Dictionary<int, int> trackGradeHighLowKeyPair = new Dictionary<int, int>();
+    public static Dictionary<int, int> playGradeHighLowKeyPair = new Dictionary<int, int>();
+    public static Dictionary<int, string> testStatusOptionsKeyValue = new Dictionary<int, string>();
+    public static Dictionary<int, string> tempTestStatusHolder = new Dictionary<int, string>();
+    public static Dictionary<int, string> tempTestTestHolder = new Dictionary<int, string>(); 
 
     public static void ClearTicketCreation()
     {

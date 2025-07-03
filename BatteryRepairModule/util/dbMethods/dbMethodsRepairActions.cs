@@ -191,9 +191,21 @@ public static partial class dbMethods
                 }
                 else
                 {
-                    dbInformation.repairNotes = string.Empty; 
+                    dbInformation.repairNotes = string.Empty;
                 }
             }
+        }
+    }
+
+    public static void clearModuleForTesting()
+    {
+        using (var conn = new NpgsqlConnection(dbConnection.connectionPath))
+        using (var cmd = new NpgsqlCommand("UPDATE public.ticket SET status_fk = @statusFk WHERE id = @ticketId", conn))
+        {
+            conn.Open();
+            cmd.Parameters.AddWithValue("@statusFk", 4);
+            cmd.Parameters.AddWithValue("@ticketId", dbInformation.selectedTwigTicketKeyPair.Keys.First());
+            cmd.ExecuteNonQuery(); 
         }
     }
 }

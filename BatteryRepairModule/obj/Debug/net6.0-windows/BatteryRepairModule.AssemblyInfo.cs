@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("BatteryRepairModule")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+f923f252c0dd62da71617eeb39321c1c9fe514f9")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+68efefd8f7afe833e580e66e515c4036a7530d09")]
 [assembly: System.Reflection.AssemblyProductAttribute("BatteryRepairModule")]
 [assembly: System.Reflection.AssemblyTitleAttribute("BatteryRepairModule")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

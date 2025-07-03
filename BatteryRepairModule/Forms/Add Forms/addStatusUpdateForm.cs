@@ -30,6 +30,10 @@ namespace BatteryRepairModule.Forms.Add_Forms
                     dbMethods.loadIssueStatusOptions();
                     listBox1.Items.AddRange(dbInformation.issueStatusOptionsKeyValue.Select(kvp => $"{kvp.Value}").ToArray()); 
                     break;
+                case "Test":
+                    dbMethods.getTestStatusOptions();
+                    listBox1.Items.AddRange(dbInformation.testStatusOptionsKeyValue.Select(kvp => $"{kvp.Value}").ToArray());
+                    break;
                 default:
                     break;
             }
@@ -85,6 +89,32 @@ namespace BatteryRepairModule.Forms.Add_Forms
                         this.Close(); 
                     }
                     break;
+
+                case "Test": 
+                    if (listBox1.SelectedItem != null)
+                    {
+                        var selectedTestString = modifiedListBox.SelectedItem as string;
+                        var selectedTest = selectedTestString?.Split('(')[0].Trim();
+                        var selectedKvpp = dbInformation.addedTestsKeyValue.FirstOrDefault(kvp => kvp.Value == (string?)selectedTest);
+                        dbInformation.tempTestTestHolder.Clear();
+                        dbInformation.tempTestTestHolder[selectedKvpp.Key] = selectedKvpp.Value;
+
+                        var selectedStatus = listBox1.SelectedItem as string;
+                        var selectedKvp = dbInformation.testStatusOptionsKeyValue.FirstOrDefault(kvp => kvp.Value == (string?)selectedStatus);
+                        dbInformation.tempTestStatusHolder.Clear();
+                        dbInformation.tempTestStatusHolder[selectedKvp.Key] = selectedKvp.Value;
+
+                        dbMethods.updateTestStatus();
+                        dbMethods.getAddedTestsByTwigTicket();  
+                        modifiedListBox.Items.Clear();
+                        modifiedListBox.Items.AddRange(
+                        dbInformation.addedTestsKeyValue.Select(
+                        kvp => $"{kvp.Value} ({dbInformation.addedTestsKeyStatus.GetValueOrDefault(kvp.Key)})").ToArray()
+                        );
+
+                        this.Close(); 
+                    }
+                    break; 
 
                 default:
                     break;

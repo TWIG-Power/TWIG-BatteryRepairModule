@@ -62,12 +62,12 @@ public static partial class dbMethods
             {
                 dbInformation.addedTestsKeyValue.Clear();
                 dbInformation.addedTestsKeyStatus.Clear();
-                dbInformation.addedTestValueStatus.Clear();
+                //dbInformation.addedTestValueStatus.Clear();
                 while (reader.Read())
                 {
                     dbInformation.addedTestsKeyValue.Add(reader.GetInt32(0), reader.GetString(1));
                     dbInformation.addedTestsKeyStatus.Add(reader.GetInt16(0), reader.GetString(2));
-                    dbInformation.addedTestValueStatus.Add(reader.GetString(1), reader.GetString(2));
+                    //dbInformation.addedTestValueStatus.Add(reader.GetString(1), reader.GetString(2));
                 }
             }
         }
@@ -128,18 +128,103 @@ public static partial class dbMethods
         }
     }
 
-    public static void updateTestStatus()
+    public static void getTestStatusOptions()
     {
         using (var conn = new NpgsqlConnection(dbConnection.connectionPath))
-        using (var cmd = new NpgsqlCommand("UPDATE public.testing_added SET staff_fk = @staffFk, timestamp = @timestamp, status_fk = @status WHERE ticket_fk = @ticketId AND test_fk = @testFk", conn))
+        using (var cmd = new NpgsqlCommand("SELECT id, status FROM public.test_status ORDER BY id ASC", conn))
+        {
+            dbInformation.testStatusOptionsKeyValue.Clear();
+            conn.Open();
+            using (var reader = cmd.ExecuteReader())
+            {
+                while (reader.Read())
+                {
+                    dbInformation.testStatusOptionsKeyValue.Add(reader.GetInt16(0), reader.GetString(1));
+                }
+            }
+        }
+    }
+
+    public static void updateTestStatus()
+    {
+        try
+        {
+            using (var conn = new NpgsqlConnection(dbConnection.connectionPath))
+            using (var cmd = new NpgsqlCommand("UPDATE public.testing_added SET staff_fk = @staffFk, timestamp = @timestamp, status_fk = @status WHERE ticket_fk = @ticketId AND id = @testId", conn))
+            {
+                conn.Open();
+                cmd.Parameters.AddWithValue("@staffFk", dbInformation.selectedStaffKeyValue.Keys.First());
+                cmd.Parameters.AddWithValue("@timestamp", System.DateTime.Now);
+                cmd.Parameters.AddWithValue("@status", dbInformation.tempTestStatusHolder.Keys.First());
+                cmd.Parameters.AddWithValue("@ticketId", dbInformation.selectedTwigTicketKeyPair.Keys.First());
+                cmd.Parameters.AddWithValue("@testId", dbInformation.tempTestTestHolder.Keys.First());
+
+                int rowsAffected = cmd.ExecuteNonQuery();
+            }
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"Error: {ex.Message}");
+        }
+    }
+
+    public static void returnModuleToRepairActions()
+    {
+        using (var conn = new NpgsqlConnection(dbConnection.connectionPath))
+        using (var cmd = new NpgsqlCommand("UPDATE public.ticket SET status_fk = @statusFk WHERE id = @ticketId", conn))
         {
             conn.Open();
-            cmd.Parameters.AddWithValue("@staffRepaired", dbInformation.selectedStaffKeyValue.Keys.First());
-            cmd.Parameters.AddWithValue("@timestamp", System.DateTime.Now);
-            cmd.Parameters.AddWithValue("@status", dbInformation.tempUpdateRepairStatusHolder.Keys.First());
+            cmd.Parameters.AddWithValue("@statusFk", 3);
             cmd.Parameters.AddWithValue("@ticketId", dbInformation.selectedTwigTicketKeyPair.Keys.First());
-            cmd.Parameters.AddWithValue("@authorizedId", dbInformation.tempUpdateRepairRepairHolder.Keys.First());
             cmd.ExecuteNonQuery();
+        }
+    }
+
+    public static void getModuleType()
+    {
+        using (var conn = new NpgsqlConnection(dbConnection.connectionPath))
+        using (var cmd = new NpgsqlCommand("SELECT cobra_fk, ktm_fk, misc_fk FROM public.ticket WHERE id = @ticketId", conn))
+        {
+            dbInformation.moduleTypeKeyValue.Clear(); 
+            conn.Open();
+            cmd.Parameters.AddWithValue("@ticketId", dbInformation.selectedTwigTicketKeyPair.Keys.First());
+            using (var reader = cmd.ExecuteReader())
+            {
+                while (reader.Read())
+                {
+                    if (!reader.IsDBNull(0))
+                    {
+                        dbInformation.moduleTypeKeyValue[reader.GetInt16(0)] = "cobra_oem";
+                    }
+                    if (!reader.IsDBNull(1))
+                    {
+                        dbInformation.moduleTypeKeyValue[reader.GetInt16(1)] = "ktm_oem";
+                    }
+                    if (!reader.IsDBNull(2))
+                    {
+                        dbInformation.moduleTypeKeyValue[reader.GetInt16(2)] = "misc_oem";
+                    }
+                }
+            }
+        }
+        using (var conn = new NpgsqlConnection(dbConnection.connectionPath))
+        using (var cmd = new NpgsqlCommand($"SELECT race_soh_upper, race_soh_lower, track_soh_upper, track_soh_lower, play_soh_upper, play_soh_lower, module_type FROM public.{dbInformation.moduleTypeKeyValue.Values.First()} WHERE id = @type", conn))
+        {
+            conn.Open();
+            cmd.Parameters.AddWithValue("@type", dbInformation.moduleTypeKeyValue.Keys.First());
+            dbInformation.raceGradeHighLowKeyPair.Clear();
+            dbInformation.trackGradeHighLowKeyPair.Clear();
+            dbInformation.playGradeHighLowKeyPair.Clear(); 
+            using (var reader = cmd.ExecuteReader())
+            {
+                while (reader.Read())
+                {
+                    dbInformation.raceGradeHighLowKeyPair[reader.GetInt32(0)] = reader.GetInt32(1);
+                    dbInformation.trackGradeHighLowKeyPair[reader.GetInt32(2)] = reader.GetInt32(3);
+                    dbInformation.playGradeHighLowKeyPair[reader.GetInt32(4)] = reader.GetInt32(5);
+                    dbInformation.moduleTypeKeyValue[dbInformation.moduleTypeKeyValue.Keys.First()] = reader.GetString(6);
+                }
+            }
         }
     }
 }
