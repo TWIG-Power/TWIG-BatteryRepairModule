@@ -3,12 +3,28 @@
   "WorkspaceRootPath": "C:\\Users\\FMustico\\Documents\\github\\TWIG-BatteryRepairModule\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{527B0BCE-AA0F-4D73-9DF5-0079242DFD81}|BatteryRepairModule\\BatteryRepairModule.csproj|c:\\users\\fmustico\\documents\\github\\twig-batteryrepairmodule\\batteryrepairmodule\\forms\\service inspection forms\\serviceinspectionform1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
-      "RelativeMoniker": "D:0:0:{527B0BCE-AA0F-4D73-9DF5-0079242DFD81}|BatteryRepairModule\\BatteryRepairModule.csproj|solutionrelative:batteryrepairmodule\\forms\\service inspection forms\\serviceinspectionform1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+      "AbsoluteMoniker": "D:0:0:{527B0BCE-AA0F-4D73-9DF5-0079242DFD81}|BatteryRepairModule\\BatteryRepairModule.csproj|c:\\users\\fmustico\\documents\\github\\twig-batteryrepairmodule\\batteryrepairmodule\\forms\\add forms\\updatelatestchecklistform.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{527B0BCE-AA0F-4D73-9DF5-0079242DFD81}|BatteryRepairModule\\BatteryRepairModule.csproj|solutionrelative:batteryrepairmodule\\forms\\add forms\\updatelatestchecklistform.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{527B0BCE-AA0F-4D73-9DF5-0079242DFD81}|BatteryRepairModule\\BatteryRepairModule.csproj|c:\\users\\fmustico\\documents\\github\\twig-batteryrepairmodule\\batteryrepairmodule\\forms\\service inspection forms\\serviceinspectionform1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{527B0BCE-AA0F-4D73-9DF5-0079242DFD81}|BatteryRepairModule\\BatteryRepairModule.csproj|solutionrelative:batteryrepairmodule\\forms\\service inspection forms\\serviceinspectionform1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{527B0BCE-AA0F-4D73-9DF5-0079242DFD81}|BatteryRepairModule\\BatteryRepairModule.csproj|c:\\users\\fmustico\\documents\\github\\twig-batteryrepairmodule\\batteryrepairmodule\\forms\\add forms\\updatelatestchecklistform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{527B0BCE-AA0F-4D73-9DF5-0079242DFD81}|BatteryRepairModule\\BatteryRepairModule.csproj|solutionrelative:batteryrepairmodule\\forms\\add forms\\updatelatestchecklistform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{527B0BCE-AA0F-4D73-9DF5-0079242DFD81}|BatteryRepairModule\\BatteryRepairModule.csproj|c:\\users\\fmustico\\documents\\github\\twig-batteryrepairmodule\\batteryrepairmodule\\forms\\quality\\qualityform1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{527B0BCE-AA0F-4D73-9DF5-0079242DFD81}|BatteryRepairModule\\BatteryRepairModule.csproj|solutionrelative:batteryrepairmodule\\forms\\quality\\qualityform1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{527B0BCE-AA0F-4D73-9DF5-0079242DFD81}|BatteryRepairModule\\BatteryRepairModule.csproj|c:\\users\\fmustico\\documents\\github\\twig-batteryrepairmodule\\batteryrepairmodule\\forms\\add forms\\updatelatestchecklistform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{527B0BCE-AA0F-4D73-9DF5-0079242DFD81}|BatteryRepairModule\\BatteryRepairModule.csproj|solutionrelative:batteryrepairmodule\\forms\\add forms\\updatelatestchecklistform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{527B0BCE-AA0F-4D73-9DF5-0079242DFD81}|BatteryRepairModule\\BatteryRepairModule.csproj|c:\\users\\fmustico\\documents\\github\\twig-batteryrepairmodule\\batteryrepairmodule\\forms\\quality\\qualityform1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{527B0BCE-AA0F-4D73-9DF5-0079242DFD81}|BatteryRepairModule\\BatteryRepairModule.csproj|solutionrelative:batteryrepairmodule\\forms\\quality\\qualityform1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{527B0BCE-AA0F-4D73-9DF5-0079242DFD81}|BatteryRepairModule\\BatteryRepairModule.csproj|c:\\users\\fmustico\\documents\\github\\twig-batteryrepairmodule\\batteryrepairmodule\\forms\\add forms\\stateofhealthcalculatorform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{527B0BCE-AA0F-4D73-9DF5-0079242DFD81}|BatteryRepairModule\\BatteryRepairModule.csproj|solutionrelative:batteryrepairmodule\\forms\\add forms\\stateofhealthcalculatorform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
     }
   ],
   "DocumentGroupContainers": [
@@ -18,7 +34,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 2,
+          "SelectedChildIndex": 1,
           "Children": [
             {
               "$type": "Bookmark",
@@ -26,27 +42,77 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "serviceInspectionForm1.cs",
-              "DocumentMoniker": "C:\\Users\\FMustico\\Documents\\github\\TWIG-BatteryRepairModule\\BatteryRepairModule\\Forms\\Service Inspection Forms\\serviceInspectionForm1.cs",
-              "RelativeDocumentMoniker": "BatteryRepairModule\\Forms\\Service Inspection Forms\\serviceInspectionForm1.cs",
-              "ToolTip": "C:\\Users\\FMustico\\Documents\\github\\TWIG-BatteryRepairModule\\BatteryRepairModule\\Forms\\Service Inspection Forms\\serviceInspectionForm1.cs*",
-              "RelativeToolTip": "BatteryRepairModule\\Forms\\Service Inspection Forms\\serviceInspectionForm1.cs*",
-              "ViewState": "AgIAAIIAAAAAAAAAAAAhwIsAAAAAAAAAAAAAAA==",
+              "DocumentIndex": 0,
+              "Title": "updateLatestChecklistForm.Designer.cs",
+              "DocumentMoniker": "C:\\Users\\FMustico\\Documents\\github\\TWIG-BatteryRepairModule\\BatteryRepairModule\\Forms\\Add Forms\\updateLatestChecklistForm.Designer.cs",
+              "RelativeDocumentMoniker": "BatteryRepairModule\\Forms\\Add Forms\\updateLatestChecklistForm.Designer.cs",
+              "ToolTip": "C:\\Users\\FMustico\\Documents\\github\\TWIG-BatteryRepairModule\\BatteryRepairModule\\Forms\\Add Forms\\updateLatestChecklistForm.Designer.cs",
+              "RelativeToolTip": "BatteryRepairModule\\Forms\\Add Forms\\updateLatestChecklistForm.Designer.cs",
+              "ViewState": "AgIAAM4AAAAAAAAAAAAQwBcAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-07-03T16:48:57.572Z",
+              "WhenOpened": "2025-07-07T19:17:40.662Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "serviceInspectionForm1.cs [Design]",
-              "DocumentMoniker": "C:\\Users\\FMustico\\Documents\\github\\TWIG-BatteryRepairModule\\BatteryRepairModule\\Forms\\Service Inspection Forms\\serviceInspectionForm1.cs",
-              "RelativeDocumentMoniker": "BatteryRepairModule\\Forms\\Service Inspection Forms\\serviceInspectionForm1.cs",
-              "ToolTip": "C:\\Users\\FMustico\\Documents\\github\\TWIG-BatteryRepairModule\\BatteryRepairModule\\Forms\\Service Inspection Forms\\serviceInspectionForm1.cs [Design]*",
-              "RelativeToolTip": "BatteryRepairModule\\Forms\\Service Inspection Forms\\serviceInspectionForm1.cs [Design]*",
+              "DocumentIndex": 1,
+              "Title": "updateLatestChecklistForm.cs [Design]",
+              "DocumentMoniker": "C:\\Users\\FMustico\\Documents\\github\\TWIG-BatteryRepairModule\\BatteryRepairModule\\Forms\\Add Forms\\updateLatestChecklistForm.cs",
+              "RelativeDocumentMoniker": "BatteryRepairModule\\Forms\\Add Forms\\updateLatestChecklistForm.cs",
+              "ToolTip": "C:\\Users\\FMustico\\Documents\\github\\TWIG-BatteryRepairModule\\BatteryRepairModule\\Forms\\Add Forms\\updateLatestChecklistForm.cs [Design]",
+              "RelativeToolTip": "BatteryRepairModule\\Forms\\Add Forms\\updateLatestChecklistForm.cs [Design]",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-07-03T16:48:40.377Z",
+              "WhenOpened": "2025-07-07T19:13:21.816Z",
+              "EditorCaption": " [Design]"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "qualityForm1.cs",
+              "DocumentMoniker": "C:\\Users\\FMustico\\Documents\\github\\TWIG-BatteryRepairModule\\BatteryRepairModule\\Forms\\Quality\\qualityForm1.cs",
+              "RelativeDocumentMoniker": "BatteryRepairModule\\Forms\\Quality\\qualityForm1.cs",
+              "ToolTip": "C:\\Users\\FMustico\\Documents\\github\\TWIG-BatteryRepairModule\\BatteryRepairModule\\Forms\\Quality\\qualityForm1.cs*",
+              "RelativeToolTip": "BatteryRepairModule\\Forms\\Quality\\qualityForm1.cs*",
+              "ViewState": "AgIAAD8AAAAAAAAAAAA9wEwAAAAtAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-07-07T18:54:19.8Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "updateLatestChecklistForm.cs",
+              "DocumentMoniker": "C:\\Users\\FMustico\\Documents\\github\\TWIG-BatteryRepairModule\\BatteryRepairModule\\Forms\\Add Forms\\updateLatestChecklistForm.cs",
+              "RelativeDocumentMoniker": "BatteryRepairModule\\Forms\\Add Forms\\updateLatestChecklistForm.cs",
+              "ToolTip": "C:\\Users\\FMustico\\Documents\\github\\TWIG-BatteryRepairModule\\BatteryRepairModule\\Forms\\Add Forms\\updateLatestChecklistForm.cs",
+              "RelativeToolTip": "BatteryRepairModule\\Forms\\Add Forms\\updateLatestChecklistForm.cs",
+              "ViewState": "AgIAAEQAAAAAAAAAAIA9wE4AAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-07-07T18:44:36.166Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "qualityForm1.cs [Design]",
+              "DocumentMoniker": "C:\\Users\\FMustico\\Documents\\github\\TWIG-BatteryRepairModule\\BatteryRepairModule\\Forms\\Quality\\qualityForm1.cs",
+              "RelativeDocumentMoniker": "BatteryRepairModule\\Forms\\Quality\\qualityForm1.cs",
+              "ToolTip": "C:\\Users\\FMustico\\Documents\\github\\TWIG-BatteryRepairModule\\BatteryRepairModule\\Forms\\Quality\\qualityForm1.cs [Design]*",
+              "RelativeToolTip": "BatteryRepairModule\\Forms\\Quality\\qualityForm1.cs [Design]*",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-07-07T18:25:10.338Z",
+              "EditorCaption": " [Design]"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "stateOfHealthCalculatorForm.cs [Design]",
+              "DocumentMoniker": "C:\\Users\\FMustico\\Documents\\github\\TWIG-BatteryRepairModule\\BatteryRepairModule\\Forms\\Add Forms\\stateOfHealthCalculatorForm.cs",
+              "RelativeDocumentMoniker": "BatteryRepairModule\\Forms\\Add Forms\\stateOfHealthCalculatorForm.cs",
+              "ToolTip": "C:\\Users\\FMustico\\Documents\\github\\TWIG-BatteryRepairModule\\BatteryRepairModule\\Forms\\Add Forms\\stateOfHealthCalculatorForm.cs [Design]*",
+              "RelativeToolTip": "BatteryRepairModule\\Forms\\Add Forms\\stateOfHealthCalculatorForm.cs [Design]*",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-07-07T18:24:10.126Z",
               "EditorCaption": " [Design]"
             }
           ]

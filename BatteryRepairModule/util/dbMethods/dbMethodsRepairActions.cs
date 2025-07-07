@@ -1,3 +1,4 @@
+using System.Runtime.InteropServices;
 using Npgsql;
 using NpgsqlTypes; 
 
@@ -199,13 +200,37 @@ public static partial class dbMethods
 
     public static void clearModuleForTesting()
     {
+        int status = dbInformation.ticketStatusOptions.FirstOrDefault(kvp => kvp.Value == "Awaiting Testing").Key;
         using (var conn = new NpgsqlConnection(dbConnection.connectionPath))
         using (var cmd = new NpgsqlCommand("UPDATE public.ticket SET status_fk = @statusFk WHERE id = @ticketId", conn))
         {
             conn.Open();
-            cmd.Parameters.AddWithValue("@statusFk", 4);
+            cmd.Parameters.AddWithValue("@statusFk", status);
             cmd.Parameters.AddWithValue("@ticketId", dbInformation.selectedTwigTicketKeyPair.Keys.First());
-            cmd.ExecuteNonQuery(); 
+            cmd.ExecuteNonQuery();
+        }
+    }
+
+    public static void getDoesRepairHaveNote()
+    {
+        using (var conn = new NpgsqlConnection(dbConnection.connectionPath))
+        using (var cmd = new NpgsqlCommand(
+            @"SELECT r.description, ar.note 
+                FROM public.authorized_repairs ar
+                INNER JOIN public.repair_options r ON ar.repair_fk = r.id
+                WHERE ar.ticket_fk = @ticketFk", conn))
+        {
+            dbInformation.repairHasNoteStringBool.Clear();
+            conn.Open();
+            cmd.Parameters.AddWithValue("@ticketFk", dbInformation.selectedTwigTicketKeyPair.Keys.First());
+            using (var reader = cmd.ExecuteReader())
+            {
+                while (reader.Read())
+                {
+                    bool hasNote = !reader.IsDBNull(1) && !string.IsNullOrWhiteSpace(reader.GetString(1));
+                    dbInformation.repairHasNoteStringBool.Add(reader.GetString(0), hasNote);
+                }
+            }
         }
     }
 }

@@ -25,13 +25,13 @@
     <Compile Update="Forms\Add Forms\stateOfHealthCalculatorForm.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Update="Forms\Add Forms\updateLatestChecklistForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Update="Forms\Authorize Repair Form\BrmAuthorizeRepairsForm.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Update="Forms\Quality\qualityForm1.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Update="Forms\Quality\qualityForm2.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Update="Forms\Repair Action Form\BrmRepairActionForm.cs">

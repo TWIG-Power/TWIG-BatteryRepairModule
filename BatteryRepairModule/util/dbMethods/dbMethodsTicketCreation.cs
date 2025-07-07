@@ -23,7 +23,7 @@ public static partial class dbMethods
         using (var cmd = new NpgsqlCommand("SELECT DISTINCT \"id\", \"name\" FROM public.staff ORDER by name ASC", conn))
         {
             conn.Open();
-            dbInformation.staffKeyPairOptions.Clear(); 
+            dbInformation.staffKeyPairOptions.Clear();
             using (var reader = cmd.ExecuteReader())
             {
                 while (reader.Read())
@@ -57,7 +57,7 @@ public static partial class dbMethods
     public static int getTicketSurrogateKey()
     {
         using (var conn = new NpgsqlConnection(dbConnection.connectionPath))
-        using (var cmd = new NpgsqlCommand("SELECT DISTINCT \"id\" FROM public.ticket WHERE \"twig_ticket_number\" = @ticketNum ORDER BY id ASC" , conn))
+        using (var cmd = new NpgsqlCommand("SELECT DISTINCT \"id\" FROM public.ticket WHERE \"twig_ticket_number\" = @ticketNum ORDER BY id ASC", conn))
         {
             conn.Open();
             cmd.Parameters.AddWithValue("@ticketNum", dbInformation.selectedTwigTicketKeyPair.Values.First());
@@ -112,7 +112,7 @@ public static partial class dbMethods
 
     public static void loadAllModuleTypes()
     {
-        dbInformation.moduleTypesByOEM.Clear(); 
+        dbInformation.moduleTypesByOEM.Clear();
         var tableNames = new[] { "cobra_oem", "ktm_oem", "misc_oem" };
         for (int i = 0; i < tableNames.Length; i++)
         {
@@ -123,7 +123,7 @@ public static partial class dbMethods
                 using (var reader = cmd.ExecuteReader())
                 {
                     while (reader.Read())
-                    {   
+                    {
                         if (!dbInformation.moduleTypesByOEM.ContainsKey(i))
                         {
                             dbInformation.moduleTypesByOEM[i] = new Dictionary<int, string>();
@@ -141,44 +141,49 @@ public static partial class dbMethods
     #region INSERT QUERIES
     public static void createDatabaseTicket(Dictionary<int, string> staff)
     {
-        using (var conn = new NpgsqlConnection(dbConnection.connectionPath))
-            if (dbInformation.selectedModuleType.Keys.First() == 0)
-            {
-                using (var cmd = new NpgsqlCommand("INSERT INTO public.ticket (twig_ticket_number, vehicle_vin_number, staff_starting_report_fk, status_fk, cobra_fk) VALUES (@ticketNum, @vehicleVin, @staffStarting, 1, @cobra_fk)", conn))
-                {
-                    conn.Open();
-                    cmd.Parameters.AddWithValue("@ticketNum", dbInformation.TWIGCaseNumber ?? (object)DBNull.Value);
-                    cmd.Parameters.AddWithValue("@vehicleVin", dbInformation.vehicleVINNumber ?? (object)DBNull.Value);
-                    cmd.Parameters.AddWithValue("@staffStarting", staff.Keys.First());
-                    cmd.Parameters.AddWithValue("@cobra_fk", dbInformation.moduleTypesByOEM[0].Keys.First());
-                    cmd.ExecuteNonQuery();
-                }
-            }
-        using (var conn = new NpgsqlConnection(dbConnection.connectionPath))
-            if (dbInformation.selectedModuleType.Keys.First() == 1)
-            {
-                using (var cmd = new NpgsqlCommand("INSERT INTO public.ticket (twig_ticket_number, vehicle_vin_number, staff_starting_report_fk, status_fk, ktm_fk) VALUES (@ticketNum, @vehicleVin, @staffStarting, 1, @ktm_fk)", conn))
-                {
-                    conn.Open();
-                    cmd.Parameters.AddWithValue("@ticketNum", dbInformation.TWIGCaseNumber ?? (object)DBNull.Value);
-                    cmd.Parameters.AddWithValue("@vehicleVin", dbInformation.vehicleVINNumber ?? (object)DBNull.Value);
-                    cmd.Parameters.AddWithValue("@staffStarting", dbInformation.selectedStaffKeyValue.Keys.First());
-                    cmd.Parameters.AddWithValue("@ktm_fk", dbInformation.moduleTypesByOEM[0].Keys.First());
-                    cmd.ExecuteNonQuery();
-                }
-            }
-        using (var conn = new NpgsqlConnection(dbConnection.connectionPath))
-            if (dbInformation.selectedModuleType.Keys.First() == 2)
-            {
-            using (var cmd = new NpgsqlCommand("INSERT INTO public.ticket (twig_ticket_number, vehicle_vin_number, staff_starting_report_fk, status_fk, misc_fk) VALUES (@ticketNum, @vehicleVin, @staffStarting, 1, @misc_fk)", conn))
+        int initialStatus = dbInformation.ticketStatusOptions.FirstOrDefault(kvp => kvp.Value == "Awaiting Service Inspection").Key;
+
+        if (dbInformation.selectedModuleType.Keys.First() == 0)
         {
-            conn.Open();
-            cmd.Parameters.AddWithValue("@ticketNum", dbInformation.TWIGCaseNumber ?? (object)DBNull.Value);
-            cmd.Parameters.AddWithValue("@vehicleVin", dbInformation.vehicleVINNumber ?? (object)DBNull.Value);
-                    cmd.Parameters.AddWithValue("@staffStarting", dbInformation.selectedStaffKeyValue.Keys.First());
-            cmd.Parameters.AddWithValue("@misc_fk", dbInformation.moduleTypesByOEM[0].Keys.First()); 
-            cmd.ExecuteNonQuery();
+            using (var conn = new NpgsqlConnection(dbConnection.connectionPath))
+            using (var cmd = new NpgsqlCommand("INSERT INTO public.ticket (twig_ticket_number, vehicle_vin_number, staff_starting_report_fk, status_fk, cobra_fk) VALUES (@ticketNum, @vehicleVin, @staffStarting, @status, @cobra_fk)", conn))
+            {
+                conn.Open();
+                cmd.Parameters.AddWithValue("@ticketNum", dbInformation.TWIGCaseNumber ?? (object)DBNull.Value);
+                cmd.Parameters.AddWithValue("@vehicleVin", dbInformation.vehicleVINNumber ?? (object)DBNull.Value);
+                cmd.Parameters.AddWithValue("@staffStarting", staff.Keys.First());
+                cmd.Parameters.AddWithValue("@status", initialStatus);
+                cmd.Parameters.AddWithValue("@cobra_fk", dbInformation.moduleTypesByOEM[0].Keys.First());
+                cmd.ExecuteNonQuery();
+            }
         }
+        else if (dbInformation.selectedModuleType.Keys.First() == 1)
+        {
+            using (var conn = new NpgsqlConnection(dbConnection.connectionPath))
+            using (var cmd = new NpgsqlCommand("INSERT INTO public.ticket (twig_ticket_number, vehicle_vin_number, staff_starting_report_fk, status_fk, ktm_fk) VALUES (@ticketNum, @vehicleVin, @staffStarting, @status, @ktm_fk)", conn))
+            {
+                conn.Open();
+                cmd.Parameters.AddWithValue("@ticketNum", dbInformation.TWIGCaseNumber ?? (object)DBNull.Value);
+                cmd.Parameters.AddWithValue("@vehicleVin", dbInformation.vehicleVINNumber ?? (object)DBNull.Value);
+                cmd.Parameters.AddWithValue("@staffStarting", dbInformation.selectedStaffKeyValue.Keys.First());
+                cmd.Parameters.AddWithValue("@status", initialStatus);
+                cmd.Parameters.AddWithValue("@ktm_fk", dbInformation.moduleTypesByOEM[1].Keys.First());
+                cmd.ExecuteNonQuery();
+            }
+        }
+        else if (dbInformation.selectedModuleType.Keys.First() == 2)
+        {
+            using (var conn = new NpgsqlConnection(dbConnection.connectionPath))
+            using (var cmd = new NpgsqlCommand("INSERT INTO public.ticket (twig_ticket_number, vehicle_vin_number, staff_starting_report_fk, status_fk, misc_fk) VALUES (@ticketNum, @vehicleVin, @staffStarting, @status, @misc_fk)", conn))
+            {
+                conn.Open();
+                cmd.Parameters.AddWithValue("@ticketNum", dbInformation.TWIGCaseNumber ?? (object)DBNull.Value);
+                cmd.Parameters.AddWithValue("@vehicleVin", dbInformation.vehicleVINNumber ?? (object)DBNull.Value);
+                cmd.Parameters.AddWithValue("@staffStarting", dbInformation.selectedStaffKeyValue.Keys.First());
+                cmd.Parameters.AddWithValue("@status", initialStatus);
+                cmd.Parameters.AddWithValue("@misc_fk", dbInformation.moduleTypesByOEM[2].Keys.First());
+                cmd.ExecuteNonQuery();
+            }
         }
     }
 
@@ -221,8 +226,8 @@ public static partial class dbMethods
                 foreach (var reportedError in dbInformation.moduleReportedErrorsKeyPair)
                 {
                     cmd.Parameters.Clear();
-                    cmd.Parameters.AddWithValue("@reportTypeFk", reportedError.Key); 
-                    cmd.Parameters.AddWithValue("@ticketFk", ticketSurrogateKey);  
+                    cmd.Parameters.AddWithValue("@reportTypeFk", reportedError.Key);
+                    cmd.Parameters.AddWithValue("@ticketFk", ticketSurrogateKey);
                     cmd.ExecuteNonQuery();
                 }
             }
@@ -239,13 +244,30 @@ public static partial class dbMethods
                 conn.Open();
                 cmd.Parameters.AddWithValue("@description", newOption);
                 cmd.ExecuteNonQuery();
-                return true; 
+                return true;
             }
         }
         catch (Exception)
         {
-            return false; 
+            return false;
         }
     }
     #endregion
+
+    public static void getTicketStatusOptions()
+    {
+        dbInformation.ticketStatusOptions.Clear(); 
+        using (var conn = new NpgsqlConnection(dbConnection.connectionPath))
+        using (var cmd = new NpgsqlCommand("SELECT id, status FROM public.ticket_status", conn))
+        {
+            conn.Open();
+            using (var reader = cmd.ExecuteReader())
+            {
+                while (reader.Read())
+                {
+                    dbInformation.ticketStatusOptions.Add(reader.GetInt16(0), reader.GetString(1));
+                }
+            }
+        }
+    }
 }

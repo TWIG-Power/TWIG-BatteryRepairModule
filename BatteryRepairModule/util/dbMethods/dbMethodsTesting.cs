@@ -91,12 +91,12 @@ public static partial class dbMethods
     public static void updateTestNotes()
     {
         using (var conn = new NpgsqlConnection(dbConnection.connectionPath))
-        using (var cmd = new NpgsqlCommand("UPDATE public.testing_added SET note = @note WHERE ticket_fk = @ticketId AND test_fk = @testId", conn))
+        using (var cmd = new NpgsqlCommand("UPDATE public.testing_added SET note = @note WHERE ticket_fk = @ticketId AND id = @id", conn))
         {
             conn.Open();
             cmd.Parameters.AddWithValue("@note", dbInformation.testNotes);
             cmd.Parameters.AddWithValue("@ticketId", dbInformation.selectedTwigTicketKeyPair.Keys.First());
-            cmd.Parameters.AddWithValue("@testId", dbInformation.tempTestNoteHolder.Keys.First());
+            cmd.Parameters.AddWithValue("@id", dbInformation.tempTestNoteHolder.Keys.First());
             cmd.ExecuteNonQuery();
         }
     }
@@ -185,7 +185,7 @@ public static partial class dbMethods
         using (var conn = new NpgsqlConnection(dbConnection.connectionPath))
         using (var cmd = new NpgsqlCommand("SELECT cobra_fk, ktm_fk, misc_fk FROM public.ticket WHERE id = @ticketId", conn))
         {
-            dbInformation.moduleTypeKeyValue.Clear(); 
+            dbInformation.moduleTypeKeyValue.Clear();
             conn.Open();
             cmd.Parameters.AddWithValue("@ticketId", dbInformation.selectedTwigTicketKeyPair.Keys.First());
             using (var reader = cmd.ExecuteReader())
@@ -214,7 +214,7 @@ public static partial class dbMethods
             cmd.Parameters.AddWithValue("@type", dbInformation.moduleTypeKeyValue.Keys.First());
             dbInformation.raceGradeHighLowKeyPair.Clear();
             dbInformation.trackGradeHighLowKeyPair.Clear();
-            dbInformation.playGradeHighLowKeyPair.Clear(); 
+            dbInformation.playGradeHighLowKeyPair.Clear();
             using (var reader = cmd.ExecuteReader())
             {
                 while (reader.Read())
@@ -225,6 +225,50 @@ public static partial class dbMethods
                     dbInformation.moduleTypeKeyValue[dbInformation.moduleTypeKeyValue.Keys.First()] = reader.GetString(6);
                 }
             }
+        }
+    }
+
+    public static void getDoesTestHaveNote()
+    {
+        using (var conn = new NpgsqlConnection(dbConnection.connectionPath))
+        using (var cmd = new NpgsqlCommand("SELECT id, note FROM public.testing_added WHERE ticket_fk = @ticketFk", conn))
+        {
+            dbInformation.doesTestHaveNote.Clear();
+            conn.Open();
+            cmd.Parameters.AddWithValue("@ticketFk", dbInformation.selectedTwigTicketKeyPair.Keys.First());
+            using (var reader = cmd.ExecuteReader())
+            {
+                while (reader.Read())
+                {
+                    bool hasNote = !reader.IsDBNull(1) && !string.IsNullOrWhiteSpace(reader.GetString(1));
+                    dbInformation.doesTestHaveNote.Add(reader.GetInt16(0), hasNote);
+                }
+            }
+        }
+    }
+
+    public static void insertStateOfHealth(int stateOfHealth)
+    {
+        using (var conn = new NpgsqlConnection(dbConnection.connectionPath))
+        using (var cmd = new NpgsqlCommand("UPDATE testing_added SET state_of_health = @soh WHERE id = @id", conn))
+        {
+            conn.Open();
+            cmd.Parameters.AddWithValue("@soh", stateOfHealth);
+            cmd.Parameters.AddWithValue("@id", dbInformation.tempTestTestHolder.Keys.First());
+            cmd.ExecuteNonQuery();
+        }
+    }
+
+    public static void clearModuleForQuality()
+    {
+        int status = dbInformation.ticketStatusOptions.FirstOrDefault(kvp => kvp.Value == "Awaiting Quality").Key;
+        using (var conn = new NpgsqlConnection(dbConnection.connectionPath))
+        using (var cmd = new NpgsqlCommand("UPDATE public.ticket SET status_fk = @status WHERE id = @ticketId", conn))
+        {
+            conn.Open();
+            cmd.Parameters.AddWithValue("@status", status);
+            cmd.Parameters.AddWithValue("ticketId", dbInformation.selectedTwigTicketKeyPair.Keys.First());
+            cmd.ExecuteNonQuery(); 
         }
     }
 }

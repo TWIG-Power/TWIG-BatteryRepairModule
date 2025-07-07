@@ -77,7 +77,7 @@ namespace BatteryRepairModule.Forms.Add_Forms
                         dbInformation.tempUpdateIssueIssueHolder[selectedKvp.Key] = selectedKvp.Value;
 
                         var selectedStatus = listBox1.SelectedItem;
-                        var selectedKvp2 = dbInformation.issueStatusOptionsKeyValue.FirstOrDefault(kvp => kvp.Value == selectedStatus);
+                        var selectedKvp2 = dbInformation.issueStatusOptionsKeyValue.FirstOrDefault(kvp => kvp.Value == (string)selectedStatus);
                         dbInformation.tempUpdateIssueStatusHolder.Clear();
                         dbInformation.tempUpdateIssueStatusHolder[selectedKvp2.Key] = selectedKvp2.Value;
 
@@ -104,13 +104,32 @@ namespace BatteryRepairModule.Forms.Add_Forms
                         dbInformation.tempTestStatusHolder.Clear();
                         dbInformation.tempTestStatusHolder[selectedKvp.Key] = selectedKvp.Value;
 
+                        if (selectedStatus == "Pass")
+                        {
+                            using (var tempForm = new stateOfHealthCalculatorForm(modifiedListBox))
+                            {
+                                tempForm.ShowDialog(this); 
+                            }
+                        }
+
                         dbMethods.updateTestStatus();
+                        dbMethods.getDoesTestHaveNote(); 
                         dbMethods.getAddedTestsByTwigTicket();  
                         modifiedListBox.Items.Clear();
-                        modifiedListBox.Items.AddRange(
-                        dbInformation.addedTestsKeyValue.Select(
-                        kvp => $"{kvp.Value} ({dbInformation.addedTestsKeyStatus.GetValueOrDefault(kvp.Key)})").ToArray()
-                        );
+
+                        foreach (var kvp in dbInformation.addedTestsKeyValue)
+                        {
+                            if (dbInformation.doesTestHaveNote[kvp.Key] == false)
+                            {
+                                var status = dbInformation.addedTestsKeyStatus.GetValueOrDefault(kvp.Key);
+                                modifiedListBox.Items.Add($"{kvp.Value} ({status})");
+                            }
+                            else
+                            {
+                                var status = dbInformation.addedTestsKeyStatus.GetValueOrDefault(kvp.Key);
+                                modifiedListBox.Items.Add($"{kvp.Value} ({status})*");
+                            }
+                        }
 
                         this.Close(); 
                     }

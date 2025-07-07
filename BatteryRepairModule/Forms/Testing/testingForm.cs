@@ -86,15 +86,40 @@ namespace BatteryRepairModule.Forms.Testing
             dbInformation.selectedTwigTicketKeyPair[selectedKvp.Key] = selectedKvp.Value;
 
             repairActionsListBox.Items.Clear();
+
+            dbMethods.getDoesRepairHaveNote(); 
+
             dbMethods.loadRepairActionKeyValueStatus();
-            repairActionsListBox.Items.AddRange(dbInformation.clearedRepairsValueStatusPair.Select(kvp => $"{kvp.Key} ({kvp.Value})").ToArray());
+            foreach (var kvp in dbInformation.clearedRepairsValueStatusPair)
+            {
+                if (dbInformation.repairHasNoteStringBool[kvp.Key] == false)
+                    repairActionsListBox.Items.Add($"{kvp.Key} ({kvp.Value})");
+                else
+                {
+                    repairActionsListBox.Items.Add($"{kvp.Key} ({kvp.Value})*");
+                }
+            }
 
             testStatusListBox.Items.Clear();
+
+            dbMethods.getDoesTestHaveNote(); 
             dbMethods.getAddedTestsByTwigTicket();
-            testStatusListBox.Items.AddRange(
-                dbInformation.addedTestsKeyValue.Select(
-                    kvp => $"{kvp.Value} ({dbInformation.addedTestsKeyStatus.GetValueOrDefault(kvp.Key)})").ToArray()
-            );
+
+            foreach (var kvp in dbInformation.addedTestsKeyValue)
+            {
+                var testId = kvp.Key; // Unique ID of the test
+                var testName = kvp.Value; // Test name
+                var status = dbInformation.addedTestsKeyStatus.GetValueOrDefault(testId); // Test status
+
+                if (dbInformation.doesTestHaveNote[testId] == false)
+                {
+                    testStatusListBox.Items.Add($"[{testId}] {testName} ({status})");
+                }
+                else
+                {
+                    testStatusListBox.Items.Add($"[{testId}] {testName} ({status})*");
+                }
+            }
         }
 
         private void staffDropDown_SelectedIndexChanged(object sender, EventArgs e)
@@ -140,7 +165,12 @@ namespace BatteryRepairModule.Forms.Testing
 
         private void calculateStateOfHealthButton_Click(object sender, EventArgs e)
         {
-            using (var newForm = new stateOfHealthCalculatorForm())
+            if (testStatusListBox.SelectedItem == null)
+            {
+                MessageBox.Show("Please select a test to calculate state of health.", "Missing Test Selection", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return; 
+            }
+            using (var newForm = new stateOfHealthCalculatorForm(testStatusListBox))
                 newForm.ShowDialog(this);
         }
 
@@ -158,7 +188,19 @@ namespace BatteryRepairModule.Forms.Testing
 
         private void clearBatteryForQualityButton_Click(object sender, EventArgs e)
         {
+            foreach (var test in testStatusListBox.Items)
+            {
+                var status = test.ToString();
+                string cutStatus = status.Split('(')[1].Split(')')[0];
+                if (cutStatus != "Pass")
+                {
+                    MessageBox.Show("Not all tests have been passed. Please try again.", "Missing Test Pass", MessageBoxButtons.OK, MessageBoxIcon.Error);
 
+                    return;
+                }
+            }
+            dbMethods.clearModuleForQuality();
+            this.Close();
         }
 
         private void viewRepairNoteButton_Click(object sender, EventArgs e)

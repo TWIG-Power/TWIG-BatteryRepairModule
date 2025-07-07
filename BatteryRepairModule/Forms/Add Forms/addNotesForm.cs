@@ -65,13 +65,39 @@ namespace BatteryRepairModule.Forms.Add_Forms
 
                     case "test":
 
-                        dbInformation.tempTestNoteHolder.Clear(); 
+                        dbInformation.tempTestNoteHolder.Clear();
                         var selectedValue2 = referenceListBox.SelectedItem as string;
-                        var selectedRepaired2 = selectedValue2?.Split('(')[0].Trim();
-                        var selectedKvp2 = dbInformation.testingOptionsKeyValue.FirstOrDefault(kvp => kvp.Value.ToString() == selectedRepaired2);
-                        dbInformation.tempTestNoteHolder[selectedKvp2.Key] = selectedKvp2.Value;
-                        dbInformation.testNotes = richTextBox1.Text.ToString();
-                        dbMethods.updateTestNotes();
+                        if (!string.IsNullOrEmpty(selectedValue2))
+                        {
+                            var selectedId = int.Parse(selectedValue2.Split(']')[0].TrimStart('[')); 
+                            dbInformation.tempTestNoteHolder[selectedId] = dbInformation.addedTestsKeyValue[selectedId];
+                            dbInformation.testNotes = richTextBox1.Text.ToString();
+                            dbMethods.updateTestNotes();
+
+                            referenceListBox.Items.Clear(); 
+                            dbMethods.getDoesTestHaveNote(); 
+                            dbMethods.getAddedTestsByTwigTicket();
+
+                            foreach (var kvp in dbInformation.addedTestsKeyValue)
+                            {
+                                var testId = kvp.Key;
+                                var testName = kvp.Value; 
+                                var status = dbInformation.addedTestsKeyStatus.GetValueOrDefault(testId); // Test status
+
+                                if (dbInformation.doesTestHaveNote[testId] == false)
+                                {
+                                    referenceListBox.Items.Add($"[{testId}] {testName} ({status})");
+                                }
+                                else
+                                {
+                                    referenceListBox.Items.Add($"[{testId}] {testName} ({status})*");
+                                }
+                            }
+                        }
+                        else
+                        {
+                            MessageBox.Show("No test selected.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        }
 
                         break;
                     default:
@@ -121,25 +147,27 @@ namespace BatteryRepairModule.Forms.Add_Forms
         private void viewOnlyTest()
         {
             var selectedValue = referenceListBox.SelectedItem as string;
-                if (!string.IsNullOrEmpty(selectedValue))
+            if (!string.IsNullOrEmpty(selectedValue))
+            {
+                var selectedTest = selectedValue.Split('(')[0].Trim();
+                selectedTest = selectedTest.Split(']')[1].Trim();
+                var selectedKvp = dbInformation.testingOptionsKeyValue.FirstOrDefault(kvp => kvp.Value.ToString() == selectedTest);
+
+                if (selectedKvp.Key != 0)
                 {
-                    var selectedRepaired = selectedValue.Split('(')[0].Trim();
-                    var selectedKvp = dbInformation.testingOptionsKeyValue.FirstOrDefault(kvp => kvp.Value.ToString() == selectedRepaired);
+                    dbInformation.tempTestNoteHolder.Clear();
+                    dbInformation.tempTestNoteHolder[selectedKvp.Key] = selectedKvp.Value;
 
-                    if (selectedKvp.Key != 0)
-                    {
-                        dbInformation.tempTestNoteHolder.Clear();
-                        dbInformation.tempTestNoteHolder[selectedKvp.Key] = selectedKvp.Value;
+                    dbInformation.testNotes = string.Empty;
+                    dbMethods.getTestNotes();
 
-                        dbInformation.testNotes = string.Empty;
-                        dbMethods.getTestNotes();
-
-                        richTextBox1.Enabled = false;
-                        richTextBox1.Text = dbInformation.testNotes;
-                    }
-                    else
-                    {
-                        MessageBox.Show("Selected test not found in the dictionary.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    richTextBox1.Enabled = false;
+                    richTextBox1.Text = dbInformation.testNotes;
+                }
+                else
+                {
+                    MessageBox.Show("Selected test not found in the dictionary.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return; 
                     }
                 }
                 else

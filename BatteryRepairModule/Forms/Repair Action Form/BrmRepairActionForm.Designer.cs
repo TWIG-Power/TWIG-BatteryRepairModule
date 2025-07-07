@@ -262,10 +262,10 @@ namespace BatteryRepairModule.Forms.BRM
             panel2.AutoSizeMode = AutoSizeMode.GrowAndShrink;
             panel2.Controls.Add(addRepairNotesButton);
             panel2.Dock = DockStyle.Left;
-            panel2.Location = new Point(620, 0);
+            panel2.Location = new Point(450, 0);
             panel2.Name = "panel2";
             panel2.Padding = new Padding(2);
-            panel2.Size = new Size(310, 63);
+            panel2.Size = new Size(245, 63);
             panel2.TabIndex = 17;
             // 
             // addRepairNotesButton
@@ -276,7 +276,7 @@ namespace BatteryRepairModule.Forms.BRM
             addRepairNotesButton.Location = new Point(2, 2);
             addRepairNotesButton.Name = "addRepairNotesButton";
             addRepairNotesButton.Padding = new Padding(3);
-            addRepairNotesButton.Size = new Size(306, 59);
+            addRepairNotesButton.Size = new Size(241, 59);
             addRepairNotesButton.TabIndex = 18;
             addRepairNotesButton.Text = "Add Repair Notes";
             addRepairNotesButton.UseVisualStyleBackColor = true;
@@ -287,10 +287,10 @@ namespace BatteryRepairModule.Forms.BRM
             panel11.AutoSizeMode = AutoSizeMode.GrowAndShrink;
             panel11.Controls.Add(viewRepairNotesButton);
             panel11.Dock = DockStyle.Left;
-            panel11.Location = new Point(310, 0);
+            panel11.Location = new Point(232, 0);
             panel11.Name = "panel11";
             panel11.Padding = new Padding(2);
-            panel11.Size = new Size(310, 63);
+            panel11.Size = new Size(218, 63);
             panel11.TabIndex = 16;
             // 
             // viewRepairNotesButton
@@ -301,7 +301,7 @@ namespace BatteryRepairModule.Forms.BRM
             viewRepairNotesButton.Location = new Point(2, 2);
             viewRepairNotesButton.Name = "viewRepairNotesButton";
             viewRepairNotesButton.Padding = new Padding(3);
-            viewRepairNotesButton.Size = new Size(306, 59);
+            viewRepairNotesButton.Size = new Size(214, 59);
             viewRepairNotesButton.TabIndex = 18;
             viewRepairNotesButton.Text = "View Repair Notes";
             viewRepairNotesButton.UseVisualStyleBackColor = true;
@@ -315,7 +315,7 @@ namespace BatteryRepairModule.Forms.BRM
             panel10.Location = new Point(0, 0);
             panel10.Name = "panel10";
             panel10.Padding = new Padding(3);
-            panel10.Size = new Size(310, 63);
+            panel10.Size = new Size(232, 63);
             panel10.TabIndex = 15;
             // 
             // addRepairActionButton
@@ -325,7 +325,7 @@ namespace BatteryRepairModule.Forms.BRM
             addRepairActionButton.Font = new Font("Segoe UI", 15.75F, FontStyle.Regular, GraphicsUnit.Point);
             addRepairActionButton.Location = new Point(3, 3);
             addRepairActionButton.Name = "addRepairActionButton";
-            addRepairActionButton.Size = new Size(304, 57);
+            addRepairActionButton.Size = new Size(226, 57);
             addRepairActionButton.TabIndex = 17;
             addRepairActionButton.Text = "Add Repair Action ";
             addRepairActionButton.UseVisualStyleBackColor = true;

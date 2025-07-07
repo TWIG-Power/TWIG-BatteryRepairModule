@@ -74,8 +74,18 @@ namespace BatteryRepairModule.Forms.BRM
             dbMethods.loadReportedIssuesAndStatus();
             reportedIssuesListBox.Items.AddRange(dbInformation.reportedIssuesValueStatus.Select(kvp => $"{kvp.Key} ({kvp.Value})").ToArray());
 
+            dbMethods.getDoesRepairHaveNote(); 
+
             dbMethods.loadRepairActionKeyValueStatus();
-            repairActionsListBox.Items.AddRange(dbInformation.clearedRepairsValueStatusPair.Select(kvp => $"{kvp.Key} ({kvp.Value})").ToArray());
+            foreach (var kvp in dbInformation.clearedRepairsValueStatusPair)
+            {
+                if (dbInformation.repairHasNoteStringBool[kvp.Key] == false)
+                    repairActionsListBox.Items.Add($"{kvp.Key} ({kvp.Value})");
+                else
+                {
+                    repairActionsListBox.Items.Add($"{kvp.Key} ({kvp.Value})*");
+                }
+            }
         }
 
         private void staffDropDown_SelectedIndexChanged(object sender, EventArgs e)
@@ -139,6 +149,7 @@ namespace BatteryRepairModule.Forms.BRM
                 if (parenIndex > 0)
                 {
                     status = item.Substring(parenIndex + 1).TrimEnd(')', ' ');
+                    status = item.Substring(parenIndex + 1).TrimEnd(')', '*');
                 }
                 if (status != "Complete")
                 {

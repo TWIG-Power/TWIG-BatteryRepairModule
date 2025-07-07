@@ -102,11 +102,13 @@ public static partial class dbMethods
             }
         }
         
+        int status = dbInformation.ticketStatusOptions.FirstOrDefault(kvp => kvp.Value == "Awaiting Repair Authorization").Key;
         using (var conn = new NpgsqlConnection(dbConnection.connectionPath))
-        using (var cmd = new NpgsqlCommand("UPDATE public.ticket SET status_fk = 2 WHERE id = @ticketId", conn))
+        using (var cmd = new NpgsqlCommand("UPDATE public.ticket SET status_fk = @status WHERE id = @ticketId", conn))
         {
             conn.Open();
             cmd.Parameters.AddWithValue("@ticketId", dbInformation.selectedTwigTicketKeyPair.Keys.First());
+            cmd.Parameters.AddWithValue("@status", status);
             cmd.ExecuteNonQuery();
         }
     }

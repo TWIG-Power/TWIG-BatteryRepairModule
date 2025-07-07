@@ -21,6 +21,7 @@ public partial class BrmMainMenuForm : Form
     public BrmMainMenuForm()
     {
         InitializeComponent();
+        dbMethods.getTicketStatusOptions();
     }
 
     private void SelectButton(Button button)
