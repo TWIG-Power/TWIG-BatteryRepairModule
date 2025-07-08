@@ -146,7 +146,7 @@ public static partial class dbMethods
         if (dbInformation.selectedModuleType.Keys.First() == 0)
         {
             using (var conn = new NpgsqlConnection(dbConnection.connectionPath))
-            using (var cmd = new NpgsqlCommand("INSERT INTO public.ticket (twig_ticket_number, vehicle_vin_number, staff_starting_report_fk, status_fk, cobra_fk) VALUES (@ticketNum, @vehicleVin, @staffStarting, @status, @cobra_fk)", conn))
+            using (var cmd = new NpgsqlCommand("INSERT INTO public.ticket (twig_ticket_number, vehicle_vin_number, staff_starting_report_fk, status_fk, cobra_fk, serial_number) VALUES (@ticketNum, @vehicleVin, @staffStarting, @status, @cobra_fk, @serialNumber)", conn))
             {
                 conn.Open();
                 cmd.Parameters.AddWithValue("@ticketNum", dbInformation.TWIGCaseNumber ?? (object)DBNull.Value);
@@ -154,13 +154,14 @@ public static partial class dbMethods
                 cmd.Parameters.AddWithValue("@staffStarting", staff.Keys.First());
                 cmd.Parameters.AddWithValue("@status", initialStatus);
                 cmd.Parameters.AddWithValue("@cobra_fk", dbInformation.moduleTypesByOEM[0].Keys.First());
+                cmd.Parameters.AddWithValue("@serialNumber", dbInformation.batterySerialNumber ?? (object)DBNull.Value); 
                 cmd.ExecuteNonQuery();
             }
         }
         else if (dbInformation.selectedModuleType.Keys.First() == 1)
         {
             using (var conn = new NpgsqlConnection(dbConnection.connectionPath))
-            using (var cmd = new NpgsqlCommand("INSERT INTO public.ticket (twig_ticket_number, vehicle_vin_number, staff_starting_report_fk, status_fk, ktm_fk) VALUES (@ticketNum, @vehicleVin, @staffStarting, @status, @ktm_fk)", conn))
+            using (var cmd = new NpgsqlCommand("INSERT INTO public.ticket (twig_ticket_number, vehicle_vin_number, staff_starting_report_fk, status_fk, ktm_fk, serial_number) VALUES (@ticketNum, @vehicleVin, @staffStarting, @status, @ktm_fk, @serialNumber)", conn))
             {
                 conn.Open();
                 cmd.Parameters.AddWithValue("@ticketNum", dbInformation.TWIGCaseNumber ?? (object)DBNull.Value);
@@ -168,13 +169,15 @@ public static partial class dbMethods
                 cmd.Parameters.AddWithValue("@staffStarting", dbInformation.selectedStaffKeyValue.Keys.First());
                 cmd.Parameters.AddWithValue("@status", initialStatus);
                 cmd.Parameters.AddWithValue("@ktm_fk", dbInformation.moduleTypesByOEM[1].Keys.First());
+                cmd.Parameters.AddWithValue("@serialNumber", dbInformation.batterySerialNumber ?? (object)DBNull.Value); 
+
                 cmd.ExecuteNonQuery();
             }
         }
         else if (dbInformation.selectedModuleType.Keys.First() == 2)
         {
             using (var conn = new NpgsqlConnection(dbConnection.connectionPath))
-            using (var cmd = new NpgsqlCommand("INSERT INTO public.ticket (twig_ticket_number, vehicle_vin_number, staff_starting_report_fk, status_fk, misc_fk) VALUES (@ticketNum, @vehicleVin, @staffStarting, @status, @misc_fk)", conn))
+            using (var cmd = new NpgsqlCommand("INSERT INTO public.ticket (twig_ticket_number, vehicle_vin_number, staff_starting_report_fk, status_fk, misc_fk, serial_number) VALUES (@ticketNum, @vehicleVin, @staffStarting, @status, @misc_fk, @serialNumber)", conn))
             {
                 conn.Open();
                 cmd.Parameters.AddWithValue("@ticketNum", dbInformation.TWIGCaseNumber ?? (object)DBNull.Value);
@@ -182,6 +185,8 @@ public static partial class dbMethods
                 cmd.Parameters.AddWithValue("@staffStarting", dbInformation.selectedStaffKeyValue.Keys.First());
                 cmd.Parameters.AddWithValue("@status", initialStatus);
                 cmd.Parameters.AddWithValue("@misc_fk", dbInformation.moduleTypesByOEM[2].Keys.First());
+                cmd.Parameters.AddWithValue("@serialNumber", dbInformation.batterySerialNumber ?? (object)DBNull.Value); 
+
                 cmd.ExecuteNonQuery();
             }
         }

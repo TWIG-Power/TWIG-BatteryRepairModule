@@ -18,7 +18,10 @@ namespace BatteryRepairModule.Forms.Testing
             InitializeComponent();
 
             dbMethods.loadAwaitingTestingTickets();
-            twigTicketNumberDropDown.Items.AddRange(dbInformation.activeTwigCaseNumbers.Select(kvp => kvp.Value.ToString()).ToArray());
+            twigTicketNumberDropDown.Items.AddRange(
+                dbInformation.activeTwigCaseNumbers.Select(kvp =>
+                    $"[{kvp.Value}] - {dbInformation.activeModuleSerialNumbers[kvp.Key].ToString()}"
+                ).ToArray());
 
             dbMethods.loadStaffNames();
             staffDropDown.Items.AddRange(dbInformation.staffKeyPairOptions.Select(kvp => kvp.Value.ToString()).ToArray());
@@ -38,15 +41,18 @@ namespace BatteryRepairModule.Forms.Testing
 
         private void addTestNoteButton_Click(object sender, EventArgs e)
         {
-            using (var newForm = new addNotesForm(testStatusListBox, false, "test"))
-                if (testStatusListBox.SelectedItem != null)
+            if (testStatusListBox.SelectedItem != null)
+            {
+                using (var newForm = new addNotesForm(testStatusListBox, false, "test"))
                 {
                     newForm.ShowDialog(this);
                 }
-                else
-                {
-                    MessageBox.Show("Please select a test to add a note.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
+            }
+            else
+            {
+                MessageBox.Show("Please select a test to add a note.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return; 
+            }
         }
 
         private void viewTestNoteButton_Click(object sender, EventArgs e)
@@ -59,6 +65,7 @@ namespace BatteryRepairModule.Forms.Testing
             else
             {
                 MessageBox.Show("Please select a test to view its note.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return; 
             }
         }
 
@@ -80,10 +87,11 @@ namespace BatteryRepairModule.Forms.Testing
 
         private void twigTicketNumberDropDown_SelectedIndexChanged(object sender, EventArgs e)
         {
-            var selectedItem = twigTicketNumberDropDown.SelectedItem as string;
-            var selectedKvp = dbInformation.activeTwigCaseNumbers.FirstOrDefault(kvp => kvp.Value.ToString() == selectedItem);
+            var selectedValue = twigTicketNumberDropDown.SelectedItem.ToString();
+            var converted = selectedValue.Split('[')[1].Split(']')[0]; 
+            var selectedKvp = dbInformation.activeTwigCaseNumbers.FirstOrDefault(kvp => kvp.Value.ToString() == converted);
             dbInformation.selectedTwigTicketKeyPair.Clear();
-            dbInformation.selectedTwigTicketKeyPair[selectedKvp.Key] = selectedKvp.Value;
+            dbInformation.selectedTwigTicketKeyPair[selectedKvp.Key] = selectedKvp.Value;;
 
             repairActionsListBox.Items.Clear();
 
@@ -165,13 +173,15 @@ namespace BatteryRepairModule.Forms.Testing
 
         private void calculateStateOfHealthButton_Click(object sender, EventArgs e)
         {
-            if (testStatusListBox.SelectedItem == null)
+            var selectedTest = testStatusListBox.SelectedItem;
+            if (selectedTest == null)
             {
-                MessageBox.Show("Please select a test to calculate state of health.", "Missing Test Selection", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return; 
+                MessageBox.Show("No test selected. Please select a test.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
             }
+
             using (var newForm = new stateOfHealthCalculatorForm(testStatusListBox))
-                newForm.ShowDialog(this);
+            newForm.ShowDialog(this);
         }
 
         private void updateTestStatus_Click_1(object sender, EventArgs e)

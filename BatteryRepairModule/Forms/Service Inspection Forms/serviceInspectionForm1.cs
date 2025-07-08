@@ -31,7 +31,11 @@ namespace BatteryRepairModule.Forms.Service_Inspection_Forms
             dbMethods.loadStaffNames();
             dbMethods.getRepairOptions();
 
-            twigTicketNumberDropDown.Items.AddRange(dbInformation.activeTwigCaseNumbers.Select(kvp => kvp.Value.ToString()).ToArray());
+            twigTicketNumberDropDown.Items.AddRange(
+                dbInformation.activeTwigCaseNumbers.Select(kvp =>
+                    $"[{kvp.Value}] - {dbInformation.activeModuleSerialNumbers[kvp.Key].ToString()}"
+                ).ToArray());
+
             staffDropDown.Items.AddRange(dbInformation.staffKeyPairOptions.Values.ToArray());
 
             dbInformation.selectedTwigTicketKeyPair.Clear();
@@ -45,7 +49,11 @@ namespace BatteryRepairModule.Forms.Service_Inspection_Forms
             {
                 string? twigValue = tempTwigCaseNumber?.ToString();
                 if (twigValue != null && twigTicketNumberDropDown.Items.Contains(twigValue))
-                    twigTicketNumberDropDown.SelectedItem = twigValue;
+                {
+                    string selectedItem = twigTicketNumberDropDown.SelectedItem as string;
+                    string trunc1 = selectedItem.Split('[')[0].Split(']')[1]; 
+                    twigTicketNumberDropDown.SelectedItem = trunc1;
+                }
             }
             if (tempCleaningProcedures.HasValue)
             {
@@ -74,7 +82,8 @@ namespace BatteryRepairModule.Forms.Service_Inspection_Forms
                 if (twigTicketNumberDropDown.SelectedItem != null)
                 {
                     var selectedValue = twigTicketNumberDropDown.SelectedItem.ToString();
-                    var selectedKvp = dbInformation.activeTwigCaseNumbers.FirstOrDefault(kvp => kvp.Value.ToString() == selectedValue);
+                    var converted = selectedValue.Split('[')[1].Split(']')[0]; 
+                    var selectedKvp = dbInformation.activeTwigCaseNumbers.FirstOrDefault(kvp => kvp.Value.ToString() == converted);
                     tempSelectedTwigTicketKeyPair.Clear();
                     tempSelectedTwigTicketKeyPair[selectedKvp.Key] = selectedKvp.Value;
                 }

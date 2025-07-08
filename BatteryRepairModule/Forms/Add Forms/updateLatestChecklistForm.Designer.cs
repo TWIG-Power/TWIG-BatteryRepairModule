@@ -180,12 +180,15 @@
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(800, 288);
+            ClientSize = new Size(800, 332);
             Controls.Add(cancelButton);
             Controls.Add(submitButton);
             Controls.Add(panel3);
             Controls.Add(panel2);
             Controls.Add(panel1);
+            MaximizeBox = false;
+            MaximumSize = new Size(816, 371);
+            MinimumSize = new Size(816, 371);
             Name = "updateLatestChecklistForm";
             Text = "updateLatestChecklistForm";
             panel1.ResumeLayout(false);

@@ -14,6 +14,7 @@ namespace BatteryRepairModule.Forms.Add_Forms
     public partial class updateLatestChecklistForm : Form
     {
         private byte[]? fileData;
+        private string fileName; 
 
         public updateLatestChecklistForm()
         {
@@ -84,7 +85,7 @@ namespace BatteryRepairModule.Forms.Add_Forms
 
             try
             {
-                int updated = dbMethods.updateLatestChecklistForm(fileData);
+                int updated = dbMethods.updateLatestChecklistForm(fileData, fileName);
                 dbMethods.updateOemChecklist(updated); 
                 MessageBox.Show("File saved to database successfully.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 this.Close(); 
@@ -106,10 +107,11 @@ namespace BatteryRepairModule.Forms.Add_Forms
             using var openFileDialog = new OpenFileDialog();
             if (openFileDialog.ShowDialog() == DialogResult.OK)
             {
-                filePath = openFileDialog.FileName;
-                fileData = File.ReadAllBytes(filePath);
+            filePath = openFileDialog.FileName;
+            fileName = Path.GetFileName(filePath);
+            fileData = File.ReadAllBytes(filePath);
             }
-            qualityChecklistPathTextBox.Text = filePath;
+            qualityChecklistPathTextBox.Text = fileName;
         }
     }
 }

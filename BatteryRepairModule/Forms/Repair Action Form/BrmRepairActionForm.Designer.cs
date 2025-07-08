@@ -379,14 +379,13 @@ namespace BatteryRepairModule.Forms.BRM
             // 
             // clearModuleForTestingButton
             // 
-            clearModuleForTestingButton.AutoSize = true;
             clearModuleForTestingButton.Dock = DockStyle.Left;
-            clearModuleForTestingButton.Font = new Font("Segoe UI", 18F, FontStyle.Regular, GraphicsUnit.Point);
+            clearModuleForTestingButton.Font = new Font("Segoe UI", 15F, FontStyle.Regular, GraphicsUnit.Point);
             clearModuleForTestingButton.Location = new Point(695, 457);
             clearModuleForTestingButton.MaximumSize = new Size(464, 54);
             clearModuleForTestingButton.MinimumSize = new Size(175, 50);
             clearModuleForTestingButton.Name = "clearModuleForTestingButton";
-            clearModuleForTestingButton.Size = new Size(292, 54);
+            clearModuleForTestingButton.Size = new Size(238, 54);
             clearModuleForTestingButton.TabIndex = 27;
             clearModuleForTestingButton.Text = "Clear Module For Testing";
             clearModuleForTestingButton.UseVisualStyleBackColor = true;

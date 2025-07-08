@@ -9,17 +9,19 @@ public static partial class dbMethods
     public static void loadAwaitingTestingTickets()
     {
         using (var conn = new NpgsqlConnection(dbConnection.connectionPath))
-        using (var cmd = new NpgsqlCommand("SELECT \"id\", \"twig_ticket_number\" FROM public.ticket WHERE \"status_fk\" = 4", conn))
+        using (var cmd = new NpgsqlCommand("SELECT \"id\", \"twig_ticket_number\", serial_number FROM public.ticket WHERE \"status_fk\" = 4", conn))
         {
             conn.Open();
             using (var reader = cmd.ExecuteReader())
             {
                 dbInformation.activeTwigCaseNumbers.Clear();
+                dbInformation.activeModuleSerialNumbers.Clear(); 
                 while (reader.Read())
                 {
                     if (!reader.IsDBNull(0) && !reader.IsDBNull(1))
                     {
                         dbInformation.activeTwigCaseNumbers.Add(reader.GetInt16(0), reader.GetInt32(1));
+                        dbInformation.activeModuleSerialNumbers.Add(reader.GetInt16(0), reader.GetInt32(2));
                     }
                 }
             }
@@ -67,7 +69,6 @@ public static partial class dbMethods
                 {
                     dbInformation.addedTestsKeyValue.Add(reader.GetInt32(0), reader.GetString(1));
                     dbInformation.addedTestsKeyStatus.Add(reader.GetInt16(0), reader.GetString(2));
-                    //dbInformation.addedTestValueStatus.Add(reader.GetString(1), reader.GetString(2));
                 }
             }
         }
@@ -207,6 +208,9 @@ public static partial class dbMethods
                 }
             }
         }
+    }
+
+    public static void getStateOfHealthRanges(){
         using (var conn = new NpgsqlConnection(dbConnection.connectionPath))
         using (var cmd = new NpgsqlCommand($"SELECT race_soh_upper, race_soh_lower, track_soh_upper, track_soh_lower, play_soh_upper, play_soh_lower, module_type FROM public.{dbInformation.moduleTypeKeyValue.Values.First()} WHERE id = @type", conn))
         {

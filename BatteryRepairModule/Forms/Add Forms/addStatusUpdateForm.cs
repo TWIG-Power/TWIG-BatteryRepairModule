@@ -95,6 +95,7 @@ namespace BatteryRepairModule.Forms.Add_Forms
                     {
                         var selectedTestString = modifiedListBox.SelectedItem as string;
                         var selectedTest = selectedTestString?.Split('(')[0].Trim();
+                        selectedTest = selectedTest?.Split(']')[1].Trim();
                         var selectedKvpp = dbInformation.addedTestsKeyValue.FirstOrDefault(kvp => kvp.Value == (string?)selectedTest);
                         dbInformation.tempTestTestHolder.Clear();
                         dbInformation.tempTestTestHolder[selectedKvpp.Key] = selectedKvpp.Value;
@@ -108,7 +109,11 @@ namespace BatteryRepairModule.Forms.Add_Forms
                         {
                             using (var tempForm = new stateOfHealthCalculatorForm(modifiedListBox))
                             {
-                                tempForm.ShowDialog(this); 
+                                tempForm.ShowDialog(this);
+                                if (dbInformation.conditionalClosureFailure)
+                                {
+                                    return; 
+                                }
                             }
                         }
 
@@ -119,15 +124,17 @@ namespace BatteryRepairModule.Forms.Add_Forms
 
                         foreach (var kvp in dbInformation.addedTestsKeyValue)
                         {
-                            if (dbInformation.doesTestHaveNote[kvp.Key] == false)
+                            var testId = kvp.Key; // Unique ID of the test
+                            var testName = kvp.Value; // Test name
+                            var status = dbInformation.addedTestsKeyStatus.GetValueOrDefault(testId); // Test status
+
+                            if (dbInformation.doesTestHaveNote[testId] == false)
                             {
-                                var status = dbInformation.addedTestsKeyStatus.GetValueOrDefault(kvp.Key);
-                                modifiedListBox.Items.Add($"{kvp.Value} ({status})");
+                                modifiedListBox.Items.Add($"[{testId}] {testName} ({status})");
                             }
                             else
                             {
-                                var status = dbInformation.addedTestsKeyStatus.GetValueOrDefault(kvp.Key);
-                                modifiedListBox.Items.Add($"{kvp.Value} ({status})*");
+                                modifiedListBox.Items.Add($"[{testId}] {testName} ({status})*");
                             }
                         }
 

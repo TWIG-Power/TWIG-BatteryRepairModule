@@ -13,6 +13,7 @@ public static class dbInformation
     public static string? selectedBatteryType = string.Empty;
     public static Dictionary<int, string> moduleReportedErrorsKeyPair = new Dictionary<int, string>();
     public static Dictionary<int, int> activeTwigCaseNumbers = new Dictionary<int, int>();
+    public static Dictionary<int, int> activeModuleSerialNumbers = new Dictionary<int, int>(); 
     public static Dictionary<int, string> staffKeyPairOptions = new Dictionary<int, string>();
     public static Dictionary<int, Dictionary<int, string>> moduleTypesByOEM = new Dictionary<int, Dictionary<int, string>>();
     public static Dictionary<int, Dictionary<int, string>> selectedModuleType = new Dictionary<int, Dictionary<int, string>>();
@@ -92,6 +93,7 @@ public static class dbInformation
     public static Dictionary<int, string> tempTestStatusHolder = new Dictionary<int, string>();
     public static Dictionary<int, string> tempTestTestHolder = new Dictionary<int, string>();
     public static Dictionary<int, bool> doesTestHaveNote = new Dictionary<int, bool>();
+    public static bool conditionalClosureFailure = false; 
 
     public static void ClearTicketCreation()
     {
@@ -119,7 +121,9 @@ public static class dbInformation
     #region QUALITY 
 
     public static string qualityFilePath = string.Empty;
-    public static Dictionary<string, int> selectedOemModelKeyPair = new Dictionary<string, int>(); 
+    public static Dictionary<string, int> selectedOemModelKeyPair = new Dictionary<string, int>();
+    public static string downloadedFileName = string.Empty;
+    public static byte[] downloadedFileBytes = null; 
 
     #endregion
 }

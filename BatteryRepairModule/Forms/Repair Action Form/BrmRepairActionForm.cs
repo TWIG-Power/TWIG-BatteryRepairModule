@@ -19,7 +19,10 @@ namespace BatteryRepairModule.Forms.BRM
             InitializeComponent();
 
             dbMethods.loadAwaitingRepairActionsStatus();
-            twigTicketNumberDropDown.Items.AddRange(dbInformation.activeTwigCaseNumbers.Select(kvp => kvp.Value.ToString()).ToArray());
+            twigTicketNumberDropDown.Items.AddRange(
+                dbInformation.activeTwigCaseNumbers.Select(kvp =>
+                    $"[{kvp.Value}] - {dbInformation.activeModuleSerialNumbers[kvp.Key].ToString()}"
+                ).ToArray());
 
             dbMethods.loadStaffNames();
             staffDropDown.Items.AddRange(dbInformation.staffKeyPairOptions.Values.ToArray());
@@ -37,6 +40,11 @@ namespace BatteryRepairModule.Forms.BRM
         // Update Issue Status
         private void continueButton_Click_1(object sender, EventArgs e)
         {
+            if (reportedIssuesListBox.SelectedItem == null)
+            {
+                MessageBox.Show("Please select an issue before updating its status.", "No Issue Selected", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
             using (var newForm = new addStatusUpdateForm(reportedIssuesListBox, "Issue"))
             {
                 newForm.ShowDialog(this);
@@ -50,9 +58,14 @@ namespace BatteryRepairModule.Forms.BRM
                 newForm.ShowDialog(this);
         }
 
-        // CHANGED TO VIEW REPAIR NOTES
+        //VIEW REPAIR NOTES
         private void updateStatusButton_Click(object sender, EventArgs e)
         {
+            if (repairActionsListBox.SelectedItem == null)
+            {
+                MessageBox.Show("Please select a repair action before viewing notes.", "No Repair Selected", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
             using (var newForm = new addNotesForm(repairActionsListBox, true, "repair"))
                 newForm.ShowDialog(this);
         }
@@ -64,8 +77,9 @@ namespace BatteryRepairModule.Forms.BRM
 
             if (twigTicketNumberDropDown.SelectedItem.ToString() != null)
             {
-                string selectedItem = twigTicketNumberDropDown.SelectedItem.ToString();
-                var selectedKvp = dbInformation.activeTwigCaseNumbers.FirstOrDefault(kvp => kvp.Value.ToString() == selectedItem);
+                var selectedValue = twigTicketNumberDropDown.SelectedItem.ToString();
+                var converted = selectedValue.Split('[')[1].Split(']')[0]; 
+                var selectedKvp = dbInformation.activeTwigCaseNumbers.FirstOrDefault(kvp => kvp.Value.ToString() == converted);
                 dbInformation.selectedTwigTicketKeyPair.Clear();
                 dbInformation.selectedTwigTicketKeyPair[selectedKvp.Key] = selectedKvp.Value;
             }
@@ -108,12 +122,22 @@ namespace BatteryRepairModule.Forms.BRM
         // Add Repair Notes
         private void button1_Click(object sender, EventArgs e)
         {
+            if (repairActionsListBox.SelectedItem == null)
+            {
+                MessageBox.Show("Please select a repair action before adding notes.", "No Repair Selected", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
             using (var newForm = new addNotesForm(repairActionsListBox, false, "repair"))
                 newForm.ShowDialog(this);
         }
 
         private void updateRepairStatus_Click(object sender, EventArgs e)
         {
+            if (repairActionsListBox.SelectedItem == null)
+            {
+                MessageBox.Show("Please select a repair action before updating its status.", "No Repair Selected", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
             using (var newForm = new addStatusUpdateForm(repairActionsListBox, "Repair"))
                 newForm.ShowDialog(this);
         }
@@ -148,7 +172,6 @@ namespace BatteryRepairModule.Forms.BRM
                 string status = string.Empty;
                 if (parenIndex > 0)
                 {
-                    status = item.Substring(parenIndex + 1).TrimEnd(')', ' ');
                     status = item.Substring(parenIndex + 1).TrimEnd(')', '*');
                 }
                 if (status != "Complete")

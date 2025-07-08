@@ -8,17 +8,19 @@ public static partial class dbMethods
     public static void loadAwaitingAuthorizeRepairTickets()
     {
         using (var conn = new NpgsqlConnection(dbConnection.connectionPath))
-        using (var cmd = new NpgsqlCommand("SELECT \"id\", \"twig_ticket_number\" FROM public.ticket WHERE \"status_fk\" = 2", conn))
+        using (var cmd = new NpgsqlCommand("SELECT \"id\", \"twig_ticket_number\", serial_number FROM public.ticket WHERE \"status_fk\" = 2", conn))
         {
             conn.Open();
             using (var reader = cmd.ExecuteReader())
             {
                 dbInformation.activeTwigCaseNumbers.Clear();
+                dbInformation.activeModuleSerialNumbers.Clear(); 
                 while (reader.Read())
                 {
                     if (!reader.IsDBNull(0) && !reader.IsDBNull(1))
                     {
                         dbInformation.activeTwigCaseNumbers.Add(reader.GetInt16(0), reader.GetInt32(1));
+                        dbInformation.activeModuleSerialNumbers.Add(reader.GetInt16(0), reader.GetInt32(2)); 
                     }
                 }
             }

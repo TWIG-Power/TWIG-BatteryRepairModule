@@ -19,6 +19,7 @@ namespace BatteryRepairModule.Forms.Add_Forms
         {
             InitializeComponent();
             dbMethods.getModuleType();
+            dbMethods.getStateOfHealthRanges(); 
             this.importedListBox = refListbox; 
             moduleTypeChangeLabel.Text = dbInformation.moduleTypeKeyValue.Values.First();
         }
@@ -31,15 +32,20 @@ namespace BatteryRepairModule.Forms.Add_Forms
                 stateOfHealthGradeChangeLabel.Text = "Race Grade";
                 stateOfHealthRangeChangeLabel.Text = $"{dbInformation.raceGradeHighLowKeyPair.Keys.First()} - {dbInformation.raceGradeHighLowKeyPair.Values.First()}";
             }
-            if (inputedValue <= dbInformation.trackGradeHighLowKeyPair.Keys.First() && inputedValue >= dbInformation.trackGradeHighLowKeyPair.Values.First())
+            else if (inputedValue <= dbInformation.trackGradeHighLowKeyPair.Keys.First() && inputedValue >= dbInformation.trackGradeHighLowKeyPair.Values.First())
             {
                 stateOfHealthGradeChangeLabel.Text = "Track Grade";
                 stateOfHealthRangeChangeLabel.Text = $"{dbInformation.trackGradeHighLowKeyPair.Keys.First()} - {dbInformation.trackGradeHighLowKeyPair.Values.First()}";
             }
-            if (inputedValue <= dbInformation.playGradeHighLowKeyPair.Keys.First() && inputedValue >= dbInformation.playGradeHighLowKeyPair.Values.First())
+            else if (inputedValue <= dbInformation.playGradeHighLowKeyPair.Keys.First() && inputedValue >= dbInformation.playGradeHighLowKeyPair.Values.First())
             {
                 stateOfHealthGradeChangeLabel.Text = "Play Grade";
-                stateOfHealthRangeChangeLabel.Text = $"{dbInformation.playGradeHighLowKeyPair.Keys.First()} - {dbInformation.playGradeHighLowKeyPair.Values.First()}"; 
+                stateOfHealthRangeChangeLabel.Text = $"{dbInformation.playGradeHighLowKeyPair.Keys.First()} - {dbInformation.playGradeHighLowKeyPair.Values.First()}";
+            }
+            else
+            {
+                MessageBox.Show("Value is out of range. Please check the values and try again.", "Out of Range", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
             }
         }
 
@@ -49,10 +55,18 @@ namespace BatteryRepairModule.Forms.Add_Forms
             {
                 var selectedTestString = importedListBox.SelectedItem as string;
                 var selectedTest = selectedTestString?.Split('(')[0].Trim();
-                var selectedKvpp = dbInformation.addedTestsKeyValue.FirstOrDefault(kvp => kvp.Value == (string?)selectedTest);
+                var finalSelectedTest = selectedTest?.Split(']')[1].Trim();
+                var selectedKvpp = dbInformation.addedTestsKeyValue.FirstOrDefault(kvp => kvp.Value == (string?)finalSelectedTest);
                 dbInformation.tempTestTestHolder.Clear();
                 dbInformation.tempTestTestHolder[selectedKvpp.Key] = selectedKvpp.Value;
 
+                if (Int32.Parse(maskedTextBox1.Text) > dbInformation.raceGradeHighLowKeyPair.Keys.First() || Int32.Parse(maskedTextBox1.Text) < dbInformation.playGradeHighLowKeyPair.Values.First())
+                {
+                    MessageBox.Show("Value is out of range. Please check the values and try again.", "Out of Range", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+
+                dbInformation.conditionalClosureFailure = false; 
                 dbMethods.insertStateOfHealth(Int32.Parse(maskedTextBox1.Text));
                 this.Close();
             }
@@ -66,6 +80,7 @@ namespace BatteryRepairModule.Forms.Add_Forms
 
         private void cancelButton_Click(object sender, EventArgs e)
         {
+            dbInformation.conditionalClosureFailure = true; 
             this.Close(); 
         }
     }

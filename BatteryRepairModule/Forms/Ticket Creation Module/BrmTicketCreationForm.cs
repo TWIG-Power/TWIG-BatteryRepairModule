@@ -70,65 +70,76 @@ namespace BatteryRepairModule.Forms.BRM
         {
             try
             {
-                tempTwigCaseNum = Int32.Parse(twigTicketNumberTextBox.Text);
+            tempTwigCaseNum = Int32.Parse(twigTicketNumberTextBox.Text);
 
-                foreach (var keyPair in dbInformation.moduleTypesByOEM)
+            if (batteryTypeDropDown.SelectedItem == null ||
+                !batteryTypeDropDown.Items.Contains(batteryTypeDropDown.Text))
+            {
+                MessageBox.Show($"Please select a valid module type from the dropdown in order to continue.", "Input Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            foreach (var keyPair in dbInformation.moduleTypesByOEM)
+            {
+                foreach (var intKeyPair in keyPair.Value)
                 {
-                    foreach (var intKeyPair in keyPair.Value)
-                    {
-                        if (batteryTypeDropDown.SelectedItem.ToString() == intKeyPair.Value)
-                        {
-                            dbInformation.selectedModuleType.Clear();
-                            tempSelectedMod.Clear(); 
-                            tempSelectedMod.Add(keyPair.Key, new Dictionary<int, string> { { intKeyPair.Key, intKeyPair.Value } });
-                        }
-                    }
+                if (batteryTypeDropDown.SelectedItem.ToString() == intKeyPair.Value)
+                {
+                    dbInformation.selectedModuleType.Clear();
+                    tempSelectedMod.Clear();
+                    tempSelectedMod.Add(keyPair.Key, new Dictionary<int, string> { { intKeyPair.Key, intKeyPair.Value } });
                 }
-
-                tempSerialNum = Int32.Parse(batterySerialNumberTextBox.Text);
-                tempVinNum = vehicleVinNumberTextBox.Text;
-
-                if (staffInitiatingReportDropDown.SelectedItem != null)
-                {
-                    var selectedValue = staffInitiatingReportDropDown.SelectedItem.ToString();
-                    var selectedKvp = dbInformation.staffKeyPairOptions.FirstOrDefault(kvp => kvp.Value.ToString() == selectedValue);
-                    tempSelectedStaff.Clear();
-                    tempSelectedStaff[selectedKvp.Key] = selectedKvp.Value;
                 }
+            }
 
+            tempSerialNum = Int32.Parse(batterySerialNumberTextBox.Text);
+            tempVinNum = vehicleVinNumberTextBox.Text;
 
+            if (staffInitiatingReportDropDown.SelectedItem != null)
+            {
+                var selectedValue = staffInitiatingReportDropDown.SelectedItem.ToString();
+                var selectedKvp = dbInformation.staffKeyPairOptions.FirstOrDefault(kvp => kvp.Value.ToString() == selectedValue);
+                tempSelectedStaff.Clear();
+                tempSelectedStaff[selectedKvp.Key] = selectedKvp.Value;
+            }
 
-                if (tempTwigCaseNum == 0)
-                {
-                    MessageBox.Show($"Please fill the TWIG Ticket Number text box in order to continue.", "Input Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            if (tempTwigCaseNum == 0)
+            {
+                MessageBox.Show($"Please fill the TWIG Ticket Number text box in order to continue.", "Input Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+            if (!dbInformation.moduleTypesByOEM.Any())
+            {
+                MessageBox.Show($"Please select a module type in order to continue.", "Input Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+            if (tempSerialNum == 0)
+            {
+                MessageBox.Show($"Please fill the module serial number text box in order to continue.", "Input Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+            if (string.IsNullOrWhiteSpace(tempVinNum))
+            {
+                var result = MessageBox.Show(
+                "No VIN number was entered. Do you want to continue without a VIN number?","VIN Number Missing",MessageBoxButtons.YesNo,MessageBoxIcon.Question);
+                if (result == DialogResult.No){
                     return;
                 }
-                if (!dbInformation.moduleTypesByOEM.Any())
-                {
-                    MessageBox.Show($"Please select a module type in order to continue.", "Input Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    return;
+                else{
+                    tempVinNum = null;
                 }
-                if (tempSerialNum == 0)
-                {
-                    MessageBox.Show($"Please fill the module serial number text box in order to continue.", "Input Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    return;
-                }
-                if (string.IsNullOrEmpty(tempVinNum))
-                {
-                    MessageBox.Show($"Please fill the vehicle vin number in order to continue.", "Input Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    return;
-                }
-                if (!tempSelectedStaff.Any())
-                {
-                    MessageBox.Show($"Please identify yourself in the respective dropdown in order to continue.", "Input Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    return;
-                }
+            }
+            if (!tempSelectedStaff.Any())
+            {
+                MessageBox.Show($"Please identify yourself in the respective dropdown in order to continue.", "Input Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
 
-                parentForm.OpenChildForm(new BrmTicketCreationForm2(parentForm));
+            parentForm.OpenChildForm(new BrmTicketCreationForm2(parentForm));
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"The following exception was thrown: {ex}.", "Input Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            MessageBox.Show($"The following exception was thrown: {ex}.", "Input Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
