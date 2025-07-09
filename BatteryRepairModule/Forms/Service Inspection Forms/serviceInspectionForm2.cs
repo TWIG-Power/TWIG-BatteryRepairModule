@@ -18,6 +18,7 @@ namespace BatteryRepairModule.Forms.Service_Inspection_Forms
         public serviceInspectionForm2(BrmMainMenuForm parentRef)
         {
             InitializeComponent();
+            ThemeHelper.ApplyTheme(this);
             this.parentForm = parentRef;
 
             dbMethods.LoadRegisteredCustomerReport();
@@ -56,9 +57,21 @@ namespace BatteryRepairModule.Forms.Service_Inspection_Forms
                     fileBytes = null;
                 }
 
-                dbMethods.createServiceInpsection(fileBytes); 
-                dbMethods.insertSuggestedRepairs();
-                ClearTempValues(); 
+                bool cond1 = dbMethods.createServiceInpsection(fileBytes); 
+                bool cond2 = dbMethods.insertSuggestedRepairs();
+                if (cond1 && cond2)
+                {
+                    MessageBox.Show("Service inspection and suggested repairs saved successfully.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    ClearTempValues();
+                    this.Close();
+                    parentForm.OpenChildForm(new serviceInspectionForm1(parentForm)); 
+                    return;
+                }
+                else
+                {
+                    MessageBox.Show("Failed to save service inspection or suggested repairs.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return; 
+                }
             }
             catch (Exception ex)
             {

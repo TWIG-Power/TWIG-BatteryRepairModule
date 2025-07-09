@@ -23,6 +23,7 @@ namespace BatteryRepairModule.Forms.Quality
         public qualityForm1(BrmMainMenuForm parentRef)
         {
             InitializeComponent();
+            ThemeHelper.ApplyTheme(this);
             this.parentForm = parentRef;
             dbMethods.loadAwaitingQualityStatus();
             twigTicketNumberDropDown.Items.AddRange(
@@ -102,6 +103,7 @@ namespace BatteryRepairModule.Forms.Quality
 
         private void attachFileButton_Click(object sender, EventArgs e)
         {
+            staffInitiatingReportDropDown.Enabled = false; 
             completedFilePath = string.Empty; 
             completedFilePath = Path.Combine(folderPath, $"QualityChecklist_{dbInformation.selectedTwigTicketKeyPair.Values.First()}.pdf");
 
@@ -137,8 +139,11 @@ namespace BatteryRepairModule.Forms.Quality
                 if (result)
                 {
                     MessageBox.Show("Quality checklist uploaded successfully.", "Success!", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    dbMethods.clearModuleForShipping(); 
+                    File.Delete(completedFilePath); 
+                    dbMethods.clearModuleForInvoice();
                     this.Close();
+                    parentForm.OpenChildForm(new qualityForm1(parentForm));
+                    return; 
                 }
                 else
                 {

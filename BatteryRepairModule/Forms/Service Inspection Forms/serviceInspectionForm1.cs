@@ -25,6 +25,7 @@ namespace BatteryRepairModule.Forms.Service_Inspection_Forms
         public serviceInspectionForm1(BrmMainMenuForm parentRef)
         {
             InitializeComponent();
+            ThemeHelper.ApplyTheme(this);
             this.parentForm = parentRef;
 
             dbMethods.loadAwaitingServiceInspectionTickets();
@@ -127,6 +128,11 @@ namespace BatteryRepairModule.Forms.Service_Inspection_Forms
                 if (tempCheckPluggedIntoDiagTool == null)
                 {
                     MessageBox.Show("Please select whether diagnostic tool was used.", "Input Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+                if (tempCheckPluggedIntoDiagTool == true && string.IsNullOrWhiteSpace(tempDiagnosticReportPath))
+                {
+                    MessageBox.Show("Please attach a diagnostic report file.", "Input Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return;
                 }
 

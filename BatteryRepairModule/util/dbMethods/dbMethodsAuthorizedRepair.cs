@@ -26,7 +26,7 @@ public static partial class dbMethods
             }
         }
     }
-    public static void insertAuthorizedRepairs()
+    public static bool insertAuthorizedRepairs()
     {
         using (var conn = new NpgsqlConnection(dbConnection.connectionPath))
         using (var cmd = new NpgsqlCommand("INSERT INTO public.authorized_repairs (ticket_fk, repair_fk, staff_authorized_fk, status_fk) VALUES (@ticketId, @repairId, @authoStaff, 1)", conn))
@@ -48,7 +48,8 @@ public static partial class dbMethods
             conn.Open();
             cmd.Parameters.AddWithValue("@ticketId", dbInformation.selectedTwigTicketKeyPair.Keys.First());
             cmd.Parameters.AddWithValue("@status", status); 
-            cmd.ExecuteNonQuery();
+            int modCount = cmd.ExecuteNonQuery();
+            return modCount > 0; 
         }
     }
 }

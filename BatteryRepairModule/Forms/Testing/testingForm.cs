@@ -1,4 +1,5 @@
 ﻿using BatteryRepairModule.Forms.Add_Forms;
+using BatteryRepairModule.Forms.BRM;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -13,10 +14,12 @@ namespace BatteryRepairModule.Forms.Testing
 {
     public partial class testingForm : Form
     {
-        public testingForm()
+        private BrmMainMenuForm parentForm; 
+        public testingForm(BrmMainMenuForm parentRef)
         {
             InitializeComponent();
-
+            parentForm = parentRef; 
+            ThemeHelper.ApplyTheme(this);
             dbMethods.loadAwaitingTestingTickets();
             twigTicketNumberDropDown.Items.AddRange(
                 dbInformation.activeTwigCaseNumbers.Select(kvp =>
@@ -35,12 +38,13 @@ namespace BatteryRepairModule.Forms.Testing
             returnBatteryToRepairButton.Enabled = false;
             clearBatteryForQualityButton.Enabled = false;
             calculateStateOfHealthButton.Enabled = false;
-            viewRepairNoteButton.Enabled = false; 
+            viewRepairNoteButton.Enabled = false;
 
         }
 
         private void addTestNoteButton_Click(object sender, EventArgs e)
         {
+            staffDropDown.Enabled = false; 
             if (testStatusListBox.SelectedItem != null)
             {
                 using (var newForm = new addNotesForm(testStatusListBox, false, "test"))
@@ -51,12 +55,13 @@ namespace BatteryRepairModule.Forms.Testing
             else
             {
                 MessageBox.Show("Please select a test to add a note.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return; 
+                return;
             }
         }
 
         private void viewTestNoteButton_Click(object sender, EventArgs e)
         {
+            staffDropDown.Enabled = false; 
             if (testStatusListBox.SelectedItem != null)
             {
                 using (var newForm = new addNotesForm(testStatusListBox, true, "test"))
@@ -65,23 +70,36 @@ namespace BatteryRepairModule.Forms.Testing
             else
             {
                 MessageBox.Show("Please select a test to view its note.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return; 
+                return;
             }
         }
 
         private void addRequiredTestButton_Click(object sender, EventArgs e)
         {
+            staffDropDown.Enabled = false; 
             using (var newForm = new addTestForm())
             {
                 newForm.ShowDialog(this);
             }
 
             testStatusListBox.Items.Clear();
+            dbMethods.getDoesTestHaveNote();
             dbMethods.getAddedTestsByTwigTicket();
-            testStatusListBox.Items.AddRange(
-                dbInformation.addedTestsKeyValue.Select(
-                    kvp => $"{kvp.Value} ({dbInformation.addedTestsKeyStatus.GetValueOrDefault(kvp.Key)})").ToArray()
-            );
+            foreach (var kvp in dbInformation.addedTestsKeyValue)
+            {
+                var testId = kvp.Key;
+                var testName = kvp.Value;
+                var status = dbInformation.addedTestsKeyStatus.GetValueOrDefault(testId);
+
+                if (dbInformation.doesTestHaveNote[testId] == false)
+                {
+                    testStatusListBox.Items.Add($"[{testId}] {testName} ({status})");
+                }
+                else
+                {
+                    testStatusListBox.Items.Add($"[{testId}] {testName} ({status})*");
+                }
+            }
 
         }
 
@@ -115,9 +133,9 @@ namespace BatteryRepairModule.Forms.Testing
 
             foreach (var kvp in dbInformation.addedTestsKeyValue)
             {
-                var testId = kvp.Key; // Unique ID of the test
-                var testName = kvp.Value; // Test name
-                var status = dbInformation.addedTestsKeyStatus.GetValueOrDefault(testId); // Test status
+                var testId = kvp.Key; 
+                var testName = kvp.Value;
+                var status = dbInformation.addedTestsKeyStatus.GetValueOrDefault(testId);
 
                 if (dbInformation.doesTestHaveNote[testId] == false)
                 {
@@ -149,6 +167,7 @@ namespace BatteryRepairModule.Forms.Testing
 
         private void viewRepairActionNotesButton_Click(object sender, EventArgs e)
         {
+            staffDropDown.Enabled = false; 
             if (repairActionsListBox.SelectedItem != null)
             {
                 using (var newForm = new addNotesForm(repairActionsListBox, true, "test"))
@@ -164,15 +183,22 @@ namespace BatteryRepairModule.Forms.Testing
 
         private void returnBatteryToRepairButton_Click(object sender, EventArgs e)
         {
+            staffDropDown.Enabled = false; 
             var result = MessageBox.Show("Are you sure you wish to return module to repair actions?", "Confirm Module To Repair Actions", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
             if (result == DialogResult.No) return;
-            dbMethods.returnModuleToRepairActions();
-            MessageBox.Show("Module returned to repair actions", "Module returned", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            this.Close();
+            bool cond = dbMethods.returnModuleToRepairActions();
+            if (cond)
+            {
+                MessageBox.Show("Module returned to repair actions", "Module returned", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                this.Close();
+                parentForm.OpenChildForm(new testingForm(parentForm));
+                return;
+            }
         }
 
         private void calculateStateOfHealthButton_Click(object sender, EventArgs e)
         {
+            staffDropDown.Enabled = false; 
             var selectedTest = testStatusListBox.SelectedItem;
             if (selectedTest == null)
             {
@@ -186,6 +212,7 @@ namespace BatteryRepairModule.Forms.Testing
 
         private void updateTestStatus_Click_1(object sender, EventArgs e)
         {
+            staffDropDown.Enabled = false; 
             if (testStatusListBox.SelectedItem == null)
             {
                 MessageBox.Show("Please select a test from the list to update its status.", "No Test Selected", MessageBoxButtons.OK, MessageBoxIcon.Warning);
@@ -198,6 +225,7 @@ namespace BatteryRepairModule.Forms.Testing
 
         private void clearBatteryForQualityButton_Click(object sender, EventArgs e)
         {
+            staffDropDown.Enabled = false; 
             foreach (var test in testStatusListBox.Items)
             {
                 var status = test.ToString();
@@ -209,20 +237,31 @@ namespace BatteryRepairModule.Forms.Testing
                     return;
                 }
             }
-            dbMethods.clearModuleForQuality();
-            this.Close();
+            bool cond = dbMethods.clearModuleForQuality();
+            if (cond)
+            {
+                MessageBox.Show("Module cleared for quality.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                parentForm.OpenChildForm(new testingForm(parentForm));
+                this.Close();
+                return;
+            }
+            else
+            {
+                MessageBox.Show("Failed to clear module for quality. Please try again.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         private void viewRepairNoteButton_Click(object sender, EventArgs e)
         {
+            staffDropDown.Enabled = false; 
             if (repairActionsListBox.SelectedItem != null)
             {
-            using (var newForm = new addNotesForm(repairActionsListBox, true, "repair"))
-                newForm.ShowDialog(this);
+                using (var newForm = new addNotesForm(repairActionsListBox, true, "repair"))
+                    newForm.ShowDialog(this);
             }
             else
             {
-            MessageBox.Show("Please select a repair action to view its note.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Please select a repair action to view its note.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
     }

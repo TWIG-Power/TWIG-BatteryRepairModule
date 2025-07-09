@@ -26,6 +26,7 @@ namespace BatteryRepairModule.Forms.BRM
         public BrmTicketCreationForm(BrmMainMenuForm parentRef)
         {
             InitializeComponent();
+            ThemeHelper.ApplyTheme(this);
             this.parentForm = parentRef;
 
             dbMethods.loadStaffNames();

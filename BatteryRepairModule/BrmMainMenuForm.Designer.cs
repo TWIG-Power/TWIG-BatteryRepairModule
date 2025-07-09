@@ -68,7 +68,7 @@ namespace BatteryRepairModule.Forms.BRM
             // 
             // panel1
             // 
-            panel1.BackColor = Color.LightBlue;
+            panel1.BackColor = Color.SteelBlue;
             panel1.Controls.Add(statusReviewButton);
             panel1.Controls.Add(shippingButton);
             panel1.Controls.Add(qualityButton);
@@ -86,6 +86,7 @@ namespace BatteryRepairModule.Forms.BRM
             // statusReviewButton
             // 
             statusReviewButton.AutoSizeMode = AutoSizeMode.GrowAndShrink;
+            statusReviewButton.BackColor = Color.SteelBlue;
             statusReviewButton.Dock = DockStyle.Top;
             statusReviewButton.FlatStyle = FlatStyle.Flat;
             statusReviewButton.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point);
@@ -99,12 +100,13 @@ namespace BatteryRepairModule.Forms.BRM
             statusReviewButton.Text = "Status Review";
             statusReviewButton.TextAlign = ContentAlignment.MiddleLeft;
             statusReviewButton.TextImageRelation = TextImageRelation.ImageBeforeText;
-            statusReviewButton.UseVisualStyleBackColor = true;
+            statusReviewButton.UseVisualStyleBackColor = false;
             statusReviewButton.Click += statusReviewButton_Click;
             // 
             // shippingButton
             // 
             shippingButton.AutoSizeMode = AutoSizeMode.GrowAndShrink;
+            shippingButton.BackColor = Color.SteelBlue;
             shippingButton.Dock = DockStyle.Top;
             shippingButton.FlatStyle = FlatStyle.Flat;
             shippingButton.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point);
@@ -118,12 +120,13 @@ namespace BatteryRepairModule.Forms.BRM
             shippingButton.Text = "Shipping";
             shippingButton.TextAlign = ContentAlignment.MiddleLeft;
             shippingButton.TextImageRelation = TextImageRelation.ImageBeforeText;
-            shippingButton.UseVisualStyleBackColor = true;
+            shippingButton.UseVisualStyleBackColor = false;
             shippingButton.Click += shippingButton_Click;
             // 
             // qualityButton
             // 
             qualityButton.AutoSizeMode = AutoSizeMode.GrowAndShrink;
+            qualityButton.BackColor = Color.SteelBlue;
             qualityButton.Dock = DockStyle.Top;
             qualityButton.FlatStyle = FlatStyle.Flat;
             qualityButton.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point);
@@ -137,12 +140,13 @@ namespace BatteryRepairModule.Forms.BRM
             qualityButton.Text = "Quality";
             qualityButton.TextAlign = ContentAlignment.MiddleLeft;
             qualityButton.TextImageRelation = TextImageRelation.ImageBeforeText;
-            qualityButton.UseVisualStyleBackColor = true;
+            qualityButton.UseVisualStyleBackColor = false;
             qualityButton.Click += qualityButton_Click;
             // 
             // testingQualityModButton
             // 
             testingQualityModButton.AutoSizeMode = AutoSizeMode.GrowAndShrink;
+            testingQualityModButton.BackColor = Color.SteelBlue;
             testingQualityModButton.Dock = DockStyle.Top;
             testingQualityModButton.FlatStyle = FlatStyle.Flat;
             testingQualityModButton.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point);
@@ -156,12 +160,13 @@ namespace BatteryRepairModule.Forms.BRM
             testingQualityModButton.Text = "Testing";
             testingQualityModButton.TextAlign = ContentAlignment.MiddleLeft;
             testingQualityModButton.TextImageRelation = TextImageRelation.ImageBeforeText;
-            testingQualityModButton.UseVisualStyleBackColor = true;
+            testingQualityModButton.UseVisualStyleBackColor = false;
             testingQualityModButton.Click += testingQualityModButton_Click;
             // 
             // repairActionModButton
             // 
             repairActionModButton.AutoSizeMode = AutoSizeMode.GrowAndShrink;
+            repairActionModButton.BackColor = Color.SteelBlue;
             repairActionModButton.Dock = DockStyle.Top;
             repairActionModButton.FlatStyle = FlatStyle.Flat;
             repairActionModButton.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point);
@@ -174,12 +179,13 @@ namespace BatteryRepairModule.Forms.BRM
             repairActionModButton.Text = "Repair Action(s)";
             repairActionModButton.TextAlign = ContentAlignment.MiddleLeft;
             repairActionModButton.TextImageRelation = TextImageRelation.ImageBeforeText;
-            repairActionModButton.UseVisualStyleBackColor = true;
+            repairActionModButton.UseVisualStyleBackColor = false;
             repairActionModButton.Click += repairActionModButton_Click;
             // 
             // authorizeReportModButton
             // 
             authorizeReportModButton.AutoSizeMode = AutoSizeMode.GrowAndShrink;
+            authorizeReportModButton.BackColor = Color.SteelBlue;
             authorizeReportModButton.Dock = DockStyle.Top;
             authorizeReportModButton.FlatStyle = FlatStyle.Flat;
             authorizeReportModButton.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point);
@@ -193,12 +199,13 @@ namespace BatteryRepairModule.Forms.BRM
             authorizeReportModButton.Text = "Authorize Repair Actions";
             authorizeReportModButton.TextAlign = ContentAlignment.MiddleLeft;
             authorizeReportModButton.TextImageRelation = TextImageRelation.ImageBeforeText;
-            authorizeReportModButton.UseVisualStyleBackColor = true;
+            authorizeReportModButton.UseVisualStyleBackColor = false;
             authorizeReportModButton.Click += authorizeReportModButton_Click;
             // 
             // serviceInspectionModButton
             // 
             serviceInspectionModButton.AutoSizeMode = AutoSizeMode.GrowAndShrink;
+            serviceInspectionModButton.BackColor = Color.SteelBlue;
             serviceInspectionModButton.Dock = DockStyle.Top;
             serviceInspectionModButton.FlatStyle = FlatStyle.Flat;
             serviceInspectionModButton.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point);
@@ -212,12 +219,13 @@ namespace BatteryRepairModule.Forms.BRM
             serviceInspectionModButton.Text = "Service Inspection ";
             serviceInspectionModButton.TextAlign = ContentAlignment.MiddleLeft;
             serviceInspectionModButton.TextImageRelation = TextImageRelation.ImageBeforeText;
-            serviceInspectionModButton.UseVisualStyleBackColor = true;
+            serviceInspectionModButton.UseVisualStyleBackColor = false;
             serviceInspectionModButton.Click += serviceInspectionModButton_Click;
             // 
             // ticketCreationModButton
             // 
             ticketCreationModButton.AutoSizeMode = AutoSizeMode.GrowAndShrink;
+            ticketCreationModButton.BackColor = Color.SteelBlue;
             ticketCreationModButton.Dock = DockStyle.Top;
             ticketCreationModButton.FlatStyle = FlatStyle.Flat;
             ticketCreationModButton.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point);
@@ -231,7 +239,7 @@ namespace BatteryRepairModule.Forms.BRM
             ticketCreationModButton.Text = "Ticket Creation ";
             ticketCreationModButton.TextAlign = ContentAlignment.MiddleLeft;
             ticketCreationModButton.TextImageRelation = TextImageRelation.ImageBeforeText;
-            ticketCreationModButton.UseVisualStyleBackColor = true;
+            ticketCreationModButton.UseVisualStyleBackColor = false;
             ticketCreationModButton.Click += ticketCreationModButton_Click;
             // 
             // logoPanel
@@ -257,7 +265,7 @@ namespace BatteryRepairModule.Forms.BRM
             // 
             // headerPanel
             // 
-            headerPanel.BackColor = Color.LightBlue;
+            headerPanel.BackColor = Color.SteelBlue;
             headerPanel.Controls.Add(panel2);
             headerPanel.Controls.Add(titleLabel);
             headerPanel.Dock = DockStyle.Top;
@@ -286,7 +294,7 @@ namespace BatteryRepairModule.Forms.BRM
             // 
             // childFormContainer
             // 
-            childFormContainer.BackColor = Color.LightGray;
+            childFormContainer.BackColor = Color.Gainsboro;
             childFormContainer.Dock = DockStyle.Fill;
             childFormContainer.Location = new Point(194, 94);
             childFormContainer.Name = "childFormContainer";

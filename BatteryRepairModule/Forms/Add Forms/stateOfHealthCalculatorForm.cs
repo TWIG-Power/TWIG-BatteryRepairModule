@@ -14,18 +14,22 @@ namespace BatteryRepairModule.Forms.Add_Forms
     public partial class stateOfHealthCalculatorForm : Form
     {
         int inputedValue = 0;
-        private ListBox importedListBox; 
+        private ListBox importedListBox;
+        private string writtenStateOfHealth = string.Empty; 
         public stateOfHealthCalculatorForm(ListBox refListbox)
         {
             InitializeComponent();
+            ThemeHelper.ApplyTheme(this);
             dbMethods.getModuleType();
-            dbMethods.getStateOfHealthRanges(); 
-            this.importedListBox = refListbox; 
+            dbMethods.getStateOfHealthRanges();
+            this.importedListBox = refListbox;
             moduleTypeChangeLabel.Text = dbInformation.moduleTypeKeyValue.Values.First();
         }
 
         private void calculateButton_Click(object sender, EventArgs e)
         {
+            try
+            {
             inputedValue = Int32.Parse(maskedTextBox1.Text.ToString());
             if (inputedValue <= dbInformation.raceGradeHighLowKeyPair.Keys.First() && inputedValue >= dbInformation.raceGradeHighLowKeyPair.Values.First())
             {
@@ -47,6 +51,17 @@ namespace BatteryRepairModule.Forms.Add_Forms
                 MessageBox.Show("Value is out of range. Please check the values and try again.", "Out of Range", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
+
+            writtenStateOfHealth = stateOfHealthGradeChangeLabel.Text;
+            }
+            catch (FormatException)
+            {
+            MessageBox.Show("Please enter a valid numeric value.", "Invalid Input", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            catch (Exception ex)
+            {
+            MessageBox.Show($"An error occurred: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         private void submitButton_Click(object sender, EventArgs e)
@@ -67,7 +82,7 @@ namespace BatteryRepairModule.Forms.Add_Forms
                 }
 
                 dbInformation.conditionalClosureFailure = false; 
-                dbMethods.insertStateOfHealth(Int32.Parse(maskedTextBox1.Text));
+                dbMethods.insertStateOfHealth(writtenStateOfHealth);
                 this.Close();
             }
             catch (Exception ex)

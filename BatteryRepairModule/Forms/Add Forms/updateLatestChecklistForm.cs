@@ -19,7 +19,7 @@ namespace BatteryRepairModule.Forms.Add_Forms
         public updateLatestChecklistForm()
         {
             InitializeComponent();
-
+            ThemeHelper.ApplyTheme(this);
             attachFileButton.Enabled = false;
 
             twigTicketNumberDropDown.Items.Clear();

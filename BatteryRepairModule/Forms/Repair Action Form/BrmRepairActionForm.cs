@@ -14,10 +14,12 @@ namespace BatteryRepairModule.Forms.BRM
 {
     public partial class BrmRepairActionForm : Form
     {
-        public BrmRepairActionForm()
+        private BrmMainMenuForm parentForm;
+        public BrmRepairActionForm(BrmMainMenuForm parentRef)
         {
             InitializeComponent();
-
+            this.parentForm = parentRef;
+            ThemeHelper.ApplyTheme(this);
             dbMethods.loadAwaitingRepairActionsStatus();
             twigTicketNumberDropDown.Items.AddRange(
                 dbInformation.activeTwigCaseNumbers.Select(kvp =>
@@ -40,6 +42,8 @@ namespace BatteryRepairModule.Forms.BRM
         // Update Issue Status
         private void continueButton_Click_1(object sender, EventArgs e)
         {
+            staffDropDown.Enabled = false; 
+
             if (reportedIssuesListBox.SelectedItem == null)
             {
                 MessageBox.Show("Please select an issue before updating its status.", "No Issue Selected", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -54,6 +58,8 @@ namespace BatteryRepairModule.Forms.BRM
         // Add Repair Actions
         private void addRepairActionButton_Click_2(object sender, EventArgs e)
         {
+            staffDropDown.Enabled = false; 
+
             using (var newForm = new addRepairActionForm(repairActionsListBox, true))
                 newForm.ShowDialog(this);
         }
@@ -61,6 +67,7 @@ namespace BatteryRepairModule.Forms.BRM
         //VIEW REPAIR NOTES
         private void updateStatusButton_Click(object sender, EventArgs e)
         {
+            staffDropDown.Enabled = false; 
             if (repairActionsListBox.SelectedItem == null)
             {
                 MessageBox.Show("Please select a repair action before viewing notes.", "No Repair Selected", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -122,6 +129,7 @@ namespace BatteryRepairModule.Forms.BRM
         // Add Repair Notes
         private void button1_Click(object sender, EventArgs e)
         {
+            staffDropDown.Enabled = false; 
             if (repairActionsListBox.SelectedItem == null)
             {
                 MessageBox.Show("Please select a repair action before adding notes.", "No Repair Selected", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -133,6 +141,7 @@ namespace BatteryRepairModule.Forms.BRM
 
         private void updateRepairStatus_Click(object sender, EventArgs e)
         {
+            staffDropDown.Enabled = false; 
             if (repairActionsListBox.SelectedItem == null)
             {
                 MessageBox.Show("Please select a repair action before updating its status.", "No Repair Selected", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -144,12 +153,14 @@ namespace BatteryRepairModule.Forms.BRM
 
         private void addTestButton_Click(object sender, EventArgs e)
         {
+            staffDropDown.Enabled = false; 
             using (var newForm = new addTestForm())
                 newForm.ShowDialog(this);
         }
 
         private void clearModuleForTestingButton_Click(object sender, EventArgs e)
         {
+            staffDropDown.Enabled = false; 
             foreach (string item2 in reportedIssuesListBox.Items)
             {
                 if (string.IsNullOrEmpty(item2)) continue;
@@ -165,6 +176,7 @@ namespace BatteryRepairModule.Forms.BRM
                     return;
                 }
             }
+
             foreach (string item in repairActionsListBox.Items)
             {
                 if (string.IsNullOrEmpty(item)) continue;
@@ -181,9 +193,18 @@ namespace BatteryRepairModule.Forms.BRM
                 }
             }
 
-            dbMethods.clearModuleForTesting();
-            MessageBox.Show("Module has been cleared for testing", "Cleared For Testing", MessageBoxButtons.OK, MessageBoxIcon.Information); 
-            this.Close(); 
+            bool cond = dbMethods.clearModuleForTesting();
+            if (cond)
+            {
+                MessageBox.Show("Module has been cleared for testing", "Cleared For Testing", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                this.Close();
+                parentForm.OpenChildForm(new BrmRepairActionForm(parentForm));
+                return;
+            }
+            else
+            {
+            MessageBox.Show("Failed to clear the module for testing.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+        }
         }
     }
 }

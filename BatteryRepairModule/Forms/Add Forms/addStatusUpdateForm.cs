@@ -17,6 +17,7 @@ namespace BatteryRepairModule.Forms.Add_Forms
         public addStatusUpdateForm(ListBox listBoxRef, string typeRef)
         {
             InitializeComponent();
+            ThemeHelper.ApplyTheme(this);
             this.modifiedListBox = listBoxRef; 
             this.statusType = typeRef;
 

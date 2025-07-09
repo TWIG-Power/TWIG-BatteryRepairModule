@@ -65,3 +65,4 @@ c:\Users\FMustico\Documents\github\TWIG-BatteryRepairModule\BatteryRepairModule\
 c:\Users\FMustico\Documents\github\TWIG-BatteryRepairModule\BatteryRepairModule\obj\Debug\net6.0-windows\BatteryRepairModule.Forms.Testing.testingForm.resources
 c:\Users\FMustico\Documents\github\TWIG-BatteryRepairModule\BatteryRepairModule\obj\Debug\net6.0-windows\BatteryRepairModule.Forms.Add_Forms.stateOfHealthCalculatorForm.resources
 c:\Users\FMustico\Documents\github\TWIG-BatteryRepairModule\BatteryRepairModule\obj\Debug\net6.0-windows\BatteryRepairModule.Forms.Add_Forms.updateLatestChecklistForm.resources
+c:\Users\FMustico\Documents\github\TWIG-BatteryRepairModule\BatteryRepairModule\obj\Debug\net6.0-windows\BatteryRepairModule.Forms.Shipping.shippingForm.resources

@@ -19,19 +19,42 @@ namespace BatteryRepairModule
         public BrmTicketCreationForm3(BrmMainMenuForm parentRef)
         {
             InitializeComponent();
+            ThemeHelper.ApplyTheme(this);
             this.parentForm = parentRef;
 
             // FOR TESTING PURPOSES ONLY 
             dbMethods.loadreportTypeOptions();
             errorsListBox.Items.AddRange(dbInformation.reportTypeKeyPair.Select(kvp => $"{kvp.Key} - {kvp.Value}").ToArray());
 
+            var errorChecks = new Dictionary<string, bool?>
+            {
+            { "Housing Scraped", BrmTicketCreationForm2.tempCheckHousingScrape },
+            { "Evidence Of Tampering", BrmTicketCreationForm2.tempCheckEvidenceOfTamp },
+            { "Screws Missing", BrmTicketCreationForm2.tempCheckScrewsMissing },
+            { "Housing Dents/Holes", BrmTicketCreationForm2.tempCheckHousingDentsHoles },
+            { "Missing Wires", BrmTicketCreationForm2.tempCheckMissingWires },
+            { "Charge Port Damage", BrmTicketCreationForm2.tempCheckChargePort },
+            { "Cable Damage", BrmTicketCreationForm2.tempCheckCableDamage },
+            { "Gove Vent Damage", BrmTicketCreationForm2.tempCheckGoveVent },
+            { "Communication Port Damage", BrmTicketCreationForm2.tempCheckCommPort }
+            };
+
+            foreach (var error in errorChecks)
+            {
+            if (error.Value == true)
+            {
+                var kvp = dbInformation.reportTypeKeyPair.FirstOrDefault(kvp => kvp.Value == error.Key);
+                if (!string.IsNullOrEmpty(kvp.Value))
+                    addedErrorsListBox.Items.Add($"{kvp.Key} - {kvp.Value}");
+            }
+            }
         }
 
         private void continueButton_Click(object sender, EventArgs e)
         {
             try
             {
-                dbInformation.selectedTwigTicketKeyPair.Clear(); 
+                dbInformation.selectedTwigTicketKeyPair.Clear();
                 dbInformation.selectedTwigTicketKeyPair.Add(0, BrmTicketCreationForm.tempTwigCaseNum);
 
                 dbInformation.selectedModuleType.Add(
@@ -68,17 +91,28 @@ namespace BatteryRepairModule
                     }
                 }
 
-                dbMethods.createDatabaseTicket(dbInformation.selectedStaffKeyValue);
-                dbMethods.insertInitialAssessment();
-                dbMethods.insertCustomerReport();
+                bool cond1 = dbMethods.createDatabaseTicket(dbInformation.selectedStaffKeyValue);
+                bool cond2 = dbMethods.insertInitialAssessment();
+                bool cond3 = dbMethods.insertCustomerReport();
 
-                ClearTempValues(); 
+                if (cond1 && cond2 && cond3)
+                {
+                    ClearTempValues();
+                    MessageBox.Show("Ticket creation completed successfully.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    this.Close();
+                    parentForm.OpenChildForm(new BrmTicketCreationForm(parentForm)); 
+                    return;
+                }
+                else
+                {
+                    MessageBox.Show("Error uploading ticket. Please try again.", "Upload Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return; 
+                }
             }
             catch (Exception ex)
             {
                 MessageBox.Show($"The following exception was thrown: {ex}.", "Input Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-            this.Close();
         }
 
         private void cancelButton_Click(object sender, EventArgs e)

@@ -200,7 +200,7 @@ public static partial class dbMethods
         }
     }
 
-    public static void clearModuleForTesting()
+    public static bool clearModuleForTesting()
     {
         int status = dbInformation.ticketStatusOptions.FirstOrDefault(kvp => kvp.Value == "Awaiting Testing").Key;
         using (var conn = new NpgsqlConnection(dbConnection.connectionPath))
@@ -209,7 +209,8 @@ public static partial class dbMethods
             conn.Open();
             cmd.Parameters.AddWithValue("@statusFk", status);
             cmd.Parameters.AddWithValue("@ticketId", dbInformation.selectedTwigTicketKeyPair.Keys.First());
-            cmd.ExecuteNonQuery();
+            int count = cmd.ExecuteNonQuery();
+            return count > 0;
         }
     }
 

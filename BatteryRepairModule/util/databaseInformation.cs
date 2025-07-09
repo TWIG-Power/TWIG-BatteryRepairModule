@@ -13,7 +13,7 @@ public static class dbInformation
     public static string? selectedBatteryType = string.Empty;
     public static Dictionary<int, string> moduleReportedErrorsKeyPair = new Dictionary<int, string>();
     public static Dictionary<int, int> activeTwigCaseNumbers = new Dictionary<int, int>();
-    public static Dictionary<int, int> activeModuleSerialNumbers = new Dictionary<int, int>(); 
+    public static Dictionary<int, int> activeModuleSerialNumbers = new Dictionary<int, int>();
     public static Dictionary<int, string> staffKeyPairOptions = new Dictionary<int, string>();
     public static Dictionary<int, Dictionary<int, string>> moduleTypesByOEM = new Dictionary<int, Dictionary<int, string>>();
     public static Dictionary<int, Dictionary<int, string>> selectedModuleType = new Dictionary<int, Dictionary<int, string>>();
@@ -24,8 +24,6 @@ public static class dbInformation
     #endregion
 
     #region Service Inspection
-    public static List<string?> TWIGTicketOptions = new List<string?>();
-
     public static Dictionary<int, int> selectedTwigTicketKeyPair = new Dictionary<int, int>();
     public static string? verifyShippingChoice = string.Empty;
     public static string? diagnosticReportPath = string.Empty;
@@ -51,7 +49,6 @@ public static class dbInformation
     #endregion
 
     #region Authorize Repairs 
-    public static string? staffAuthorized = string.Empty;
     public static Dictionary<int, string> clearedRepairsKeyValPair = new Dictionary<int, string>();
     public static Dictionary<int, string> clearedRepairsKeyStatusPair = new Dictionary<int, string>();
     public static Dictionary<string, string> clearedRepairsValueStatusPair = new Dictionary<string, string>();
@@ -60,7 +57,6 @@ public static class dbInformation
 
     #region REPAIR ACTIONS
     public static string repairNotes = string.Empty;
-    public static Dictionary<int, string> repairActionKeyStatus = new Dictionary<int, string>();
     public static Dictionary<int, string> newRepairActionInRepairFormKeyValue = new Dictionary<int, string>();
     public static Dictionary<int, string> reportedIssueKeyValue = new Dictionary<int, string>();
     public static Dictionary<int, string> reportedIssueKeyStatus = new Dictionary<int, string>();
@@ -83,7 +79,6 @@ public static class dbInformation
     public static Dictionary<int, string> addedTestsKeyValue = new Dictionary<int, string>();
     public static Dictionary<int, string> tempAddNewTest = new Dictionary<int, string>();
     public static Dictionary<int, string> addedTestsKeyStatus = new Dictionary<int, string>();
-    public static Dictionary<string, string> addedTestValueStatus = new Dictionary<string, string>();
     public static Dictionary<int, string> tempTestNoteHolder = new Dictionary<int, string>();
     public static Dictionary<int, string> moduleTypeKeyValue = new Dictionary<int, string>();
     public static Dictionary<int, int> raceGradeHighLowKeyPair = new Dictionary<int, int>();
@@ -93,7 +88,7 @@ public static class dbInformation
     public static Dictionary<int, string> tempTestStatusHolder = new Dictionary<int, string>();
     public static Dictionary<int, string> tempTestTestHolder = new Dictionary<int, string>();
     public static Dictionary<int, bool> doesTestHaveNote = new Dictionary<int, bool>();
-    public static bool conditionalClosureFailure = false; 
+    public static bool conditionalClosureFailure = false;
 
     public static void ClearTicketCreation()
     {
@@ -123,7 +118,33 @@ public static class dbInformation
     public static string qualityFilePath = string.Empty;
     public static Dictionary<string, int> selectedOemModelKeyPair = new Dictionary<string, int>();
     public static string downloadedFileName = string.Empty;
-    public static byte[] downloadedFileBytes = null; 
+    public static byte[] downloadedFileBytes = null;
 
     #endregion
+
+    #region Shipping 
+
+    public static List<Module> awaitingInvoiceModuleList = new List<Module>();
+    public static List<Module> awaitingShippingModuleList = new List<Module>(); 
+
+    #endregion
+}
+
+public class Module
+{
+    public int ticketId { get; set; }
+    public int SerialNumber { get; set; }
+    public string Type { get; set; } = string.Empty;
+    public string model { get; set; } = string.Empty;
+    public string Oem { get; set; } = string.Empty;
+    public string stateOfHealth { get; set; } = string.Empty; 
+
+    public Module() { }
+
+    public Module(int id, int serialNumber, string oem)
+    {
+        ticketId = id;
+        SerialNumber = serialNumber;
+        Oem = oem;
+    }
 }

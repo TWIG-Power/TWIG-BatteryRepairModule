@@ -116,9 +116,9 @@ public static partial class dbMethods
         }
     }
 
-    public static void clearModuleForShipping()
+    public static void clearModuleForInvoice()
     {
-        int status = dbInformation.ticketStatusOptions.FirstOrDefault(kvp => kvp.Value == "Awaiting Shipping").Key;
+        int status = dbInformation.ticketStatusOptions.FirstOrDefault(kvp => kvp.Value == "Awaiting Invoice").Key;
         using (var conn = new NpgsqlConnection(dbConnection.connectionPath))
         using (var cmd = new NpgsqlCommand("UPDATE public.ticket SET status_fk = @status WHERE id = @ticketId", conn))
         {

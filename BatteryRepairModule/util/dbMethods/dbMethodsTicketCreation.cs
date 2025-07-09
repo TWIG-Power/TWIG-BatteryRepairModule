@@ -139,7 +139,7 @@ public static partial class dbMethods
     #endregion
 
     #region INSERT QUERIES
-    public static void createDatabaseTicket(Dictionary<int, string> staff)
+    public static bool createDatabaseTicket(Dictionary<int, string> staff)
     {
         int initialStatus = dbInformation.ticketStatusOptions.FirstOrDefault(kvp => kvp.Value == "Awaiting Service Inspection").Key;
 
@@ -154,8 +154,9 @@ public static partial class dbMethods
                 cmd.Parameters.AddWithValue("@staffStarting", staff.Keys.First());
                 cmd.Parameters.AddWithValue("@status", initialStatus);
                 cmd.Parameters.AddWithValue("@cobra_fk", dbInformation.moduleTypesByOEM[0].Keys.First());
-                cmd.Parameters.AddWithValue("@serialNumber", dbInformation.batterySerialNumber ?? (object)DBNull.Value); 
-                cmd.ExecuteNonQuery();
+                cmd.Parameters.AddWithValue("@serialNumber", dbInformation.batterySerialNumber ?? (object)DBNull.Value);
+                int rowsAffected = cmd.ExecuteNonQuery();
+                return rowsAffected > 0;
             }
         }
         else if (dbInformation.selectedModuleType.Keys.First() == 1)
@@ -169,9 +170,10 @@ public static partial class dbMethods
                 cmd.Parameters.AddWithValue("@staffStarting", dbInformation.selectedStaffKeyValue.Keys.First());
                 cmd.Parameters.AddWithValue("@status", initialStatus);
                 cmd.Parameters.AddWithValue("@ktm_fk", dbInformation.moduleTypesByOEM[1].Keys.First());
-                cmd.Parameters.AddWithValue("@serialNumber", dbInformation.batterySerialNumber ?? (object)DBNull.Value); 
+                cmd.Parameters.AddWithValue("@serialNumber", dbInformation.batterySerialNumber ?? (object)DBNull.Value);
 
-                cmd.ExecuteNonQuery();
+                int rowsAffected = cmd.ExecuteNonQuery();
+                return rowsAffected > 0;
             }
         }
         else if (dbInformation.selectedModuleType.Keys.First() == 2)
@@ -185,15 +187,21 @@ public static partial class dbMethods
                 cmd.Parameters.AddWithValue("@staffStarting", dbInformation.selectedStaffKeyValue.Keys.First());
                 cmd.Parameters.AddWithValue("@status", initialStatus);
                 cmd.Parameters.AddWithValue("@misc_fk", dbInformation.moduleTypesByOEM[2].Keys.First());
-                cmd.Parameters.AddWithValue("@serialNumber", dbInformation.batterySerialNumber ?? (object)DBNull.Value); 
+                cmd.Parameters.AddWithValue("@serialNumber", dbInformation.batterySerialNumber ?? (object)DBNull.Value);
 
-                cmd.ExecuteNonQuery();
+                int rowsAffected = cmd.ExecuteNonQuery();
+                return rowsAffected > 0;
             }
+        }
+        else
+        {
+            int rowsAffected = 0;
+            return rowsAffected > 0;
         }
     }
 
 
-    public static void insertInitialAssessment()
+    public static bool insertInitialAssessment()
     {
         using (var conn = new NpgsqlConnection(dbConnection.connectionPath))
         using (var cmd = new NpgsqlCommand("INSERT INTO public.initial_assessment (report_fk, battery_leads_protected, cable_damage, charge_port, comm_port, evidence_of_tamp, gove_vent, housing_dents, housing_scrapes, missing_wires, screws_missing, verify_shipping, staff_fk) VALUES (@reportFk, @battLeads, @cableDamage, @chargePort, @commPort, @evidenceTamp, @goveVent, @housingDents, @housingScrapes, @missingWires, @screwsMissing, @verifyShipping, @staff_fk)", conn))
@@ -212,14 +220,15 @@ public static partial class dbMethods
             cmd.Parameters.AddWithValue("@screwsMissing", dbInformation.checkScrewsMissing ?? (object)DBNull.Value);
             cmd.Parameters.AddWithValue("@verifyShipping", dbInformation.verifyShippingChoice ?? (object)DBNull.Value);
             cmd.Parameters.AddWithValue("@staff_fk", dbInformation.selectedStaffKeyValue.Keys.First());
-            cmd.ExecuteNonQuery();
+            int rowsAffected = cmd.ExecuteNonQuery();
+            return rowsAffected > 0;
 
         }
     }
 
-    public static void insertCustomerReport()
+    public static bool insertCustomerReport()
     {
-        if (!dbInformation.moduleReportedErrorsKeyPair.Any()) return;
+        if (!dbInformation.moduleReportedErrorsKeyPair.Any()) return false;
 
         using (var conn = new NpgsqlConnection(dbConnection.connectionPath))
         {
@@ -228,13 +237,19 @@ public static partial class dbMethods
 
             using (var cmd = new NpgsqlCommand("INSERT INTO public.registered_customer_report (report_type_fk, ticket_fk, report_status_fk) VALUES (@reportTypeFk, @ticketFk, 1)", conn))
             {
+                bool anyInserted = false;
                 foreach (var reportedError in dbInformation.moduleReportedErrorsKeyPair)
                 {
                     cmd.Parameters.Clear();
                     cmd.Parameters.AddWithValue("@reportTypeFk", reportedError.Key);
                     cmd.Parameters.AddWithValue("@ticketFk", ticketSurrogateKey);
-                    cmd.ExecuteNonQuery();
+                    int rowsAffected = cmd.ExecuteNonQuery();
+                    if (rowsAffected > 0)
+                    {
+                        anyInserted = true;
+                    }
                 }
+                return anyInserted;
             }
         }
     }

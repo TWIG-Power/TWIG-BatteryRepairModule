@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using BatteryRepairModule.Forms.Service_Inspection_Forms;
+using BatteryRepairModule.Forms.Shipping;
 using BatteryRepairModule.Forms.Testing;
 
 namespace BatteryRepairModule.Forms.BRM;
@@ -30,7 +31,7 @@ public partial class BrmMainMenuForm : Form
         selectedButton = button;
 
         button.FlatStyle = FlatStyle.Flat;
-        button.BackColor = Color.LightBlue;
+        button.BackColor = Color.SteelBlue;
         button.FlatAppearance.BorderSize = 6;
         button.FlatAppearance.BorderColor = Color.DarkRed;
         name = button.Text.ToString();
@@ -54,7 +55,7 @@ public partial class BrmMainMenuForm : Form
         foreach (var btn in menuButtons)
         {
             btn.FlatStyle = FlatStyle.Flat;
-            btn.BackColor = Color.LightBlue;
+            btn.BackColor = Color.SteelBlue;
             btn.FlatAppearance.BorderSize = 1;
             btn.FlatAppearance.BorderColor = Color.Black;
         }
@@ -75,19 +76,19 @@ public partial class BrmMainMenuForm : Form
     private void authorizeReportModButton_Click(object sender, EventArgs e)
     {
         SelectButton(authorizeReportModButton);
-        OpenChildForm(new BrmAuthorizeRepairsForm());
+        OpenChildForm(new BrmAuthorizeRepairsForm(this));
     }
 
     private void repairActionModButton_Click(object sender, EventArgs e)
     {
         SelectButton(repairActionModButton);
-        OpenChildForm(new BrmRepairActionForm());
+        OpenChildForm(new BrmRepairActionForm(this));
     }
 
     private void testingQualityModButton_Click(object sender, EventArgs e)
     {
         SelectButton(testingQualityModButton);
-        OpenChildForm(new testingForm()); 
+        OpenChildForm(new testingForm(this));
     }
 
     private void qualityButton_Click(object sender, EventArgs e)
@@ -117,10 +118,12 @@ public partial class BrmMainMenuForm : Form
     private void shippingButton_Click(object sender, EventArgs e)
     {
         SelectButton(shippingButton);
+        OpenChildForm(new shippingForm());
     }
 
     private void statusReviewButton_Click(object sender, EventArgs e)
     {
-        SelectButton(statusReviewButton); 
+        SelectButton(statusReviewButton);
     }
+    
 }

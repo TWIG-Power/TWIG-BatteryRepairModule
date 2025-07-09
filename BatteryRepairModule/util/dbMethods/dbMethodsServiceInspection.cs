@@ -89,7 +89,7 @@ public static partial class dbMethods
 
     #region Insert Methods 
 
-    public static void insertSuggestedRepairs()
+    public static bool insertSuggestedRepairs()
     {
         using (var conn = new NpgsqlConnection(dbConnection.connectionPath))
         using (var cmd = new NpgsqlCommand("INSERT INTO public.proposed_repairs (repair_id_fk, ticket_fk, staff_fk) VALUES (@repairId, @ticketId, @staff_fk)", conn))
@@ -101,7 +101,7 @@ public static partial class dbMethods
                 cmd.Parameters.AddWithValue("@repairId", repair.Key);
                 cmd.Parameters.AddWithValue("@ticketId", dbInformation.selectedTwigTicketKeyPair.Keys.First());
                 cmd.Parameters.AddWithValue("@staff_fk", dbInformation.selectedStaffKeyValue.Keys.First());
-                cmd.ExecuteNonQuery();
+                int modCount = cmd.ExecuteNonQuery();
             }
         }
         
@@ -112,11 +112,12 @@ public static partial class dbMethods
             conn.Open();
             cmd.Parameters.AddWithValue("@ticketId", dbInformation.selectedTwigTicketKeyPair.Keys.First());
             cmd.Parameters.AddWithValue("@status", status);
-            cmd.ExecuteNonQuery();
+            int modCount = cmd.ExecuteNonQuery();
+            return modCount > 0; 
         }
     }
 
-    public static void createServiceInpsection(byte[] fileByte)
+    public static bool createServiceInpsection(byte[] fileByte)
     {
         using (var conn = new NpgsqlConnection(dbConnection.connectionPath))
         using (var cmd = new NpgsqlCommand("INSERT INTO public.service_inspection (staff_fk, cleaning_procedures, diagnostic_tool_plugged, diagnostic_report, ticket_fk) VALUES (@staff_fk, @cleaningProcedures, @diagnostic_tool_plugged, @diagnostic_report, @ticket_fk)", conn))
@@ -127,7 +128,8 @@ public static partial class dbMethods
             cmd.Parameters.AddWithValue("@diagnostic_tool_plugged", dbInformation.checkPluggedIntoDiagTool ?? (object)DBNull.Value);
             cmd.Parameters.AddWithValue("@diagnostic_report", fileByte ?? (object)DBNull.Value);
             cmd.Parameters.AddWithValue("@ticket_fk", dbInformation.selectedTwigTicketKeyPair.Keys.First());
-            cmd.ExecuteNonQuery(); 
+            int modCount = cmd.ExecuteNonQuery();
+            return modCount > 0; 
         }
     }
 

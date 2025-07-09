@@ -30,6 +30,7 @@ namespace BatteryRepairModule.Forms.BRM
         public BrmTicketCreationForm2(BrmMainMenuForm parent)
         {
             InitializeComponent();
+            ThemeHelper.ApplyTheme(this);
             this.parentForm = parent;
 
             // Load temp variables back into form controls

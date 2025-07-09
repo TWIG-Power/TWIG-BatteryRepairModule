@@ -43,6 +43,9 @@
     <Compile Update="Forms\Service Inspection Forms\serviceInspectionForm2.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Update="Forms\Shipping\shippingForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Update="Forms\Testing\testingForm.cs">
       <SubType>Form</SubType>
     </Compile>

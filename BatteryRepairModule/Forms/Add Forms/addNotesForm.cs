@@ -18,6 +18,7 @@ namespace BatteryRepairModule.Forms.Add_Forms
         public addNotesForm(ListBox passedListBox, bool viewOnlyRef, string table)
         {
             InitializeComponent();
+            ThemeHelper.ApplyTheme(this);
             this.viewOnly = viewOnlyRef;
             this.referenceListBox = passedListBox;
             this.localTable = table;

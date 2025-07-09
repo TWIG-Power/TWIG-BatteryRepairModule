@@ -15,7 +15,7 @@ namespace BatteryRepairModule.Forms.Add_Forms
         public addTestForm()
         {
             InitializeComponent();
-
+ThemeHelper.ApplyTheme(this);
             dbMethods.getTestingOptions();
             listBox1.Items.AddRange(dbInformation.testingOptionsKeyValue.Select(kvp => kvp.Value).ToArray());
 

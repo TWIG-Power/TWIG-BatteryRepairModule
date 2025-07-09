@@ -16,6 +16,7 @@ namespace BatteryRepairModule.Forms.Ticket_Creation_Module
         public addCustomerReport(ListBox list)
         {
             InitializeComponent();
+            ThemeHelper.ApplyTheme(this);
             this.listBoxRef = list; 
         }
 

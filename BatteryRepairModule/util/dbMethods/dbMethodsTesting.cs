@@ -169,7 +169,7 @@ public static partial class dbMethods
         }
     }
 
-    public static void returnModuleToRepairActions()
+    public static bool returnModuleToRepairActions()
     {
         using (var conn = new NpgsqlConnection(dbConnection.connectionPath))
         using (var cmd = new NpgsqlCommand("UPDATE public.ticket SET status_fk = @statusFk WHERE id = @ticketId", conn))
@@ -177,7 +177,8 @@ public static partial class dbMethods
             conn.Open();
             cmd.Parameters.AddWithValue("@statusFk", 3);
             cmd.Parameters.AddWithValue("@ticketId", dbInformation.selectedTwigTicketKeyPair.Keys.First());
-            cmd.ExecuteNonQuery();
+            int rowsAffected = cmd.ExecuteNonQuery();
+            return rowsAffected > 0;
         }
     }
 
@@ -197,11 +198,11 @@ public static partial class dbMethods
                     {
                         dbInformation.moduleTypeKeyValue[reader.GetInt16(0)] = "cobra_oem";
                     }
-                    if (!reader.IsDBNull(1))
+                    else if (!reader.IsDBNull(1))
                     {
                         dbInformation.moduleTypeKeyValue[reader.GetInt16(1)] = "ktm_oem";
                     }
-                    if (!reader.IsDBNull(2))
+                    else if (!reader.IsDBNull(2))
                     {
                         dbInformation.moduleTypeKeyValue[reader.GetInt16(2)] = "misc_oem";
                     }
@@ -251,7 +252,7 @@ public static partial class dbMethods
         }
     }
 
-    public static void insertStateOfHealth(int stateOfHealth)
+    public static void insertStateOfHealth(string stateOfHealth)
     {
         using (var conn = new NpgsqlConnection(dbConnection.connectionPath))
         using (var cmd = new NpgsqlCommand("UPDATE testing_added SET state_of_health = @soh WHERE id = @id", conn))
@@ -263,7 +264,7 @@ public static partial class dbMethods
         }
     }
 
-    public static void clearModuleForQuality()
+    public static bool clearModuleForQuality()
     {
         int status = dbInformation.ticketStatusOptions.FirstOrDefault(kvp => kvp.Value == "Awaiting Quality").Key;
         using (var conn = new NpgsqlConnection(dbConnection.connectionPath))
@@ -272,7 +273,8 @@ public static partial class dbMethods
             conn.Open();
             cmd.Parameters.AddWithValue("@status", status);
             cmd.Parameters.AddWithValue("ticketId", dbInformation.selectedTwigTicketKeyPair.Keys.First());
-            cmd.ExecuteNonQuery(); 
+            int rowsAffected = cmd.ExecuteNonQuery();
+            return rowsAffected > 0;
         }
     }
 }
