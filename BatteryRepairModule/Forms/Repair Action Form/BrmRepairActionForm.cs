@@ -79,33 +79,40 @@ namespace BatteryRepairModule.Forms.BRM
 
         private void twigTicketNumberDropDown_SelectedIndexChanged(object sender, EventArgs e)
         {
-            reportedIssuesListBox.Items.Clear();
-            repairActionsListBox.Items.Clear();
-
-            if (twigTicketNumberDropDown.SelectedItem.ToString() != null)
+            try
             {
-                var selectedValue = twigTicketNumberDropDown.SelectedItem.ToString();
-                var converted = selectedValue.Split('[')[1].Split(']')[0]; 
-                var selectedKvp = dbInformation.activeTwigCaseNumbers.FirstOrDefault(kvp => kvp.Value.ToString() == converted);
-                dbInformation.selectedTwigTicketKeyPair.Clear();
-                dbInformation.selectedTwigTicketKeyPair[selectedKvp.Key] = selectedKvp.Value;
-            }
+                reportedIssuesListBox.Items.Clear();
+                repairActionsListBox.Items.Clear();
 
-
-            dbMethods.loadReportedIssuesAndStatus();
-            reportedIssuesListBox.Items.AddRange(dbInformation.reportedIssuesValueStatus.Select(kvp => $"{kvp.Key} ({kvp.Value})").ToArray());
-
-            dbMethods.getDoesRepairHaveNote(); 
-
-            dbMethods.loadRepairActionKeyValueStatus();
-            foreach (var kvp in dbInformation.clearedRepairsValueStatusPair)
-            {
-                if (dbInformation.repairHasNoteStringBool[kvp.Key] == false)
-                    repairActionsListBox.Items.Add($"{kvp.Key} ({kvp.Value})");
-                else
+                if (twigTicketNumberDropDown.SelectedItem.ToString() != null)
                 {
-                    repairActionsListBox.Items.Add($"{kvp.Key} ({kvp.Value})*");
+                    var selectedValue = twigTicketNumberDropDown.SelectedItem.ToString();
+                    var converted = selectedValue.Split('[')[1].Split(']')[0]; 
+                    var selectedKvp = dbInformation.activeTwigCaseNumbers.FirstOrDefault(kvp => kvp.Value.ToString() == converted);
+                    dbInformation.selectedTwigTicketKeyPair.Clear();
+                    dbInformation.selectedTwigTicketKeyPair[selectedKvp.Key] = selectedKvp.Value;
                 }
+
+
+                dbMethods.loadReportedIssuesAndStatus();
+                reportedIssuesListBox.Items.AddRange(dbInformation.reportedIssuesValueStatus.Select(kvp => $"{kvp.Key} ({kvp.Value})").ToArray());
+
+                dbMethods.getDoesRepairHaveNote(); 
+
+                dbMethods.loadRepairActionKeyValueStatus();
+                foreach (var kvp in dbInformation.clearedRepairsValueStatusPair)
+                {
+                    if (dbInformation.repairHasNoteStringBool[kvp.Key] == false)
+                        repairActionsListBox.Items.Add($"{kvp.Key} ({kvp.Value})");
+                    else
+                    {
+                        repairActionsListBox.Items.Add($"{kvp.Key} ({kvp.Value})*");
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"An error occurred: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 

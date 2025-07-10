@@ -7,22 +7,28 @@ public static partial class dbMethods
 {
     public static void loadAwaitingInvoiceTickets()
     {
+        int status = dbInformation.ticketStatusOptions.FirstOrDefault(kvp => kvp.Value == "Awaiting Invoice").Key; 
         using (var conn = new NpgsqlConnection(dbConnection.connectionPath))
         {
             conn.Open();
 
             using (var cmd = new NpgsqlCommand(
-                @"SELECT DISTINCT t.twig_ticket_number, t.serial_number, 
+                @$"SELECT DISTINCT t.twig_ticket_number, t.serial_number, 
                         CASE 
                             WHEN t.cobra_fk IS NOT NULL THEN 'Cobra'
                             WHEN t.ktm_fk IS NOT NULL THEN 'KTM'
                             WHEN t.misc_fk IS NOT NULL THEN 'Misc'
                             ELSE 'Unknown'
                         END AS oem,
-                        ta.state_of_health
+                        (
+                            SELECT ta2.state_of_health
+                            FROM public.testing_added ta2
+                            WHERE ta2.ticket_fk = t.id
+                            ORDER BY ta2.id ASC
+                            LIMIT 1
+                        ) AS state_of_health
                 FROM public.ticket t
-                LEFT JOIN public.testing_added ta ON t.id = ta.ticket_fk
-                WHERE t.status_fk = 6", conn))
+                WHERE t.status_fk = {status}", conn))
             {
                 dbInformation.awaitingInvoiceModuleList.Clear();
 
@@ -46,22 +52,28 @@ public static partial class dbMethods
 
     public static void loadAwaitingShippingTickets()
     {
+        int status = dbInformation.ticketStatusOptions.FirstOrDefault(kvp => kvp.Value == "Awaiting Shipping").Key; 
         using (var conn = new NpgsqlConnection(dbConnection.connectionPath))
         {
             conn.Open();
 
             using (var cmd = new NpgsqlCommand(
-                @"SELECT DISTINCT t.id, t.serial_number, 
+                @$"SELECT DISTINCT t.twig_ticket_number, t.serial_number, 
                         CASE 
                             WHEN t.cobra_fk IS NOT NULL THEN 'Cobra'
                             WHEN t.ktm_fk IS NOT NULL THEN 'KTM'
                             WHEN t.misc_fk IS NOT NULL THEN 'Misc'
                             ELSE 'Unknown'
                         END AS oem,
-                        ta.state_of_health
+                        (
+                            SELECT ta2.state_of_health
+                            FROM public.testing_added ta2
+                            WHERE ta2.ticket_fk = t.id
+                            ORDER BY ta2.id ASC
+                            LIMIT 1
+                        ) AS state_of_health
                 FROM public.ticket t
-                LEFT JOIN public.testing_added ta ON t.id = ta.ticket_fk
-                WHERE t.status_fk = 7", conn))
+                WHERE t.status_fk = {status}", conn))
             {
                 dbInformation.awaitingShippingModuleList.Clear();
 
@@ -87,9 +99,10 @@ public static partial class dbMethods
     {
         int status = dbInformation.ticketStatusOptions.FirstOrDefault(kvp => kvp.Value == "Awaiting Shipping").Key;
         using (var conn = new NpgsqlConnection(dbConnection.connectionPath))
-        using (var cmd = new NpgsqlCommand($"UPDATE public.ticket SET status_fk = {status} WHERE id = {module.ticketId}", conn))
+        using (var cmd = new NpgsqlCommand($"UPDATE public.ticket SET status_fk = {status}, status_timestamp = @timestamp WHERE twig_ticket_number = {module.ticketId}", conn))
         {
             conn.Open();
+            cmd.Parameters.AddWithValue("@timestamp", DateTime.Now); 
             cmd.ExecuteNonQuery();
             conn.Close();
         }
@@ -99,9 +112,10 @@ public static partial class dbMethods
     {
         int status = dbInformation.ticketStatusOptions.FirstOrDefault(kvp => kvp.Value == "Shipped / Closed").Key;
         using (var conn = new NpgsqlConnection(dbConnection.connectionPath))
-        using (var cmd = new NpgsqlCommand($"UPDATE public.ticket SET status_fk = {status} WHERE id = {module.ticketId}", conn))
+        using (var cmd = new NpgsqlCommand($"UPDATE public.ticket SET status_fk = {status}, status_timestamp = @timestamp WHERE twig_ticket_number = {module.ticketId}", conn))
         {
             conn.Open();
+            cmd.Parameters.AddWithValue("@timestamp", DateTime.Now); 
             cmd.ExecuteNonQuery();
             conn.Close(); 
         }

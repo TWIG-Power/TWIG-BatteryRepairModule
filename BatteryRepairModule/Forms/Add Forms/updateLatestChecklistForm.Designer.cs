@@ -190,6 +190,7 @@
             MaximumSize = new Size(816, 371);
             MinimumSize = new Size(816, 371);
             Name = "updateLatestChecklistForm";
+            StartPosition = FormStartPosition.CenterScreen;
             Text = "updateLatestChecklistForm";
             panel1.ResumeLayout(false);
             panel1.PerformLayout();

@@ -28,149 +28,188 @@ namespace BatteryRepairModule.Forms.Shipping
 
         private void stateOfHealthFilterDropDown_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (moduleOemFilterDropDown.SelectedItem == null)
-                filterByStateOfHealthFirst();
-            else
-                filterByStateOfHealthFirst();
+            try
+            {
+                if (moduleOemFilterDropDown.SelectedItem == null)
+                    filterByStateOfHealthFirst();
+                else
+                    filterByStateOfHealthFirst();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"An error occurred: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         private void moduleOemFilterDropDown_SelectedIndexChanged_1(object sender, EventArgs e)
         {
-            if (stateOfHealthFilterDropDown.SelectedItem == null)
-                filterByOemFirst();
-            else
-                filterByOemFirst(); 
-        }
-
-        private void readyInventoryListBox_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void invoicedListBox_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
+            try
+            {
+                if (stateOfHealthFilterDropDown.SelectedItem == null)
+                    filterByOemFirst();
+                else
+                    filterByOemFirst(); 
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"An error occurred: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         private void markModuleAsInvoiced_Click(object sender, EventArgs e)
         {
-            if (readyInventoryListBox.SelectedItem == null)
+            try
             {
-                MessageBox.Show("No module selected.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return;
+                if (readyInventoryListBox.SelectedItem == null)
+                {
+                    MessageBox.Show("No module selected.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+
+                string selectedItem = readyInventoryListBox.SelectedItem.ToString();
+                int modified = Int32.Parse(selectedItem.Split('[')[1].Split(']')[0]);
+
+
+                Module selectedModule = dbInformation.awaitingInvoiceModuleList.FirstOrDefault(item => item.ticketId == modified);
+
+                if (selectedModule != null)
+                {
+                    dbMethods.clearModuleForShipping(selectedModule);
+
+                    reloadModules();
+                    MessageBox.Show("Module marked as invoiced successfully.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+                else
+                {
+                    MessageBox.Show("Selected module not found.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
             }
-
-            string selectedItem = readyInventoryListBox.SelectedItem.ToString();
-            int modified = Int32.Parse(selectedItem.Split('[')[1].Split(']')[0]);
-
-
-            Module selectedModule = dbInformation.awaitingInvoiceModuleList.FirstOrDefault(item => item.ticketId == modified);
-
-            if (selectedModule != null)
+            catch (Exception ex)
             {
-                dbMethods.clearModuleForShipping(selectedModule);
-
-                reloadModules();
-                MessageBox.Show("Module marked as invoiced successfully.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            }
-            else
-            {
-                MessageBox.Show("Selected module not found.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show($"An error occurred: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
         private void reloadModules()
         {
-            readyInventoryListBox.Items.Clear();
-            invoicedListBox.Items.Clear();
-
-            dbMethods.loadAwaitingInvoiceTickets();
-            foreach (Module item in dbInformation.awaitingInvoiceModuleList)
+            try
             {
-                readyInventoryListBox.Items.Add($"[{item.ticketId}] - {item.Oem} - {item.SerialNumber} ({item.stateOfHealth})");
+                readyInventoryListBox.Items.Clear();
+                invoicedListBox.Items.Clear();
+
+                dbMethods.loadAwaitingInvoiceTickets();
+                foreach (Module item in dbInformation.awaitingInvoiceModuleList)
+                {
+                    readyInventoryListBox.Items.Add($"[{item.ticketId}] - {item.Oem} - {item.SerialNumber} ({item.stateOfHealth})");
+                }
+
+                dbMethods.loadAwaitingShippingTickets();
+                foreach (Module item in dbInformation.awaitingShippingModuleList)
+                {
+                    invoicedListBox.Items.Add($"[{item.ticketId}] - {item.Oem} - {item.SerialNumber} ({item.stateOfHealth})");
+                }
             }
-
-            dbMethods.loadAwaitingShippingTickets();
-            foreach (Module item in dbInformation.awaitingShippingModuleList)
+            catch (Exception ex)
             {
-                invoicedListBox.Items.Add($"[{item.ticketId}] - {item.Oem} - {item.SerialNumber} ({item.stateOfHealth})");
+                MessageBox.Show($"An error occurred: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
         private void markModuleAsShipped_Click(object sender, EventArgs e)
         {
-            if (invoicedListBox.SelectedItem == null)
+            try
             {
-                MessageBox.Show("No module selected.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return;
+                if (invoicedListBox.SelectedItem == null)
+                {
+                    MessageBox.Show("No module selected.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+
+                string selectedItem = invoicedListBox.SelectedItem.ToString();
+                int modified = Int32.Parse(selectedItem.Split('[')[1].Split(']')[0]);
+
+                Module selectedModule = dbInformation.awaitingShippingModuleList.FirstOrDefault(item => item.ticketId == modified);
+
+                if (selectedModule == null)
+                {
+                    MessageBox.Show("Selected module not found.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+
+                dbMethods.clearModuleAsShippedOrClosed(selectedModule);
+                reloadModules(); 
+                MessageBox.Show("Module marked as shipped successfully.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
-
-            string selectedItem = invoicedListBox.SelectedItem.ToString();
-            int modified = Int32.Parse(selectedItem.Split('[')[1].Split(']')[0]);
-
-            Module selectedModule = dbInformation.awaitingShippingModuleList.FirstOrDefault(item => item.ticketId == modified);
-
-            if (selectedModule == null)
+            catch (Exception ex)
             {
-                MessageBox.Show("Selected module not found.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show($"An error occurred: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-
-            dbMethods.clearModuleAsShippedOrClosed(selectedModule);
-            reloadModules(); 
-            MessageBox.Show("Module marked as shipped successfully.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
         private void filterByStateOfHealthFirst()
         {
-            if (stateOfHealthFilterDropDown.SelectedItem == null)
-                return;
-
-            string selectedItem = stateOfHealthFilterDropDown.SelectedItem.ToString();
-
-            readyInventoryListBox.Items.Clear();
-            invoicedListBox.Items.Clear();
-
-            foreach (Module item in dbInformation.awaitingInvoiceModuleList)
+            try
             {
-                if (item.stateOfHealth == selectedItem)
+                if (stateOfHealthFilterDropDown.SelectedItem == null)
+                    return;
+
+                string selectedItem = stateOfHealthFilterDropDown.SelectedItem.ToString();
+
+                readyInventoryListBox.Items.Clear();
+                invoicedListBox.Items.Clear();
+
+                foreach (Module item in dbInformation.awaitingInvoiceModuleList)
                 {
-                    readyInventoryListBox.Items.Add($"[{item.ticketId}] - {item.Oem} - {item.SerialNumber} ({item.stateOfHealth})");
+                    if (item.stateOfHealth == selectedItem)
+                    {
+                        readyInventoryListBox.Items.Add($"[{item.ticketId}] - {item.Oem} - {item.SerialNumber} ({item.stateOfHealth})");
+                    }
+                }
+
+                foreach (Module item in dbInformation.awaitingShippingModuleList)
+                {
+                    if (item.stateOfHealth == selectedItem)
+                    {
+                        invoicedListBox.Items.Add($"[{item.ticketId}] - {item.Oem} - {item.SerialNumber} ({item.stateOfHealth})");
+                    }
                 }
             }
-
-            foreach (Module item in dbInformation.awaitingShippingModuleList)
+            catch (Exception ex)
             {
-                if (item.stateOfHealth == selectedItem)
-                {
-                    invoicedListBox.Items.Add($"[{item.ticketId}] - {item.Oem} - {item.SerialNumber} ({item.stateOfHealth})");
-                }
+                MessageBox.Show($"An error occurred: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
         private void filterByOemFirst()
         {
-            if (moduleOemFilterDropDown.SelectedItem == null)
-                return;
-
-            string selectedItem = moduleOemFilterDropDown.SelectedItem.ToString();
-
-            readyInventoryListBox.Items.Clear();
-            invoicedListBox.Items.Clear();
-
-            foreach (Module item in dbInformation.awaitingInvoiceModuleList)
+            try
             {
-                if (item.Oem == selectedItem) 
+                if (moduleOemFilterDropDown.SelectedItem == null)
+                    return;
+
+                string selectedItem = moduleOemFilterDropDown.SelectedItem.ToString();
+
+                readyInventoryListBox.Items.Clear();
+                invoicedListBox.Items.Clear();
+
+                foreach (Module item in dbInformation.awaitingInvoiceModuleList)
                 {
-                    readyInventoryListBox.Items.Add($"[{item.ticketId}] - {item.Oem} - {item.SerialNumber} ({item.stateOfHealth})");
+                    if (item.Oem == selectedItem) 
+                    {
+                        readyInventoryListBox.Items.Add($"[{item.ticketId}] - {item.Oem} - {item.SerialNumber} ({item.stateOfHealth})");
+                    }
+                }
+
+                foreach (Module item in dbInformation.awaitingShippingModuleList)
+                {
+                    if (item.Oem == selectedItem) 
+                    {
+                        invoicedListBox.Items.Add($"[{item.ticketId}] - {item.Oem} - {item.SerialNumber} ({item.stateOfHealth})");
+                    }
                 }
             }
-
-            foreach (Module item in dbInformation.awaitingShippingModuleList)
+            catch (Exception ex)
             {
-                if (item.Oem == selectedItem) 
-                {
-                    invoicedListBox.Items.Add($"[{item.ticketId}] - {item.Oem} - {item.SerialNumber} ({item.stateOfHealth})");
-                }
+                MessageBox.Show($"An error occurred: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
     }

@@ -30,37 +30,37 @@ namespace BatteryRepairModule.Forms.Add_Forms
         {
             try
             {
-            inputedValue = Int32.Parse(maskedTextBox1.Text.ToString());
-            if (inputedValue <= dbInformation.raceGradeHighLowKeyPair.Keys.First() && inputedValue >= dbInformation.raceGradeHighLowKeyPair.Values.First())
-            {
-                stateOfHealthGradeChangeLabel.Text = "Race Grade";
-                stateOfHealthRangeChangeLabel.Text = $"{dbInformation.raceGradeHighLowKeyPair.Keys.First()} - {dbInformation.raceGradeHighLowKeyPair.Values.First()}";
-            }
-            else if (inputedValue <= dbInformation.trackGradeHighLowKeyPair.Keys.First() && inputedValue >= dbInformation.trackGradeHighLowKeyPair.Values.First())
-            {
-                stateOfHealthGradeChangeLabel.Text = "Track Grade";
-                stateOfHealthRangeChangeLabel.Text = $"{dbInformation.trackGradeHighLowKeyPair.Keys.First()} - {dbInformation.trackGradeHighLowKeyPair.Values.First()}";
-            }
-            else if (inputedValue <= dbInformation.playGradeHighLowKeyPair.Keys.First() && inputedValue >= dbInformation.playGradeHighLowKeyPair.Values.First())
-            {
-                stateOfHealthGradeChangeLabel.Text = "Play Grade";
-                stateOfHealthRangeChangeLabel.Text = $"{dbInformation.playGradeHighLowKeyPair.Keys.First()} - {dbInformation.playGradeHighLowKeyPair.Values.First()}";
-            }
-            else
-            {
-                MessageBox.Show("Value is out of range. Please check the values and try again.", "Out of Range", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return;
-            }
+                inputedValue = Int32.Parse(maskedTextBox1.Text.ToString());
+                if (inputedValue <= dbInformation.raceGradeHighLowKeyPair.Keys.First() && inputedValue >= dbInformation.raceGradeHighLowKeyPair.Values.First())
+                {
+                    stateOfHealthGradeChangeLabel.Text = "Race Grade";
+                    stateOfHealthRangeChangeLabel.Text = $"{dbInformation.raceGradeHighLowKeyPair.Keys.First()} - {dbInformation.raceGradeHighLowKeyPair.Values.First()}";
+                }
+                else if (inputedValue <= dbInformation.trackGradeHighLowKeyPair.Keys.First() && inputedValue >= dbInformation.trackGradeHighLowKeyPair.Values.First())
+                {
+                    stateOfHealthGradeChangeLabel.Text = "Track Grade";
+                    stateOfHealthRangeChangeLabel.Text = $"{dbInformation.trackGradeHighLowKeyPair.Keys.First()} - {dbInformation.trackGradeHighLowKeyPair.Values.First()}";
+                }
+                else if (inputedValue <= dbInformation.playGradeHighLowKeyPair.Keys.First() && inputedValue >= dbInformation.playGradeHighLowKeyPair.Values.First())
+                {
+                    stateOfHealthGradeChangeLabel.Text = "Play Grade";
+                    stateOfHealthRangeChangeLabel.Text = $"{dbInformation.playGradeHighLowKeyPair.Keys.First()} - {dbInformation.playGradeHighLowKeyPair.Values.First()}";
+                }
+                else
+                {
+                    MessageBox.Show("Value is out of range. Please check the values and try again.", "Out of Range", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
 
-            writtenStateOfHealth = stateOfHealthGradeChangeLabel.Text;
+                writtenStateOfHealth = stateOfHealthGradeChangeLabel.Text;
             }
             catch (FormatException)
             {
-            MessageBox.Show("Please enter a valid numeric value.", "Invalid Input", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Please enter a valid numeric value.", "Invalid Input", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             catch (Exception ex)
             {
-            MessageBox.Show($"An error occurred: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show($"An error occurred: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -87,8 +87,7 @@ namespace BatteryRepairModule.Forms.Add_Forms
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.ToString());
-                return; 
+                MessageBox.Show($"An error occurred: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
 
         }

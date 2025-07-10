@@ -22,13 +22,11 @@ namespace BatteryRepairModule.Forms.Ticket_Creation_Module
 
         private void continueButton_Click(object sender, EventArgs e)
         {
-            bool success; 
             try
             {
                 if (!string.IsNullOrEmpty(textBox1.Text))
                 {
-                    success = dbMethods.insertNewReportOption(textBox1.Text);
-                    if (success)
+                    if (dbMethods.insertNewReportOption(textBox1.Text))
                     {
                         MessageBox.Show("Option added successfully", "Successfull Operation", MessageBoxButtons.OK, MessageBoxIcon.Information);
                         dbMethods.loadreportTypeOptions();

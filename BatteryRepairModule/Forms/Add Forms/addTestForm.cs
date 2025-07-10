@@ -15,26 +15,39 @@ namespace BatteryRepairModule.Forms.Add_Forms
         public addTestForm()
         {
             InitializeComponent();
-ThemeHelper.ApplyTheme(this);
-            dbMethods.getTestingOptions();
-            listBox1.Items.AddRange(dbInformation.testingOptionsKeyValue.Select(kvp => kvp.Value).ToArray());
+    ThemeHelper.ApplyTheme(this);
+            try
+            {
+                dbMethods.getTestingOptions();
+                listBox1.Items.AddRange(dbInformation.testingOptionsKeyValue.Select(kvp => kvp.Value).ToArray());
 
-            dbMethods.getAddedTestsByTwigTicket();
-            listBox2.Items.AddRange(dbInformation.addedTestsKeyValue.Select(kvp => kvp.Value).ToArray()); 
-
+                dbMethods.getAddedTestsByTwigTicket();
+                listBox2.Items.AddRange(dbInformation.addedTestsKeyValue.Select(kvp => kvp.Value).ToArray()); 
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"An error occurred: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         private void addSelectedTest_Click(object sender, EventArgs e)
         {
-            if (listBox1.SelectedItem != null)
+            try
             {
-                var selectedItem = listBox1.SelectedItem.ToString();
-                var selectedItemKvp = dbInformation.testingOptionsKeyValue.FirstOrDefault(kvp => kvp.Value == selectedItem);
-                dbInformation.tempAddNewTest.Clear();
-                dbInformation.tempAddNewTest[selectedItemKvp.Key] = selectedItemKvp.Value;
+                if (listBox1.SelectedItem != null)
+                {
+                    var selectedItem = listBox1.SelectedItem.ToString();
+                    var selectedItemKvp = dbInformation.testingOptionsKeyValue.FirstOrDefault(kvp => kvp.Value == selectedItem);
+                    dbInformation.tempAddNewTest.Clear();
+                    dbInformation.tempAddNewTest[selectedItemKvp.Key] = selectedItemKvp.Value;
 
-                dbMethods.insertNewTestAction();
-                this.Close();
+                    dbMethods.insertNewTestAction();
+                    this.Close();
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"An error occurred: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 

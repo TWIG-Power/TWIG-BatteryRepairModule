@@ -111,14 +111,16 @@
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(800, 264);
+            ClientSize = new Size(800, 307);
             Controls.Add(cancelButton);
             Controls.Add(continueButton);
             Controls.Add(panel2);
             Controls.Add(panel1);
             MaximizeBox = false;
-            MinimumSize = new Size(816, 303);
+            MaximumSize = new Size(816, 346);
+            MinimumSize = new Size(816, 346);
             Name = "addNotesForm";
+            StartPosition = FormStartPosition.CenterScreen;
             Text = "addNotesForm";
             panel2.ResumeLayout(false);
             panel1.ResumeLayout(false);

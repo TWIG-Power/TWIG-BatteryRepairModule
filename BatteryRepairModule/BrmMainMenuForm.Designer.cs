@@ -262,6 +262,7 @@ namespace BatteryRepairModule.Forms.BRM
             pictureBox1.Size = new Size(105, 94);
             pictureBox1.TabIndex = 0;
             pictureBox1.TabStop = false;
+            pictureBox1.Click += pictureBox1_Click;
             // 
             // headerPanel
             // 
@@ -311,7 +312,9 @@ namespace BatteryRepairModule.Forms.BRM
             Controls.Add(menuPanel);
             MinimumSize = new Size(1216, 655);
             Name = "BrmMainMenuForm";
+            StartPosition = FormStartPosition.CenterScreen;
             Text = "BrmMainMenuForm";
+            WindowState = FormWindowState.Maximized;
             menuPanel.ResumeLayout(false);
             panel1.ResumeLayout(false);
             logoPanel.ResumeLayout(false);

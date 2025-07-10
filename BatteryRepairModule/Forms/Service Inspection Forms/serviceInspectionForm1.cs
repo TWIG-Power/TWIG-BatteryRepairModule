@@ -28,20 +28,27 @@ namespace BatteryRepairModule.Forms.Service_Inspection_Forms
             ThemeHelper.ApplyTheme(this);
             this.parentForm = parentRef;
 
-            dbMethods.loadAwaitingServiceInspectionTickets();
-            dbMethods.loadStaffNames();
-            dbMethods.getRepairOptions();
+            try
+            {
+                dbMethods.loadAwaitingServiceInspectionTickets();
+                dbMethods.loadStaffNames();
+                dbMethods.getRepairOptions();
 
-            twigTicketNumberDropDown.Items.AddRange(
-                dbInformation.activeTwigCaseNumbers.Select(kvp =>
-                    $"[{kvp.Value}] - {dbInformation.activeModuleSerialNumbers[kvp.Key].ToString()}"
-                ).ToArray());
+                twigTicketNumberDropDown.Items.AddRange(
+                    dbInformation.activeTwigCaseNumbers.Select(kvp =>
+                        $"[{kvp.Value}] - {dbInformation.activeModuleSerialNumbers[kvp.Key].ToString()}"
+                    ).ToArray());
 
-            staffDropDown.Items.AddRange(dbInformation.staffKeyPairOptions.Values.ToArray());
+                staffDropDown.Items.AddRange(dbInformation.staffKeyPairOptions.Values.ToArray());
 
-            dbInformation.selectedTwigTicketKeyPair.Clear();
-            LoadTempVariables();
-            dbInformation.TWIGCaseNumber = null;
+                dbInformation.selectedTwigTicketKeyPair.Clear();
+                LoadTempVariables();
+                dbInformation.TWIGCaseNumber = null;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"An error occurred: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         private void LoadTempVariables()
@@ -153,18 +160,25 @@ namespace BatteryRepairModule.Forms.Service_Inspection_Forms
         {
             string filePath = string.Empty;
 
-            using (OpenFileDialog openFileDialog = new OpenFileDialog())
+            try
             {
-                openFileDialog.InitialDirectory = "C:\\";
-                openFileDialog.Filter = "All files (*.*)|*.*|Text files (*.txt)|*.txt";
-                openFileDialog.FilterIndex = 1;
-                openFileDialog.RestoreDirectory = true;
-
-                if (openFileDialog.ShowDialog() == DialogResult.OK)
+                using (OpenFileDialog openFileDialog = new OpenFileDialog())
                 {
-                    dbInformation.diagnosticReportPath = openFileDialog.FileName;
+                    openFileDialog.InitialDirectory = "C:\\";
+                    openFileDialog.Filter = "All files (*.*)|*.*|Text files (*.txt)|*.txt";
+                    openFileDialog.FilterIndex = 1;
+                    openFileDialog.RestoreDirectory = true;
+
+                    if (openFileDialog.ShowDialog() == DialogResult.OK)
+                    {
+                        dbInformation.diagnosticReportPath = openFileDialog.FileName;
+                    }
+                    diagnosticReportPath.Text = dbInformation.diagnosticReportPath; 
                 }
-                diagnosticReportPath.Text = dbInformation.diagnosticReportPath; 
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"An error occurred: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
     }

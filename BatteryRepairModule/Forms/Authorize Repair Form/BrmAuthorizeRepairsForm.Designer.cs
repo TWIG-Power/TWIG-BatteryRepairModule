@@ -353,7 +353,7 @@ namespace BatteryRepairModule.Forms.BRM
             backButton.TabIndex = 16;
             backButton.Text = "Back ";
             backButton.UseVisualStyleBackColor = true;
-            backButton.Click += backButton_Click; 
+            backButton.Click += backButton_Click;
             // 
             // continueButton
             // 

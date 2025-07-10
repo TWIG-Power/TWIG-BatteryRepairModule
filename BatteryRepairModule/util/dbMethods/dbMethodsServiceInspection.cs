@@ -9,14 +9,15 @@ public static partial class dbMethods
     #region LOAD METHODS
     public static void loadAwaitingServiceInspectionTickets()
     {
+        int status = dbInformation.ticketStatusOptions.FirstOrDefault(kvp => kvp.Value == "Awaiting Service Inspection").Key; 
         using (var conn = new NpgsqlConnection(dbConnection.connectionPath))
-        using (var cmd = new NpgsqlCommand("SELECT \"id\", \"twig_ticket_number\", serial_number FROM public.ticket WHERE \"status_fk\" = 1", conn))
+        using (var cmd = new NpgsqlCommand($"SELECT \"id\", \"twig_ticket_number\", serial_number FROM public.ticket WHERE \"status_fk\" = {status}", conn))
         {
             conn.Open();
             using (var reader = cmd.ExecuteReader())
             {
                 dbInformation.activeTwigCaseNumbers.Clear();
-                dbInformation.activeModuleSerialNumbers.Clear(); 
+                dbInformation.activeModuleSerialNumbers.Clear();
                 while (reader.Read())
                 {
                     if (!reader.IsDBNull(0) && !reader.IsDBNull(1))
@@ -107,11 +108,12 @@ public static partial class dbMethods
         
         int status = dbInformation.ticketStatusOptions.FirstOrDefault(kvp => kvp.Value == "Awaiting Repair Authorization").Key;
         using (var conn = new NpgsqlConnection(dbConnection.connectionPath))
-        using (var cmd = new NpgsqlCommand("UPDATE public.ticket SET status_fk = @status WHERE id = @ticketId", conn))
+        using (var cmd = new NpgsqlCommand("UPDATE public.ticket SET status_fk = @status, status_timestamp = @timestamp WHERE id = @ticketId", conn))
         {
             conn.Open();
             cmd.Parameters.AddWithValue("@ticketId", dbInformation.selectedTwigTicketKeyPair.Keys.First());
             cmd.Parameters.AddWithValue("@status", status);
+            cmd.Parameters.AddWithValue("@timestamp", DateTime.Now); 
             int modCount = cmd.ExecuteNonQuery();
             return modCount > 0; 
         }

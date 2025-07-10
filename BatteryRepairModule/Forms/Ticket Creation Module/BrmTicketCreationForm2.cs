@@ -39,50 +39,57 @@ namespace BatteryRepairModule.Forms.BRM
 
         private void LoadTempVariables()
         {
-            if (!string.IsNullOrEmpty(tempVerifyShippingChoice))
+            try
             {
-                switch (tempVerifyShippingChoice)
+                if (!string.IsNullOrEmpty(tempVerifyShippingChoice))
                 {
-                    case "Safe":
-                        safeShippingButton.Checked = true;
-                        break;
-                    case "Unsafe":
-                        unsafeShippingButton.Checked = true;
-                        break;
-                    case "N/A":
-                        doesNotApplyShippingButton.Checked = true;
-                        break; 
-                    default:
-                        break;
+                    switch (tempVerifyShippingChoice)
+                    {
+                        case "Safe":
+                            safeShippingButton.Checked = true;
+                            break;
+                        case "Unsafe":
+                            unsafeShippingButton.Checked = true;
+                            break;
+                        case "N/A":
+                            doesNotApplyShippingButton.Checked = true;
+                            break; 
+                        default:
+                            break;
+                    }
                 }
-            }
 
-            if (tempBatteryLeadsProtected.HasValue)
+                if (tempBatteryLeadsProtected.HasValue)
+                {
+                    if (tempBatteryLeadsProtected.Value)
+                        battLeadProtectYes.Checked = true;
+                    else
+                        battLeadProtectNo.Checked = true;
+                }
+
+                if (tempCheckHousingScrape.HasValue)
+                    housingScrapesCheckBox.Checked = tempCheckHousingScrape.Value;
+                if (tempCheckEvidenceOfTamp.HasValue)
+                    evidenceOfTamperingCheckBox.Checked = tempCheckEvidenceOfTamp.Value;
+                if (tempCheckScrewsMissing.HasValue)
+                    screwsMissingCheckBox.Checked = tempCheckScrewsMissing.Value;
+                if (tempCheckHousingDentsHoles.HasValue)
+                    housingDentsCheckBox.Checked = tempCheckHousingDentsHoles.Value;
+                if (tempCheckMissingWires.HasValue)
+                    missingWiresCheckBox.Checked = tempCheckMissingWires.Value;
+                if (tempCheckChargePort.HasValue)
+                    chargePortCheckBox.Checked = tempCheckChargePort.Value;
+                if (tempCheckCableDamage.HasValue)
+                    cableDamageCheckBox.Checked = tempCheckCableDamage.Value;
+                if (tempCheckGoveVent.HasValue)
+                    goveVentCheckBox.Checked = tempCheckGoveVent.Value;
+                if (tempCheckCommPort.HasValue)
+                    commPortCheckBox.Checked = tempCheckCommPort.Value;
+            }
+            catch (Exception ex)
             {
-                if (tempBatteryLeadsProtected.Value)
-                    battLeadProtectYes.Checked = true;
-                else
-                    battLeadProtectNo.Checked = true;
+                MessageBox.Show($"An error occurred while loading temporary variables: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-
-            if (tempCheckHousingScrape.HasValue)
-                housingScrapesCheckBox.Checked = tempCheckHousingScrape.Value;
-            if (tempCheckEvidenceOfTamp.HasValue)
-                evidenceOfTamperingCheckBox.Checked = tempCheckEvidenceOfTamp.Value;
-            if (tempCheckScrewsMissing.HasValue)
-                screwsMissingCheckBox.Checked = tempCheckScrewsMissing.Value;
-            if (tempCheckHousingDentsHoles.HasValue)
-                housingDentsCheckBox.Checked = tempCheckHousingDentsHoles.Value;
-            if (tempCheckMissingWires.HasValue)
-                missingWiresCheckBox.Checked = tempCheckMissingWires.Value;
-            if (tempCheckChargePort.HasValue)
-                chargePortCheckBox.Checked = tempCheckChargePort.Value;
-            if (tempCheckCableDamage.HasValue)
-                cableDamageCheckBox.Checked = tempCheckCableDamage.Value;
-            if (tempCheckGoveVent.HasValue)
-                goveVentCheckBox.Checked = tempCheckGoveVent.Value;
-            if (tempCheckCommPort.HasValue)
-                commPortCheckBox.Checked = tempCheckCommPort.Value;
         }
 
         private void backButton_Click(object sender, EventArgs e)
@@ -94,11 +101,9 @@ namespace BatteryRepairModule.Forms.BRM
         {
             try
             {
-                // Store form data in temporary variables
                 tempVerifyShippingChoice = safeShippingButton.Checked ? "Safe" : (unsafeShippingButton.Checked ? "Unsafe" : "N/A");
                 tempBatteryLeadsProtected = battLeadProtectYes.Checked ? true : (battLeadProtectNo.Checked ? false : null);
                 
-                // Store battery check data
                 tempCheckHousingScrape = housingScrapesCheckBox.Checked;
                 tempCheckEvidenceOfTamp = evidenceOfTamperingCheckBox.Checked;
                 tempCheckScrewsMissing = screwsMissingCheckBox.Checked;
@@ -109,7 +114,6 @@ namespace BatteryRepairModule.Forms.BRM
                 tempCheckGoveVent = goveVentCheckBox.Checked;
                 tempCheckCommPort = commPortCheckBox.Checked;
 
-                // Validation using temp variables
                 if (string.IsNullOrEmpty(tempVerifyShippingChoice))
                 {
                     MessageBox.Show("Please select an option regarding shipping verification", "Input Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -132,7 +136,14 @@ namespace BatteryRepairModule.Forms.BRM
 
         private void cancelButton_Click(object sender, EventArgs e)
         {
-            parentForm.OpenChildForm(new BrmTicketCreationForm(parentForm));
+            try
+            {
+                parentForm.OpenChildForm(new BrmTicketCreationForm(parentForm));
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"An error occurred while cancelling: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         

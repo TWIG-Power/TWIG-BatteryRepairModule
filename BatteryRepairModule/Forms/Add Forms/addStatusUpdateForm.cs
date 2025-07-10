@@ -42,109 +42,116 @@ namespace BatteryRepairModule.Forms.Add_Forms
 
         private void continueButton_Click(object sender, EventArgs e)
         {
-            switch (statusType)
+            try
             {
-                case "Repair":
-                    if (listBox1.SelectedItem != null)
-                    {
-
-                        var selectedRepair = modifiedListBox.SelectedItem as string;
-                        var selectedRepaired = selectedRepair?.Split('(')[0].Trim();
-                        var selectedKvpp = dbInformation.clearedRepairsKeyValPair.FirstOrDefault(kvp => kvp.Value == (string?)selectedRepaired);
-                        dbInformation.tempUpdateRepairRepairHolder.Clear();
-                        dbInformation.tempUpdateRepairRepairHolder[selectedKvpp.Key] = selectedKvpp.Value;
-
-                        var selectedStatus2 = listBox1.SelectedItem as string;
-                        var selectedKvp22 = dbInformation.repairStatusOptionKeyValue.FirstOrDefault(kvp => kvp.Value == selectedStatus2);
-                        dbInformation.tempUpdateRepairStatusHolder.Clear();
-                        dbInformation.tempUpdateRepairStatusHolder[selectedKvp22.Key] = selectedKvp22.Value;
-
-                        dbMethods.updateRepairStatus();
-                        dbMethods.loadRepairActionKeyValueStatus();
-                        modifiedListBox.Items.Clear(); 
-                        modifiedListBox.Items.AddRange(dbInformation.clearedRepairsValueStatusPair.Select(kvp => $"{kvp.Key} ({kvp.Value})").ToArray());
-
-                        this.Close(); 
-                    }
-                    break;
-
-                case "Issue":
-                    if (listBox1.SelectedItem != null)
-                    {
-                        var selectedIssueString = modifiedListBox.SelectedItem as string;
-                        var selectedIssue = selectedIssueString?.Split('(')[0].Trim();
-                        var selectedKvp = dbInformation.reportedIssueKeyValue.FirstOrDefault(kvp => kvp.Value == (string?)selectedIssue);
-                        dbInformation.tempUpdateIssueIssueHolder.Clear();
-                        dbInformation.tempUpdateIssueIssueHolder[selectedKvp.Key] = selectedKvp.Value;
-
-                        var selectedStatus = listBox1.SelectedItem;
-                        var selectedKvp2 = dbInformation.issueStatusOptionsKeyValue.FirstOrDefault(kvp => kvp.Value == (string)selectedStatus);
-                        dbInformation.tempUpdateIssueStatusHolder.Clear();
-                        dbInformation.tempUpdateIssueStatusHolder[selectedKvp2.Key] = selectedKvp2.Value;
-
-                        dbMethods.updateIssueStatus();
-                        dbMethods.loadReportedIssuesAndStatus();
-                        modifiedListBox.Items.Clear(); 
-                        modifiedListBox.Items.AddRange(dbInformation.reportedIssuesValueStatus.Select(kvp => $"{kvp.Key} ({kvp.Value})").ToArray());
-
-                        this.Close(); 
-                    }
-                    break;
-
-                case "Test": 
-                    if (listBox1.SelectedItem != null)
-                    {
-                        var selectedTestString = modifiedListBox.SelectedItem as string;
-                        var selectedTest = selectedTestString?.Split('(')[0].Trim();
-                        selectedTest = selectedTest?.Split(']')[1].Trim();
-                        var selectedKvpp = dbInformation.addedTestsKeyValue.FirstOrDefault(kvp => kvp.Value == (string?)selectedTest);
-                        dbInformation.tempTestTestHolder.Clear();
-                        dbInformation.tempTestTestHolder[selectedKvpp.Key] = selectedKvpp.Value;
-
-                        var selectedStatus = listBox1.SelectedItem as string;
-                        var selectedKvp = dbInformation.testStatusOptionsKeyValue.FirstOrDefault(kvp => kvp.Value == (string?)selectedStatus);
-                        dbInformation.tempTestStatusHolder.Clear();
-                        dbInformation.tempTestStatusHolder[selectedKvp.Key] = selectedKvp.Value;
-
-                        if (selectedStatus == "Pass")
+                switch (statusType)
+                {
+                    case "Repair":
+                        if (listBox1.SelectedItem != null)
                         {
-                            using (var tempForm = new stateOfHealthCalculatorForm(modifiedListBox))
+
+                            var selectedRepair = modifiedListBox.SelectedItem as string;
+                            var selectedRepaired = selectedRepair?.Split('(')[0].Trim();
+                            var selectedKvpp = dbInformation.clearedRepairsKeyValPair.FirstOrDefault(kvp => kvp.Value == (string?)selectedRepaired);
+                            dbInformation.tempUpdateRepairRepairHolder.Clear();
+                            dbInformation.tempUpdateRepairRepairHolder[selectedKvpp.Key] = selectedKvpp.Value;
+
+                            var selectedStatus2 = listBox1.SelectedItem as string;
+                            var selectedKvp22 = dbInformation.repairStatusOptionKeyValue.FirstOrDefault(kvp => kvp.Value == selectedStatus2);
+                            dbInformation.tempUpdateRepairStatusHolder.Clear();
+                            dbInformation.tempUpdateRepairStatusHolder[selectedKvp22.Key] = selectedKvp22.Value;
+
+                            dbMethods.updateRepairStatus();
+                            dbMethods.loadRepairActionKeyValueStatus();
+                            modifiedListBox.Items.Clear(); 
+                            modifiedListBox.Items.AddRange(dbInformation.clearedRepairsValueStatusPair.Select(kvp => $"{kvp.Key} ({kvp.Value})").ToArray());
+
+                            this.Close(); 
+                        }
+                        break;
+
+                    case "Issue":
+                        if (listBox1.SelectedItem != null)
+                        {
+                            var selectedIssueString = modifiedListBox.SelectedItem as string;
+                            var selectedIssue = selectedIssueString?.Split('(')[0].Trim();
+                            var selectedKvp = dbInformation.reportedIssueKeyValue.FirstOrDefault(kvp => kvp.Value == (string?)selectedIssue);
+                            dbInformation.tempUpdateIssueIssueHolder.Clear();
+                            dbInformation.tempUpdateIssueIssueHolder[selectedKvp.Key] = selectedKvp.Value;
+
+                            var selectedStatus = listBox1.SelectedItem;
+                            var selectedKvp2 = dbInformation.issueStatusOptionsKeyValue.FirstOrDefault(kvp => kvp.Value == (string)selectedStatus);
+                            dbInformation.tempUpdateIssueStatusHolder.Clear();
+                            dbInformation.tempUpdateIssueStatusHolder[selectedKvp2.Key] = selectedKvp2.Value;
+
+                            dbMethods.updateIssueStatus();
+                            dbMethods.loadReportedIssuesAndStatus();
+                            modifiedListBox.Items.Clear(); 
+                            modifiedListBox.Items.AddRange(dbInformation.reportedIssuesValueStatus.Select(kvp => $"{kvp.Key} ({kvp.Value})").ToArray());
+
+                            this.Close(); 
+                        }
+                        break;
+
+                    case "Test": 
+                        if (listBox1.SelectedItem != null)
+                        {
+                            var selectedTestString = modifiedListBox.SelectedItem as string;
+                            var selectedTest = selectedTestString?.Split('(')[0].Trim();
+                            selectedTest = selectedTest?.Split(']')[1].Trim();
+                            var selectedKvpp = dbInformation.addedTestsKeyValue.FirstOrDefault(kvp => kvp.Value == (string?)selectedTest);
+                            dbInformation.tempTestTestHolder.Clear();
+                            dbInformation.tempTestTestHolder[selectedKvpp.Key] = selectedKvpp.Value;
+
+                            var selectedStatus = listBox1.SelectedItem as string;
+                            var selectedKvp = dbInformation.testStatusOptionsKeyValue.FirstOrDefault(kvp => kvp.Value == (string?)selectedStatus);
+                            dbInformation.tempTestStatusHolder.Clear();
+                            dbInformation.tempTestStatusHolder[selectedKvp.Key] = selectedKvp.Value;
+
+                            if (selectedStatus == "Pass")
                             {
-                                tempForm.ShowDialog(this);
-                                if (dbInformation.conditionalClosureFailure)
+                                using (var tempForm = new stateOfHealthCalculatorForm(modifiedListBox))
                                 {
-                                    return; 
+                                    tempForm.ShowDialog(this);
+                                    if (dbInformation.conditionalClosureFailure)
+                                    {
+                                        return; 
+                                    }
                                 }
                             }
-                        }
 
-                        dbMethods.updateTestStatus();
-                        dbMethods.getDoesTestHaveNote(); 
-                        dbMethods.getAddedTestsByTwigTicket();  
-                        modifiedListBox.Items.Clear();
+                            dbMethods.updateTestStatus();
+                            dbMethods.getDoesTestHaveNote(); 
+                            dbMethods.getAddedTestsByTwigTicket();  
+                            modifiedListBox.Items.Clear();
 
-                        foreach (var kvp in dbInformation.addedTestsKeyValue)
-                        {
-                            var testId = kvp.Key; // Unique ID of the test
-                            var testName = kvp.Value; // Test name
-                            var status = dbInformation.addedTestsKeyStatus.GetValueOrDefault(testId); // Test status
-
-                            if (dbInformation.doesTestHaveNote[testId] == false)
+                            foreach (var kvp in dbInformation.addedTestsKeyValue)
                             {
-                                modifiedListBox.Items.Add($"[{testId}] {testName} ({status})");
+                                var testId = kvp.Key; // Unique ID of the test
+                                var testName = kvp.Value; // Test name
+                                var status = dbInformation.addedTestsKeyStatus.GetValueOrDefault(testId); // Test status
+
+                                if (dbInformation.doesTestHaveNote[testId] == false)
+                                {
+                                    modifiedListBox.Items.Add($"[{testId}] {testName} ({status})");
+                                }
+                                else
+                                {
+                                    modifiedListBox.Items.Add($"[{testId}] {testName} ({status})*");
+                                }
                             }
-                            else
-                            {
-                                modifiedListBox.Items.Add($"[{testId}] {testName} ({status})*");
-                            }
+
+                            this.Close(); 
                         }
+                        break; 
 
-                        this.Close(); 
-                    }
-                    break; 
-
-                default:
-                    break;
+                    default:
+                        break;
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"An error occurred: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             
 

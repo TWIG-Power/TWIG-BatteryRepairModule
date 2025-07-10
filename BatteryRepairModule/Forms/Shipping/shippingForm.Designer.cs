@@ -250,7 +250,6 @@
             invoicedListBox.Name = "invoicedListBox";
             invoicedListBox.Size = new Size(452, 336);
             invoicedListBox.TabIndex = 4;
-            invoicedListBox.SelectedIndexChanged += invoicedListBox_SelectedIndexChanged;
             // 
             // panel4
             // 
@@ -270,7 +269,6 @@
             readyInventoryListBox.Name = "readyInventoryListBox";
             readyInventoryListBox.Size = new Size(450, 336);
             readyInventoryListBox.TabIndex = 0;
-            readyInventoryListBox.SelectedIndexChanged += readyInventoryListBox_SelectedIndexChanged;
             // 
             // shippingForm
             // 

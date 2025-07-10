@@ -105,46 +105,53 @@ namespace BatteryRepairModule.Forms.Testing
 
         private void twigTicketNumberDropDown_SelectedIndexChanged(object sender, EventArgs e)
         {
-            var selectedValue = twigTicketNumberDropDown.SelectedItem.ToString();
-            var converted = selectedValue.Split('[')[1].Split(']')[0]; 
-            var selectedKvp = dbInformation.activeTwigCaseNumbers.FirstOrDefault(kvp => kvp.Value.ToString() == converted);
-            dbInformation.selectedTwigTicketKeyPair.Clear();
-            dbInformation.selectedTwigTicketKeyPair[selectedKvp.Key] = selectedKvp.Value;;
-
-            repairActionsListBox.Items.Clear();
-
-            dbMethods.getDoesRepairHaveNote(); 
-
-            dbMethods.loadRepairActionKeyValueStatus();
-            foreach (var kvp in dbInformation.clearedRepairsValueStatusPair)
+            try
             {
-                if (dbInformation.repairHasNoteStringBool[kvp.Key] == false)
-                    repairActionsListBox.Items.Add($"{kvp.Key} ({kvp.Value})");
-                else
+                var selectedValue = twigTicketNumberDropDown.SelectedItem.ToString();
+                var converted = selectedValue.Split('[')[1].Split(']')[0]; 
+                var selectedKvp = dbInformation.activeTwigCaseNumbers.FirstOrDefault(kvp => kvp.Value.ToString() == converted);
+                dbInformation.selectedTwigTicketKeyPair.Clear();
+                dbInformation.selectedTwigTicketKeyPair[selectedKvp.Key] = selectedKvp.Value;;
+
+                repairActionsListBox.Items.Clear();
+
+                dbMethods.getDoesRepairHaveNote(); 
+
+                dbMethods.loadRepairActionKeyValueStatus();
+                foreach (var kvp in dbInformation.clearedRepairsValueStatusPair)
                 {
-                    repairActionsListBox.Items.Add($"{kvp.Key} ({kvp.Value})*");
+                    if (dbInformation.repairHasNoteStringBool[kvp.Key] == false)
+                        repairActionsListBox.Items.Add($"{kvp.Key} ({kvp.Value})");
+                    else
+                    {
+                        repairActionsListBox.Items.Add($"{kvp.Key} ({kvp.Value})*");
+                    }
+                }
+
+                testStatusListBox.Items.Clear();
+
+                dbMethods.getDoesTestHaveNote(); 
+                dbMethods.getAddedTestsByTwigTicket();
+
+                foreach (var kvp in dbInformation.addedTestsKeyValue)
+                {
+                    var testId = kvp.Key; 
+                    var testName = kvp.Value;
+                    var status = dbInformation.addedTestsKeyStatus.GetValueOrDefault(testId);
+
+                    if (dbInformation.doesTestHaveNote[testId] == false)
+                    {
+                        testStatusListBox.Items.Add($"[{testId}] {testName} ({status})");
+                    }
+                    else
+                    {
+                        testStatusListBox.Items.Add($"[{testId}] {testName} ({status})*");
+                    }
                 }
             }
-
-            testStatusListBox.Items.Clear();
-
-            dbMethods.getDoesTestHaveNote(); 
-            dbMethods.getAddedTestsByTwigTicket();
-
-            foreach (var kvp in dbInformation.addedTestsKeyValue)
+            catch (Exception ex)
             {
-                var testId = kvp.Key; 
-                var testName = kvp.Value;
-                var status = dbInformation.addedTestsKeyStatus.GetValueOrDefault(testId);
-
-                if (dbInformation.doesTestHaveNote[testId] == false)
-                {
-                    testStatusListBox.Items.Add($"[{testId}] {testName} ({status})");
-                }
-                else
-                {
-                    testStatusListBox.Items.Add($"[{testId}] {testName} ({status})*");
-                }
+                MessageBox.Show($"An error occurred: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -225,6 +232,11 @@ namespace BatteryRepairModule.Forms.Testing
 
         private void clearBatteryForQualityButton_Click(object sender, EventArgs e)
         {
+            if (testStatusListBox.Items.Count == 0)
+            {
+                MessageBox.Show("At least one test is required before clearing the battery for quality.", "No Tests Found", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
             staffDropDown.Enabled = false; 
             foreach (var test in testStatusListBox.Items)
             {

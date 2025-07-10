@@ -48,107 +48,134 @@ namespace BatteryRepairModule.Forms.Quality
 
         private void twigTicketNumberDropDown_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (twigTicketNumberDropDown.SelectedItem != null)
+            try
             {
-                staffInitiatingReportDropDown.Enabled = true;
-
-                var selectedValue = twigTicketNumberDropDown.SelectedItem.ToString();
-                var converted = selectedValue.Split('[')[1].Split(']')[0]; 
-                var selectedKvp = dbInformation.activeTwigCaseNumbers.FirstOrDefault(kvp => kvp.Value.ToString() == converted);
-                dbInformation.selectedTwigTicketKeyPair.Clear();
-                dbInformation.selectedTwigTicketKeyPair[selectedKvp.Key] = selectedKvp.Value;
-
-                dbMethods.getModuleType();
-                dbMethods.getLatestChecklistVersion();
-
-                string fileName = $"QualityChecklist_{converted}.pdf";
-                string filePath = Path.Combine(folderPath, fileName);
-
-                if (File.Exists(filePath))
+                if (twigTicketNumberDropDown.SelectedItem != null)
                 {
-                    var result = MessageBox.Show("File already exists. Would you like to replace?", "Warning: File Already Exists", MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation);
-                    if (result == DialogResult.Yes)
+                    staffInitiatingReportDropDown.Enabled = true;
+
+                    var selectedValue = twigTicketNumberDropDown.SelectedItem.ToString();
+                    var converted = selectedValue.Split('[')[1].Split(']')[0]; 
+                    var selectedKvp = dbInformation.activeTwigCaseNumbers.FirstOrDefault(kvp => kvp.Value.ToString() == converted);
+                    dbInformation.selectedTwigTicketKeyPair.Clear();
+                    dbInformation.selectedTwigTicketKeyPair[selectedKvp.Key] = selectedKvp.Value;
+
+                    dbMethods.getModuleType();
+                    dbMethods.getLatestChecklistVersion();
+
+                    string fileName = $"QualityChecklist_{converted}.pdf";
+                    string filePath = Path.Combine(folderPath, fileName);
+
+                    if (File.Exists(filePath))
+                    {
+                        var result = MessageBox.Show("File already exists. Would you like to replace?", "Warning: File Already Exists", MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation);
+                        if (result == DialogResult.Yes)
+                        {
+                            File.WriteAllBytes(filePath, dbInformation.downloadedFileBytes);
+                        }
+                    }
+                    else
                     {
                         File.WriteAllBytes(filePath, dbInformation.downloadedFileBytes);
                     }
-                }
-                else
-                {
-                    File.WriteAllBytes(filePath, dbInformation.downloadedFileBytes);
-                }
 
-                if (File.Exists(filePath))
-                {
-                    System.Diagnostics.Process.Start(new System.Diagnostics.ProcessStartInfo()
+                    if (File.Exists(filePath))
                     {
-                        FileName = filePath,
-                        UseShellExecute = true
-                    });
+                        System.Diagnostics.Process.Start(new System.Diagnostics.ProcessStartInfo()
+                        {
+                            FileName = filePath,
+                            UseShellExecute = true
+                        });
+                    }
                 }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"An error occurred: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
         private void staffInitiatingReportDropDown_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (staffInitiatingReportDropDown.SelectedItem != null)
+            try
             {
-                attachFileButton.Enabled = true;
+                if (staffInitiatingReportDropDown.SelectedItem != null)
+                {
+                    attachFileButton.Enabled = true;
 
-                string selectedItem = staffInitiatingReportDropDown.SelectedItem as string;
-                var selectedKvp = dbInformation.staffKeyPairOptions.FirstOrDefault(kvp => kvp.Value == selectedItem);
-                dbInformation.selectedStaffKeyValue.Clear();
-                dbInformation.selectedStaffKeyValue[selectedKvp.Key] = selectedKvp.Value; 
+                    string selectedItem = staffInitiatingReportDropDown.SelectedItem as string;
+                    var selectedKvp = dbInformation.staffKeyPairOptions.FirstOrDefault(kvp => kvp.Value == selectedItem);
+                    dbInformation.selectedStaffKeyValue.Clear();
+                    dbInformation.selectedStaffKeyValue[selectedKvp.Key] = selectedKvp.Value; 
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"An error occurred: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
         private void attachFileButton_Click(object sender, EventArgs e)
         {
-            staffInitiatingReportDropDown.Enabled = false; 
-            completedFilePath = string.Empty; 
-            completedFilePath = Path.Combine(folderPath, $"QualityChecklist_{dbInformation.selectedTwigTicketKeyPair.Values.First()}.pdf");
-
-            if (!File.Exists(completedFilePath))
+            try
             {
-                MessageBox.Show("File was not found automatically. Please attach.", "Missing File", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                using (OpenFileDialog openFileDialog = new OpenFileDialog())
+                staffInitiatingReportDropDown.Enabled = false; 
+                completedFilePath = string.Empty; 
+                completedFilePath = Path.Combine(folderPath, $"QualityChecklist_{dbInformation.selectedTwigTicketKeyPair.Values.First()}.pdf");
+
+                if (!File.Exists(completedFilePath))
                 {
-                    openFileDialog.InitialDirectory = "C:\\";
-                    openFileDialog.Filter = "All files (*.*)|*.*|Text files (*.txt)|*.txt";
-                    openFileDialog.FilterIndex = 1;
-                    openFileDialog.RestoreDirectory = true;
-
-                    if (openFileDialog.ShowDialog() == DialogResult.OK)
+                    MessageBox.Show("File was not found automatically. Please attach.", "Missing File", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    using (OpenFileDialog openFileDialog = new OpenFileDialog())
                     {
-                        dbInformation.qualityFilePath = openFileDialog.FileName;
+                        openFileDialog.InitialDirectory = "C:\\";
+                        openFileDialog.Filter = "All files (*.*)|*.*|Text files (*.txt)|*.txt";
+                        openFileDialog.FilterIndex = 1;
+                        openFileDialog.RestoreDirectory = true;
+
+                        if (openFileDialog.ShowDialog() == DialogResult.OK)
+                        {
+                            dbInformation.qualityFilePath = openFileDialog.FileName;
+                        }
+                        qualityChecklistPathTextBox.Text = dbInformation.qualityFilePath;
                     }
-                    qualityChecklistPathTextBox.Text = dbInformation.qualityFilePath;
                 }
+
+                completedFileName = Path.GetFileName(completedFilePath);
+                qualityChecklistPathTextBox.Text = completedFileName; 
             }
-
-            completedFileName = Path.GetFileName(completedFilePath);
-            qualityChecklistPathTextBox.Text = completedFileName; 
-
+            catch (Exception ex)
+            {
+                MessageBox.Show($"An error occurred: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         private void continueButton_Click_1(object sender, EventArgs e)
         {
-            if (!string.IsNullOrEmpty(qualityChecklistPathTextBox.Text) && !string.IsNullOrEmpty(completedFilePath))
+            try
             {
-                byte[] convertedFile = File.ReadAllBytes(completedFilePath);
-                bool result = dbMethods.uploadCompletedQualityChecklist(convertedFile);
-                if (result)
+                if (!string.IsNullOrEmpty(qualityChecklistPathTextBox.Text) && !string.IsNullOrEmpty(completedFilePath))
                 {
-                    MessageBox.Show("Quality checklist uploaded successfully.", "Success!", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    File.Delete(completedFilePath); 
-                    dbMethods.clearModuleForInvoice();
-                    this.Close();
-                    parentForm.OpenChildForm(new qualityForm1(parentForm));
-                    return; 
+                    byte[] convertedFile = File.ReadAllBytes(completedFilePath);
+                    bool result = dbMethods.uploadCompletedQualityChecklist(convertedFile);
+                    if (result)
+                    {
+                        MessageBox.Show("Quality checklist uploaded successfully.", "Success!", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        File.Delete(completedFilePath); 
+                        dbMethods.clearModuleForInvoice();
+                        this.Close();
+                        parentForm.OpenChildForm(new qualityForm1(parentForm));
+                        return; 
+                    }
+                    else
+                    {
+                        MessageBox.Show("Failed to upload the quality checklist.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
                 }
-                else
-                {
-                    MessageBox.Show("Failed to upload the quality checklist.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"An error occurred: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 

@@ -48,6 +48,7 @@
             label5 = new Label();
             submitButton = new Button();
             cancelButton = new Button();
+            panel9 = new Panel();
             panel1.SuspendLayout();
             panel2.SuspendLayout();
             panel4.SuspendLayout();
@@ -56,6 +57,7 @@
             panel7.SuspendLayout();
             panel5.SuspendLayout();
             panel6.SuspendLayout();
+            panel9.SuspendLayout();
             SuspendLayout();
             // 
             // panel1
@@ -65,7 +67,7 @@
             panel1.Location = new Point(0, 0);
             panel1.Name = "panel1";
             panel1.Padding = new Padding(10);
-            panel1.Size = new Size(800, 52);
+            panel1.Size = new Size(825, 52);
             panel1.TabIndex = 1;
             // 
             // label1
@@ -87,7 +89,7 @@
             panel2.Location = new Point(0, 52);
             panel2.Name = "panel2";
             panel2.Padding = new Padding(10);
-            panel2.Size = new Size(800, 218);
+            panel2.Size = new Size(825, 218);
             panel2.TabIndex = 2;
             // 
             // panel4
@@ -99,7 +101,7 @@
             panel4.Location = new Point(10, 108);
             panel4.Name = "panel4";
             panel4.Padding = new Padding(10);
-            panel4.Size = new Size(780, 107);
+            panel4.Size = new Size(805, 411);
             panel4.TabIndex = 8;
             // 
             // panel8
@@ -107,10 +109,10 @@
             panel8.Controls.Add(stateOfHealthRangeChangeLabel);
             panel8.Controls.Add(label10);
             panel8.Dock = DockStyle.Left;
-            panel8.Location = new Point(521, 10);
+            panel8.Location = new Point(520, 10);
             panel8.Name = "panel8";
             panel8.Padding = new Padding(10);
-            panel8.Size = new Size(257, 87);
+            panel8.Size = new Size(257, 391);
             panel8.TabIndex = 8;
             // 
             // stateOfHealthRangeChangeLabel
@@ -140,10 +142,10 @@
             panel3.Controls.Add(stateOfHealthGradeChangeLabel);
             panel3.Controls.Add(label8);
             panel3.Dock = DockStyle.Left;
-            panel3.Location = new Point(233, 10);
+            panel3.Location = new Point(263, 10);
             panel3.Name = "panel3";
             panel3.Padding = new Padding(10);
-            panel3.Size = new Size(288, 87);
+            panel3.Size = new Size(257, 391);
             panel3.TabIndex = 7;
             // 
             // stateOfHealthGradeChangeLabel
@@ -176,7 +178,7 @@
             panel7.Location = new Point(10, 10);
             panel7.Name = "panel7";
             panel7.Padding = new Padding(10);
-            panel7.Size = new Size(223, 87);
+            panel7.Size = new Size(253, 391);
             panel7.TabIndex = 6;
             // 
             // moduleTypeChangeLabel
@@ -209,7 +211,7 @@
             panel5.Location = new Point(10, 10);
             panel5.Name = "panel5";
             panel5.Padding = new Padding(10);
-            panel5.Size = new Size(780, 98);
+            panel5.Size = new Size(805, 98);
             panel5.TabIndex = 7;
             // 
             // panel6
@@ -217,17 +219,17 @@
             panel6.Controls.Add(calculateButton);
             panel6.Controls.Add(maskedTextBox1);
             panel6.Dock = DockStyle.Top;
-            panel6.Location = new Point(135, 10);
+            panel6.Location = new Point(147, 10);
             panel6.Name = "panel6";
             panel6.Padding = new Padding(10);
-            panel6.Size = new Size(635, 70);
+            panel6.Size = new Size(648, 70);
             panel6.TabIndex = 7;
             // 
             // calculateButton
             // 
             calculateButton.Dock = DockStyle.Left;
             calculateButton.Font = new Font("Segoe UI", 18F, FontStyle.Regular, GraphicsUnit.Point);
-            calculateButton.Location = new Point(494, 10);
+            calculateButton.Location = new Point(488, 10);
             calculateButton.MaximumSize = new Size(1355, 60);
             calculateButton.MinimumSize = new Size(135, 60);
             calculateButton.Name = "calculateButton";
@@ -245,7 +247,7 @@
             maskedTextBox1.MaximumSize = new Size(500, 0);
             maskedTextBox1.MinimumSize = new Size(0, 110);
             maskedTextBox1.Name = "maskedTextBox1";
-            maskedTextBox1.Size = new Size(484, 110);
+            maskedTextBox1.Size = new Size(478, 110);
             maskedTextBox1.TabIndex = 2;
             // 
             // label5
@@ -255,15 +257,15 @@
             label5.Font = new Font("Segoe UI", 15.75F, FontStyle.Bold, GraphicsUnit.Point);
             label5.Location = new Point(10, 10);
             label5.Name = "label5";
-            label5.Size = new Size(125, 30);
+            label5.Size = new Size(137, 30);
             label5.TabIndex = 3;
-            label5.Text = "Input info: ";
+            label5.Text = "Watt Hours: ";
             // 
             // submitButton
             // 
             submitButton.Dock = DockStyle.Right;
             submitButton.Font = new Font("Segoe UI", 18F, FontStyle.Regular, GraphicsUnit.Point);
-            submitButton.Location = new Point(665, 270);
+            submitButton.Location = new Point(545, 10);
             submitButton.MaximumSize = new Size(1355, 60);
             submitButton.MinimumSize = new Size(135, 60);
             submitButton.Name = "submitButton";
@@ -277,7 +279,7 @@
             // 
             cancelButton.Dock = DockStyle.Right;
             cancelButton.Font = new Font("Segoe UI", 18F, FontStyle.Regular, GraphicsUnit.Point);
-            cancelButton.Location = new Point(530, 270);
+            cancelButton.Location = new Point(680, 10);
             cancelButton.MaximumSize = new Size(1355, 60);
             cancelButton.MinimumSize = new Size(135, 60);
             cancelButton.Name = "cancelButton";
@@ -287,16 +289,29 @@
             cancelButton.UseVisualStyleBackColor = true;
             cancelButton.Click += cancelButton_Click;
             // 
+            // panel9
+            // 
+            panel9.Controls.Add(submitButton);
+            panel9.Controls.Add(cancelButton);
+            panel9.Dock = DockStyle.Top;
+            panel9.Location = new Point(0, 270);
+            panel9.Name = "panel9";
+            panel9.Padding = new Padding(10);
+            panel9.Size = new Size(825, 98);
+            panel9.TabIndex = 10;
+            // 
             // stateOfHealthCalculatorForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(800, 328);
-            Controls.Add(cancelButton);
-            Controls.Add(submitButton);
+            ClientSize = new Size(825, 372);
+            Controls.Add(panel9);
             Controls.Add(panel2);
             Controls.Add(panel1);
+            MaximumSize = new Size(841, 411);
+            MinimumSize = new Size(841, 411);
             Name = "stateOfHealthCalculatorForm";
+            StartPosition = FormStartPosition.CenterScreen;
             Text = "stateOfHealthCalculatorForm";
             panel1.ResumeLayout(false);
             panel1.PerformLayout();
@@ -312,6 +327,7 @@
             panel5.PerformLayout();
             panel6.ResumeLayout(false);
             panel6.PerformLayout();
+            panel9.ResumeLayout(false);
             ResumeLayout(false);
         }
 
@@ -339,5 +355,6 @@
         private Panel panel3;
         private Label stateOfHealthGradeChangeLabel;
         private Label label8;
+        private Panel panel9;
     }
 }

@@ -36,51 +36,58 @@ namespace BatteryRepairModule.Forms.BRM
 
         private void continueButton_Click(object sender, EventArgs e)
         {
-            if (!modifiedListBox.Items.Contains(listBox1.SelectedItem.ToString()) && authoRepair == false)
-                modifiedListBox.Items.Add(listBox1.SelectedItem.ToString()); 
+            try
+            {
+                if (!modifiedListBox.Items.Contains(listBox1.SelectedItem.ToString()) && authoRepair == false)
+                    modifiedListBox.Items.Add(listBox1.SelectedItem.ToString()); 
 
-            else if (!modifiedListBox.Items.Contains(listBox1.SelectedItem.ToString()) && authoRepair == true){
+                else if (!modifiedListBox.Items.Contains(listBox1.SelectedItem.ToString()) && authoRepair == true){
 
-                string temp = listBox1.SelectedItem.ToString().Split(" - ")[1];
-                if (dbInformation.clearedRepairsValueStatusPair.ContainsKey(temp))
-                    return; 
+                    string temp = listBox1.SelectedItem.ToString().Split(" - ")[1];
+                    if (dbInformation.clearedRepairsValueStatusPair.ContainsKey(temp))
+                        return; 
 
-                var selectedValue = listBox1.SelectedItem.ToString();
-                var str = selectedValue as string;
-                if (!string.IsNullOrEmpty(str))
-                {
-                    var parts = str.Split(new[] { " - " }, 2, StringSplitOptions.None);
-                    if (parts.Length == 2)
+                    var selectedValue = listBox1.SelectedItem.ToString();
+                    var str = selectedValue as string;
+                    if (!string.IsNullOrEmpty(str))
                     {
-                        dbInformation.newRepairActionInRepairFormKeyValue[Int16.Parse(parts[0])] = parts[1];
-                        if (parts[1] == "RECYCLE")
+                        var parts = str.Split(new[] { " - " }, 2, StringSplitOptions.None);
+                        if (parts.Length == 2)
                         {
-                            var recycleResult = MessageBox.Show("Are you sure you want to authorize recycling for this item?", "Confirm Recycle", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-                            if (recycleResult == DialogResult.No)
+                            dbInformation.newRepairActionInRepairFormKeyValue[Int16.Parse(parts[0])] = parts[1];
+                            if (parts[1] == "RECYCLE")
                             {
-                                return;
-                            }
-                            else if (recycleResult == DialogResult.Yes)
-                            {
-                                dbMethods.recycleStatus();
-                                this.Close();
-                                recycled = true; 
+                                var recycleResult = MessageBox.Show("Are you sure you want to authorize recycling for this item?", "Confirm Recycle", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                                if (recycleResult == DialogResult.No)
+                                {
+                                    return;
+                                }
+                                else if (recycleResult == DialogResult.Yes)
+                                {
+                                    dbMethods.recycleStatus();
+                                    this.Close();
+                                    recycled = true; 
+                                }
                             }
                         }
                     }
-                }
 
-                if (!modifiedListBox.Items.Contains(dbInformation.clearedRepairsValueStatusPair.Select(kvp => $"{kvp.Key} ({kvp.Value})")) && !recycled)
-                {
-                    dbMethods.insertRepairRepairForm();
-                    dbMethods.loadRepairActionKeyValueStatus();
-                    modifiedListBox.Items.Clear();
-                    modifiedListBox.Items.AddRange(dbInformation.clearedRepairsValueStatusPair.Select(kvp => $"{kvp.Key} ({kvp.Value})").ToArray());
-                }
+                    if (!modifiedListBox.Items.Contains(dbInformation.clearedRepairsValueStatusPair.Select(kvp => $"{kvp.Key} ({kvp.Value})")) && !recycled)
+                    {
+                        dbMethods.insertRepairRepairForm();
+                        dbMethods.loadRepairActionKeyValueStatus();
+                        modifiedListBox.Items.Clear();
+                        modifiedListBox.Items.AddRange(dbInformation.clearedRepairsValueStatusPair.Select(kvp => $"{kvp.Key} ({kvp.Value})").ToArray());
+                    }
 
+                }
+                if (!recycled)
+                    this.Close();
             }
-            if (!recycled)
-                this.Close();
+            catch (Exception ex)
+            {
+                MessageBox.Show($"An error occurred: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         private void cancelButton_Click(object sender, EventArgs e)

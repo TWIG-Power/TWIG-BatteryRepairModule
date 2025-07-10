@@ -117,7 +117,10 @@
             Controls.Add(panel2);
             Controls.Add(panel1);
             MaximizeBox = false;
+            MaximumSize = new Size(816, 262);
+            MinimumSize = new Size(816, 262);
             Name = "addCustomerReport";
+            StartPosition = FormStartPosition.CenterScreen;
             Text = "addCustomerReport";
             panel1.ResumeLayout(false);
             panel1.PerformLayout();

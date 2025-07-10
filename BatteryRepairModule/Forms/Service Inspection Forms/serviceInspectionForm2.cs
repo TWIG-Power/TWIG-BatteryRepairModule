@@ -21,8 +21,15 @@ namespace BatteryRepairModule.Forms.Service_Inspection_Forms
             ThemeHelper.ApplyTheme(this);
             this.parentForm = parentRef;
 
-            dbMethods.LoadRegisteredCustomerReport();
-            reportedIssuesListBox.Items.AddRange(dbInformation.reportedIssuesList.Select(kvp => $"{kvp.Key} - {kvp.Value}").ToArray());
+            try
+            {
+                dbMethods.LoadRegisteredCustomerReport();
+                reportedIssuesListBox.Items.AddRange(dbInformation.reportedIssuesList.Select(kvp => $"{kvp.Key} - {kvp.Value}").ToArray());
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"An error occurred: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         private void continueButton_Click(object sender, EventArgs e)

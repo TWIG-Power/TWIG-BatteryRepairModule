@@ -7,16 +7,6 @@ namespace BatteryRepairModule;
 public static partial class dbMethods
 {
     #region LOAD QUERIES
-    private static void AddOptionsFromReader(NpgsqlDataReader reader, List<string> optionsList)
-    {
-        var tempList = new List<string>();
-        while (reader.Read() && !reader.IsDBNull(0))
-        {
-            tempList.Add(reader.GetString(0));
-        }
-        optionsList.Clear();
-        optionsList.AddRange(tempList);
-    }
     public static void loadStaffNames()
     {
         using (var conn = new NpgsqlConnection(dbConnection.connectionPath))
@@ -146,7 +136,7 @@ public static partial class dbMethods
         if (dbInformation.selectedModuleType.Keys.First() == 0)
         {
             using (var conn = new NpgsqlConnection(dbConnection.connectionPath))
-            using (var cmd = new NpgsqlCommand("INSERT INTO public.ticket (twig_ticket_number, vehicle_vin_number, staff_starting_report_fk, status_fk, cobra_fk, serial_number) VALUES (@ticketNum, @vehicleVin, @staffStarting, @status, @cobra_fk, @serialNumber)", conn))
+            using (var cmd = new NpgsqlCommand("INSERT INTO public.ticket (twig_ticket_number, vehicle_vin_number, staff_starting_report_fk, status_fk, cobra_fk, serial_number, status_timestamp) VALUES (@ticketNum, @vehicleVin, @staffStarting, @status, @cobra_fk, @serialNumber, @timestamp)", conn))
             {
                 conn.Open();
                 cmd.Parameters.AddWithValue("@ticketNum", dbInformation.TWIGCaseNumber ?? (object)DBNull.Value);
@@ -155,6 +145,7 @@ public static partial class dbMethods
                 cmd.Parameters.AddWithValue("@status", initialStatus);
                 cmd.Parameters.AddWithValue("@cobra_fk", dbInformation.moduleTypesByOEM[0].Keys.First());
                 cmd.Parameters.AddWithValue("@serialNumber", dbInformation.batterySerialNumber ?? (object)DBNull.Value);
+                cmd.Parameters.AddWithValue("@timestamp", DateTime.Now); 
                 int rowsAffected = cmd.ExecuteNonQuery();
                 return rowsAffected > 0;
             }
@@ -162,7 +153,7 @@ public static partial class dbMethods
         else if (dbInformation.selectedModuleType.Keys.First() == 1)
         {
             using (var conn = new NpgsqlConnection(dbConnection.connectionPath))
-            using (var cmd = new NpgsqlCommand("INSERT INTO public.ticket (twig_ticket_number, vehicle_vin_number, staff_starting_report_fk, status_fk, ktm_fk, serial_number) VALUES (@ticketNum, @vehicleVin, @staffStarting, @status, @ktm_fk, @serialNumber)", conn))
+            using (var cmd = new NpgsqlCommand("INSERT INTO public.ticket (twig_ticket_number, vehicle_vin_number, staff_starting_report_fk, status_fk, ktm_fk, serial_number, status_timestamp) VALUES (@ticketNum, @vehicleVin, @staffStarting, @status, @ktm_fk, @serialNumber, @timestamp)", conn))
             {
                 conn.Open();
                 cmd.Parameters.AddWithValue("@ticketNum", dbInformation.TWIGCaseNumber ?? (object)DBNull.Value);
@@ -171,6 +162,7 @@ public static partial class dbMethods
                 cmd.Parameters.AddWithValue("@status", initialStatus);
                 cmd.Parameters.AddWithValue("@ktm_fk", dbInformation.moduleTypesByOEM[1].Keys.First());
                 cmd.Parameters.AddWithValue("@serialNumber", dbInformation.batterySerialNumber ?? (object)DBNull.Value);
+                cmd.Parameters.AddWithValue("@timestamp", DateTime.Now); 
 
                 int rowsAffected = cmd.ExecuteNonQuery();
                 return rowsAffected > 0;
@@ -179,7 +171,7 @@ public static partial class dbMethods
         else if (dbInformation.selectedModuleType.Keys.First() == 2)
         {
             using (var conn = new NpgsqlConnection(dbConnection.connectionPath))
-            using (var cmd = new NpgsqlCommand("INSERT INTO public.ticket (twig_ticket_number, vehicle_vin_number, staff_starting_report_fk, status_fk, misc_fk, serial_number) VALUES (@ticketNum, @vehicleVin, @staffStarting, @status, @misc_fk, @serialNumber)", conn))
+            using (var cmd = new NpgsqlCommand("INSERT INTO public.ticket (twig_ticket_number, vehicle_vin_number, staff_starting_report_fk, status_fk, misc_fk, serial_number, status_timestamp) VALUES (@ticketNum, @vehicleVin, @staffStarting, @status, @misc_fk, @serialNumber, @timestamp)", conn))
             {
                 conn.Open();
                 cmd.Parameters.AddWithValue("@ticketNum", dbInformation.TWIGCaseNumber ?? (object)DBNull.Value);
@@ -188,6 +180,7 @@ public static partial class dbMethods
                 cmd.Parameters.AddWithValue("@status", initialStatus);
                 cmd.Parameters.AddWithValue("@misc_fk", dbInformation.moduleTypesByOEM[2].Keys.First());
                 cmd.Parameters.AddWithValue("@serialNumber", dbInformation.batterySerialNumber ?? (object)DBNull.Value);
+                cmd.Parameters.AddWithValue("@timestamp", DateTime.Now); 
 
                 int rowsAffected = cmd.ExecuteNonQuery();
                 return rowsAffected > 0;
@@ -276,7 +269,7 @@ public static partial class dbMethods
 
     public static void getTicketStatusOptions()
     {
-        dbInformation.ticketStatusOptions.Clear(); 
+        dbInformation.ticketStatusOptions.Clear();
         using (var conn = new NpgsqlConnection(dbConnection.connectionPath))
         using (var cmd = new NpgsqlCommand("SELECT id, status FROM public.ticket_status", conn))
         {
@@ -288,6 +281,33 @@ public static partial class dbMethods
                     dbInformation.ticketStatusOptions.Add(reader.GetInt16(0), reader.GetString(1));
                 }
             }
+        }
+    }
+
+
+    public static bool checkIfSerialNumberHasActiveTicket(int? serialNumber)
+    {
+        int status = dbInformation.ticketStatusOptions.FirstOrDefault(kvp => kvp.Value == "Shipped / Closed").Key;
+        using (var conn = new NpgsqlConnection(dbConnection.connectionPath))
+        using (var cmd = new NpgsqlCommand($"SELECT COUNT(*) FROM public.ticket WHERE serial_number = {serialNumber} AND status_fk != {status}", conn))
+        {
+            conn.Open();
+            using (var reader = cmd.ExecuteReader())
+            {
+                while (reader.Read())
+                {
+                    int count = reader.GetInt16(0);
+                    if (count > 0)
+                    {
+                        MessageBox.Show("Serial number has an active ticket.", "Active Ticket Found", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        return false;
+                    }
+                    else
+                        return true;
+                }
+            }
+            MessageBox.Show("Check could not be executed. Serial number has an active ticket.", "Check Result", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            return false; 
         }
     }
 }
