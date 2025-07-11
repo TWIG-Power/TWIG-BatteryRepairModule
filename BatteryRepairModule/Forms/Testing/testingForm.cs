@@ -14,11 +14,12 @@ namespace BatteryRepairModule.Forms.Testing
 {
     public partial class testingForm : Form
     {
-        private BrmMainMenuForm parentForm; 
+        private BrmMainMenuForm parentForm;
+        private List<string> temp = new List<string>(); 
         public testingForm(BrmMainMenuForm parentRef)
         {
             InitializeComponent();
-            parentForm = parentRef; 
+            parentForm = parentRef;
             ThemeHelper.ApplyTheme(this);
             dbMethods.loadModulesAwaitingTesting();
             foreach (Module module in dbInformation.activeModules)
@@ -133,9 +134,32 @@ namespace BatteryRepairModule.Forms.Testing
                 dbMethods.getDoesTestHaveNote(); 
                 dbMethods.getAddedTestsByTwigTicket();
 
+                if (!dbInformation.addedTestsKeyValue.Any())
+                {
+                    dbInformation.tempAddNewTest.Clear();
+                    dbInformation.tempAddNewTest.Add(dbInformation.testingOptionsKeyValue.FirstOrDefault(kvp => kvp.Value == "Cycle Test").Key, "");
+                    dbMethods.insertNewTestAction();
+
+                    dbMethods.getAddedTestsByTwigTicket();
+
+                    temp.Clear();
+
+                    foreach (var kvp in dbInformation.addedTestsKeyValue)
+                    {
+                        var testId = kvp.Key;
+                        var testName = kvp.Value;
+                        var status = dbInformation.addedTestsKeyStatus.GetValueOrDefault(testId);
+                        temp.Add($"[{testId}] {testName} ({status})");
+                    }
+
+                    temp.Sort(); 
+
+                    testStatusListBox.Items.AddRange(temp.ToArray()); 
+                }
+
                 foreach (var kvp in dbInformation.addedTestsKeyValue)
                 {
-                    var testId = kvp.Key; 
+                    var testId = kvp.Key;
                     var testName = kvp.Value;
                     var status = dbInformation.addedTestsKeyStatus.GetValueOrDefault(testId);
 
@@ -170,22 +194,6 @@ namespace BatteryRepairModule.Forms.Testing
             clearBatteryForQualityButton.Enabled = true;
             calculateStateOfHealthButton.Enabled = true;
             viewRepairNoteButton.Enabled = true; 
-        }
-
-        private void viewRepairActionNotesButton_Click(object sender, EventArgs e)
-        {
-            staffDropDown.Enabled = false; 
-            if (repairActionsListBox.SelectedItem != null)
-            {
-                using (var newForm = new addNotesForm(repairActionsListBox, true, "test"))
-                {
-                    newForm.ShowDialog(this);
-                }
-            }
-            else
-            {
-                MessageBox.Show("Please select a repair action to view its note.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
         }
 
         private void returnBatteryToRepairButton_Click(object sender, EventArgs e)

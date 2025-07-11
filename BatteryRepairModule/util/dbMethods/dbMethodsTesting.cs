@@ -110,7 +110,10 @@ public static partial class dbMethods
         using (var cmd = new NpgsqlCommand("INSERT INTO public.testing_added (staff_fk, status_fk, test_fk, ticket_fk, timestamp) VALUES (@staffFk, @statusFk, @testFk, @ticketFk, @timestamp)", conn))
         {
             conn.Open();
-            cmd.Parameters.AddWithValue("@staffFk", dbInformation.selectedStaffKeyValue.Keys.First());
+            if (dbInformation.selectedStaffKeyValue.Keys.Any())
+                cmd.Parameters.AddWithValue("@staffFk", dbInformation.selectedStaffKeyValue.Keys.First());
+            else
+                cmd.Parameters.AddWithValue("@staffFk", DBNull.Value);
             cmd.Parameters.AddWithValue("@statusFk", 1);
             cmd.Parameters.AddWithValue("@testFk", dbInformation.tempAddNewTest.Keys.First());
             cmd.Parameters.AddWithValue("@ticketFk", dbInformation.selectedTwigTicketKeyPair.Keys.First());
