@@ -33,6 +33,7 @@ public static class dbInformation
     public static Dictionary<int, string> reportedIssuesList = new Dictionary<int, string>();
     public static Dictionary<int, string> repairActionOptions = new Dictionary<int, string>();
     public static Dictionary<int, string> proposedRepairsKeyPair = new Dictionary<int, string>();
+    public static List<Module> activeModules = new List<Module>(); 
 
     // Inspection Checkboxes
     public static bool? checkHousingScrape = false;
@@ -132,6 +133,7 @@ public static class dbInformation
 
 public class Module
 {
+    public int ticketSurrogateKey { get; set; }
     public int ticketId { get; set; }
     public int SerialNumber { get; set; }
     public string Type { get; set; } = string.Empty;
@@ -141,10 +143,13 @@ public class Module
 
     public Module() { }
 
-    public Module(int id, int serialNumber, string oem)
+    public Module(int surroKey, int id, int serialNumber, string oem, string type, string stateOfHealth)
     {
+        ticketSurrogateKey = surroKey; 
         ticketId = id;
         SerialNumber = serialNumber;
         Oem = oem;
+        model = type;
+        this.stateOfHealth = stateOfHealth; 
     }
 }

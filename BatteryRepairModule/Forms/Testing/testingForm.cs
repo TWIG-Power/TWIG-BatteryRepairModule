@@ -20,11 +20,11 @@ namespace BatteryRepairModule.Forms.Testing
             InitializeComponent();
             parentForm = parentRef; 
             ThemeHelper.ApplyTheme(this);
-            dbMethods.loadAwaitingTestingTickets();
-            twigTicketNumberDropDown.Items.AddRange(
-                dbInformation.activeTwigCaseNumbers.Select(kvp =>
-                    $"[{kvp.Value}] - {dbInformation.activeModuleSerialNumbers[kvp.Key].ToString()}"
-                ).ToArray());
+            dbMethods.loadModulesAwaitingTesting();
+            foreach (Module module in dbInformation.activeModules)
+            {
+                twigTicketNumberDropDown.Items.Add($"[{module.ticketId}] - [{module.model}] - {module.SerialNumber}");
+            }
 
             dbMethods.loadStaffNames();
             staffDropDown.Items.AddRange(dbInformation.staffKeyPairOptions.Select(kvp => kvp.Value.ToString()).ToArray());
@@ -109,9 +109,9 @@ namespace BatteryRepairModule.Forms.Testing
             {
                 var selectedValue = twigTicketNumberDropDown.SelectedItem.ToString();
                 var converted = selectedValue.Split('[')[1].Split(']')[0]; 
-                var selectedKvp = dbInformation.activeTwigCaseNumbers.FirstOrDefault(kvp => kvp.Value.ToString() == converted);
+                var selectedKvp = dbInformation.activeModules.FirstOrDefault(mod => mod.ticketId.ToString() == converted);
                 dbInformation.selectedTwigTicketKeyPair.Clear();
-                dbInformation.selectedTwigTicketKeyPair[selectedKvp.Key] = selectedKvp.Value;;
+                dbInformation.selectedTwigTicketKeyPair[selectedKvp.ticketSurrogateKey] = selectedKvp.ticketId;;
 
                 repairActionsListBox.Items.Clear();
 

@@ -45,8 +45,9 @@ namespace BatteryRepairModule.Forms.BRM
 
                     string temp = listBox1.SelectedItem.ToString().Split(" - ")[1];
                     if (dbInformation.clearedRepairsValueStatusPair.ContainsKey(temp))
-                        return; 
+                        return;
 
+                    dbInformation.newRepairActionInRepairFormKeyValue.Clear(); 
                     var selectedValue = listBox1.SelectedItem.ToString();
                     var str = selectedValue as string;
                     if (!string.IsNullOrEmpty(str))
