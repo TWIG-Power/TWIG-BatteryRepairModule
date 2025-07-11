@@ -6,23 +6,52 @@ namespace BatteryRepairModule;
 public static partial class dbMethods
 {
 
-    public static void loadAwaitingTestingTickets()
+    public static void loadModulesAwaitingTesting()
     {
         int status = dbInformation.ticketStatusOptions.FirstOrDefault(kvp => kvp.Value == "Awaiting Testing").Key; 
         using (var conn = new NpgsqlConnection(dbConnection.connectionPath))
-        using (var cmd = new NpgsqlCommand($"SELECT \"id\", \"twig_ticket_number\", serial_number FROM public.ticket WHERE \"status_fk\" = {status}", conn))
         {
             conn.Open();
-            using (var reader = cmd.ExecuteReader())
+
+            using (var cmd = new NpgsqlCommand(
+                @$"SELECT DISTINCT t.id, t.twig_ticket_number, t.serial_number, 
+                        CASE 
+                            WHEN t.cobra_fk IS NOT NULL THEN 'Cobra'
+                            WHEN t.ktm_fk IS NOT NULL THEN 'KTM'
+                            WHEN t.misc_fk IS NOT NULL THEN 'Misc'
+                            ELSE 'Unknown'
+                        END AS oem,
+                        CASE 
+                            WHEN t.cobra_fk IS NOT NULL THEN (SELECT module_type FROM public.cobra_oem WHERE cobra_oem.id = t.cobra_fk)
+                            WHEN t.ktm_fk IS NOT NULL THEN (SELECT module_type FROM public.ktm_oem WHERE ktm_oem.id = t.ktm_fk)
+                            WHEN t.misc_fk IS NOT NULL THEN (SELECT module_type FROM public.misc_oem WHERE misc_oem.id = t.misc_fk)
+                            ELSE 'Unknown'
+                        END AS module_type,
+                        (
+                            SELECT ta2.state_of_health
+                            FROM public.testing_added ta2
+                            WHERE ta2.ticket_fk = t.id
+                            ORDER BY ta2.id ASC
+                            LIMIT 1
+                        ) AS state_of_health
+                FROM public.ticket t
+                WHERE t.status_fk = {status}", conn))
             {
-                dbInformation.activeTwigCaseNumbers.Clear();
-                dbInformation.activeModuleSerialNumbers.Clear();
-                while (reader.Read())
+                dbInformation.activeModules.Clear();
+
+                using (var reader = cmd.ExecuteReader())
                 {
-                    if (!reader.IsDBNull(0) && !reader.IsDBNull(1))
+                    while (reader.Read())
                     {
-                        dbInformation.activeTwigCaseNumbers.Add(reader.GetInt16(0), reader.GetInt32(1));
-                        dbInformation.activeModuleSerialNumbers.Add(reader.GetInt16(0), reader.GetInt32(2));
+                        int ticketSurroKey = reader.GetInt32(0);
+                        int twigTicketNumber = reader.GetInt32(1);
+                        int serialNumber = reader.GetInt32(2);
+                        string oem = reader.GetString(3);
+                        string moduleType = reader.IsDBNull(4) ? "Unknown" : reader.GetString(4);
+                        string stateOfHealth = reader.IsDBNull(5) ? "Unknown" : reader.GetString(5);
+
+                        Module module = new Module(ticketSurroKey, twigTicketNumber, serialNumber, oem, moduleType, stateOfHealth);
+                        dbInformation.activeModules.Add(module);
                     }
                 }
             }
@@ -81,7 +110,10 @@ public static partial class dbMethods
         using (var cmd = new NpgsqlCommand("INSERT INTO public.testing_added (staff_fk, status_fk, test_fk, ticket_fk, timestamp) VALUES (@staffFk, @statusFk, @testFk, @ticketFk, @timestamp)", conn))
         {
             conn.Open();
-            cmd.Parameters.AddWithValue("@staffFk", dbInformation.selectedStaffKeyValue.Keys.First());
+            if (dbInformation.selectedStaffKeyValue.Keys.Any())
+                cmd.Parameters.AddWithValue("@staffFk", dbInformation.selectedStaffKeyValue.Keys.First());
+            else
+                cmd.Parameters.AddWithValue("@staffFk", DBNull.Value);
             cmd.Parameters.AddWithValue("@statusFk", 1);
             cmd.Parameters.AddWithValue("@testFk", dbInformation.tempAddNewTest.Keys.First());
             cmd.Parameters.AddWithValue("@ticketFk", dbInformation.selectedTwigTicketKeyPair.Keys.First());

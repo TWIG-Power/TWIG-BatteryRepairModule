@@ -24,12 +24,11 @@ namespace BatteryRepairModule.Forms.BRM
             this.parentForm = parentRef;
 
             ThemeHelper.ApplyTheme(this);
-            dbMethods.loadAwaitingAuthorizeRepairTickets();
-
-            twigTicketNumberDropDown.Items.AddRange(
-                dbInformation.activeTwigCaseNumbers.Select(kvp =>
-                    $"[{kvp.Value}] - {dbInformation.activeModuleSerialNumbers[kvp.Key].ToString()}"
-                ).ToArray());
+            dbMethods.loadModulesAwaitingAuthorization();
+            foreach (Module module in dbInformation.activeModules)
+            {
+                twigTicketNumberDropDown.Items.Add($"[{module.ticketId}] - [{module.model}] - {module.SerialNumber}");
+            }
 
             dbMethods.loadStaffNames();
             staffDropDown.Items.AddRange(dbInformation.staffKeyPairOptions.Values.ToArray());
@@ -71,10 +70,10 @@ namespace BatteryRepairModule.Forms.BRM
                 reportedIssuesListBox.Items.Clear(); 
 
                 var selectedValue = twigTicketNumberDropDown.SelectedItem.ToString();
-                var converted = selectedValue.Split('[')[1].Split(']')[0];
-                var selectedKvp = dbInformation.activeTwigCaseNumbers.FirstOrDefault(kvp => kvp.Value.ToString() == converted);
+                var converted = Int32.Parse(selectedValue.Split('[')[1].Split(']')[0]);
+                var selectedKvp = dbInformation.activeModules.FirstOrDefault(module => module.ticketId == converted);
                 dbInformation.selectedTwigTicketKeyPair.Clear();
-                dbInformation.selectedTwigTicketKeyPair[selectedKvp.Key] = selectedKvp.Value; ;
+                dbInformation.selectedTwigTicketKeyPair[selectedKvp.ticketSurrogateKey] = selectedKvp.ticketId; ;
 
                 loadReportedIssues();
                 loadSuggestedRepairs();
@@ -118,12 +117,12 @@ namespace BatteryRepairModule.Forms.BRM
         {
             try
             {
-                bool cmd = CheckIfValueNotNullOrLess();
-                if (!cmd)
+                bool control = CheckIfValueNotNullOrLess();
+                if (!control)
                     return;
                 
-                cmd = parseAndCheckRecycle();
-                if (!cmd)
+                control = ParseAndCheckRecycle();
+                if (control)
                     return; 
                 
 
@@ -199,10 +198,11 @@ namespace BatteryRepairModule.Forms.BRM
                 newForm.ShowDialog(this);
         }
 
-        private bool parseAndCheckRecycle()
+        private bool ParseAndCheckRecycle()
         {
             try
             {
+                dbInformation.clearedRepairsKeyValPair.Clear(); 
                 foreach (var item in authorizedRepairsListBox.Items)
                 {
                     var str = item as string;
@@ -225,16 +225,18 @@ namespace BatteryRepairModule.Forms.BRM
                                     MessageBox.Show("Recycle detected. Recycling process will proceed.", "Recycle Detected", MessageBoxButtons.OK, MessageBoxIcon.Information);
                                     this.Close();
                                     recycled = true;
-                                    break;
+                                    return true;
                                 }
                             }
                         }
                     }
-                } return true; 
+                }
+                return false;
             }
             catch (Exception ex)
             {
                 MessageBox.Show($"An error occurred: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return false;
             }
         }
 

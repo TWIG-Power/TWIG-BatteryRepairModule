@@ -38,15 +38,18 @@ namespace BatteryRepairModule.Forms.BRM
         {
             try
             {
+                dbInformation.recycled = false; 
                 if (!modifiedListBox.Items.Contains(listBox1.SelectedItem.ToString()) && authoRepair == false)
-                    modifiedListBox.Items.Add(listBox1.SelectedItem.ToString()); 
+                    modifiedListBox.Items.Add(listBox1.SelectedItem.ToString());
 
-                else if (!modifiedListBox.Items.Contains(listBox1.SelectedItem.ToString()) && authoRepair == true){
+                else if (!modifiedListBox.Items.Contains(listBox1.SelectedItem.ToString()) && authoRepair == true)
+                {
 
                     string temp = listBox1.SelectedItem.ToString().Split(" - ")[1];
                     if (dbInformation.clearedRepairsValueStatusPair.ContainsKey(temp))
-                        return; 
+                        return;
 
+                    dbInformation.newRepairActionInRepairFormKeyValue.Clear();
                     var selectedValue = listBox1.SelectedItem.ToString();
                     var str = selectedValue as string;
                     if (!string.IsNullOrEmpty(str))
@@ -65,8 +68,9 @@ namespace BatteryRepairModule.Forms.BRM
                                 else if (recycleResult == DialogResult.Yes)
                                 {
                                     dbMethods.recycleStatus();
+                                    dbInformation.recycled = true; 
                                     this.Close();
-                                    recycled = true; 
+                                    recycled = true;
                                 }
                             }
                         }

@@ -13,6 +13,7 @@ namespace BatteryRepairModule.Forms.Add_Forms
     public partial class addStatusUpdateForm : Form
     {
         private string statusType;
+        private List<string> temp = new List<string>(); 
         private ListBox modifiedListBox; 
         public addStatusUpdateForm(ListBox listBoxRef, string typeRef)
         {
@@ -125,21 +126,27 @@ namespace BatteryRepairModule.Forms.Add_Forms
                             dbMethods.getAddedTestsByTwigTicket();  
                             modifiedListBox.Items.Clear();
 
+                            temp.Clear(); 
+
                             foreach (var kvp in dbInformation.addedTestsKeyValue)
                             {
                                 var testId = kvp.Key; // Unique ID of the test
                                 var testName = kvp.Value; // Test name
                                 var status = dbInformation.addedTestsKeyStatus.GetValueOrDefault(testId); // Test status
 
+
                                 if (dbInformation.doesTestHaveNote[testId] == false)
                                 {
-                                    modifiedListBox.Items.Add($"[{testId}] {testName} ({status})");
+                                    temp.Add($"[{testId}] {testName} ({status})");
                                 }
                                 else
                                 {
-                                    modifiedListBox.Items.Add($"[{testId}] {testName} ({status})*");
+                                    temp.Add($"[{testId}] {testName} ({status})*");
                                 }
                             }
+
+                            temp.Sort();
+                            modifiedListBox.Items.AddRange(temp.ToArray()); 
 
                             this.Close(); 
                         }

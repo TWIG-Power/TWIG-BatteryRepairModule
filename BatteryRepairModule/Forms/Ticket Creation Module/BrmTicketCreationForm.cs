@@ -14,7 +14,7 @@ namespace BatteryRepairModule.Forms.BRM
 {
     public partial class BrmTicketCreationForm : Form
     {
-        public static int tempTwigCaseNum;
+        //public static int tempTwigCaseNum;
         public static int? tempSerialNum;
         public static string? tempVinNum;
         private BrmMainMenuForm parentForm;
@@ -34,9 +34,8 @@ namespace BatteryRepairModule.Forms.BRM
                 dbMethods.loadStaffNames();
                 staffInitiatingReportDropDown.Items.AddRange(dbInformation.staffKeyPairOptions.Values.ToArray());
 
-                dbInformation.TWIGCaseNumber = dbMethods.getLastTwigTicketNumber() + 1;
-                twigTicketNumberTextBox.Text = dbInformation.TWIGCaseNumber.ToString();
-                twigTicketNumberTextBox.Enabled = false;
+                //dbInformation.TWIGCaseNumber = dbMethods.getLastTwigTicketNumber() + 1;
+                //twigTicketNumberTextBox.Text = dbInformation.TWIGCaseNumber.ToString();
 
                 dbMethods.loadAllModuleTypes();
                 batteryTypeDropDown.Items.Clear();
@@ -50,10 +49,10 @@ namespace BatteryRepairModule.Forms.BRM
                     }
                 }
 
-                LoadTempVariables();
-
                 tempSelectedMod.Clear();
                 tempSelectedStaff.Clear();
+
+                LoadTempVariables();
             }
             catch (Exception ex)
             {
@@ -63,8 +62,8 @@ namespace BatteryRepairModule.Forms.BRM
 
         private void LoadTempVariables()
         {
-            if (tempTwigCaseNum != 0)
-                twigTicketNumberTextBox.Text = tempTwigCaseNum.ToString();
+            //if (tempTwigCaseNum != 0)
+                //twigTicketNumberTextBox.Text = tempTwigCaseNum.ToString();
 
             if (tempSerialNum.HasValue && tempSerialNum != 0)
                 batterySerialNumberTextBox.Text = tempSerialNum.ToString();
@@ -78,7 +77,7 @@ namespace BatteryRepairModule.Forms.BRM
         {
             try
             {
-                tempTwigCaseNum = Int32.Parse(twigTicketNumberTextBox.Text);
+                //tempTwigCaseNum = Int32.Parse(twigTicketNumberTextBox.Text);
 
                 if (batteryTypeDropDown.SelectedItem == null ||
                     !batteryTypeDropDown.Items.Contains(batteryTypeDropDown.Text))
@@ -111,11 +110,11 @@ namespace BatteryRepairModule.Forms.BRM
                     tempSelectedStaff[selectedKvp.Key] = selectedKvp.Value;
                 }
 
-                if (tempTwigCaseNum == 0)
+                /*if (tempTwigCaseNum == 0)
                 {
                     MessageBox.Show($"Please fill the TWIG Ticket Number text box in order to continue.", "Input Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return;
-                }
+                }*/
                 if (!dbInformation.moduleTypesByOEM.Any())
                 {
                     MessageBox.Show($"Please select a module type in order to continue.", "Input Error", MessageBoxButtons.OK, MessageBoxIcon.Error);

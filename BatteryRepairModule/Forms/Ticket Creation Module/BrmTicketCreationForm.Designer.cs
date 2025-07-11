@@ -32,9 +32,6 @@ namespace BatteryRepairModule.Forms.BRM
         /// </summary>
         private void InitializeComponent()
         {
-            twigTicketNumContainer = new Panel();
-            twigTicketNumberTextBox = new MaskedTextBox();
-            label1 = new Label();
             panel1 = new Panel();
             comboBox1 = new ComboBox();
             label2 = new Label();
@@ -52,7 +49,6 @@ namespace BatteryRepairModule.Forms.BRM
             label6 = new Label();
             continueButton = new Button();
             cancelButton = new Button();
-            twigTicketNumContainer.SuspendLayout();
             panel1.SuspendLayout();
             panel2.SuspendLayout();
             panel3.SuspendLayout();
@@ -60,48 +56,13 @@ namespace BatteryRepairModule.Forms.BRM
             panel5.SuspendLayout();
             SuspendLayout();
             // 
-            // twigTicketNumContainer
-            // 
-            twigTicketNumContainer.AutoSizeMode = AutoSizeMode.GrowAndShrink;
-            twigTicketNumContainer.Controls.Add(twigTicketNumberTextBox);
-            twigTicketNumContainer.Controls.Add(label1);
-            twigTicketNumContainer.Dock = DockStyle.Top;
-            twigTicketNumContainer.Location = new Point(0, 0);
-            twigTicketNumContainer.Name = "twigTicketNumContainer";
-            twigTicketNumContainer.Padding = new Padding(10, 10, 10, 5);
-            twigTicketNumContainer.Size = new Size(931, 80);
-            twigTicketNumContainer.TabIndex = 0;
-            // 
-            // twigTicketNumberTextBox
-            // 
-            twigTicketNumberTextBox.Dock = DockStyle.Fill;
-            twigTicketNumberTextBox.Font = new Font("Segoe UI", 20F, FontStyle.Regular, GraphicsUnit.Point);
-            twigTicketNumberTextBox.Location = new Point(363, 10);
-            twigTicketNumberTextBox.MaximumSize = new Size(500, 0);
-            twigTicketNumberTextBox.MinimumSize = new Size(0, 110);
-            twigTicketNumberTextBox.Name = "twigTicketNumberTextBox";
-            twigTicketNumberTextBox.Size = new Size(500, 110);
-            twigTicketNumberTextBox.TabIndex = 1;
-            // 
-            // label1
-            // 
-            label1.AutoSize = true;
-            label1.Dock = DockStyle.Left;
-            label1.Font = new Font("Segoe UI", 22F, FontStyle.Bold, GraphicsUnit.Point);
-            label1.Location = new Point(10, 10);
-            label1.Name = "label1";
-            label1.Padding = new Padding(10, 0, 10, 10);
-            label1.Size = new Size(353, 51);
-            label1.TabIndex = 0;
-            label1.Text = "TWIG Ticket Number: ";
-            // 
             // panel1
             // 
             panel1.AutoSize = true;
             panel1.Controls.Add(comboBox1);
             panel1.Controls.Add(label2);
             panel1.Dock = DockStyle.Top;
-            panel1.Location = new Point(0, 80);
+            panel1.Location = new Point(0, 0);
             panel1.Name = "panel1";
             panel1.Size = new Size(931, 0);
             panel1.TabIndex = 1;
@@ -135,7 +96,7 @@ namespace BatteryRepairModule.Forms.BRM
             panel2.Controls.Add(batteryTypeDropDown);
             panel2.Controls.Add(label3);
             panel2.Dock = DockStyle.Top;
-            panel2.Location = new Point(0, 80);
+            panel2.Location = new Point(0, 0);
             panel2.Name = "panel2";
             panel2.Padding = new Padding(10, 10, 10, 5);
             panel2.Size = new Size(931, 80);
@@ -169,7 +130,7 @@ namespace BatteryRepairModule.Forms.BRM
             panel3.Controls.Add(batterySerialNumberTextBox);
             panel3.Controls.Add(label4);
             panel3.Dock = DockStyle.Top;
-            panel3.Location = new Point(0, 160);
+            panel3.Location = new Point(0, 80);
             panel3.Name = "panel3";
             panel3.Padding = new Padding(10, 10, 10, 5);
             panel3.Size = new Size(931, 80);
@@ -202,7 +163,7 @@ namespace BatteryRepairModule.Forms.BRM
             panel4.Controls.Add(vehicleVinNumberTextBox);
             panel4.Controls.Add(label5);
             panel4.Dock = DockStyle.Top;
-            panel4.Location = new Point(0, 240);
+            panel4.Location = new Point(0, 160);
             panel4.Name = "panel4";
             panel4.Padding = new Padding(10, 10, 10, 5);
             panel4.Size = new Size(931, 80);
@@ -235,7 +196,7 @@ namespace BatteryRepairModule.Forms.BRM
             panel5.Controls.Add(staffInitiatingReportDropDown);
             panel5.Controls.Add(label6);
             panel5.Dock = DockStyle.Top;
-            panel5.Location = new Point(0, 320);
+            panel5.Location = new Point(0, 240);
             panel5.Name = "panel5";
             panel5.Padding = new Padding(10, 10, 10, 5);
             panel5.Size = new Size(931, 80);
@@ -268,7 +229,7 @@ namespace BatteryRepairModule.Forms.BRM
             // 
             continueButton.Dock = DockStyle.Right;
             continueButton.Font = new Font("Segoe UI", 18F, FontStyle.Regular, GraphicsUnit.Point);
-            continueButton.Location = new Point(756, 400);
+            continueButton.Location = new Point(756, 320);
             continueButton.MaximumSize = new Size(175, 80);
             continueButton.MinimumSize = new Size(175, 80);
             continueButton.Name = "continueButton";
@@ -282,7 +243,7 @@ namespace BatteryRepairModule.Forms.BRM
             // 
             cancelButton.Dock = DockStyle.Right;
             cancelButton.Font = new Font("Segoe UI", 18F, FontStyle.Regular, GraphicsUnit.Point);
-            cancelButton.Location = new Point(581, 400);
+            cancelButton.Location = new Point(581, 320);
             cancelButton.MaximumSize = new Size(175, 80);
             cancelButton.MinimumSize = new Size(175, 80);
             cancelButton.Name = "cancelButton";
@@ -305,12 +266,9 @@ namespace BatteryRepairModule.Forms.BRM
             Controls.Add(panel3);
             Controls.Add(panel2);
             Controls.Add(panel1);
-            Controls.Add(twigTicketNumContainer);
             MinimumSize = new Size(0, 530);
             Name = "BrmTicketCreationForm";
             Text = "BrmTicketCreationForm";
-            twigTicketNumContainer.ResumeLayout(false);
-            twigTicketNumContainer.PerformLayout();
             panel1.ResumeLayout(false);
             panel1.PerformLayout();
             panel2.ResumeLayout(false);
@@ -326,10 +284,6 @@ namespace BatteryRepairModule.Forms.BRM
         }
 
         #endregion
-
-        private Panel twigTicketNumContainer;
-        private Label label1;
-        private MaskedTextBox twigTicketNumberTextBox;
         private Panel panel1;
         private ComboBox comboBox1;
         private Label label2;

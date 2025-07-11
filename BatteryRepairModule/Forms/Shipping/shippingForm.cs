@@ -97,16 +97,16 @@ namespace BatteryRepairModule.Forms.Shipping
                 readyInventoryListBox.Items.Clear();
                 invoicedListBox.Items.Clear();
 
-                dbMethods.loadAwaitingInvoiceTickets();
+                dbMethods.loadModulesAwaitingInvoiceTickets();
                 foreach (Module item in dbInformation.awaitingInvoiceModuleList)
                 {
-                    readyInventoryListBox.Items.Add($"[{item.ticketId}] - {item.Oem} - {item.SerialNumber} ({item.stateOfHealth})");
+                    readyInventoryListBox.Items.Add($"[{item.ticketId}] - [{item.model}] - {item.SerialNumber} ({item.stateOfHealth})");
                 }
 
-                dbMethods.loadAwaitingShippingTickets();
+                dbMethods.loadModulesAwaitingShipping();
                 foreach (Module item in dbInformation.awaitingShippingModuleList)
                 {
-                    invoicedListBox.Items.Add($"[{item.ticketId}] - {item.Oem} - {item.SerialNumber} ({item.stateOfHealth})");
+                    invoicedListBox.Items.Add($"[{item.ticketId}] - [{item.model}] - {item.SerialNumber} ({item.stateOfHealth})");
                 }
             }
             catch (Exception ex)
@@ -161,7 +161,7 @@ namespace BatteryRepairModule.Forms.Shipping
                 {
                     if (item.stateOfHealth == selectedItem)
                     {
-                        readyInventoryListBox.Items.Add($"[{item.ticketId}] - {item.Oem} - {item.SerialNumber} ({item.stateOfHealth})");
+                        readyInventoryListBox.Items.Add($"[{item.ticketId}] - [{item.model}] - {item.SerialNumber} ({item.stateOfHealth})");
                     }
                 }
 
@@ -169,7 +169,7 @@ namespace BatteryRepairModule.Forms.Shipping
                 {
                     if (item.stateOfHealth == selectedItem)
                     {
-                        invoicedListBox.Items.Add($"[{item.ticketId}] - {item.Oem} - {item.SerialNumber} ({item.stateOfHealth})");
+                        invoicedListBox.Items.Add($"[{item.ticketId}] - [{item.model}] - {item.SerialNumber} ({item.stateOfHealth})");
                     }
                 }
             }
@@ -195,7 +195,7 @@ namespace BatteryRepairModule.Forms.Shipping
                 {
                     if (item.Oem == selectedItem) 
                     {
-                        readyInventoryListBox.Items.Add($"[{item.ticketId}] - {item.Oem} - {item.SerialNumber} ({item.stateOfHealth})");
+                        readyInventoryListBox.Items.Add($"[{item.ticketId}] - [{item.model}] - {item.SerialNumber} ({item.stateOfHealth})");
                     }
                 }
 
@@ -203,7 +203,7 @@ namespace BatteryRepairModule.Forms.Shipping
                 {
                     if (item.Oem == selectedItem) 
                     {
-                        invoicedListBox.Items.Add($"[{item.ticketId}] - {item.Oem} - {item.SerialNumber} ({item.stateOfHealth})");
+                        invoicedListBox.Items.Add($"[{item.ticketId}] - [{item.model}] - {item.SerialNumber} ({item.stateOfHealth})");
                     }
                 }
             }

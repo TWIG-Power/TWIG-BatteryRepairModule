@@ -5,7 +5,7 @@ namespace BatteryRepairModule;
 
 public static partial class dbMethods
 {
-    public static void loadAwaitingInvoiceTickets()
+    public static void loadModulesAwaitingInvoiceTickets()
     {
         int status = dbInformation.ticketStatusOptions.FirstOrDefault(kvp => kvp.Value == "Awaiting Invoice").Key; 
         using (var conn = new NpgsqlConnection(dbConnection.connectionPath))
@@ -13,13 +13,19 @@ public static partial class dbMethods
             conn.Open();
 
             using (var cmd = new NpgsqlCommand(
-                @$"SELECT DISTINCT t.twig_ticket_number, t.serial_number, 
+                @$"SELECT DISTINCT t.id, t.twig_ticket_number, t.serial_number, 
                         CASE 
                             WHEN t.cobra_fk IS NOT NULL THEN 'Cobra'
                             WHEN t.ktm_fk IS NOT NULL THEN 'KTM'
                             WHEN t.misc_fk IS NOT NULL THEN 'Misc'
                             ELSE 'Unknown'
                         END AS oem,
+                        CASE 
+                            WHEN t.cobra_fk IS NOT NULL THEN (SELECT module_type FROM public.cobra_oem WHERE cobra_oem.id = t.cobra_fk)
+                            WHEN t.ktm_fk IS NOT NULL THEN (SELECT module_type FROM public.ktm_oem WHERE ktm_oem.id = t.ktm_fk)
+                            WHEN t.misc_fk IS NOT NULL THEN (SELECT module_type FROM public.misc_oem WHERE misc_oem.id = t.misc_fk)
+                            ELSE 'Unknown'
+                        END AS module_type,
                         (
                             SELECT ta2.state_of_health
                             FROM public.testing_added ta2
@@ -36,13 +42,14 @@ public static partial class dbMethods
                 {
                     while (reader.Read())
                     {
-                        int ticketId = reader.GetInt16(0);
-                        int serialNumber = reader.GetInt32(1);
-                        string oem = reader.GetString(2);
-                        string stateOfHealth = reader.IsDBNull(3) ? "Unknown" : reader.GetString(3);
+                        int ticketSurroKey = reader.GetInt32(0);
+                        int twigTicketNumber = reader.GetInt32(1);
+                        int serialNumber = reader.GetInt32(2);
+                        string oem = reader.GetString(3);
+                        string moduleType = reader.IsDBNull(4) ? "Unknown" : reader.GetString(4);
+                        string stateOfHealth = reader.IsDBNull(5) ? "Unknown" : reader.GetString(5);
 
-                        Module module = new Module(ticketId, serialNumber, oem);
-                        module.stateOfHealth = stateOfHealth;
+                        Module module = new Module(ticketSurroKey, twigTicketNumber, serialNumber, oem, moduleType, stateOfHealth);
                         dbInformation.awaitingInvoiceModuleList.Add(module);
                     }
                 }
@@ -50,7 +57,7 @@ public static partial class dbMethods
         }
     }
 
-    public static void loadAwaitingShippingTickets()
+    public static void loadModulesAwaitingShipping()
     {
         int status = dbInformation.ticketStatusOptions.FirstOrDefault(kvp => kvp.Value == "Awaiting Shipping").Key; 
         using (var conn = new NpgsqlConnection(dbConnection.connectionPath))
@@ -58,13 +65,19 @@ public static partial class dbMethods
             conn.Open();
 
             using (var cmd = new NpgsqlCommand(
-                @$"SELECT DISTINCT t.twig_ticket_number, t.serial_number, 
+                @$"SELECT DISTINCT t.id, t.twig_ticket_number, t.serial_number, 
                         CASE 
                             WHEN t.cobra_fk IS NOT NULL THEN 'Cobra'
                             WHEN t.ktm_fk IS NOT NULL THEN 'KTM'
                             WHEN t.misc_fk IS NOT NULL THEN 'Misc'
                             ELSE 'Unknown'
                         END AS oem,
+                        CASE 
+                            WHEN t.cobra_fk IS NOT NULL THEN (SELECT module_type FROM public.cobra_oem WHERE cobra_oem.id = t.cobra_fk)
+                            WHEN t.ktm_fk IS NOT NULL THEN (SELECT module_type FROM public.ktm_oem WHERE ktm_oem.id = t.ktm_fk)
+                            WHEN t.misc_fk IS NOT NULL THEN (SELECT module_type FROM public.misc_oem WHERE misc_oem.id = t.misc_fk)
+                            ELSE 'Unknown'
+                        END AS module_type,
                         (
                             SELECT ta2.state_of_health
                             FROM public.testing_added ta2
@@ -81,13 +94,14 @@ public static partial class dbMethods
                 {
                     while (reader.Read())
                     {
-                        int ticketId = reader.GetInt16(0);
-                        int serialNumber = reader.GetInt32(1);
-                        string oem = reader.GetString(2);
-                        string stateOfHealth = reader.IsDBNull(3) ? "Unknown" : reader.GetString(3);
+                        int ticketSurroKey = reader.GetInt32(0);
+                        int twigTicketNumber = reader.GetInt32(1);
+                        int serialNumber = reader.GetInt32(2);
+                        string oem = reader.GetString(3);
+                        string moduleType = reader.IsDBNull(4) ? "Unknown" : reader.GetString(4);
+                        string stateOfHealth = reader.IsDBNull(5) ? "Unknown" : reader.GetString(5);
 
-                        Module module = new Module(ticketId, serialNumber, oem);
-                        module.stateOfHealth = stateOfHealth;
+                        Module module = new Module(ticketSurroKey, twigTicketNumber, serialNumber, oem, moduleType, stateOfHealth);
                         dbInformation.awaitingShippingModuleList.Add(module);
                     }
                 }

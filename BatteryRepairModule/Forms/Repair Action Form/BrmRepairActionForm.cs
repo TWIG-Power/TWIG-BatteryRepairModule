@@ -20,11 +20,12 @@ namespace BatteryRepairModule.Forms.BRM
             InitializeComponent();
             this.parentForm = parentRef;
             ThemeHelper.ApplyTheme(this);
-            dbMethods.loadAwaitingRepairActionsStatus();
-            twigTicketNumberDropDown.Items.AddRange(
-                dbInformation.activeTwigCaseNumbers.Select(kvp =>
-                    $"[{kvp.Value}] - {dbInformation.activeModuleSerialNumbers[kvp.Key].ToString()}"
-                ).ToArray());
+
+            dbMethods.loadModulesAwaitingRepairAction();
+            foreach (Module module in dbInformation.activeModules)
+            {
+                twigTicketNumberDropDown.Items.Add($"[{module.ticketId}] - [{module.model}] - {module.SerialNumber}");
+            }
 
             dbMethods.loadStaffNames();
             staffDropDown.Items.AddRange(dbInformation.staffKeyPairOptions.Values.ToArray());
@@ -58,10 +59,15 @@ namespace BatteryRepairModule.Forms.BRM
         // Add Repair Actions
         private void addRepairActionButton_Click_2(object sender, EventArgs e)
         {
-            staffDropDown.Enabled = false; 
+            staffDropDown.Enabled = false;
 
             using (var newForm = new addRepairActionForm(repairActionsListBox, true))
                 newForm.ShowDialog(this);
+            if (dbInformation.recycled == true)
+            {
+                this.Close();
+                parentForm.OpenChildForm(new BrmRepairActionForm(parentForm)); 
+            }
         }
 
         //VIEW REPAIR NOTES
@@ -87,10 +93,10 @@ namespace BatteryRepairModule.Forms.BRM
                 if (twigTicketNumberDropDown.SelectedItem.ToString() != null)
                 {
                     var selectedValue = twigTicketNumberDropDown.SelectedItem.ToString();
-                    var converted = selectedValue.Split('[')[1].Split(']')[0]; 
-                    var selectedKvp = dbInformation.activeTwigCaseNumbers.FirstOrDefault(kvp => kvp.Value.ToString() == converted);
+                    var converted = Int32.Parse(selectedValue.Split('[')[1].Split(']')[0]); 
+                    var selectedKvp = dbInformation.activeModules.FirstOrDefault(module => module.ticketId == converted);
                     dbInformation.selectedTwigTicketKeyPair.Clear();
-                    dbInformation.selectedTwigTicketKeyPair[selectedKvp.Key] = selectedKvp.Value;
+                    dbInformation.selectedTwigTicketKeyPair[selectedKvp.ticketSurrogateKey] = selectedKvp.ticketId;
                 }
 
 

@@ -143,7 +143,7 @@
             noCleanProcedButton.AutoSize = true;
             noCleanProcedButton.Dock = DockStyle.Left;
             noCleanProcedButton.Font = new Font("Segoe UI", 20F, FontStyle.Regular, GraphicsUnit.Point);
-            noCleanProcedButton.Location = new Point(653, 20);
+            noCleanProcedButton.Location = new Point(658, 20);
             noCleanProcedButton.Name = "noCleanProcedButton";
             noCleanProcedButton.Padding = new Padding(20, 0, 20, 0);
             noCleanProcedButton.Size = new Size(118, 47);
@@ -157,7 +157,7 @@
             yesCleanProcButton.AutoSize = true;
             yesCleanProcButton.Dock = DockStyle.Left;
             yesCleanProcButton.Font = new Font("Segoe UI", 20F, FontStyle.Regular, GraphicsUnit.Point);
-            yesCleanProcButton.Location = new Point(540, 20);
+            yesCleanProcButton.Location = new Point(545, 20);
             yesCleanProcButton.Name = "yesCleanProcButton";
             yesCleanProcButton.Padding = new Padding(20, 0, 20, 0);
             yesCleanProcButton.Size = new Size(113, 47);
@@ -174,9 +174,9 @@
             label6.Location = new Point(20, 20);
             label6.Name = "label6";
             label6.Padding = new Padding(10, 0, 25, 10);
-            label6.Size = new Size(520, 51);
+            label6.Size = new Size(525, 51);
             label6.TabIndex = 0;
-            label6.Text = "Cleaning Procedures Completed: ";
+            label6.Text = "Cleaning Procedures Completed? ";
             // 
             // panel2
             // 
@@ -195,7 +195,7 @@
             noDiagnosticButton.AutoSize = true;
             noDiagnosticButton.Dock = DockStyle.Left;
             noDiagnosticButton.Font = new Font("Segoe UI", 20F, FontStyle.Regular, GraphicsUnit.Point);
-            noDiagnosticButton.Location = new Point(612, 20);
+            noDiagnosticButton.Location = new Point(609, 20);
             noDiagnosticButton.Name = "noDiagnosticButton";
             noDiagnosticButton.Padding = new Padding(20, 0, 20, 0);
             noDiagnosticButton.Size = new Size(118, 48);
@@ -209,7 +209,7 @@
             yesDiagnosticButton.AutoSize = true;
             yesDiagnosticButton.Dock = DockStyle.Left;
             yesDiagnosticButton.Font = new Font("Segoe UI", 20F, FontStyle.Regular, GraphicsUnit.Point);
-            yesDiagnosticButton.Location = new Point(499, 20);
+            yesDiagnosticButton.Location = new Point(496, 20);
             yesDiagnosticButton.Name = "yesDiagnosticButton";
             yesDiagnosticButton.Padding = new Padding(20, 0, 20, 0);
             yesDiagnosticButton.Size = new Size(113, 48);
@@ -226,9 +226,9 @@
             label3.Location = new Point(20, 20);
             label3.Name = "label3";
             label3.Padding = new Padding(10, 0, 25, 10);
-            label3.Size = new Size(479, 51);
+            label3.Size = new Size(476, 51);
             label3.TabIndex = 1;
-            label3.Text = "Plugged Into Diagnostic Tool: ";
+            label3.Text = "Plugged Into Diagnostic Tool?";
             // 
             // panel4
             // 

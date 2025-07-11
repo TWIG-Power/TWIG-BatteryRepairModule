@@ -47,7 +47,7 @@ public static partial class dbMethods
     public static int getTicketSurrogateKey()
     {
         using (var conn = new NpgsqlConnection(dbConnection.connectionPath))
-        using (var cmd = new NpgsqlCommand("SELECT DISTINCT \"id\" FROM public.ticket WHERE \"twig_ticket_number\" = @ticketNum ORDER BY id ASC", conn))
+        using (var cmd = new NpgsqlCommand("SELECT DISTINCT \"id\" FROM public.ticket WHERE \"twig_ticket_number\" = @ticketNum", conn))
         {
             conn.Open();
             cmd.Parameters.AddWithValue("@ticketNum", dbInformation.selectedTwigTicketKeyPair.Values.First());
@@ -129,7 +129,7 @@ public static partial class dbMethods
     #endregion
 
     #region INSERT QUERIES
-    public static bool createDatabaseTicket(Dictionary<int, string> staff)
+    public static bool createDatabaseTicket(int ticketNumber, Dictionary<int, string> staff)
     {
         int initialStatus = dbInformation.ticketStatusOptions.FirstOrDefault(kvp => kvp.Value == "Awaiting Service Inspection").Key;
 
@@ -139,7 +139,7 @@ public static partial class dbMethods
             using (var cmd = new NpgsqlCommand("INSERT INTO public.ticket (twig_ticket_number, vehicle_vin_number, staff_starting_report_fk, status_fk, cobra_fk, serial_number, status_timestamp) VALUES (@ticketNum, @vehicleVin, @staffStarting, @status, @cobra_fk, @serialNumber, @timestamp)", conn))
             {
                 conn.Open();
-                cmd.Parameters.AddWithValue("@ticketNum", dbInformation.TWIGCaseNumber ?? (object)DBNull.Value);
+                cmd.Parameters.AddWithValue("@ticketNum", ticketNumber);
                 cmd.Parameters.AddWithValue("@vehicleVin", dbInformation.vehicleVINNumber ?? (object)DBNull.Value);
                 cmd.Parameters.AddWithValue("@staffStarting", staff.Keys.First());
                 cmd.Parameters.AddWithValue("@status", initialStatus);
@@ -156,7 +156,7 @@ public static partial class dbMethods
             using (var cmd = new NpgsqlCommand("INSERT INTO public.ticket (twig_ticket_number, vehicle_vin_number, staff_starting_report_fk, status_fk, ktm_fk, serial_number, status_timestamp) VALUES (@ticketNum, @vehicleVin, @staffStarting, @status, @ktm_fk, @serialNumber, @timestamp)", conn))
             {
                 conn.Open();
-                cmd.Parameters.AddWithValue("@ticketNum", dbInformation.TWIGCaseNumber ?? (object)DBNull.Value);
+                cmd.Parameters.AddWithValue("@ticketNum", ticketNumber);
                 cmd.Parameters.AddWithValue("@vehicleVin", dbInformation.vehicleVINNumber ?? (object)DBNull.Value);
                 cmd.Parameters.AddWithValue("@staffStarting", dbInformation.selectedStaffKeyValue.Keys.First());
                 cmd.Parameters.AddWithValue("@status", initialStatus);
@@ -174,7 +174,7 @@ public static partial class dbMethods
             using (var cmd = new NpgsqlCommand("INSERT INTO public.ticket (twig_ticket_number, vehicle_vin_number, staff_starting_report_fk, status_fk, misc_fk, serial_number, status_timestamp) VALUES (@ticketNum, @vehicleVin, @staffStarting, @status, @misc_fk, @serialNumber, @timestamp)", conn))
             {
                 conn.Open();
-                cmd.Parameters.AddWithValue("@ticketNum", dbInformation.TWIGCaseNumber ?? (object)DBNull.Value);
+                cmd.Parameters.AddWithValue("@ticketNum", ticketNumber);
                 cmd.Parameters.AddWithValue("@vehicleVin", dbInformation.vehicleVINNumber ?? (object)DBNull.Value);
                 cmd.Parameters.AddWithValue("@staffStarting", dbInformation.selectedStaffKeyValue.Keys.First());
                 cmd.Parameters.AddWithValue("@status", initialStatus);

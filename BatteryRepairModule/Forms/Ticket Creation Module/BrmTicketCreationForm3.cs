@@ -16,6 +16,7 @@ namespace BatteryRepairModule
     public partial class BrmTicketCreationForm3 : Form
     {
         private BrmMainMenuForm parentForm;
+        private int showOnlyTicketNum; 
         public BrmTicketCreationForm3(BrmMainMenuForm parentRef)
         {
             InitializeComponent();
@@ -41,12 +42,12 @@ namespace BatteryRepairModule
 
             foreach (var error in errorChecks)
             {
-            if (error.Value == true)
-            {
-                var kvp = dbInformation.reportTypeKeyPair.FirstOrDefault(kvp => kvp.Value == error.Key);
-                if (!string.IsNullOrEmpty(kvp.Value))
-                    addedErrorsListBox.Items.Add($"{kvp.Key} - {kvp.Value}");
-            }
+                if (error.Value == true)
+                {
+                    var kvp = dbInformation.reportTypeKeyPair.FirstOrDefault(kvp => kvp.Value == error.Key);
+                    if (!string.IsNullOrEmpty(kvp.Value))
+                        addedErrorsListBox.Items.Add($"{kvp.Key} - {kvp.Value}");
+                }
             }
         }
 
@@ -55,8 +56,10 @@ namespace BatteryRepairModule
             try
             {
                 dbInformation.selectedTwigTicketKeyPair.Clear();
-                dbInformation.selectedTwigTicketKeyPair.Add(0, BrmTicketCreationForm.tempTwigCaseNum);
+                dbInformation.selectedTwigTicketKeyPair.Add(0, dbMethods.getLastTwigTicketNumber() + 1);
+                showOnlyTicketNum = dbInformation.selectedTwigTicketKeyPair.Values.First(); 
 
+                dbInformation.selectedModuleType.Clear(); 
                 dbInformation.selectedModuleType.Add(
                     BrmTicketCreationForm.tempSelectedMod.Keys.First(),
                     BrmTicketCreationForm.tempSelectedMod.Values.First()
@@ -91,14 +94,14 @@ namespace BatteryRepairModule
                     }
                 }
 
-                bool cond1 = dbMethods.createDatabaseTicket(dbInformation.selectedStaffKeyValue);
+                bool cond1 = dbMethods.createDatabaseTicket(dbInformation.selectedTwigTicketKeyPair.Values.First(), dbInformation.selectedStaffKeyValue);
                 bool cond2 = dbMethods.insertInitialAssessment();
                 bool cond3 = dbMethods.insertCustomerReport();
 
                 if (cond1 && cond2 && cond3)
                 {
                     ClearTempValues();
-                    MessageBox.Show("Ticket creation completed successfully.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageBox.Show($"Ticket {showOnlyTicketNum} creation completed successfully.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     this.Close();
                     parentForm.OpenChildForm(new BrmTicketCreationForm(parentForm)); 
                     return;
@@ -146,7 +149,6 @@ namespace BatteryRepairModule
         public static void ClearTempValues()
         {
             dbInformation.selectedTwigTicketKeyPair.Clear();
-            BrmTicketCreationForm.tempTwigCaseNum = 0;
             BrmTicketCreationForm.tempSerialNum = null;
             BrmTicketCreationForm.tempVinNum = null;
             BrmTicketCreationForm.tempSelectedStaff.Clear();
