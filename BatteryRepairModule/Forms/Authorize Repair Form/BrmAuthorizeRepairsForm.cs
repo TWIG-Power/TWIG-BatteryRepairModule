@@ -122,7 +122,7 @@ namespace BatteryRepairModule.Forms.BRM
                     return;
                 
                 control = ParseAndCheckRecycle();
-                if (!control)
+                if (control)
                     return; 
                 
 
@@ -202,6 +202,7 @@ namespace BatteryRepairModule.Forms.BRM
         {
             try
             {
+                dbInformation.clearedRepairsKeyValPair.Clear(); 
                 foreach (var item in authorizedRepairsListBox.Items)
                 {
                     var str = item as string;
@@ -224,13 +225,13 @@ namespace BatteryRepairModule.Forms.BRM
                                     MessageBox.Show("Recycle detected. Recycling process will proceed.", "Recycle Detected", MessageBoxButtons.OK, MessageBoxIcon.Information);
                                     this.Close();
                                     recycled = true;
-                                    break;
+                                    return true;
                                 }
                             }
                         }
                     }
                 }
-                return true;
+                return false;
             }
             catch (Exception ex)
             {

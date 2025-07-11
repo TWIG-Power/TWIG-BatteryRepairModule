@@ -5,6 +5,7 @@ namespace BatteryRepairModule;
 
 public static class dbInformation
 {
+    public static bool recycled; 
     #region Ticket Creation 
 
     public static int? TWIGCaseNumber = 0;
@@ -12,8 +13,6 @@ public static class dbInformation
     public static string? vehicleVINNumber = string.Empty;
     public static string? selectedBatteryType = string.Empty;
     public static Dictionary<int, string> moduleReportedErrorsKeyPair = new Dictionary<int, string>();
-    public static Dictionary<int, int> activeTwigCaseNumbers = new Dictionary<int, int>();
-    public static Dictionary<int, int> activeModuleSerialNumbers = new Dictionary<int, int>();
     public static Dictionary<int, string> staffKeyPairOptions = new Dictionary<int, string>();
     public static Dictionary<int, Dictionary<int, string>> moduleTypesByOEM = new Dictionary<int, Dictionary<int, string>>();
     public static Dictionary<int, Dictionary<int, string>> selectedModuleType = new Dictionary<int, Dictionary<int, string>>();

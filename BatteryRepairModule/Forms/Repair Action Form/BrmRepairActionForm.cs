@@ -59,10 +59,15 @@ namespace BatteryRepairModule.Forms.BRM
         // Add Repair Actions
         private void addRepairActionButton_Click_2(object sender, EventArgs e)
         {
-            staffDropDown.Enabled = false; 
+            staffDropDown.Enabled = false;
 
             using (var newForm = new addRepairActionForm(repairActionsListBox, true))
                 newForm.ShowDialog(this);
+            if (dbInformation.recycled == true)
+            {
+                this.Close();
+                parentForm.OpenChildForm(new BrmRepairActionForm(parentForm)); 
+            }
         }
 
         //VIEW REPAIR NOTES
