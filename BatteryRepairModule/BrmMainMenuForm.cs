@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using BatteryRepairModule.Forms.Service_Inspection_Forms;
 using BatteryRepairModule.Forms.Shipping;
+using BatteryRepairModule.Forms.Status_Review;
 using BatteryRepairModule.Forms.Testing;
 
 namespace BatteryRepairModule.Forms.BRM;
@@ -203,6 +204,7 @@ public partial class BrmMainMenuForm : Form
         try
         {
             SelectButton(statusReviewButton);
+            OpenChildForm(new statusReviewForm()); 
         }
         catch (Exception ex)
         {

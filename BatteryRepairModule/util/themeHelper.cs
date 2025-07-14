@@ -3,7 +3,7 @@ public static class ThemeHelper
     public static void ApplyTheme(Form form)
     {
         form.BackColor = Color.Gainsboro;
-
+/*
         foreach (Control control in form.Controls)
         {
             if (control is ComboBox)
@@ -26,6 +26,6 @@ public static class ThemeHelper
                 //control.BackColor = Color.LightGreen;
                 //control.ForeColor = Color.Black;
             }
-        }
+        } */
     }
 }

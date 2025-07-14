@@ -43,12 +43,11 @@
             label2 = new Label();
             panel5 = new Panel();
             panel6 = new Panel();
-            calculateButton = new Button();
             maskedTextBox1 = new MaskedTextBox();
             label5 = new Label();
             submitButton = new Button();
-            cancelButton = new Button();
             panel9 = new Panel();
+            cancelButton = new Button();
             panel1.SuspendLayout();
             panel2.SuspendLayout();
             panel4.SuspendLayout();
@@ -216,7 +215,6 @@
             // 
             // panel6
             // 
-            panel6.Controls.Add(calculateButton);
             panel6.Controls.Add(maskedTextBox1);
             panel6.Dock = DockStyle.Top;
             panel6.Location = new Point(147, 10);
@@ -224,20 +222,6 @@
             panel6.Padding = new Padding(10);
             panel6.Size = new Size(648, 70);
             panel6.TabIndex = 7;
-            // 
-            // calculateButton
-            // 
-            calculateButton.Dock = DockStyle.Left;
-            calculateButton.Font = new Font("Segoe UI", 18F, FontStyle.Regular, GraphicsUnit.Point);
-            calculateButton.Location = new Point(488, 10);
-            calculateButton.MaximumSize = new Size(1355, 60);
-            calculateButton.MinimumSize = new Size(135, 60);
-            calculateButton.Name = "calculateButton";
-            calculateButton.Size = new Size(135, 60);
-            calculateButton.TabIndex = 7;
-            calculateButton.Text = "Calculate";
-            calculateButton.UseVisualStyleBackColor = true;
-            calculateButton.Click += calculateButton_Click;
             // 
             // maskedTextBox1
             // 
@@ -247,8 +231,9 @@
             maskedTextBox1.MaximumSize = new Size(500, 0);
             maskedTextBox1.MinimumSize = new Size(0, 110);
             maskedTextBox1.Name = "maskedTextBox1";
-            maskedTextBox1.Size = new Size(478, 110);
+            maskedTextBox1.Size = new Size(500, 110);
             maskedTextBox1.TabIndex = 2;
+            maskedTextBox1.TextChanged += inputTextbox_textChanged;
             // 
             // label5
             // 
@@ -265,7 +250,7 @@
             // 
             submitButton.Dock = DockStyle.Right;
             submitButton.Font = new Font("Segoe UI", 18F, FontStyle.Regular, GraphicsUnit.Point);
-            submitButton.Location = new Point(545, 10);
+            submitButton.Location = new Point(680, 10);
             submitButton.MaximumSize = new Size(1355, 60);
             submitButton.MinimumSize = new Size(135, 60);
             submitButton.Name = "submitButton";
@@ -275,30 +260,30 @@
             submitButton.UseVisualStyleBackColor = true;
             submitButton.Click += submitButton_Click;
             // 
-            // cancelButton
-            // 
-            cancelButton.Dock = DockStyle.Right;
-            cancelButton.Font = new Font("Segoe UI", 18F, FontStyle.Regular, GraphicsUnit.Point);
-            cancelButton.Location = new Point(680, 10);
-            cancelButton.MaximumSize = new Size(1355, 60);
-            cancelButton.MinimumSize = new Size(135, 60);
-            cancelButton.Name = "cancelButton";
-            cancelButton.Size = new Size(135, 60);
-            cancelButton.TabIndex = 9;
-            cancelButton.Text = "Cancel";
-            cancelButton.UseVisualStyleBackColor = true;
-            cancelButton.Click += cancelButton_Click;
-            // 
             // panel9
             // 
-            panel9.Controls.Add(submitButton);
             panel9.Controls.Add(cancelButton);
+            panel9.Controls.Add(submitButton);
             panel9.Dock = DockStyle.Top;
             panel9.Location = new Point(0, 270);
             panel9.Name = "panel9";
             panel9.Padding = new Padding(10);
             panel9.Size = new Size(825, 98);
             panel9.TabIndex = 10;
+            // 
+            // cancelButton
+            // 
+            cancelButton.Dock = DockStyle.Right;
+            cancelButton.Font = new Font("Segoe UI", 18F, FontStyle.Regular, GraphicsUnit.Point);
+            cancelButton.Location = new Point(545, 10);
+            cancelButton.MaximumSize = new Size(1355, 60);
+            cancelButton.MinimumSize = new Size(135, 60);
+            cancelButton.Name = "cancelButton";
+            cancelButton.Size = new Size(135, 60);
+            cancelButton.TabIndex = 10;
+            cancelButton.Text = "Cancel";
+            cancelButton.UseVisualStyleBackColor = true;
+            cancelButton.Click += cancelButton_Click;
             // 
             // stateOfHealthCalculatorForm
             // 
@@ -341,14 +326,12 @@
         private Panel panel4;
         private Panel panel5;
         private Panel panel6;
-        private Button calculateButton;
         private MaskedTextBox maskedTextBox1;
         private Label label5;
         private Panel panel7;
         private Label moduleTypeChangeLabel;
         private Label label2;
         private Button submitButton;
-        private Button cancelButton;
         private Panel panel8;
         private Label stateOfHealthRangeChangeLabel;
         private Label label10;
@@ -356,5 +339,6 @@
         private Label stateOfHealthGradeChangeLabel;
         private Label label8;
         private Panel panel9;
+        private Button cancelButton;
     }
 }

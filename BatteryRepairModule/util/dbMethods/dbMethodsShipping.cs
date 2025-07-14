@@ -88,7 +88,7 @@ public static partial class dbMethods
                 FROM public.ticket t
                 WHERE t.status_fk = {status}", conn))
             {
-                dbInformation.awaitingShippingModuleList.Clear();
+                dbInformation.activeModules.Clear();
 
                 using (var reader = cmd.ExecuteReader())
                 {

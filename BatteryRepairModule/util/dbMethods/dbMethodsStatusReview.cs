@@ -1,0 +1,62 @@
+using Npgsql;
+using NpgsqlTypes; 
+
+namespace BatteryRepairModule;
+
+public static partial class dbMethods
+{
+        public static void loadAllTickets()
+    {
+        using (var conn = new NpgsqlConnection(dbConnection.connectionPath))
+        {
+            conn.Open();
+
+            using (var cmd = new NpgsqlCommand(
+                @$"SELECT DISTINCT t.id, t.twig_ticket_number, t.serial_number, t.status_fk,  
+                        CASE 
+                            WHEN t.cobra_fk IS NOT NULL THEN 'Cobra'
+                            WHEN t.ktm_fk IS NOT NULL THEN 'KTM'
+                            WHEN t.misc_fk IS NOT NULL THEN 'Misc'
+                            ELSE 'Unknown'
+                        END AS oem,
+                        CASE 
+                            WHEN t.cobra_fk IS NOT NULL THEN (SELECT module_type FROM public.cobra_oem WHERE cobra_oem.id = t.cobra_fk)
+                            WHEN t.ktm_fk IS NOT NULL THEN (SELECT module_type FROM public.ktm_oem WHERE ktm_oem.id = t.ktm_fk)
+                            WHEN t.misc_fk IS NOT NULL THEN (SELECT module_type FROM public.misc_oem WHERE misc_oem.id = t.misc_fk)
+                            ELSE 'Unknown'
+                        END AS module_type,
+                        (
+                            SELECT ta2.state_of_health
+                            FROM public.testing_added ta2
+                            WHERE ta2.ticket_fk = t.id
+                            ORDER BY ta2.id ASC
+                            LIMIT 1
+                        ) AS state_of_health
+                FROM public.ticket t", conn))
+            {
+                dbInformation.activeModules.Clear();
+
+                using (var reader = cmd.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        int ticketSurroKey = reader.GetInt32(0);
+                        int twigTicketNumber = reader.GetInt32(1);
+                        int serialNumber = reader.GetInt32(2);
+                        string oem = reader.GetString(4);
+                        string moduleType = reader.IsDBNull(5) ? "Unknown" : reader.GetString(5);
+                        string stateOfHealth = reader.IsDBNull(6) ? "Unknown" : reader.GetString(6);
+                        int status = reader.GetInt16(3);
+
+                        string status2 = dbInformation.ticketStatusOptions.FirstOrDefault(kvp => kvp.Key == status).Value;
+
+                        Module module = new Module(ticketSurroKey, twigTicketNumber, serialNumber, oem, moduleType, stateOfHealth, status2);
+                        dbInformation.activeModules.Add(module);
+
+                        dbInformation.activeModules = dbInformation.activeModules.OrderBy(e => e.Oem).ThenBy(e => e.SerialNumber).ToList();
+                    }
+                }
+            }
+        }
+    }
+}

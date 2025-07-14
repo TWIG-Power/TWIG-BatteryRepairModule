@@ -15,7 +15,7 @@ namespace BatteryRepairModule.Forms.Add_Forms
         public addTestForm()
         {
             InitializeComponent();
-    ThemeHelper.ApplyTheme(this);
+            ThemeHelper.ApplyTheme(this);
             try
             {
                 dbMethods.getTestingOptions();

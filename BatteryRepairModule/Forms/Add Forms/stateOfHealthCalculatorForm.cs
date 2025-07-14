@@ -16,12 +16,15 @@ namespace BatteryRepairModule.Forms.Add_Forms
         int inputedValue = 0;
         private ListBox importedListBox;
         private string writtenStateOfHealth = string.Empty; 
+        private List<string> temp = new List<string>(); 
+
         public stateOfHealthCalculatorForm(ListBox refListbox)
         {
             InitializeComponent();
             ThemeHelper.ApplyTheme(this);
             dbMethods.getModuleType();
             dbMethods.getStateOfHealthRanges();
+            dbMethods.getTestStatusOptions();
             this.importedListBox = refListbox;
             moduleTypeChangeLabel.Text = dbInformation.moduleTypeKeyValue.Values.First();
         }
@@ -64,6 +67,42 @@ namespace BatteryRepairModule.Forms.Add_Forms
             }
         }
 
+        private void inputTextbox_textChanged(object sender, EventArgs e) {
+            try
+            {
+                inputedValue = Int32.Parse(maskedTextBox1.Text.ToString());
+                if (inputedValue <= dbInformation.raceGradeHighLowKeyPair.Keys.First() && inputedValue >= dbInformation.raceGradeHighLowKeyPair.Values.First())
+                {
+                    stateOfHealthGradeChangeLabel.Text = "Race Grade";
+                    stateOfHealthRangeChangeLabel.Text = $"{dbInformation.raceGradeHighLowKeyPair.Values.First()} - {dbInformation.raceGradeHighLowKeyPair.Keys.First()}";
+                }
+                else if (inputedValue <= dbInformation.trackGradeHighLowKeyPair.Keys.First() && inputedValue >= dbInformation.trackGradeHighLowKeyPair.Values.First())
+                {
+                    stateOfHealthGradeChangeLabel.Text = "Track Grade";
+                    stateOfHealthRangeChangeLabel.Text = $"{dbInformation.trackGradeHighLowKeyPair.Values.First()} - {dbInformation.trackGradeHighLowKeyPair.Keys.First()}";
+                }
+                else if (inputedValue <= dbInformation.playGradeHighLowKeyPair.Keys.First() && inputedValue >= dbInformation.playGradeHighLowKeyPair.Values.First())
+                {
+                    stateOfHealthGradeChangeLabel.Text = "Play Grade";
+                    stateOfHealthRangeChangeLabel.Text = $"{dbInformation.playGradeHighLowKeyPair.Values.First()} - {dbInformation.playGradeHighLowKeyPair.Keys.First()}";
+                }
+                else
+                {
+                    stateOfHealthGradeChangeLabel.Text = "NULL";
+                    stateOfHealthRangeChangeLabel.Text = "NULL";
+                    return;
+                }
+            }
+            catch (FormatException)
+            {
+                MessageBox.Show("Please enter a valid numeric value.", "Invalid Input", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"An error occurred: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
         private void submitButton_Click(object sender, EventArgs e)
         {
             try
@@ -75,14 +114,48 @@ namespace BatteryRepairModule.Forms.Add_Forms
                 dbInformation.tempTestTestHolder.Clear();
                 dbInformation.tempTestTestHolder[selectedKvpp.Key] = selectedKvpp.Value;
 
+                dbInformation.tempTestStatusHolder.Clear();
+
                 if (Int32.Parse(maskedTextBox1.Text) > dbInformation.raceGradeHighLowKeyPair.Keys.First() || Int32.Parse(maskedTextBox1.Text) < dbInformation.playGradeHighLowKeyPair.Values.First())
                 {
-                    MessageBox.Show("Value is out of range. Please check the values and try again.", "Out of Range", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                    return;
+                    var kvp = dbInformation.testStatusOptionsKeyValue.FirstOrDefault(kvp => kvp.Value == "Fail");
+                    dbInformation.tempTestStatusHolder[kvp.Key] = kvp.Value;
+                }
+                else
+                {
+                    var kvp = dbInformation.testStatusOptionsKeyValue.FirstOrDefault(kvp => kvp.Value == "Pass");
+                    dbInformation.tempTestStatusHolder[kvp.Key] = kvp.Value;
                 }
 
-                dbInformation.conditionalClosureFailure = false; 
-                dbMethods.insertStateOfHealth(writtenStateOfHealth);
+                dbInformation.conditionalClosureFailure = false;
+                dbMethods.updateTestStatus(writtenStateOfHealth);
+
+                dbMethods.getDoesTestHaveNote();
+                dbMethods.getAddedTestsByTwigTicket();
+                importedListBox.Items.Clear();
+
+                temp.Clear();
+
+                foreach (var kvp in dbInformation.addedTestsKeyValue)
+                {
+                    var testId = kvp.Key; // Unique ID of the test
+                    var testName = kvp.Value; // Test name
+                    var status = dbInformation.addedTestsKeyStatus.GetValueOrDefault(testId); // Test status
+
+
+                    if (dbInformation.doesTestHaveNote[testId] == false)
+                    {
+                        temp.Add($"[{testId}] {testName} ({status})");
+                    }
+                    else
+                    {
+                        temp.Add($"[{testId}] {testName} ({status})*");
+                    }
+                }
+
+                temp.Sort();
+                importedListBox.Items.AddRange(temp.ToArray());
+
                 this.Close();
             }
             catch (Exception ex)

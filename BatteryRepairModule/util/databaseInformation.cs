@@ -5,9 +5,10 @@ namespace BatteryRepairModule;
 
 public static class dbInformation
 {
+    // General
     public static bool recycled; 
-    #region Ticket Creation 
 
+    #region Ticket Creation 
     public static int? TWIGCaseNumber = 0;
     public static int? batterySerialNumber = 0;
     public static string? vehicleVINNumber = string.Empty;
@@ -18,8 +19,6 @@ public static class dbInformation
     public static Dictionary<int, Dictionary<int, string>> selectedModuleType = new Dictionary<int, Dictionary<int, string>>();
     public static Dictionary<int, string> selectedStaffKeyValue = new Dictionary<int, string>();
     public static Dictionary<int, string> ticketStatusOptions = new Dictionary<int, string>();
-
-
     #endregion
 
     #region Service Inspection
@@ -32,7 +31,8 @@ public static class dbInformation
     public static Dictionary<int, string> reportedIssuesList = new Dictionary<int, string>();
     public static Dictionary<int, string> repairActionOptions = new Dictionary<int, string>();
     public static Dictionary<int, string> proposedRepairsKeyPair = new Dictionary<int, string>();
-    public static List<Module> activeModules = new List<Module>(); 
+    public static List<Module> activeModules = new List<Module>();
+    public static List<repairOption> repairOptionsList = new List<repairOption>(); 
 
     // Inspection Checkboxes
     public static bool? checkHousingScrape = false;
@@ -45,14 +45,12 @@ public static class dbInformation
     public static bool? checkCableDamage = false;
     public static bool? checkGoveVent = false;
     public static bool? checkCommPort = false;
-
     #endregion
 
     #region Authorize Repairs 
     public static Dictionary<int, string> clearedRepairsKeyValPair = new Dictionary<int, string>();
     public static Dictionary<int, string> clearedRepairsKeyStatusPair = new Dictionary<int, string>();
     public static Dictionary<string, string> clearedRepairsValueStatusPair = new Dictionary<string, string>();
-
     #endregion
 
     #region REPAIR ACTIONS
@@ -69,13 +67,12 @@ public static class dbInformation
     public static Dictionary<int, string> tempUpdateRepairStatusHolder = new Dictionary<int, string>();
     public static Dictionary<int, string> tempUpdateNotesRepairHolder = new Dictionary<int, string>();
     public static Dictionary<string, bool> repairHasNoteStringBool = new Dictionary<string, bool>();
-
     #endregion
 
     #region TESTING 
-
     public static string testNotes = string.Empty;
     public static Dictionary<int, string> testingOptionsKeyValue = new Dictionary<int, string>();
+    public static Dictionary<int, bool> testingOptionsRequiredKeyBoolean = new Dictionary<int, bool>(); 
     public static Dictionary<int, string> addedTestsKeyValue = new Dictionary<int, string>();
     public static Dictionary<int, string> tempAddNewTest = new Dictionary<int, string>();
     public static Dictionary<int, string> addedTestsKeyStatus = new Dictionary<int, string>();
@@ -114,20 +111,28 @@ public static class dbInformation
     #endregion
 
     #region QUALITY 
-
     public static string qualityFilePath = string.Empty;
     public static Dictionary<string, int> selectedOemModelKeyPair = new Dictionary<string, int>();
     public static string downloadedFileName = string.Empty;
     public static byte[] downloadedFileBytes = null;
-
     #endregion
 
     #region Shipping 
-
     public static List<Module> awaitingInvoiceModuleList = new List<Module>();
     public static List<Module> awaitingShippingModuleList = new List<Module>(); 
-
     #endregion
+
+    // Example: Sorting activeModules by SerialNumber
+    public static void SortActiveModulesBySerialNumber()
+    {
+        activeModules = activeModules.OrderBy(m => m.SerialNumber).ToList();
+    }
+
+    // Example: Sorting repairOptionsList by Id
+    public static void SortRepairOptionsListById()
+    {
+        repairOptionsList = repairOptionsList.OrderBy(o => o.Id).ToList();
+    }
 }
 
 public class Module
@@ -135,20 +140,47 @@ public class Module
     public int ticketSurrogateKey { get; set; }
     public int ticketId { get; set; }
     public int SerialNumber { get; set; }
-    public string Type { get; set; } = string.Empty;
     public string model { get; set; } = string.Empty;
     public string Oem { get; set; } = string.Empty;
-    public string stateOfHealth { get; set; } = string.Empty; 
-
-    public Module() { }
+    public string stateOfHealth { get; set; } = string.Empty;
+    public string ticketStatus { get; set; } = string.Empty; 
 
     public Module(int surroKey, int id, int serialNumber, string oem, string type, string stateOfHealth)
     {
-        ticketSurrogateKey = surroKey; 
+        ticketSurrogateKey = surroKey;
         ticketId = id;
         SerialNumber = serialNumber;
         Oem = oem;
         model = type;
-        this.stateOfHealth = stateOfHealth; 
+        this.stateOfHealth = stateOfHealth;
+    }
+    public Module(int surroKey, int id, int serialNumber, string oem, string type, string stateOfHealth, string status)
+    {
+        ticketSurrogateKey = surroKey;
+        ticketId = id;
+        SerialNumber = serialNumber;
+        Oem = oem;
+        model = type;
+        this.stateOfHealth = stateOfHealth;
+        ticketStatus = status; 
+    }
+}
+
+public class repairOption
+{
+    public int Id { get; set; }
+    public string Description { get; set; }
+    public bool Enabled { get; set; }
+
+    public repairOption(int refId, string refDescription, bool refEnabled)
+    {
+        Id = refId;
+        Description = refDescription;
+        Enabled = refEnabled; 
+    }
+
+    public static List<repairOption> SortById(List<repairOption> options)
+    {
+        return options.OrderBy(o => o.Id).ToList();
     }
 }

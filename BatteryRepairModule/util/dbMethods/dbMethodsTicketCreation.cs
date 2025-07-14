@@ -143,7 +143,7 @@ public static partial class dbMethods
                 cmd.Parameters.AddWithValue("@vehicleVin", dbInformation.vehicleVINNumber ?? (object)DBNull.Value);
                 cmd.Parameters.AddWithValue("@staffStarting", staff.Keys.First());
                 cmd.Parameters.AddWithValue("@status", initialStatus);
-                cmd.Parameters.AddWithValue("@cobra_fk", dbInformation.moduleTypesByOEM[0].Keys.First());
+                cmd.Parameters.AddWithValue("@cobra_fk", dbInformation.selectedModuleType[0].Keys.First());
                 cmd.Parameters.AddWithValue("@serialNumber", dbInformation.batterySerialNumber ?? (object)DBNull.Value);
                 cmd.Parameters.AddWithValue("@timestamp", DateTime.Now); 
                 int rowsAffected = cmd.ExecuteNonQuery();
@@ -285,12 +285,33 @@ public static partial class dbMethods
     }
 
 
-    public static bool checkIfSerialNumberHasActiveTicket(int? serialNumber)
+    public static bool checkIfSerialNumberHasActiveTicket(int? serialNumber, Dictionary<int, string> dictSelectedMod)
     {
         int status = dbInformation.ticketStatusOptions.FirstOrDefault(kvp => kvp.Value == "Shipped / Closed").Key;
-        using (var conn = new NpgsqlConnection(dbConnection.connectionPath))
-        using (var cmd = new NpgsqlCommand($"SELECT COUNT(*) FROM public.ticket WHERE serial_number = {serialNumber} AND status_fk != {status}", conn))
+        var parts = dictSelectedMod.Values.First().Split(' ');
+        string firstPart = parts.Length > 0 ? parts[0] : "";
+
+        string oemColumn = firstPart switch
         {
+            "COBRA" => "cobra_fk",
+            "KTM" => "ktm_fk",
+            "MISC" => "misc_fk",
+            _ => null
+        };
+
+        if (oemColumn == null)
+        {
+            MessageBox.Show("Invalid module type selected.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            return false;
+        }
+
+        using (var conn = new NpgsqlConnection(dbConnection.connectionPath))
+        using (var cmd = new NpgsqlCommand(
+            $"SELECT COUNT(*) FROM public.ticket WHERE serial_number = @serialNumber AND {oemColumn} = @moduleType AND status_fk != @status", conn))
+        {
+            cmd.Parameters.AddWithValue("@serialNumber", serialNumber ?? (object)DBNull.Value);
+            cmd.Parameters.AddWithValue("@moduleType", dictSelectedMod.Keys.First()); 
+            cmd.Parameters.AddWithValue("@status", status);
             conn.Open();
             using (var reader = cmd.ExecuteReader())
             {

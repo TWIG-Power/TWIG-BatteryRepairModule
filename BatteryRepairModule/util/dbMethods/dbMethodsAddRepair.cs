@@ -9,7 +9,7 @@ public static partial class dbMethods
     {
         dbInformation.repairActionOptions.Clear();
         using (var conn = new NpgsqlConnection(dbConnection.connectionPath))
-        using (var cmd = new NpgsqlCommand("SELECT DISTINCT \"id\", \"description\" FROM public.repair_options", conn))
+        using (var cmd = new NpgsqlCommand("SELECT DISTINCT \"id\", \"description\" FROM public.repair_options WHERE enabled = true", conn))
         {
             conn.Open();
             using (var reader = cmd.ExecuteReader())
@@ -22,7 +22,41 @@ public static partial class dbMethods
             }
         }
     }
-    
+
+    public static void getRepairOptionsEnabledDisabled()
+    {
+        dbInformation.repairOptionsList.Clear();
+        using (var conn = new NpgsqlConnection(dbConnection.connectionPath))
+        using (var cmd = new NpgsqlCommand("SELECT DISTINCT \"id\", \"description\", enabled FROM public.repair_options", conn))
+        {
+            conn.Open();
+            using (var reader = cmd.ExecuteReader())
+            {
+                while (reader.Read())
+                {
+                    if (!reader.IsDBNull(0) && !reader.IsDBNull(1) && !reader.IsDBNull(2))
+                    {
+                        int tempId = reader.GetInt16(0);
+                        string tempDescrip = reader.GetString(1);
+                        bool getEnabled = reader.GetBoolean(2);
+                        dbInformation.repairOptionsList.Add(new repairOption(tempId, tempDescrip, getEnabled));
+                    }
+                }
+            }
+        }
+        dbInformation.SortRepairOptionsListById(); 
+    }
+
+    public static void updateRepairEnabledDisabled(int repairId, bool updatedStatus)
+    {
+        using (var conn = new NpgsqlConnection(dbConnection.connectionPath))
+        using (var cmd = new NpgsqlCommand($"UPDATE public.repair_options SET enabled = {updatedStatus} WHERE id = {repairId}", conn))
+        {
+            conn.Open();
+            cmd.ExecuteNonQuery(); 
+        }
+    }
+
     public static void insertRepairRepairForm()
     {
         using (var conn = new NpgsqlConnection(dbConnection.connectionPath))

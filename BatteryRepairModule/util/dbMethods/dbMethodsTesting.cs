@@ -1,3 +1,4 @@
+using System.Diagnostics.Tracing;
 using Npgsql;
 using NpgsqlTypes; 
 
@@ -8,7 +9,7 @@ public static partial class dbMethods
 
     public static void loadModulesAwaitingTesting()
     {
-        int status = dbInformation.ticketStatusOptions.FirstOrDefault(kvp => kvp.Value == "Awaiting Testing").Key; 
+        int status = dbInformation.ticketStatusOptions.FirstOrDefault(kvp => kvp.Value == "Awaiting Testing").Key;
         using (var conn = new NpgsqlConnection(dbConnection.connectionPath))
         {
             conn.Open();
@@ -61,15 +62,17 @@ public static partial class dbMethods
     public static void getTestingOptions()
     {
         using (var conn = new NpgsqlConnection(dbConnection.connectionPath))
-        using (var cmd = new NpgsqlCommand("SELECT DISTINCT \"id\", \"test\" FROM public.testing_options ORDER BY \"id\" ASC", conn))
+        using (var cmd = new NpgsqlCommand("SELECT DISTINCT \"id\", \"test\", requires_input FROM public.testing_options ORDER BY \"id\" ASC", conn))
         {
             dbInformation.testingOptionsKeyValue.Clear();
+            dbInformation.testingOptionsRequiredKeyBoolean.Clear();
             conn.Open();
             using (var reader = cmd.ExecuteReader())
             {
                 while (reader.Read())
                 {
                     dbInformation.testingOptionsKeyValue.Add(reader.GetInt16(0), reader.GetString(1));
+                    dbInformation.testingOptionsRequiredKeyBoolean.Add(reader.GetInt16(0), reader.GetBoolean(2));
                 }
             }
         }
@@ -179,12 +182,12 @@ public static partial class dbMethods
         }
     }
 
-    public static void updateTestStatus()
+    public static void updateTestStatus(string stateOfHealth)
     {
         try
         {
             using (var conn = new NpgsqlConnection(dbConnection.connectionPath))
-            using (var cmd = new NpgsqlCommand("UPDATE public.testing_added SET staff_fk = @staffFk, timestamp = @timestamp, status_fk = @status WHERE ticket_fk = @ticketId AND id = @testId", conn))
+            using (var cmd = new NpgsqlCommand("UPDATE public.testing_added SET staff_fk = @staffFk, timestamp = @timestamp, status_fk = @status, state_of_health = @soh WHERE ticket_fk = @ticketId AND id = @testId", conn))
             {
                 conn.Open();
                 cmd.Parameters.AddWithValue("@staffFk", dbInformation.selectedStaffKeyValue.Keys.First());
@@ -192,6 +195,7 @@ public static partial class dbMethods
                 cmd.Parameters.AddWithValue("@status", dbInformation.tempTestStatusHolder.Keys.First());
                 cmd.Parameters.AddWithValue("@ticketId", dbInformation.selectedTwigTicketKeyPair.Keys.First());
                 cmd.Parameters.AddWithValue("@testId", dbInformation.tempTestTestHolder.Keys.First());
+                cmd.Parameters.AddWithValue("@soh", stateOfHealth);
 
                 int rowsAffected = cmd.ExecuteNonQuery();
             }
@@ -244,7 +248,8 @@ public static partial class dbMethods
         }
     }
 
-    public static void getStateOfHealthRanges(){
+    public static void getStateOfHealthRanges()
+    {
         using (var conn = new NpgsqlConnection(dbConnection.connectionPath))
         using (var cmd = new NpgsqlCommand($"SELECT race_soh_upper, race_soh_lower, track_soh_upper, track_soh_lower, play_soh_upper, play_soh_lower, module_type FROM public.{dbInformation.moduleTypeKeyValue.Values.First()} WHERE id = @type", conn))
         {
@@ -306,8 +311,42 @@ public static partial class dbMethods
             conn.Open();
             cmd.Parameters.AddWithValue("@status", status);
             cmd.Parameters.AddWithValue("ticketId", dbInformation.selectedTwigTicketKeyPair.Keys.First());
-            cmd.Parameters.AddWithValue("@timestamp", DateTime.Now); 
+            cmd.Parameters.AddWithValue("@timestamp", DateTime.Now);
 
+            int rowsAffected = cmd.ExecuteNonQuery();
+            return rowsAffected > 0;
+        }
+    }
+
+    public static byte[] pullDiagnosticFile()
+    {
+        using (var conn = new NpgsqlConnection(dbConnection.connectionPath))
+        using (var cmd = new NpgsqlCommand("SELECT diagnostic_file FROM public.initial_assessment WHERE report_fk = @id", conn))
+        {
+            cmd.Parameters.AddWithValue("@id", dbInformation.selectedTwigTicketKeyPair.Keys.First());
+            conn.Open();
+            using (var reader = cmd.ExecuteReader())
+            {
+                while (reader.Read())
+                {
+                    if (!reader.IsDBNull(0))
+                    {
+                        return (byte[])reader[0];
+                    }
+                }
+                return null;
+            }
+        }
+    }
+
+    public static bool attachDiagnosticFile(byte[] fileData)
+    {
+        using (var conn = new NpgsqlConnection(dbConnection.connectionPath))
+        using (var cmd = new NpgsqlCommand("UPDATE initial_assessment SET diagnostic_file = @fileData WHERE report_fk = @reportFk", conn))
+        {
+            conn.Open();
+            cmd.Parameters.AddWithValue("@fileData", fileData);
+            cmd.Parameters.AddWithValue("@reportFk", dbInformation.selectedTwigTicketKeyPair.Keys.First());
             int rowsAffected = cmd.ExecuteNonQuery();
             return rowsAffected > 0;
         }

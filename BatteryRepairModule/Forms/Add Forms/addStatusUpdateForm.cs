@@ -109,19 +109,7 @@ namespace BatteryRepairModule.Forms.Add_Forms
                             dbInformation.tempTestStatusHolder.Clear();
                             dbInformation.tempTestStatusHolder[selectedKvp.Key] = selectedKvp.Value;
 
-                            if (selectedStatus == "Pass")
-                            {
-                                using (var tempForm = new stateOfHealthCalculatorForm(modifiedListBox))
-                                {
-                                    tempForm.ShowDialog(this);
-                                    if (dbInformation.conditionalClosureFailure)
-                                    {
-                                        return; 
-                                    }
-                                }
-                            }
-
-                            dbMethods.updateTestStatus();
+                            dbMethods.updateTestStatus("NULL");
                             dbMethods.getDoesTestHaveNote(); 
                             dbMethods.getAddedTestsByTwigTicket();  
                             modifiedListBox.Items.Clear();

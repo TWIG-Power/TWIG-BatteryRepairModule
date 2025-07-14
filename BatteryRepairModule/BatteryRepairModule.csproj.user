@@ -7,6 +7,9 @@
     <Compile Update="BrmMainMenuForm.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Update="Forms\Add Forms\activateDeactivateRepairForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Update="Forms\Add Forms\addCustomerReport.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -44,6 +47,9 @@
       <SubType>Form</SubType>
     </Compile>
     <Compile Update="Forms\Shipping\shippingForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Forms\Status Review\statusReviewForm.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Update="Forms\Testing\testingForm.cs">

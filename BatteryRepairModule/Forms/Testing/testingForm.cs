@@ -6,6 +6,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
+using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -15,7 +16,7 @@ namespace BatteryRepairModule.Forms.Testing
     public partial class testingForm : Form
     {
         private BrmMainMenuForm parentForm;
-        private List<string> temp = new List<string>(); 
+        private List<string> temp = new List<string>();
         public testingForm(BrmMainMenuForm parentRef)
         {
             InitializeComponent();
@@ -38,14 +39,14 @@ namespace BatteryRepairModule.Forms.Testing
             updateTestStatus.Enabled = false;
             returnBatteryToRepairButton.Enabled = false;
             clearBatteryForQualityButton.Enabled = false;
-            calculateStateOfHealthButton.Enabled = false;
             viewRepairNoteButton.Enabled = false;
+            diagnosticReportButton.Enabled = false; 
 
         }
 
         private void addTestNoteButton_Click(object sender, EventArgs e)
         {
-            staffDropDown.Enabled = false; 
+            staffDropDown.Enabled = false;
             if (testStatusListBox.SelectedItem != null)
             {
                 using (var newForm = new addNotesForm(testStatusListBox, false, "test"))
@@ -62,7 +63,7 @@ namespace BatteryRepairModule.Forms.Testing
 
         private void viewTestNoteButton_Click(object sender, EventArgs e)
         {
-            staffDropDown.Enabled = false; 
+            staffDropDown.Enabled = false;
             if (testStatusListBox.SelectedItem != null)
             {
                 using (var newForm = new addNotesForm(testStatusListBox, true, "test"))
@@ -77,7 +78,7 @@ namespace BatteryRepairModule.Forms.Testing
 
         private void addRequiredTestButton_Click(object sender, EventArgs e)
         {
-            staffDropDown.Enabled = false; 
+            staffDropDown.Enabled = false;
             using (var newForm = new addTestForm())
             {
                 newForm.ShowDialog(this);
@@ -109,14 +110,14 @@ namespace BatteryRepairModule.Forms.Testing
             try
             {
                 var selectedValue = twigTicketNumberDropDown.SelectedItem.ToString();
-                var converted = selectedValue.Split('[')[1].Split(']')[0]; 
+                var converted = selectedValue.Split('[')[1].Split(']')[0];
                 var selectedKvp = dbInformation.activeModules.FirstOrDefault(mod => mod.ticketId.ToString() == converted);
                 dbInformation.selectedTwigTicketKeyPair.Clear();
-                dbInformation.selectedTwigTicketKeyPair[selectedKvp.ticketSurrogateKey] = selectedKvp.ticketId;;
+                dbInformation.selectedTwigTicketKeyPair[selectedKvp.ticketSurrogateKey] = selectedKvp.ticketId; ;
 
                 repairActionsListBox.Items.Clear();
 
-                dbMethods.getDoesRepairHaveNote(); 
+                dbMethods.getDoesRepairHaveNote();
 
                 dbMethods.loadRepairActionKeyValueStatus();
                 foreach (var kvp in dbInformation.clearedRepairsValueStatusPair)
@@ -131,7 +132,7 @@ namespace BatteryRepairModule.Forms.Testing
 
                 testStatusListBox.Items.Clear();
 
-                dbMethods.getDoesTestHaveNote(); 
+                dbMethods.getDoesTestHaveNote();
                 dbMethods.getAddedTestsByTwigTicket();
 
                 if (!dbInformation.addedTestsKeyValue.Any())
@@ -152,10 +153,12 @@ namespace BatteryRepairModule.Forms.Testing
                         temp.Add($"[{testId}] {testName} ({status})");
                     }
 
-                    temp.Sort(); 
+                    temp.Sort();
 
-                    testStatusListBox.Items.AddRange(temp.ToArray()); 
+                    testStatusListBox.Items.AddRange(temp.ToArray());
                 }
+
+                temp.Clear();
 
                 foreach (var kvp in dbInformation.addedTestsKeyValue)
                 {
@@ -165,13 +168,17 @@ namespace BatteryRepairModule.Forms.Testing
 
                     if (dbInformation.doesTestHaveNote[testId] == false)
                     {
-                        testStatusListBox.Items.Add($"[{testId}] {testName} ({status})");
+                        temp.Add($"[{testId}] {testName} ({status})");
                     }
                     else
                     {
-                        testStatusListBox.Items.Add($"[{testId}] {testName} ({status})*");
+                        temp.Add($"[{testId}] {testName} ({status})*");
                     }
                 }
+
+                temp.Sort();
+
+                testStatusListBox.Items.AddRange(temp.ToArray());
             }
             catch (Exception ex)
             {
@@ -192,13 +199,13 @@ namespace BatteryRepairModule.Forms.Testing
             updateTestStatus.Enabled = true;
             returnBatteryToRepairButton.Enabled = true;
             clearBatteryForQualityButton.Enabled = true;
-            calculateStateOfHealthButton.Enabled = true;
-            viewRepairNoteButton.Enabled = true; 
+            viewRepairNoteButton.Enabled = true;
+            diagnosticReportButton.Enabled = true; 
         }
 
         private void returnBatteryToRepairButton_Click(object sender, EventArgs e)
         {
-            staffDropDown.Enabled = false; 
+            staffDropDown.Enabled = false;
             var result = MessageBox.Show("Are you sure you wish to return module to repair actions?", "Confirm Module To Repair Actions", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
             if (result == DialogResult.No) return;
             bool cond = dbMethods.returnModuleToRepairActions();
@@ -211,31 +218,42 @@ namespace BatteryRepairModule.Forms.Testing
             }
         }
 
-        private void calculateStateOfHealthButton_Click(object sender, EventArgs e)
-        {
-            staffDropDown.Enabled = false; 
-            var selectedTest = testStatusListBox.SelectedItem;
-            if (selectedTest == null)
-            {
-                MessageBox.Show("No test selected. Please select a test.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return;
-            }
-
-            using (var newForm = new stateOfHealthCalculatorForm(testStatusListBox))
-            newForm.ShowDialog(this);
-        }
-
         private void updateTestStatus_Click_1(object sender, EventArgs e)
         {
-            staffDropDown.Enabled = false; 
+            staffDropDown.Enabled = false;
             if (testStatusListBox.SelectedItem == null)
             {
                 MessageBox.Show("Please select a test from the list to update its status.", "No Test Selected", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
 
-            using (var newForm = new addStatusUpdateForm(testStatusListBox, "Test"))
-                newForm.ShowDialog(this);
+            string selectedItem = testStatusListBox.SelectedItem.ToString();
+            string parsed = selectedItem.Split(']')[1].Split('(')[0].Trim();
+            var kvp = dbInformation.testingOptionsKeyValue.FirstOrDefault(kvp => kvp.Value == parsed);
+            Dictionary<int, string> tempDict = new Dictionary<int, string>
+            {
+                { kvp.Key, kvp.Value }
+            };
+
+            // does it require input??
+            bool reqInput = dbInformation.testingOptionsRequiredKeyBoolean[kvp.Key];
+
+            if (!reqInput)
+            {
+                using (var newForm = new addStatusUpdateForm(testStatusListBox, "Test"))
+                    newForm.ShowDialog(this);
+            }
+            else
+            {
+                using (var tempForm = new stateOfHealthCalculatorForm(testStatusListBox))
+                {
+                    tempForm.ShowDialog(this);
+                    if (dbInformation.conditionalClosureFailure)
+                    {
+                        return;
+                    }
+                }
+            }
         }
 
         private void clearBatteryForQualityButton_Click(object sender, EventArgs e)
@@ -245,7 +263,7 @@ namespace BatteryRepairModule.Forms.Testing
                 MessageBox.Show("At least one test is required before clearing the battery for quality.", "No Tests Found", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
-            staffDropDown.Enabled = false; 
+            staffDropDown.Enabled = false;
             foreach (var test in testStatusListBox.Items)
             {
                 var status = test.ToString();
@@ -273,7 +291,7 @@ namespace BatteryRepairModule.Forms.Testing
 
         private void viewRepairNoteButton_Click(object sender, EventArgs e)
         {
-            staffDropDown.Enabled = false; 
+            staffDropDown.Enabled = false;
             if (repairActionsListBox.SelectedItem != null)
             {
                 using (var newForm = new addNotesForm(repairActionsListBox, true, "repair"))
@@ -282,6 +300,68 @@ namespace BatteryRepairModule.Forms.Testing
             else
             {
                 MessageBox.Show("Please select a repair action to view its note.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void diagnosticReportButton_Click(object sender, EventArgs e)
+        {
+            byte[] file = dbMethods.pullDiagnosticFile();
+            if (file != null && file.Length > 0)
+            {
+                string folderPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Desktop), "BRM Diagnostic Reports"); // Save in "BRM Diagnostic Reports" folder on Desktop
+                Directory.CreateDirectory(folderPath); 
+
+                string fileName = $"{dbInformation.selectedTwigTicketKeyPair.Values.First()}_DiagnosticReport.html";
+                string filePath = Path.Combine(folderPath, fileName);
+
+                if (File.Exists(filePath))
+                {
+                    var result = MessageBox.Show("File already exists. Would you like to replace?", "Warning: File Already Exists", MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation);
+                    if (result == DialogResult.Yes)
+                    {
+                        File.WriteAllBytes(filePath, file);
+                        MessageBox.Show("Diagnostic report saved successfully.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    }
+                }
+                else
+                {
+                    File.WriteAllBytes(filePath, file);
+                    MessageBox.Show("Diagnostic report saved successfully.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+
+                if (File.Exists(filePath))
+                {
+                    System.Diagnostics.Process.Start(new System.Diagnostics.ProcessStartInfo()
+                    {
+                        FileName = filePath,
+                        UseShellExecute = true
+                    });
+                }
+            }
+            else
+            {
+                var attachResult = MessageBox.Show("No diagnostic report found. Would you like to attach one?", "Warning", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+                if (attachResult == DialogResult.Yes)
+                {
+                    using (OpenFileDialog openFileDialog = new OpenFileDialog())
+                    {
+                        openFileDialog.Filter = "PDF Files (*.pdf)|*.pdf|HTML Files (*.html;*.htm)|*.html;*.htm";
+                        openFileDialog.Title = "Select Diagnostic Report PDF/HTML";
+                        if (openFileDialog.ShowDialog() == DialogResult.OK)
+                        {
+                            byte[] fileBytes = File.ReadAllBytes(openFileDialog.FileName);
+                            bool uploadSuccess = dbMethods.attachDiagnosticFile(fileBytes);
+                            if (uploadSuccess)
+                            {
+                                MessageBox.Show("Diagnostic report attached successfully.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                            }
+                            else
+                            {
+                                MessageBox.Show("Failed to attach diagnostic report.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            }
+                        }
+                    }
+                }
             }
         }
     }

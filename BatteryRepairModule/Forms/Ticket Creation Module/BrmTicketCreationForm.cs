@@ -34,9 +34,6 @@ namespace BatteryRepairModule.Forms.BRM
                 dbMethods.loadStaffNames();
                 staffInitiatingReportDropDown.Items.AddRange(dbInformation.staffKeyPairOptions.Values.ToArray());
 
-                //dbInformation.TWIGCaseNumber = dbMethods.getLastTwigTicketNumber() + 1;
-                //twigTicketNumberTextBox.Text = dbInformation.TWIGCaseNumber.ToString();
-
                 dbMethods.loadAllModuleTypes();
                 batteryTypeDropDown.Items.Clear();
                 foreach (var keyPair in dbInformation.moduleTypesByOEM)
@@ -62,9 +59,6 @@ namespace BatteryRepairModule.Forms.BRM
 
         private void LoadTempVariables()
         {
-            //if (tempTwigCaseNum != 0)
-                //twigTicketNumberTextBox.Text = tempTwigCaseNum.ToString();
-
             if (tempSerialNum.HasValue && tempSerialNum != 0)
                 batterySerialNumberTextBox.Text = tempSerialNum.ToString();
 
@@ -77,7 +71,6 @@ namespace BatteryRepairModule.Forms.BRM
         {
             try
             {
-                //tempTwigCaseNum = Int32.Parse(twigTicketNumberTextBox.Text);
 
                 if (batteryTypeDropDown.SelectedItem == null ||
                     !batteryTypeDropDown.Items.Contains(batteryTypeDropDown.Text))
@@ -110,12 +103,7 @@ namespace BatteryRepairModule.Forms.BRM
                     tempSelectedStaff[selectedKvp.Key] = selectedKvp.Value;
                 }
 
-                /*if (tempTwigCaseNum == 0)
-                {
-                    MessageBox.Show($"Please fill the TWIG Ticket Number text box in order to continue.", "Input Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    return;
-                }*/
-                if (!dbInformation.moduleTypesByOEM.Any())
+                if (!tempSelectedMod.Any())
                 {
                     MessageBox.Show($"Please select a module type in order to continue.", "Input Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return;
@@ -144,7 +132,7 @@ namespace BatteryRepairModule.Forms.BRM
                     return;
                 }
 
-                if (dbMethods.checkIfSerialNumberHasActiveTicket(tempSerialNum))
+                if (dbMethods.checkIfSerialNumberHasActiveTicket(tempSerialNum, tempSelectedMod.Values.First()))
                     parentForm.OpenChildForm(new BrmTicketCreationForm2(parentForm));
             }
             catch (Exception ex)

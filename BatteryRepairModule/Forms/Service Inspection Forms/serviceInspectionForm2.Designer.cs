@@ -43,11 +43,14 @@
             label3 = new Label();
             backButton = new Button();
             continueButton = new Button();
+            panel2 = new Panel();
+            activateReactiveRepair = new Button();
             panel7.SuspendLayout();
             panel10.SuspendLayout();
             panel8.SuspendLayout();
             panel5.SuspendLayout();
             panel3.SuspendLayout();
+            panel2.SuspendLayout();
             SuspendLayout();
             // 
             // panel7
@@ -224,12 +227,37 @@
             continueButton.UseVisualStyleBackColor = true;
             continueButton.Click += continueButton_Click;
             // 
+            // panel2
+            // 
+            panel2.Controls.Add(activateReactiveRepair);
+            panel2.Dock = DockStyle.Left;
+            panel2.Location = new Point(0, 428);
+            panel2.Name = "panel2";
+            panel2.Padding = new Padding(7, 10, 7, 10);
+            panel2.Size = new Size(462, 83);
+            panel2.TabIndex = 25;
+            // 
+            // activateReactiveRepair
+            // 
+            activateReactiveRepair.AutoSize = true;
+            activateReactiveRepair.Dock = DockStyle.Fill;
+            activateReactiveRepair.Font = new Font("Segoe UI", 15.75F, FontStyle.Regular, GraphicsUnit.Point);
+            activateReactiveRepair.Location = new Point(7, 10);
+            activateReactiveRepair.MaximumSize = new Size(0, 63);
+            activateReactiveRepair.Name = "activateReactiveRepair";
+            activateReactiveRepair.Size = new Size(448, 63);
+            activateReactiveRepair.TabIndex = 17;
+            activateReactiveRepair.Text = "Activate / Deactivate Repair";
+            activateReactiveRepair.UseVisualStyleBackColor = true;
+            activateReactiveRepair.Click += activateReactiveRepair_Click;
+            // 
             // serviceInspectionForm2
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.Gainsboro;
             ClientSize = new Size(931, 511);
+            Controls.Add(panel2);
             Controls.Add(backButton);
             Controls.Add(continueButton);
             Controls.Add(panel7);
@@ -245,6 +273,8 @@
             panel5.ResumeLayout(false);
             panel3.ResumeLayout(false);
             panel3.PerformLayout();
+            panel2.ResumeLayout(false);
+            panel2.PerformLayout();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -266,5 +296,7 @@
         private Label label3;
         private Button backButton;
         private Button continueButton;
+        private Panel panel2;
+        private Button activateReactiveRepair;
     }
 }

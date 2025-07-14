@@ -129,7 +129,7 @@ namespace BatteryRepairModule.Forms.Quality
                     using (OpenFileDialog openFileDialog = new OpenFileDialog())
                     {
                         openFileDialog.InitialDirectory = "C:\\";
-                        openFileDialog.Filter = "All files (*.*)|*.*|Text files (*.txt)|*.txt";
+                        openFileDialog.Filter = "PDF files (*.pdf)|*.pdf|HTML files (*.html;*.htm)|*.html;*.htm";
                         openFileDialog.FilterIndex = 1;
                         openFileDialog.RestoreDirectory = true;
 

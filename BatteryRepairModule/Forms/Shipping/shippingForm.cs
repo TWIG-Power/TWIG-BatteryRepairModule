@@ -12,8 +12,8 @@ namespace BatteryRepairModule.Forms.Shipping
 {
     public partial class shippingForm : Form
     {
-        private List<string> oemOptions = new List<string> { "Cobra", "KTM", "Misc" };
-        private List<string> stateOfHealthOptions = new List<string> { "Race Grade", "Track Grade", "Play Grade" };
+        private List<string> oemOptions = new List<string> { "Cobra", "KTM", "Misc", "All" };
+        private List<string> stateOfHealthOptions = new List<string> { "Race Grade", "Track Grade", "Play Grade", "All" };
         public shippingForm()
         {
             InitializeComponent();
@@ -157,6 +157,19 @@ namespace BatteryRepairModule.Forms.Shipping
                 readyInventoryListBox.Items.Clear();
                 invoicedListBox.Items.Clear();
 
+                if (stateOfHealthFilterDropDown.SelectedItem == "All")
+                {
+                    foreach (Module item in dbInformation.awaitingInvoiceModuleList)
+                    {
+                        readyInventoryListBox.Items.Add($"[{item.ticketId}] - [{item.model}] - {item.SerialNumber} ({item.stateOfHealth})");
+                    }
+                    foreach (Module item in dbInformation.awaitingShippingModuleList)
+                    {
+                        invoicedListBox.Items.Add($"[{item.ticketId}] - [{item.model}] - {item.SerialNumber} ({item.stateOfHealth})");
+                    }
+                    return; 
+                }
+
                 foreach (Module item in dbInformation.awaitingInvoiceModuleList)
                 {
                     if (item.stateOfHealth == selectedItem)
@@ -190,10 +203,23 @@ namespace BatteryRepairModule.Forms.Shipping
 
                 readyInventoryListBox.Items.Clear();
                 invoicedListBox.Items.Clear();
+                
+                if (moduleOemFilterDropDown.SelectedItem == "All")
+                {
+                    foreach (Module item in dbInformation.awaitingInvoiceModuleList)
+                    {
+                        readyInventoryListBox.Items.Add($"[{item.ticketId}] - [{item.model}] - {item.SerialNumber} ({item.stateOfHealth})");
+                    }
+                    foreach (Module item in dbInformation.awaitingShippingModuleList)
+                    {
+                        invoicedListBox.Items.Add($"[{item.ticketId}] - [{item.model}] - {item.SerialNumber} ({item.stateOfHealth})");
+                    }
+                    return; 
+                }
 
                 foreach (Module item in dbInformation.awaitingInvoiceModuleList)
                 {
-                    if (item.Oem == selectedItem) 
+                    if (item.Oem == selectedItem)
                     {
                         readyInventoryListBox.Items.Add($"[{item.ticketId}] - [{item.model}] - {item.SerialNumber} ({item.stateOfHealth})");
                     }
