@@ -36,7 +36,8 @@ namespace BatteryRepairModule.Forms.BRM
             addAuthorizedRepairAction.Enabled = false;
             removeAuthorizedRepairAction.Enabled = false;
             addTestButton.Enabled = false;
-            continueButton.Enabled = false; 
+            continueButton.Enabled = false;
+            pullDiagnosticFileButton.Enabled = false; 
         }
 
         private void addAuthorizedRepairAction_Click(object sender, EventArgs e)
@@ -65,9 +66,9 @@ namespace BatteryRepairModule.Forms.BRM
         {
             try
             {
-                suggestedRepairsListBox.Items.Clear(); 
+                suggestedRepairsListBox.Items.Clear();
                 authorizedRepairsListBox.Items.Clear();
-                reportedIssuesListBox.Items.Clear(); 
+                reportedIssuesListBox.Items.Clear();
 
                 var selectedValue = twigTicketNumberDropDown.SelectedItem.ToString();
                 var converted = Int32.Parse(selectedValue.Split('[')[1].Split(']')[0]);
@@ -120,22 +121,22 @@ namespace BatteryRepairModule.Forms.BRM
                 bool control = CheckIfValueNotNullOrLess();
                 if (!control)
                     return;
-                
+
                 control = ParseAndCheckRecycle();
                 if (control)
-                    return; 
-                
+                    return;
+
 
                 if (staffDropDown.SelectedItem.ToString() != null)
+                {
+                    if (!recycled)
                     {
-                        if (!recycled)
-                        {
-                            string selectedValue = staffDropDown.SelectedItem.ToString();
-                            var selectedKvp = dbInformation.staffKeyPairOptions.FirstOrDefault(kvp => kvp.Value == selectedValue);
-                            dbInformation.selectedStaffKeyValue.Clear();
-                            dbInformation.selectedStaffKeyValue[selectedKvp.Key] = selectedKvp.Value;
-                        }
+                        string selectedValue = staffDropDown.SelectedItem.ToString();
+                        var selectedKvp = dbInformation.staffKeyPairOptions.FirstOrDefault(kvp => kvp.Value == selectedValue);
+                        dbInformation.selectedStaffKeyValue.Clear();
+                        dbInformation.selectedStaffKeyValue[selectedKvp.Key] = selectedKvp.Value;
                     }
+                }
 
                 if (!recycled)
                 {
@@ -176,6 +177,7 @@ namespace BatteryRepairModule.Forms.BRM
                     removeAuthorizedRepairAction.Enabled = true;
                     addTestButton.Enabled = true;
                     continueButton.Enabled = true;
+                    pullDiagnosticFileButton.Enabled = true;
                 }
                 else
                 {
@@ -183,6 +185,7 @@ namespace BatteryRepairModule.Forms.BRM
                     removeAuthorizedRepairAction.Enabled = false;
                     addTestButton.Enabled = false;
                     continueButton.Enabled = false;
+                    pullDiagnosticFileButton.Enabled = false; 
                 }
             }
             catch (Exception ex)
@@ -202,7 +205,7 @@ namespace BatteryRepairModule.Forms.BRM
         {
             try
             {
-                dbInformation.clearedRepairsKeyValPair.Clear(); 
+                dbInformation.clearedRepairsKeyValPair.Clear();
                 foreach (var item in authorizedRepairsListBox.Items)
                 {
                     var str = item as string;
@@ -260,7 +263,69 @@ namespace BatteryRepairModule.Forms.BRM
 
         private void backButton_Click(object sender, EventArgs e)
         {
-            this.Close(); 
+            this.Close();
+        }
+
+        private void pullDiagnosticFileButton_Click(object sender, EventArgs e)
+        {
+            byte[] file = dbMethods.pullDiagnosticFile();
+            if (file != null && file.Length > 0)
+            {
+                string folderPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Desktop), "BRM Diagnostic Reports"); // Save in "BRM Diagnostic Reports" folder on Desktop
+                Directory.CreateDirectory(folderPath); 
+
+                string fileName = $"{dbInformation.selectedTwigTicketKeyPair.Values.First()}_DiagnosticReport.html";
+                string filePath = Path.Combine(folderPath, fileName);
+
+                if (File.Exists(filePath))
+                {
+                    var result = MessageBox.Show("File already exists. Would you like to replace?", "Warning: File Already Exists", MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation);
+                    if (result == DialogResult.Yes)
+                    {
+                        File.WriteAllBytes(filePath, file);
+                        MessageBox.Show("Diagnostic report saved successfully.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    }
+                }
+                else
+                {
+                    File.WriteAllBytes(filePath, file);
+                    MessageBox.Show("Diagnostic report saved successfully.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+
+                if (File.Exists(filePath))
+                {
+                    System.Diagnostics.Process.Start(new System.Diagnostics.ProcessStartInfo()
+                    {
+                        FileName = filePath,
+                        UseShellExecute = true
+                    });
+                }
+            }
+            else
+            {
+                var attachResult = MessageBox.Show("No diagnostic report found. Would you like to attach one?", "Warning", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+                if (attachResult == DialogResult.Yes)
+                {
+                    using (OpenFileDialog openFileDialog = new OpenFileDialog())
+                    {
+                        openFileDialog.Filter = "PDF Files (*.pdf)|*.pdf|HTML Files (*.html;*.htm)|*.html;*.htm";
+                        openFileDialog.Title = "Select Diagnostic Report PDF/HTML";
+                        if (openFileDialog.ShowDialog() == DialogResult.OK)
+                        {
+                            byte[] fileBytes = File.ReadAllBytes(openFileDialog.FileName);
+                            bool uploadSuccess = dbMethods.attachDiagnosticFile(fileBytes);
+                            if (uploadSuccess)
+                            {
+                                MessageBox.Show("Diagnostic report attached successfully.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                            }
+                            else
+                            {
+                                MessageBox.Show("Failed to attach diagnostic report.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            }
+                        }
+                    }
+                }
+            }
         }
     }
 }

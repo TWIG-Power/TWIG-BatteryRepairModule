@@ -63,7 +63,6 @@ public static partial class dbMethods
         using (var conn = new NpgsqlConnection(dbConnection.connectionPath))
         {
             conn.Open();
-
             using (var cmd = new NpgsqlCommand(
                 @$"SELECT DISTINCT t.id, t.twig_ticket_number, t.serial_number, 
                         CASE 
@@ -88,7 +87,7 @@ public static partial class dbMethods
                 FROM public.ticket t
                 WHERE t.status_fk = {status}", conn))
             {
-                dbInformation.activeModules.Clear();
+                dbInformation.awaitingShippingModuleList.Clear();
 
                 using (var reader = cmd.ExecuteReader())
                 {

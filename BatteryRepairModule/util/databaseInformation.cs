@@ -122,13 +122,6 @@ public static class dbInformation
     public static List<Module> awaitingShippingModuleList = new List<Module>(); 
     #endregion
 
-    // Example: Sorting activeModules by SerialNumber
-    public static void SortActiveModulesBySerialNumber()
-    {
-        activeModules = activeModules.OrderBy(m => m.SerialNumber).ToList();
-    }
-
-    // Example: Sorting repairOptionsList by Id
     public static void SortRepairOptionsListById()
     {
         repairOptionsList = repairOptionsList.OrderBy(o => o.Id).ToList();
@@ -143,7 +136,12 @@ public class Module
     public string model { get; set; } = string.Empty;
     public string Oem { get; set; } = string.Empty;
     public string stateOfHealth { get; set; } = string.Empty;
-    public string ticketStatus { get; set; } = string.Empty; 
+    public string ticketStatus { get; set; } = string.Empty;
+    public List<CustomerReport> reportList { get; set; }
+    public List<RepairAction> repairList { get; set; }
+    public List<testAction> testList { get; set; }
+    public initialAssesment initialAssesment { get; set; }
+    public serviceInspection serviceInspection { get; set; }
 
     public Module(int surroKey, int id, int serialNumber, string oem, string type, string stateOfHealth)
     {
@@ -162,7 +160,119 @@ public class Module
         Oem = oem;
         model = type;
         this.stateOfHealth = stateOfHealth;
-        ticketStatus = status; 
+        ticketStatus = status;
+    }
+    public Module(int surroKey, int id, int serialNumber, string oem, string type, string stateOfHealth, string status, List<RepairAction> repairList, List<CustomerReport> reportList, List<testAction> testList, initialAssesment initialAssesment, serviceInspection serviceInspection)
+    {
+        ticketSurrogateKey = surroKey;
+        ticketId = id;
+        SerialNumber = serialNumber;
+        Oem = oem;
+        model = type;
+        this.stateOfHealth = stateOfHealth;
+        ticketStatus = status;
+        this.repairList = repairList;
+        this.reportList = reportList;
+        this.testList = testList;
+        this.initialAssesment = initialAssesment;
+        this.serviceInspection = serviceInspection; 
+    }
+}
+public class serviceInspection
+{
+    public int id { get; set; }
+    public string staff { get; set; } 
+    public bool cleaned { get; set; }
+    public bool diagnosticFile { get; set; }
+
+    public serviceInspection(int id, string staff, bool cleaned, bool diagnosticFile)
+    {
+        this.id = id;
+        this.staff = staff;
+        this.cleaned = cleaned;
+        this.diagnosticFile = diagnosticFile;
+    }
+
+}
+public class initialAssesment
+{
+    public int id { get; set; }
+    public string shipping { get; set; }
+    public bool housingScrapes { get; set; }
+    public bool evidenceOfTampering { get; set; }
+    public bool screwsMissing { get; set; }
+    public bool housingDents { get; set; }
+    public bool missingWires { get; set; }
+    public bool chargePort { get; set; }
+    public bool cableDamage { get; set; }
+    public bool goveVent { get; set; }
+    public bool commPort { get; set; }
+    public bool batteryLeadsProtected { get; set; }
+    public string staff { get; set; }
+
+    public initialAssesment(int id, string shipping, bool housingScrapes, bool evidenceOfTampering, bool screwsMissing, bool housingDents, bool missingWires, bool chargePort, bool cableDamage, bool goveVent, bool commPort, bool batteryLeadsProtected, string staff)
+    {
+        this.id = id;
+        this.shipping = shipping;
+        this.housingScrapes = housingScrapes;
+        this.evidenceOfTampering = evidenceOfTampering;
+        this.screwsMissing = screwsMissing;
+        this.housingDents = housingDents;
+        this.missingWires = missingWires;
+        this.chargePort = chargePort;
+        this.cableDamage = cableDamage;
+        this.goveVent = goveVent;
+        this.commPort = commPort;
+        this.batteryLeadsProtected = batteryLeadsProtected;
+        this.staff = staff;
+    }
+}
+public class testAction
+{
+    int id { get; set; }
+    string staff { get; set; }
+    string description { get; set; }
+    string status { get; set; }
+    string note { get; set; }
+    string stateOfHealth { get; set; }
+
+    public testAction(int id, string staff, string description, string status, string note, string stateOfHealth)
+    {
+        this.id = id;
+        this.staff = staff;
+        this.description = description;
+        this.status = status;
+        this.note = note;
+        this.stateOfHealth = stateOfHealth;
+    }
+}
+public class RepairAction
+{
+    public int repairId { get; set; }
+    public string staff { get; set; }
+    public string description { get; set; }
+    public string status { get; set; }
+    public string note { get; set; }
+
+    public RepairAction(int repairId, string staff, string description, string status, string note)
+    {
+        this.repairId = repairId;
+        this.staff = staff;
+        this.description = description;
+        this.status = status;
+        this.note = note;
+    }
+}
+
+public class CustomerReport
+{
+    public string description { get; set; }
+    public string status { get; set; }
+
+    public CustomerReport(string description, string status)
+    {
+        this.description = description;
+        this.status = status; 
     }
 }
 
@@ -176,11 +286,6 @@ public class repairOption
     {
         Id = refId;
         Description = refDescription;
-        Enabled = refEnabled; 
-    }
-
-    public static List<repairOption> SortById(List<repairOption> options)
-    {
-        return options.OrderBy(o => o.Id).ToList();
+        Enabled = refEnabled;
     }
 }

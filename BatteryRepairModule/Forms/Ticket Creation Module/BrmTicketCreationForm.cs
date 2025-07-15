@@ -132,8 +132,11 @@ namespace BatteryRepairModule.Forms.BRM
                     return;
                 }
 
+                dbMethods.checkIfSerialNumberHasBeenServiced(tempSerialNum, tempSelectedMod.Values.First()); 
+
                 if (dbMethods.checkIfSerialNumberHasActiveTicket(tempSerialNum, tempSelectedMod.Values.First()))
                     parentForm.OpenChildForm(new BrmTicketCreationForm2(parentForm));
+
             }
             catch (Exception ex)
             {

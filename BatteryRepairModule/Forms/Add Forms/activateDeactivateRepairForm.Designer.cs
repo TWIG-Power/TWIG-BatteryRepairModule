@@ -46,7 +46,7 @@
             listBox1.ItemHeight = 32;
             listBox1.Location = new Point(10, 10);
             listBox1.Name = "listBox1";
-            listBox1.Size = new Size(354, 322);
+            listBox1.Size = new Size(614, 322);
             listBox1.TabIndex = 0;
             // 
             // panel2
@@ -55,7 +55,7 @@
             panel2.Dock = DockStyle.Fill;
             panel2.Location = new Point(0, 342);
             panel2.Name = "panel2";
-            panel2.Size = new Size(374, 119);
+            panel2.Size = new Size(634, 119);
             panel2.TabIndex = 3;
             // 
             // panel4
@@ -65,7 +65,7 @@
             panel4.Location = new Point(0, 0);
             panel4.Name = "panel4";
             panel4.Padding = new Padding(10);
-            panel4.Size = new Size(374, 119);
+            panel4.Size = new Size(631, 119);
             panel4.TabIndex = 1;
             // 
             // continueButton
@@ -76,7 +76,7 @@
             continueButton.MaximumSize = new Size(0, 70);
             continueButton.Name = "continueButton";
             continueButton.Padding = new Padding(10);
-            continueButton.Size = new Size(354, 70);
+            continueButton.Size = new Size(611, 70);
             continueButton.TabIndex = 14;
             continueButton.Text = "Activate / Deactivate";
             continueButton.UseVisualStyleBackColor = true;
@@ -89,18 +89,18 @@
             panel1.Location = new Point(0, 0);
             panel1.Name = "panel1";
             panel1.Padding = new Padding(10);
-            panel1.Size = new Size(374, 342);
+            panel1.Size = new Size(634, 342);
             panel1.TabIndex = 2;
             // 
             // activateDeactivateRepairForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(374, 461);
+            ClientSize = new Size(634, 461);
             Controls.Add(panel2);
             Controls.Add(panel1);
-            MaximumSize = new Size(390, 500);
-            MinimumSize = new Size(390, 500);
+            MaximumSize = new Size(650, 500);
+            MinimumSize = new Size(650, 500);
             Name = "activateDeactivateRepairForm";
             Text = "activateDeactivateRepairForm";
             panel2.ResumeLayout(false);

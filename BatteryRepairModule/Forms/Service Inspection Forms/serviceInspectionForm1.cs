@@ -126,9 +126,9 @@ namespace BatteryRepairModule.Forms.Service_Inspection_Forms
                     return;
                 }
 
-                if (tempCleaningProcedures == null)
+                if (yesCleanProcButton.Checked != true)
                 {
-                    MessageBox.Show("Please select whether cleaning procedures were followed.", "Input Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show("Please confirm that the module is clean before proceeding.", "Input Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return;
                 }
 

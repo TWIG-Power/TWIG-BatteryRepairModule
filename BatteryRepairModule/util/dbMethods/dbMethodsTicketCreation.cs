@@ -145,7 +145,7 @@ public static partial class dbMethods
                 cmd.Parameters.AddWithValue("@status", initialStatus);
                 cmd.Parameters.AddWithValue("@cobra_fk", dbInformation.selectedModuleType[0].Keys.First());
                 cmd.Parameters.AddWithValue("@serialNumber", dbInformation.batterySerialNumber ?? (object)DBNull.Value);
-                cmd.Parameters.AddWithValue("@timestamp", DateTime.Now); 
+                cmd.Parameters.AddWithValue("@timestamp", DateTime.Now);
                 int rowsAffected = cmd.ExecuteNonQuery();
                 return rowsAffected > 0;
             }
@@ -162,7 +162,7 @@ public static partial class dbMethods
                 cmd.Parameters.AddWithValue("@status", initialStatus);
                 cmd.Parameters.AddWithValue("@ktm_fk", dbInformation.moduleTypesByOEM[1].Keys.First());
                 cmd.Parameters.AddWithValue("@serialNumber", dbInformation.batterySerialNumber ?? (object)DBNull.Value);
-                cmd.Parameters.AddWithValue("@timestamp", DateTime.Now); 
+                cmd.Parameters.AddWithValue("@timestamp", DateTime.Now);
 
                 int rowsAffected = cmd.ExecuteNonQuery();
                 return rowsAffected > 0;
@@ -180,7 +180,7 @@ public static partial class dbMethods
                 cmd.Parameters.AddWithValue("@status", initialStatus);
                 cmd.Parameters.AddWithValue("@misc_fk", dbInformation.moduleTypesByOEM[2].Keys.First());
                 cmd.Parameters.AddWithValue("@serialNumber", dbInformation.batterySerialNumber ?? (object)DBNull.Value);
-                cmd.Parameters.AddWithValue("@timestamp", DateTime.Now); 
+                cmd.Parameters.AddWithValue("@timestamp", DateTime.Now);
 
                 int rowsAffected = cmd.ExecuteNonQuery();
                 return rowsAffected > 0;
@@ -299,18 +299,12 @@ public static partial class dbMethods
             _ => null
         };
 
-        if (oemColumn == null)
-        {
-            MessageBox.Show("Invalid module type selected.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            return false;
-        }
-
         using (var conn = new NpgsqlConnection(dbConnection.connectionPath))
         using (var cmd = new NpgsqlCommand(
             $"SELECT COUNT(*) FROM public.ticket WHERE serial_number = @serialNumber AND {oemColumn} = @moduleType AND status_fk != @status", conn))
         {
             cmd.Parameters.AddWithValue("@serialNumber", serialNumber ?? (object)DBNull.Value);
-            cmd.Parameters.AddWithValue("@moduleType", dictSelectedMod.Keys.First()); 
+            cmd.Parameters.AddWithValue("@moduleType", dictSelectedMod.Keys.First());
             cmd.Parameters.AddWithValue("@status", status);
             conn.Open();
             using (var reader = cmd.ExecuteReader())
@@ -328,7 +322,48 @@ public static partial class dbMethods
                 }
             }
             MessageBox.Show("Check could not be executed. Serial number has an active ticket.", "Check Result", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            return false; 
+            return false;
+        }
+    }
+
+    public static bool checkIfSerialNumberHasBeenServiced(int? serialNumber, Dictionary<int, string> dictSelectedMod)
+    {
+        int status = dbInformation.ticketStatusOptions.FirstOrDefault(kvp => kvp.Value == "Shipped / Closed").Key;
+        var parts = dictSelectedMod.Values.First().Split(' ');
+        string firstPart = parts.Length > 0 ? parts[0] : "";
+
+        string oemColumn = firstPart switch
+        {
+            "COBRA" => "cobra_fk",
+            "KTM" => "ktm_fk",
+            "MISC" => "misc_fk",
+            _ => null
+        };
+
+        using (var conn = new NpgsqlConnection(dbConnection.connectionPath))
+        using (var cmd = new NpgsqlCommand(
+            $"SELECT COUNT(*) FROM public.ticket WHERE serial_number = @serialNumber AND {oemColumn} = @moduleType AND status_fk = @status", conn))
+        {
+            cmd.Parameters.AddWithValue("@serialNumber", serialNumber ?? (object)DBNull.Value);
+            cmd.Parameters.AddWithValue("@moduleType", dictSelectedMod.Keys.First());
+            cmd.Parameters.AddWithValue("@status", status);
+            conn.Open();
+            using (var reader = cmd.ExecuteReader())
+            {
+                while (reader.Read())
+                {
+                    int count = reader.GetInt16(0);
+                    if (count > 0)
+                    {
+                        MessageBox.Show("Serial Number has been serviced before. Please check status review for previous logs.", "Serial Number History Found", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        return true;
+                    }
+                    else
+                        return true;
+                }
+            }
+            MessageBox.Show("Check could not be executed. Serial number has an active ticket.", "Check Result", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            return false;
         }
     }
 }

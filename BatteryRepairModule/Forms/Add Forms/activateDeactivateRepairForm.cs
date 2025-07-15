@@ -19,7 +19,8 @@ namespace BatteryRepairModule.Forms.Add_Forms
             dbMethods.getRepairOptionsEnabledDisabled(); 
             foreach (repairOption repair in dbInformation.repairOptionsList)
             {
-                listBox1.Items.Add($"[{repair.Id}] {repair.Description} - ({repair.Enabled})");
+                string status = repair.Enabled ? "Enabled" : "Disabled";
+                listBox1.Items.Add($"[{repair.Id}] {repair.Description} - ({status})");
             }
         }
 
@@ -29,7 +30,7 @@ namespace BatteryRepairModule.Forms.Add_Forms
             int parsedSelectedItem = Int32.Parse(selectedItem.Split('[')[1].Split(']')[0]);
             string currentStatus = selectedItem.Split('(')[1].Split(')')[0];
 
-            bool isEnabled = currentStatus.Equals("True");
+            bool isEnabled = currentStatus.Equals("Enabled");
 
             dbMethods.updateRepairEnabledDisabled(parsedSelectedItem, !isEnabled);
             this.Close(); 

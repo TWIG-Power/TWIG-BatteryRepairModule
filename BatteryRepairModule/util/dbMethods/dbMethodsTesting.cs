@@ -321,7 +321,7 @@ public static partial class dbMethods
     public static byte[] pullDiagnosticFile()
     {
         using (var conn = new NpgsqlConnection(dbConnection.connectionPath))
-        using (var cmd = new NpgsqlCommand("SELECT diagnostic_file FROM public.initial_assessment WHERE report_fk = @id", conn))
+        using (var cmd = new NpgsqlCommand("SELECT diagnostic_report FROM public.service_inspection WHERE ticket_fk = @id", conn))
         {
             cmd.Parameters.AddWithValue("@id", dbInformation.selectedTwigTicketKeyPair.Keys.First());
             conn.Open();

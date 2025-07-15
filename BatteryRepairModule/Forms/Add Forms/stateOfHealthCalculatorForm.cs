@@ -126,7 +126,8 @@ namespace BatteryRepairModule.Forms.Add_Forms
                     var kvp = dbInformation.testStatusOptionsKeyValue.FirstOrDefault(kvp => kvp.Value == "Pass");
                     dbInformation.tempTestStatusHolder[kvp.Key] = kvp.Value;
                 }
-
+                
+                writtenStateOfHealth = stateOfHealthGradeChangeLabel.Text;
                 dbInformation.conditionalClosureFailure = false;
                 dbMethods.updateTestStatus(writtenStateOfHealth);
 

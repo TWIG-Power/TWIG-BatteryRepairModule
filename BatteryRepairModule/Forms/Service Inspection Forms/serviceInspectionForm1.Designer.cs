@@ -143,7 +143,7 @@
             noCleanProcedButton.AutoSize = true;
             noCleanProcedButton.Dock = DockStyle.Left;
             noCleanProcedButton.Font = new Font("Segoe UI", 20F, FontStyle.Regular, GraphicsUnit.Point);
-            noCleanProcedButton.Location = new Point(658, 20);
+            noCleanProcedButton.Location = new Point(535, 20);
             noCleanProcedButton.Name = "noCleanProcedButton";
             noCleanProcedButton.Padding = new Padding(20, 0, 20, 0);
             noCleanProcedButton.Size = new Size(118, 47);
@@ -157,7 +157,7 @@
             yesCleanProcButton.AutoSize = true;
             yesCleanProcButton.Dock = DockStyle.Left;
             yesCleanProcButton.Font = new Font("Segoe UI", 20F, FontStyle.Regular, GraphicsUnit.Point);
-            yesCleanProcButton.Location = new Point(545, 20);
+            yesCleanProcButton.Location = new Point(422, 20);
             yesCleanProcButton.Name = "yesCleanProcButton";
             yesCleanProcButton.Padding = new Padding(20, 0, 20, 0);
             yesCleanProcButton.Size = new Size(113, 47);
@@ -174,9 +174,9 @@
             label6.Location = new Point(20, 20);
             label6.Name = "label6";
             label6.Padding = new Padding(10, 0, 25, 10);
-            label6.Size = new Size(525, 51);
+            label6.Size = new Size(402, 51);
             label6.TabIndex = 0;
-            label6.Text = "Cleaning Procedures Completed? ";
+            label6.Text = "Battery / Module Clean? ";
             // 
             // panel2
             // 

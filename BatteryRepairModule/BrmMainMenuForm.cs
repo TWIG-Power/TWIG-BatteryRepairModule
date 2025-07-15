@@ -30,6 +30,7 @@ public partial class BrmMainMenuForm : Form
     {
         InitializeComponent();
         dbMethods.getTicketStatusOptions();
+        ThemeHelper.ApplyTheme(this); 
         customTitleBar();
     }
 

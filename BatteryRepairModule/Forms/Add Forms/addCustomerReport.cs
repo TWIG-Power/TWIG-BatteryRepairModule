@@ -13,11 +13,13 @@ namespace BatteryRepairModule.Forms.Ticket_Creation_Module
     public partial class addCustomerReport : Form
     {
         private ListBox listBoxRef;
+        
+        private List<string> temp = new List<string>(); 
         public addCustomerReport(ListBox list)
         {
             InitializeComponent();
             ThemeHelper.ApplyTheme(this);
-            this.listBoxRef = list; 
+            this.listBoxRef = list;
         }
 
         private void continueButton_Click(object sender, EventArgs e)
@@ -31,6 +33,7 @@ namespace BatteryRepairModule.Forms.Ticket_Creation_Module
                         MessageBox.Show("Option added successfully", "Successfull Operation", MessageBoxButtons.OK, MessageBoxIcon.Information);
                         dbMethods.loadreportTypeOptions();
                         listBoxRef.Items.Clear(); 
+                        //foreach (var item in dbInformation.reportTypeKeyPair)
                         listBoxRef.Items.AddRange(dbInformation.reportTypeKeyPair.Select(kvp => $"{kvp.Key} - {kvp.Value}").ToArray());
                         this.Close();
                     }

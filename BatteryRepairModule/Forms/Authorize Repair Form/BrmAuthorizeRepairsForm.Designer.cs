@@ -60,6 +60,8 @@ namespace BatteryRepairModule.Forms.BRM
             continueButton = new Button();
             addTestButton = new Button();
             panel12 = new Panel();
+            panel13 = new Panel();
+            pullDiagnosticFileButton = new Button();
             twigTicketNumContainer.SuspendLayout();
             panel6.SuspendLayout();
             panel1.SuspendLayout();
@@ -69,6 +71,7 @@ namespace BatteryRepairModule.Forms.BRM
             panel11.SuspendLayout();
             panel10.SuspendLayout();
             panel12.SuspendLayout();
+            panel13.SuspendLayout();
             SuspendLayout();
             // 
             // twigTicketNumContainer
@@ -378,7 +381,7 @@ namespace BatteryRepairModule.Forms.BRM
             addTestButton.Location = new Point(3, 3);
             addTestButton.MinimumSize = new Size(175, 40);
             addTestButton.Name = "addTestButton";
-            addTestButton.Size = new Size(494, 56);
+            addTestButton.Size = new Size(249, 56);
             addTestButton.TabIndex = 17;
             addTestButton.Text = "Add Required Test";
             addTestButton.UseVisualStyleBackColor = true;
@@ -392,8 +395,33 @@ namespace BatteryRepairModule.Forms.BRM
             panel12.MaximumSize = new Size(500, 62);
             panel12.Name = "panel12";
             panel12.Padding = new Padding(3);
-            panel12.Size = new Size(500, 62);
+            panel12.Size = new Size(255, 62);
             panel12.TabIndex = 18;
+            // 
+            // panel13
+            // 
+            panel13.Controls.Add(pullDiagnosticFileButton);
+            panel13.Dock = DockStyle.Left;
+            panel13.Location = new Point(255, 446);
+            panel13.MaximumSize = new Size(500, 62);
+            panel13.Name = "panel13";
+            panel13.Padding = new Padding(3);
+            panel13.Size = new Size(255, 62);
+            panel13.TabIndex = 19;
+            // 
+            // pullDiagnosticFileButton
+            // 
+            pullDiagnosticFileButton.AutoSize = true;
+            pullDiagnosticFileButton.Dock = DockStyle.Fill;
+            pullDiagnosticFileButton.Font = new Font("Segoe UI", 18F, FontStyle.Regular, GraphicsUnit.Point);
+            pullDiagnosticFileButton.Location = new Point(3, 3);
+            pullDiagnosticFileButton.MinimumSize = new Size(175, 40);
+            pullDiagnosticFileButton.Name = "pullDiagnosticFileButton";
+            pullDiagnosticFileButton.Size = new Size(249, 56);
+            pullDiagnosticFileButton.TabIndex = 17;
+            pullDiagnosticFileButton.Text = "Pull Diagnostic File";
+            pullDiagnosticFileButton.UseVisualStyleBackColor = true;
+            pullDiagnosticFileButton.Click += pullDiagnosticFileButton_Click;
             // 
             // BrmAuthorizeRepairsForm
             // 
@@ -401,6 +429,7 @@ namespace BatteryRepairModule.Forms.BRM
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.Gainsboro;
             ClientSize = new Size(931, 511);
+            Controls.Add(panel13);
             Controls.Add(panel12);
             Controls.Add(backButton);
             Controls.Add(continueButton);
@@ -426,6 +455,8 @@ namespace BatteryRepairModule.Forms.BRM
             panel10.PerformLayout();
             panel12.ResumeLayout(false);
             panel12.PerformLayout();
+            panel13.ResumeLayout(false);
+            panel13.PerformLayout();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -460,5 +491,7 @@ namespace BatteryRepairModule.Forms.BRM
         private Label label4;
         private Button addTestButton;
         private Panel panel12;
+        private Panel panel13;
+        private Button pullDiagnosticFileButton;
     }
 }
