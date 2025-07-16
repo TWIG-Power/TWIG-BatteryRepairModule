@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Microsoft.VisualBasic;
 
 namespace BatteryRepairModule.Forms.Add_Forms
 {
@@ -82,35 +83,38 @@ namespace BatteryRepairModule.Forms.Add_Forms
                             break;
 
                         case "test":
-
+                            List<string> temp = new List<string>(); 
+                            
                             dbInformation.tempTestNoteHolder.Clear();
                             var selectedValue2 = referenceListBox.SelectedItem as string;
                             if (!string.IsNullOrEmpty(selectedValue2))
                             {
-                                var selectedId = int.Parse(selectedValue2.Split(']')[0].TrimStart('[')); 
+                                var selectedId = int.Parse(selectedValue2.Split(']')[0].TrimStart('['));
                                 dbInformation.tempTestNoteHolder[selectedId] = dbInformation.addedTestsKeyValue[selectedId];
                                 dbInformation.testNotes = richTextBox1.Text.ToString();
                                 dbMethods.updateTestNotes();
 
-                                referenceListBox.Items.Clear(); 
-                                dbMethods.getDoesTestHaveNote(); 
+                                referenceListBox.Items.Clear();
+                                dbMethods.getDoesTestHaveNote();
                                 dbMethods.getAddedTestsByTwigTicket();
 
                                 foreach (var kvp in dbInformation.addedTestsKeyValue)
                                 {
                                     var testId = kvp.Key;
-                                    var testName = kvp.Value; 
+                                    var testName = kvp.Value;
                                     var status = dbInformation.addedTestsKeyStatus.GetValueOrDefault(testId); // Test status
 
                                     if (dbInformation.doesTestHaveNote[testId] == false)
                                     {
-                                        referenceListBox.Items.Add($"[{testId}] {testName} ({status})");
+                                        temp.Add($"[{testId}] {testName} ({status})");
                                     }
                                     else
                                     {
-                                        referenceListBox.Items.Add($"[{testId}] {testName} ({status})*");
+                                        temp.Add($"[{testId}] {testName} ({status})*");
                                     }
                                 }
+                                temp.Sort();
+                                referenceListBox.Items.AddRange(temp.ToArray()); 
                             }
                             else
                             {

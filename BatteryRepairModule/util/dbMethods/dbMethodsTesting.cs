@@ -97,7 +97,6 @@ public static partial class dbMethods
             {
                 dbInformation.addedTestsKeyValue.Clear();
                 dbInformation.addedTestsKeyStatus.Clear();
-                //dbInformation.addedTestValueStatus.Clear();
                 while (reader.Read())
                 {
                     dbInformation.addedTestsKeyValue.Add(reader.GetInt32(0), reader.GetString(1));
