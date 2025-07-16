@@ -25,7 +25,7 @@ namespace BatteryRepairModule.Forms.BRM
             dbMethods.getRepairOptions();
             listBox1.Items.Clear();
             string[] temp = dbInformation.repairActionOptions.Select(kvp => $"{kvp.Key} - {kvp.Value}").ToArray();
-            Array.Sort(temp);
+            temp.OrderBy(s => (s.Split('-')[1]).Trim()).ToArray(); 
             listBox1.Items.AddRange(temp);
         }
 

@@ -38,12 +38,20 @@
             attachFileButton = new Button();
             qualityChecklistPathTextBox = new MaskedTextBox();
             label1 = new Label();
-            backButton = new Button();
-            continueButton = new Button();
             addNewChecklist = new Button();
+            panel16 = new Panel();
+            panel14 = new Panel();
+            continueButton = new Button();
+            panel15 = new Panel();
+            backButton = new Button();
+            panel3 = new Panel();
             panel1.SuspendLayout();
             panel5.SuspendLayout();
             panel2.SuspendLayout();
+            panel16.SuspendLayout();
+            panel14.SuspendLayout();
+            panel15.SuspendLayout();
+            panel3.SuspendLayout();
             SuspendLayout();
             // 
             // panel1
@@ -134,7 +142,7 @@
             attachFileButton.Font = new Font("Segoe UI", 15F, FontStyle.Regular, GraphicsUnit.Point);
             attachFileButton.Location = new Point(817, 10);
             attachFileButton.Name = "attachFileButton";
-            attachFileButton.Size = new Size(105, 73);
+            attachFileButton.Size = new Size(110, 73);
             attachFileButton.TabIndex = 4;
             attachFileButton.Text = "Attach";
             attachFileButton.UseVisualStyleBackColor = true;
@@ -163,59 +171,100 @@
             label1.TabIndex = 0;
             label1.Text = "Quality checklist: ";
             // 
-            // backButton
-            // 
-            backButton.AutoSize = true;
-            backButton.Dock = DockStyle.Right;
-            backButton.Font = new Font("Segoe UI", 18F, FontStyle.Regular, GraphicsUnit.Point);
-            backButton.Location = new Point(581, 278);
-            backButton.MaximumSize = new Size(175, 80);
-            backButton.MinimumSize = new Size(175, 80);
-            backButton.Name = "backButton";
-            backButton.Size = new Size(175, 80);
-            backButton.TabIndex = 22;
-            backButton.Text = "Back";
-            backButton.UseVisualStyleBackColor = true;
-            backButton.Click += backButton_Click_1;
-            // 
-            // continueButton
-            // 
-            continueButton.AutoSize = true;
-            continueButton.Dock = DockStyle.Right;
-            continueButton.Font = new Font("Segoe UI", 18F, FontStyle.Regular, GraphicsUnit.Point);
-            continueButton.Location = new Point(756, 278);
-            continueButton.MaximumSize = new Size(175, 80);
-            continueButton.MinimumSize = new Size(175, 80);
-            continueButton.Name = "continueButton";
-            continueButton.Size = new Size(175, 80);
-            continueButton.TabIndex = 21;
-            continueButton.Text = "Continue";
-            continueButton.UseVisualStyleBackColor = true;
-            continueButton.Click += continueButton_Click_1;
-            // 
             // addNewChecklist
             // 
             addNewChecklist.AutoSize = true;
             addNewChecklist.Dock = DockStyle.Left;
             addNewChecklist.Font = new Font("Segoe UI", 18F, FontStyle.Regular, GraphicsUnit.Point);
-            addNewChecklist.Location = new Point(0, 278);
-            addNewChecklist.MaximumSize = new Size(175, 80);
+            addNewChecklist.Location = new Point(3, 3);
+            addNewChecklist.MaximumSize = new Size(1220, 80);
             addNewChecklist.MinimumSize = new Size(175, 80);
             addNewChecklist.Name = "addNewChecklist";
-            addNewChecklist.Size = new Size(175, 80);
+            addNewChecklist.Size = new Size(333, 80);
             addNewChecklist.TabIndex = 23;
             addNewChecklist.Text = "Upload new checklist version";
             addNewChecklist.UseVisualStyleBackColor = true;
             addNewChecklist.Click += addNewChecklist_Click;
+            // 
+            // panel16
+            // 
+            panel16.AutoSizeMode = AutoSizeMode.GrowAndShrink;
+            panel16.Controls.Add(panel14);
+            panel16.Controls.Add(panel15);
+            panel16.Dock = DockStyle.Right;
+            panel16.Location = new Point(500, 278);
+            panel16.Name = "panel16";
+            panel16.Size = new Size(431, 233);
+            panel16.TabIndex = 24;
+            // 
+            // panel14
+            // 
+            panel14.Controls.Add(continueButton);
+            panel14.Dock = DockStyle.Left;
+            panel14.Location = new Point(215, 0);
+            panel14.MaximumSize = new Size(500, 83);
+            panel14.Name = "panel14";
+            panel14.Padding = new Padding(3);
+            panel14.Size = new Size(215, 83);
+            panel14.TabIndex = 20;
+            // 
+            // continueButton
+            // 
+            continueButton.AutoSize = true;
+            continueButton.Dock = DockStyle.Fill;
+            continueButton.Font = new Font("Segoe UI", 18F, FontStyle.Regular, GraphicsUnit.Point);
+            continueButton.Location = new Point(3, 3);
+            continueButton.MinimumSize = new Size(175, 50);
+            continueButton.Name = "continueButton";
+            continueButton.Size = new Size(209, 77);
+            continueButton.TabIndex = 15;
+            continueButton.Text = "Continue";
+            continueButton.UseVisualStyleBackColor = true;
+            continueButton.Click += continueButton_Click;
+            // 
+            // panel15
+            // 
+            panel15.Controls.Add(backButton);
+            panel15.Dock = DockStyle.Left;
+            panel15.Location = new Point(0, 0);
+            panel15.MaximumSize = new Size(500, 83);
+            panel15.Name = "panel15";
+            panel15.Padding = new Padding(3);
+            panel15.Size = new Size(215, 83);
+            panel15.TabIndex = 21;
+            // 
+            // backButton
+            // 
+            backButton.AutoSize = true;
+            backButton.Dock = DockStyle.Fill;
+            backButton.Font = new Font("Segoe UI", 18F, FontStyle.Regular, GraphicsUnit.Point);
+            backButton.Location = new Point(3, 3);
+            backButton.MinimumSize = new Size(175, 40);
+            backButton.Name = "backButton";
+            backButton.Size = new Size(209, 77);
+            backButton.TabIndex = 17;
+            backButton.Text = "Back ";
+            backButton.UseVisualStyleBackColor = true;
+            backButton.Click += backButton_Click;
+            // 
+            // panel3
+            // 
+            panel3.AutoSizeMode = AutoSizeMode.GrowAndShrink;
+            panel3.Controls.Add(addNewChecklist);
+            panel3.Dock = DockStyle.Left;
+            panel3.Location = new Point(0, 278);
+            panel3.Name = "panel3";
+            panel3.Padding = new Padding(3);
+            panel3.Size = new Size(497, 233);
+            panel3.TabIndex = 25;
             // 
             // qualityForm1
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(931, 511);
-            Controls.Add(addNewChecklist);
-            Controls.Add(backButton);
-            Controls.Add(continueButton);
+            Controls.Add(panel3);
+            Controls.Add(panel16);
             Controls.Add(panel2);
             Controls.Add(panel5);
             Controls.Add(panel1);
@@ -228,8 +277,14 @@
             panel5.PerformLayout();
             panel2.ResumeLayout(false);
             panel2.PerformLayout();
+            panel16.ResumeLayout(false);
+            panel14.ResumeLayout(false);
+            panel14.PerformLayout();
+            panel15.ResumeLayout(false);
+            panel15.PerformLayout();
+            panel3.ResumeLayout(false);
+            panel3.PerformLayout();
             ResumeLayout(false);
-            PerformLayout();
         }
 
         #endregion
@@ -244,8 +299,12 @@
         private Label label1;
         private Button attachFileButton;
         private MaskedTextBox qualityChecklistPathTextBox;
-        private Button backButton;
-        private Button continueButton;
         private Button addNewChecklist;
+        private Panel panel16;
+        private Panel panel14;
+        private Button continueButton;
+        private Panel panel15;
+        private Button backButton;
+        private Panel panel3;
     }
 }

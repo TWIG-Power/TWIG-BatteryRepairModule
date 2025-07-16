@@ -56,12 +56,15 @@ namespace BatteryRepairModule.Forms.BRM
             removeAuthorizedRepairAction = new Button();
             panel10 = new Panel();
             addAuthorizedRepairAction = new Button();
-            backButton = new Button();
-            continueButton = new Button();
             addTestButton = new Button();
             panel12 = new Panel();
             panel13 = new Panel();
             pullDiagnosticFileButton = new Button();
+            panel14 = new Panel();
+            continueButton = new Button();
+            panel15 = new Panel();
+            backButton = new Button();
+            panel16 = new Panel();
             twigTicketNumContainer.SuspendLayout();
             panel6.SuspendLayout();
             panel1.SuspendLayout();
@@ -72,6 +75,9 @@ namespace BatteryRepairModule.Forms.BRM
             panel10.SuspendLayout();
             panel12.SuspendLayout();
             panel13.SuspendLayout();
+            panel14.SuspendLayout();
+            panel15.SuspendLayout();
+            panel16.SuspendLayout();
             SuspendLayout();
             // 
             // twigTicketNumContainer
@@ -302,7 +308,7 @@ namespace BatteryRepairModule.Forms.BRM
             panel11.Location = new Point(500, 0);
             panel11.Name = "panel11";
             panel11.Padding = new Padding(2);
-            panel11.Size = new Size(465, 63);
+            panel11.Size = new Size(431, 63);
             panel11.TabIndex = 16;
             // 
             // removeAuthorizedRepairAction
@@ -313,7 +319,7 @@ namespace BatteryRepairModule.Forms.BRM
             removeAuthorizedRepairAction.Location = new Point(2, 2);
             removeAuthorizedRepairAction.Name = "removeAuthorizedRepairAction";
             removeAuthorizedRepairAction.Padding = new Padding(3);
-            removeAuthorizedRepairAction.Size = new Size(461, 59);
+            removeAuthorizedRepairAction.Size = new Size(427, 59);
             removeAuthorizedRepairAction.TabIndex = 18;
             removeAuthorizedRepairAction.Text = "Remove Authorized Repair Action";
             removeAuthorizedRepairAction.UseVisualStyleBackColor = true;
@@ -342,36 +348,6 @@ namespace BatteryRepairModule.Forms.BRM
             addAuthorizedRepairAction.Text = "Add Authorized Repair Action";
             addAuthorizedRepairAction.UseVisualStyleBackColor = true;
             addAuthorizedRepairAction.Click += addAuthorizedRepairAction_Click;
-            // 
-            // backButton
-            // 
-            backButton.AutoSize = true;
-            backButton.Dock = DockStyle.Right;
-            backButton.Font = new Font("Segoe UI", 18F, FontStyle.Regular, GraphicsUnit.Point);
-            backButton.Location = new Point(581, 446);
-            backButton.MaximumSize = new Size(175, 80);
-            backButton.MinimumSize = new Size(175, 40);
-            backButton.Name = "backButton";
-            backButton.Size = new Size(175, 62);
-            backButton.TabIndex = 16;
-            backButton.Text = "Back ";
-            backButton.UseVisualStyleBackColor = true;
-            backButton.Click += backButton_Click;
-            // 
-            // continueButton
-            // 
-            continueButton.AutoSize = true;
-            continueButton.Dock = DockStyle.Right;
-            continueButton.Font = new Font("Segoe UI", 18F, FontStyle.Regular, GraphicsUnit.Point);
-            continueButton.Location = new Point(756, 446);
-            continueButton.MaximumSize = new Size(175, 80);
-            continueButton.MinimumSize = new Size(175, 50);
-            continueButton.Name = "continueButton";
-            continueButton.Size = new Size(175, 62);
-            continueButton.TabIndex = 15;
-            continueButton.Text = "Continue";
-            continueButton.UseVisualStyleBackColor = true;
-            continueButton.Click += continueButton_Click;
             // 
             // addTestButton
             // 
@@ -406,7 +382,7 @@ namespace BatteryRepairModule.Forms.BRM
             panel13.MaximumSize = new Size(500, 62);
             panel13.Name = "panel13";
             panel13.Padding = new Padding(3);
-            panel13.Size = new Size(255, 62);
+            panel13.Size = new Size(245, 62);
             panel13.TabIndex = 19;
             // 
             // pullDiagnosticFileButton
@@ -417,11 +393,72 @@ namespace BatteryRepairModule.Forms.BRM
             pullDiagnosticFileButton.Location = new Point(3, 3);
             pullDiagnosticFileButton.MinimumSize = new Size(175, 40);
             pullDiagnosticFileButton.Name = "pullDiagnosticFileButton";
-            pullDiagnosticFileButton.Size = new Size(249, 56);
+            pullDiagnosticFileButton.Size = new Size(239, 56);
             pullDiagnosticFileButton.TabIndex = 17;
             pullDiagnosticFileButton.Text = "Pull Diagnostic File";
             pullDiagnosticFileButton.UseVisualStyleBackColor = true;
             pullDiagnosticFileButton.Click += pullDiagnosticFileButton_Click;
+            // 
+            // panel14
+            // 
+            panel14.Controls.Add(continueButton);
+            panel14.Dock = DockStyle.Left;
+            panel14.Location = new Point(215, 0);
+            panel14.MaximumSize = new Size(500, 62);
+            panel14.Name = "panel14";
+            panel14.Padding = new Padding(3);
+            panel14.Size = new Size(215, 62);
+            panel14.TabIndex = 20;
+            // 
+            // continueButton
+            // 
+            continueButton.AutoSize = true;
+            continueButton.Dock = DockStyle.Fill;
+            continueButton.Font = new Font("Segoe UI", 18F, FontStyle.Regular, GraphicsUnit.Point);
+            continueButton.Location = new Point(3, 3);
+            continueButton.MinimumSize = new Size(175, 50);
+            continueButton.Name = "continueButton";
+            continueButton.Size = new Size(209, 56);
+            continueButton.TabIndex = 15;
+            continueButton.Text = "Continue";
+            continueButton.UseVisualStyleBackColor = true;
+            continueButton.Click += continueButton_Click;
+            // 
+            // panel15
+            // 
+            panel15.Controls.Add(backButton);
+            panel15.Dock = DockStyle.Left;
+            panel15.Location = new Point(0, 0);
+            panel15.MaximumSize = new Size(500, 62);
+            panel15.Name = "panel15";
+            panel15.Padding = new Padding(3);
+            panel15.Size = new Size(215, 62);
+            panel15.TabIndex = 21;
+            // 
+            // backButton
+            // 
+            backButton.AutoSize = true;
+            backButton.Dock = DockStyle.Fill;
+            backButton.Font = new Font("Segoe UI", 18F, FontStyle.Regular, GraphicsUnit.Point);
+            backButton.Location = new Point(3, 3);
+            backButton.MinimumSize = new Size(175, 40);
+            backButton.Name = "backButton";
+            backButton.Size = new Size(209, 56);
+            backButton.TabIndex = 17;
+            backButton.Text = "Back ";
+            backButton.UseVisualStyleBackColor = true;
+            backButton.Click += backButton_Click;
+            // 
+            // panel16
+            // 
+            panel16.AutoSizeMode = AutoSizeMode.GrowAndShrink;
+            panel16.Controls.Add(panel14);
+            panel16.Controls.Add(panel15);
+            panel16.Dock = DockStyle.Left;
+            panel16.Location = new Point(500, 446);
+            panel16.Name = "panel16";
+            panel16.Size = new Size(431, 62);
+            panel16.TabIndex = 22;
             // 
             // BrmAuthorizeRepairsForm
             // 
@@ -429,10 +466,9 @@ namespace BatteryRepairModule.Forms.BRM
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.Gainsboro;
             ClientSize = new Size(931, 511);
+            Controls.Add(panel16);
             Controls.Add(panel13);
             Controls.Add(panel12);
-            Controls.Add(backButton);
-            Controls.Add(continueButton);
             Controls.Add(panel9);
             Controls.Add(panel5);
             Controls.Add(panel3);
@@ -457,8 +493,12 @@ namespace BatteryRepairModule.Forms.BRM
             panel12.PerformLayout();
             panel13.ResumeLayout(false);
             panel13.PerformLayout();
+            panel14.ResumeLayout(false);
+            panel14.PerformLayout();
+            panel15.ResumeLayout(false);
+            panel15.PerformLayout();
+            panel16.ResumeLayout(false);
             ResumeLayout(false);
-            PerformLayout();
         }
 
         #endregion
@@ -482,8 +522,6 @@ namespace BatteryRepairModule.Forms.BRM
         private Button removeAuthorizedRepairAction;
         private Panel panel10;
         private Button addAuthorizedRepairAction;
-        private Button backButton;
-        private Button continueButton;
         private Panel panel4;
         private Panel panel1;
         private Panel panel6;
@@ -493,5 +531,10 @@ namespace BatteryRepairModule.Forms.BRM
         private Panel panel12;
         private Panel panel13;
         private Button pullDiagnosticFileButton;
+        private Panel panel14;
+        private Button continueButton;
+        private Panel panel15;
+        private Button backButton;
+        private Panel panel16;
     }
 }

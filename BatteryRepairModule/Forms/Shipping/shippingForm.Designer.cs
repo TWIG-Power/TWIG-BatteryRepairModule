@@ -29,14 +29,14 @@
         private void InitializeComponent()
         {
             panel1 = new Panel();
-            label2 = new Label();
-            panel7 = new Panel();
-            label1 = new Label();
-            panel2 = new Panel();
             stateOfHealthFilterDropDown = new ComboBox();
             label3 = new Label();
             moduleOemFilterDropDown = new ComboBox();
             label4 = new Label();
+            label2 = new Label();
+            panel7 = new Panel();
+            label1 = new Label();
+            panel2 = new Panel();
             panel3 = new Panel();
             panel8 = new Panel();
             markModuleAsShipped = new Button();
@@ -57,21 +57,72 @@
             // 
             // panel1
             // 
-            panel1.Controls.Add(label2);
-            panel1.Controls.Add(panel7);
-            panel1.Controls.Add(label1);
+            panel1.Controls.Add(stateOfHealthFilterDropDown);
+            panel1.Controls.Add(label3);
+            panel1.Controls.Add(moduleOemFilterDropDown);
+            panel1.Controls.Add(label4);
             panel1.Dock = DockStyle.Top;
             panel1.Location = new Point(0, 0);
+            panel1.Margin = new Padding(0);
             panel1.Name = "panel1";
+            panel1.Padding = new Padding(5);
             panel1.Size = new Size(931, 54);
             panel1.TabIndex = 4;
+            // 
+            // stateOfHealthFilterDropDown
+            // 
+            stateOfHealthFilterDropDown.Dock = DockStyle.Left;
+            stateOfHealthFilterDropDown.Font = new Font("Segoe UI", 20F, FontStyle.Regular, GraphicsUnit.Point);
+            stateOfHealthFilterDropDown.FormattingEnabled = true;
+            stateOfHealthFilterDropDown.Location = new Point(682, 5);
+            stateOfHealthFilterDropDown.MaximumSize = new Size(500, 0);
+            stateOfHealthFilterDropDown.Name = "stateOfHealthFilterDropDown";
+            stateOfHealthFilterDropDown.Size = new Size(255, 45);
+            stateOfHealthFilterDropDown.TabIndex = 9;
+            stateOfHealthFilterDropDown.SelectedIndexChanged += stateOfHealthFilterDropDown_SelectedIndexChanged;
+            // 
+            // label3
+            // 
+            label3.AutoSize = true;
+            label3.Dock = DockStyle.Left;
+            label3.Font = new Font("Segoe UI", 18F, FontStyle.Bold, GraphicsUnit.Point);
+            label3.Location = new Point(463, 5);
+            label3.Name = "label3";
+            label3.Padding = new Padding(10, 0, 10, 10);
+            label3.Size = new Size(219, 42);
+            label3.TabIndex = 8;
+            label3.Text = "State Of Health: ";
+            // 
+            // moduleOemFilterDropDown
+            // 
+            moduleOemFilterDropDown.Dock = DockStyle.Left;
+            moduleOemFilterDropDown.Font = new Font("Segoe UI", 20F, FontStyle.Regular, GraphicsUnit.Point);
+            moduleOemFilterDropDown.FormattingEnabled = true;
+            moduleOemFilterDropDown.Location = new Point(202, 5);
+            moduleOemFilterDropDown.MaximumSize = new Size(500, 0);
+            moduleOemFilterDropDown.Name = "moduleOemFilterDropDown";
+            moduleOemFilterDropDown.Size = new Size(261, 45);
+            moduleOemFilterDropDown.TabIndex = 7;
+            moduleOemFilterDropDown.SelectedIndexChanged += moduleOemFilterDropDown_SelectedIndexChanged_1;
+            // 
+            // label4
+            // 
+            label4.AutoSize = true;
+            label4.Dock = DockStyle.Left;
+            label4.Font = new Font("Segoe UI", 18F, FontStyle.Bold, GraphicsUnit.Point);
+            label4.Location = new Point(5, 5);
+            label4.Name = "label4";
+            label4.Padding = new Padding(10, 0, 10, 10);
+            label4.Size = new Size(197, 42);
+            label4.TabIndex = 0;
+            label4.Text = "Module OEM: ";
             // 
             // label2
             // 
             label2.AutoSize = true;
             label2.Dock = DockStyle.Left;
             label2.Font = new Font("Segoe UI", 22F, FontStyle.Bold, GraphicsUnit.Point);
-            label2.Location = new Point(488, 0);
+            label2.Location = new Point(473, 0);
             label2.Name = "label2";
             label2.Padding = new Padding(10, 0, 10, 10);
             label2.Size = new Size(174, 51);
@@ -83,7 +134,7 @@
             panel7.Dock = DockStyle.Left;
             panel7.Location = new Point(285, 0);
             panel7.Name = "panel7";
-            panel7.Size = new Size(203, 54);
+            panel7.Size = new Size(188, 54);
             panel7.TabIndex = 7;
             // 
             // label1
@@ -100,63 +151,14 @@
             // 
             // panel2
             // 
-            panel2.Controls.Add(stateOfHealthFilterDropDown);
-            panel2.Controls.Add(label3);
-            panel2.Controls.Add(moduleOemFilterDropDown);
-            panel2.Controls.Add(label4);
+            panel2.Controls.Add(label2);
+            panel2.Controls.Add(panel7);
+            panel2.Controls.Add(label1);
             panel2.Dock = DockStyle.Top;
             panel2.Location = new Point(0, 54);
             panel2.Name = "panel2";
             panel2.Size = new Size(931, 54);
             panel2.TabIndex = 5;
-            // 
-            // stateOfHealthFilterDropDown
-            // 
-            stateOfHealthFilterDropDown.Dock = DockStyle.Left;
-            stateOfHealthFilterDropDown.Font = new Font("Segoe UI", 20F, FontStyle.Regular, GraphicsUnit.Point);
-            stateOfHealthFilterDropDown.FormattingEnabled = true;
-            stateOfHealthFilterDropDown.Location = new Point(658, 0);
-            stateOfHealthFilterDropDown.MaximumSize = new Size(500, 0);
-            stateOfHealthFilterDropDown.Name = "stateOfHealthFilterDropDown";
-            stateOfHealthFilterDropDown.Size = new Size(255, 45);
-            stateOfHealthFilterDropDown.TabIndex = 9;
-            stateOfHealthFilterDropDown.SelectedIndexChanged += stateOfHealthFilterDropDown_SelectedIndexChanged;
-            // 
-            // label3
-            // 
-            label3.AutoSize = true;
-            label3.Dock = DockStyle.Left;
-            label3.Font = new Font("Segoe UI", 18F, FontStyle.Regular, GraphicsUnit.Point);
-            label3.Location = new Point(449, 0);
-            label3.Name = "label3";
-            label3.Padding = new Padding(10, 0, 10, 10);
-            label3.Size = new Size(209, 42);
-            label3.TabIndex = 8;
-            label3.Text = "State Of Health: ";
-            // 
-            // moduleOemFilterDropDown
-            // 
-            moduleOemFilterDropDown.Dock = DockStyle.Left;
-            moduleOemFilterDropDown.Font = new Font("Segoe UI", 20F, FontStyle.Regular, GraphicsUnit.Point);
-            moduleOemFilterDropDown.FormattingEnabled = true;
-            moduleOemFilterDropDown.Location = new Point(188, 0);
-            moduleOemFilterDropDown.MaximumSize = new Size(500, 0);
-            moduleOemFilterDropDown.Name = "moduleOemFilterDropDown";
-            moduleOemFilterDropDown.Size = new Size(261, 45);
-            moduleOemFilterDropDown.TabIndex = 7;
-            moduleOemFilterDropDown.SelectedIndexChanged += moduleOemFilterDropDown_SelectedIndexChanged_1;
-            // 
-            // label4
-            // 
-            label4.AutoSize = true;
-            label4.Dock = DockStyle.Left;
-            label4.Font = new Font("Segoe UI", 18F, FontStyle.Regular, GraphicsUnit.Point);
-            label4.Location = new Point(0, 0);
-            label4.Name = "label4";
-            label4.Padding = new Padding(10, 0, 10, 10);
-            label4.Size = new Size(188, 42);
-            label4.TabIndex = 0;
-            label4.Text = "Module OEM: ";
             // 
             // panel3
             // 

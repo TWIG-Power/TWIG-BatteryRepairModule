@@ -267,22 +267,23 @@ namespace BatteryRepairModule.Forms.BRM
             panel6.Dock = DockStyle.Left;
             panel6.Location = new Point(695, 0);
             panel6.Name = "panel6";
-            panel6.Padding = new Padding(2);
+            panel6.Padding = new Padding(3);
             panel6.Size = new Size(236, 63);
             panel6.TabIndex = 18;
             // 
             // updateRepairStatus
             // 
             updateRepairStatus.AutoSize = true;
+            updateRepairStatus.BackColor = Color.LemonChiffon;
             updateRepairStatus.Dock = DockStyle.Fill;
             updateRepairStatus.Font = new Font("Segoe UI", 14F, FontStyle.Regular, GraphicsUnit.Point);
-            updateRepairStatus.Location = new Point(2, 2);
+            updateRepairStatus.Location = new Point(3, 3);
             updateRepairStatus.MinimumSize = new Size(175, 50);
             updateRepairStatus.Name = "updateRepairStatus";
-            updateRepairStatus.Size = new Size(232, 59);
+            updateRepairStatus.Size = new Size(230, 57);
             updateRepairStatus.TabIndex = 27;
             updateRepairStatus.Text = "Update Repair Status";
-            updateRepairStatus.UseVisualStyleBackColor = true;
+            updateRepairStatus.UseVisualStyleBackColor = false;
             updateRepairStatus.Click += updateRepairStatus_Click;
             // 
             // panel2
@@ -292,22 +293,23 @@ namespace BatteryRepairModule.Forms.BRM
             panel2.Dock = DockStyle.Left;
             panel2.Location = new Point(450, 0);
             panel2.Name = "panel2";
-            panel2.Padding = new Padding(2);
+            panel2.Padding = new Padding(3);
             panel2.Size = new Size(245, 63);
             panel2.TabIndex = 17;
             // 
             // addRepairNotesButton
             // 
             addRepairNotesButton.AutoSize = true;
+            addRepairNotesButton.BackColor = Color.LemonChiffon;
             addRepairNotesButton.Dock = DockStyle.Fill;
             addRepairNotesButton.Font = new Font("Segoe UI", 14F, FontStyle.Regular, GraphicsUnit.Point);
-            addRepairNotesButton.Location = new Point(2, 2);
+            addRepairNotesButton.Location = new Point(3, 3);
             addRepairNotesButton.Name = "addRepairNotesButton";
             addRepairNotesButton.Padding = new Padding(3);
-            addRepairNotesButton.Size = new Size(241, 59);
+            addRepairNotesButton.Size = new Size(239, 57);
             addRepairNotesButton.TabIndex = 18;
             addRepairNotesButton.Text = "Add Repair Notes";
-            addRepairNotesButton.UseVisualStyleBackColor = true;
+            addRepairNotesButton.UseVisualStyleBackColor = false;
             addRepairNotesButton.Click += button1_Click;
             // 
             // panel11
@@ -324,6 +326,7 @@ namespace BatteryRepairModule.Forms.BRM
             // viewRepairNotesButton
             // 
             viewRepairNotesButton.AutoSize = true;
+            viewRepairNotesButton.BackColor = Color.LemonChiffon;
             viewRepairNotesButton.Dock = DockStyle.Fill;
             viewRepairNotesButton.Font = new Font("Segoe UI", 14F, FontStyle.Regular, GraphicsUnit.Point);
             viewRepairNotesButton.Location = new Point(2, 2);
@@ -332,7 +335,7 @@ namespace BatteryRepairModule.Forms.BRM
             viewRepairNotesButton.Size = new Size(214, 59);
             viewRepairNotesButton.TabIndex = 18;
             viewRepairNotesButton.Text = "View Repair Notes";
-            viewRepairNotesButton.UseVisualStyleBackColor = true;
+            viewRepairNotesButton.UseVisualStyleBackColor = false;
             viewRepairNotesButton.Click += updateStatusButton_Click;
             // 
             // panel10
@@ -349,6 +352,7 @@ namespace BatteryRepairModule.Forms.BRM
             // addRepairActionButton
             // 
             addRepairActionButton.AutoSize = true;
+            addRepairActionButton.BackColor = Color.LemonChiffon;
             addRepairActionButton.Dock = DockStyle.Fill;
             addRepairActionButton.Font = new Font("Segoe UI", 14F, FontStyle.Regular, GraphicsUnit.Point);
             addRepairActionButton.Location = new Point(3, 3);
@@ -356,7 +360,7 @@ namespace BatteryRepairModule.Forms.BRM
             addRepairActionButton.Size = new Size(226, 57);
             addRepairActionButton.TabIndex = 17;
             addRepairActionButton.Text = "Add Repair Action ";
-            addRepairActionButton.UseVisualStyleBackColor = true;
+            addRepairActionButton.UseVisualStyleBackColor = false;
             addRepairActionButton.Click += addRepairActionButton_Click_2;
             // 
             // panel13
@@ -379,21 +383,22 @@ namespace BatteryRepairModule.Forms.BRM
             panel14.Dock = DockStyle.Left;
             panel14.Location = new Point(695, 0);
             panel14.Name = "panel14";
-            panel14.Padding = new Padding(2);
+            panel14.Padding = new Padding(3);
             panel14.Size = new Size(236, 57);
             panel14.TabIndex = 18;
             // 
             // clearModuleForTestingButton
             // 
+            clearModuleForTestingButton.BackColor = Color.FromArgb(192, 255, 192);
             clearModuleForTestingButton.Dock = DockStyle.Fill;
             clearModuleForTestingButton.Font = new Font("Segoe UI", 14F, FontStyle.Regular, GraphicsUnit.Point);
-            clearModuleForTestingButton.Location = new Point(2, 2);
+            clearModuleForTestingButton.Location = new Point(3, 3);
             clearModuleForTestingButton.MinimumSize = new Size(175, 50);
             clearModuleForTestingButton.Name = "clearModuleForTestingButton";
-            clearModuleForTestingButton.Size = new Size(232, 53);
+            clearModuleForTestingButton.Size = new Size(230, 51);
             clearModuleForTestingButton.TabIndex = 31;
             clearModuleForTestingButton.Text = "Clear Module For Testing";
-            clearModuleForTestingButton.UseVisualStyleBackColor = true;
+            clearModuleForTestingButton.UseVisualStyleBackColor = false;
             clearModuleForTestingButton.Click += clearModuleForTestingButton_Click;
             // 
             // panel15
@@ -413,23 +418,24 @@ namespace BatteryRepairModule.Forms.BRM
             panel16.Dock = DockStyle.Left;
             panel16.Location = new Point(232, 0);
             panel16.Name = "panel16";
-            panel16.Padding = new Padding(2);
+            panel16.Padding = new Padding(3);
             panel16.Size = new Size(218, 57);
             panel16.TabIndex = 16;
             // 
             // addTestButton
             // 
             addTestButton.AutoSize = true;
+            addTestButton.BackColor = Color.LavenderBlush;
             addTestButton.Dock = DockStyle.Fill;
             addTestButton.Font = new Font("Segoe UI", 14F, FontStyle.Regular, GraphicsUnit.Point);
-            addTestButton.Location = new Point(2, 2);
+            addTestButton.Location = new Point(3, 3);
             addTestButton.Margin = new Padding(5);
             addTestButton.MinimumSize = new Size(175, 40);
             addTestButton.Name = "addTestButton";
-            addTestButton.Size = new Size(214, 53);
+            addTestButton.Size = new Size(212, 51);
             addTestButton.TabIndex = 30;
             addTestButton.Text = "Add Required Test";
-            addTestButton.UseVisualStyleBackColor = true;
+            addTestButton.UseVisualStyleBackColor = false;
             addTestButton.Click += addTestButton_Click;
             // 
             // panel17
@@ -446,6 +452,7 @@ namespace BatteryRepairModule.Forms.BRM
             // updateIssueStatus
             // 
             updateIssueStatus.AutoSize = true;
+            updateIssueStatus.BackColor = Color.LightCyan;
             updateIssueStatus.Dock = DockStyle.Fill;
             updateIssueStatus.Font = new Font("Segoe UI", 14F, FontStyle.Regular, GraphicsUnit.Point);
             updateIssueStatus.Location = new Point(3, 3);
@@ -454,7 +461,7 @@ namespace BatteryRepairModule.Forms.BRM
             updateIssueStatus.Size = new Size(226, 51);
             updateIssueStatus.TabIndex = 29;
             updateIssueStatus.Text = "Update Issue Status";
-            updateIssueStatus.UseVisualStyleBackColor = true;
+            updateIssueStatus.UseVisualStyleBackColor = false;
             updateIssueStatus.Click += continueButton_Click_1;
             // 
             // BrmRepairActionForm

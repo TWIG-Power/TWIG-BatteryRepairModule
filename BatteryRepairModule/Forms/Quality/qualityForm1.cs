@@ -14,12 +14,12 @@ namespace BatteryRepairModule.Forms.Quality
 {
     public partial class qualityForm1 : Form
     {
-        
+
         private BrmMainMenuForm parentForm;
         private string desktopPath;
         private string folderPath;
         private string completedFilePath;
-        private string completedFileName; 
+        private string completedFileName;
         public qualityForm1(BrmMainMenuForm parentRef)
         {
             InitializeComponent();
@@ -55,7 +55,7 @@ namespace BatteryRepairModule.Forms.Quality
                     staffInitiatingReportDropDown.Enabled = true;
 
                     var selectedValue = twigTicketNumberDropDown.SelectedItem.ToString();
-                    var converted = selectedValue.Split('[')[1].Split(']')[0]; 
+                    var converted = selectedValue.Split('[')[1].Split(']')[0];
                     var selectedKvp = dbInformation.activeModules.FirstOrDefault(mod => mod.ticketId.ToString() == converted);
                     dbInformation.selectedTwigTicketKeyPair.Clear();
                     dbInformation.selectedTwigTicketKeyPair[selectedKvp.ticketSurrogateKey] = selectedKvp.ticketId;
@@ -106,7 +106,7 @@ namespace BatteryRepairModule.Forms.Quality
                     string selectedItem = staffInitiatingReportDropDown.SelectedItem as string;
                     var selectedKvp = dbInformation.staffKeyPairOptions.FirstOrDefault(kvp => kvp.Value == selectedItem);
                     dbInformation.selectedStaffKeyValue.Clear();
-                    dbInformation.selectedStaffKeyValue[selectedKvp.Key] = selectedKvp.Value; 
+                    dbInformation.selectedStaffKeyValue[selectedKvp.Key] = selectedKvp.Value;
                 }
             }
             catch (Exception ex)
@@ -119,8 +119,8 @@ namespace BatteryRepairModule.Forms.Quality
         {
             try
             {
-                staffInitiatingReportDropDown.Enabled = false; 
-                completedFilePath = string.Empty; 
+                staffInitiatingReportDropDown.Enabled = false;
+                completedFilePath = string.Empty;
                 completedFilePath = Path.Combine(folderPath, $"QualityChecklist_{dbInformation.selectedTwigTicketKeyPair.Values.First()}.pdf");
 
                 if (!File.Exists(completedFilePath))
@@ -142,7 +142,7 @@ namespace BatteryRepairModule.Forms.Quality
                 }
 
                 completedFileName = Path.GetFileName(completedFilePath);
-                qualityChecklistPathTextBox.Text = completedFileName; 
+                qualityChecklistPathTextBox.Text = completedFileName;
             }
             catch (Exception ex)
             {
@@ -150,7 +150,13 @@ namespace BatteryRepairModule.Forms.Quality
             }
         }
 
-        private void continueButton_Click_1(object sender, EventArgs e)
+        private void addNewChecklist_Click(object sender, EventArgs e)
+        {
+            using (var newForm = new updateLatestChecklistForm())
+                newForm.ShowDialog(this);
+        }
+
+        private void continueButton_Click(object sender, EventArgs e)
         {
             try
             {
@@ -161,11 +167,11 @@ namespace BatteryRepairModule.Forms.Quality
                     if (result)
                     {
                         MessageBox.Show("Quality checklist uploaded successfully.", "Success!", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                        File.Delete(completedFilePath); 
+                        File.Delete(completedFilePath);
                         dbMethods.clearModuleForInvoice();
                         this.Close();
                         parentForm.OpenChildForm(new qualityForm1(parentForm));
-                        return; 
+                        return;
                     }
                     else
                     {
@@ -179,15 +185,9 @@ namespace BatteryRepairModule.Forms.Quality
             }
         }
 
-        private void backButton_Click_1(object sender, EventArgs e)
+        private void backButton_Click(object sender, EventArgs e)
         {
-            this.Close(); 
-        }
-
-        private void addNewChecklist_Click(object sender, EventArgs e)
-        {
-            using (var newForm = new updateLatestChecklistForm())
-                    newForm.ShowDialog(this);
+            this.Close();
         }
     }
 }

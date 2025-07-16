@@ -37,7 +37,7 @@ namespace BatteryRepairModule.Forms.BRM
             removeAuthorizedRepairAction.Enabled = false;
             addTestButton.Enabled = false;
             continueButton.Enabled = false;
-            pullDiagnosticFileButton.Enabled = false; 
+            pullDiagnosticFileButton.Enabled = false;
         }
 
         private void addAuthorizedRepairAction_Click(object sender, EventArgs e)
@@ -185,7 +185,7 @@ namespace BatteryRepairModule.Forms.BRM
                     removeAuthorizedRepairAction.Enabled = false;
                     addTestButton.Enabled = false;
                     continueButton.Enabled = false;
-                    pullDiagnosticFileButton.Enabled = false; 
+                    pullDiagnosticFileButton.Enabled = false;
                 }
             }
             catch (Exception ex)
@@ -272,7 +272,7 @@ namespace BatteryRepairModule.Forms.BRM
             if (file != null && file.Length > 0)
             {
                 string folderPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Desktop), "BRM Diagnostic Reports"); // Save in "BRM Diagnostic Reports" folder on Desktop
-                Directory.CreateDirectory(folderPath); 
+                Directory.CreateDirectory(folderPath);
 
                 string fileName = $"{dbInformation.selectedTwigTicketKeyPair.Values.First()}_DiagnosticReport.html";
                 string filePath = Path.Combine(folderPath, fileName);

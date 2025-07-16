@@ -16,16 +16,23 @@ namespace BatteryRepairModule
     public partial class BrmTicketCreationForm3 : Form
     {
         private BrmMainMenuForm parentForm;
-        private int showOnlyTicketNum; 
+        private int showOnlyTicketNum;
+        private List<string> tempList = new List<string>(); 
         public BrmTicketCreationForm3(BrmMainMenuForm parentRef)
         {
             InitializeComponent();
             ThemeHelper.ApplyTheme(this);
             this.parentForm = parentRef;
 
-            // FOR TESTING PURPOSES ONLY 
             dbMethods.loadreportTypeOptions();
-            errorsListBox.Items.AddRange(dbInformation.reportTypeKeyPair.Select(kvp => $"{kvp.Key} - {kvp.Value}").ToArray());
+            foreach (var report in dbInformation.reportTypeKeyPair)
+            {
+                tempList.Add($"{report.Key} - {report.Value}"); 
+            }
+
+            var tempList2 = tempList.OrderBy(s => (s.Split('-')[1]).Trim()).ToArray();
+
+            errorsListBox.Items.AddRange(tempList2.ToArray()); 
 
             var errorChecks = new Dictionary<string, bool?>
             {
