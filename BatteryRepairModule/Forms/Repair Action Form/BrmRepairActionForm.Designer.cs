@@ -40,13 +40,13 @@ namespace BatteryRepairModule.Forms.BRM
             twigTicketNumberDropDown = new ComboBox();
             label1 = new Label();
             panel3 = new Panel();
-            label2 = new Label();
-            panel1 = new Panel();
             label3 = new Label();
+            panel1 = new Panel();
+            label2 = new Label();
             panel5 = new Panel();
-            repairActionsListBox = new ListBox();
-            panel4 = new Panel();
             reportedIssuesListBox = new ListBox();
+            panel4 = new Panel();
+            repairActionsListBox = new ListBox();
             panel7 = new Panel();
             panel6 = new Panel();
             updateRepairStatus = new Button();
@@ -173,26 +173,6 @@ namespace BatteryRepairModule.Forms.BRM
             panel3.Size = new Size(931, 57);
             panel3.TabIndex = 11;
             // 
-            // label2
-            // 
-            label2.AutoSize = true;
-            label2.Dock = DockStyle.Left;
-            label2.Font = new Font("Segoe UI", 22F, FontStyle.Bold, GraphicsUnit.Point);
-            label2.Location = new Point(10, 10);
-            label2.Name = "label2";
-            label2.Padding = new Padding(5);
-            label2.Size = new Size(251, 51);
-            label2.TabIndex = 3;
-            label2.Text = "Reported Issues";
-            // 
-            // panel1
-            // 
-            panel1.Dock = DockStyle.Left;
-            panel1.Location = new Point(261, 10);
-            panel1.Name = "panel1";
-            panel1.Size = new Size(206, 42);
-            panel1.TabIndex = 2;
-            // 
             // label3
             // 
             label3.AutoSize = true;
@@ -204,6 +184,26 @@ namespace BatteryRepairModule.Forms.BRM
             label3.Size = new Size(248, 51);
             label3.TabIndex = 0;
             label3.Text = "Repair Actions: ";
+            // 
+            // panel1
+            // 
+            panel1.Dock = DockStyle.Left;
+            panel1.Location = new Point(261, 10);
+            panel1.Name = "panel1";
+            panel1.Size = new Size(206, 42);
+            panel1.TabIndex = 2;
+            // 
+            // label2
+            // 
+            label2.AutoSize = true;
+            label2.Dock = DockStyle.Left;
+            label2.Font = new Font("Segoe UI", 22F, FontStyle.Bold, GraphicsUnit.Point);
+            label2.Location = new Point(10, 10);
+            label2.Name = "label2";
+            label2.Padding = new Padding(5);
+            label2.Size = new Size(251, 51);
+            label2.TabIndex = 3;
+            label2.Text = "Reported Issues";
             // 
             // panel5
             // 
@@ -217,25 +217,6 @@ namespace BatteryRepairModule.Forms.BRM
             panel5.Size = new Size(931, 215);
             panel5.TabIndex = 12;
             // 
-            // repairActionsListBox
-            // 
-            repairActionsListBox.Dock = DockStyle.Right;
-            repairActionsListBox.Font = new Font("Segoe UI", 18F, FontStyle.Regular, GraphicsUnit.Point);
-            repairActionsListBox.FormattingEnabled = true;
-            repairActionsListBox.ItemHeight = 32;
-            repairActionsListBox.Location = new Point(475, 0);
-            repairActionsListBox.Name = "repairActionsListBox";
-            repairActionsListBox.Size = new Size(456, 215);
-            repairActionsListBox.TabIndex = 2;
-            // 
-            // panel4
-            // 
-            panel4.Dock = DockStyle.Right;
-            panel4.Location = new Point(458, 0);
-            panel4.Name = "panel4";
-            panel4.Size = new Size(17, 215);
-            panel4.TabIndex = 1;
-            // 
             // reportedIssuesListBox
             // 
             reportedIssuesListBox.Dock = DockStyle.Right;
@@ -246,6 +227,25 @@ namespace BatteryRepairModule.Forms.BRM
             reportedIssuesListBox.Name = "reportedIssuesListBox";
             reportedIssuesListBox.Size = new Size(458, 215);
             reportedIssuesListBox.TabIndex = 0;
+            // 
+            // panel4
+            // 
+            panel4.Dock = DockStyle.Right;
+            panel4.Location = new Point(458, 0);
+            panel4.Name = "panel4";
+            panel4.Size = new Size(17, 215);
+            panel4.TabIndex = 1;
+            // 
+            // repairActionsListBox
+            // 
+            repairActionsListBox.Dock = DockStyle.Right;
+            repairActionsListBox.Font = new Font("Segoe UI", 18F, FontStyle.Regular, GraphicsUnit.Point);
+            repairActionsListBox.FormattingEnabled = true;
+            repairActionsListBox.ItemHeight = 32;
+            repairActionsListBox.Location = new Point(475, 0);
+            repairActionsListBox.Name = "repairActionsListBox";
+            repairActionsListBox.Size = new Size(456, 215);
+            repairActionsListBox.TabIndex = 2;
             // 
             // panel7
             // 

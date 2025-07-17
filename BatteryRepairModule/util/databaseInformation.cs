@@ -171,6 +171,8 @@ public class Module
         model = type;
         this.stateOfHealth = stateOfHealth;
         ticketStatus = status;
+
+        // imported from other methods. 
         this.repairList = repairList;
         this.reportList = reportList;
         this.testList = testList;

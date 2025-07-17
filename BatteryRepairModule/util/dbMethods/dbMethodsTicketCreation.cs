@@ -269,18 +269,25 @@ public static partial class dbMethods
 
     public static void getTicketStatusOptions()
     {
-        dbInformation.ticketStatusOptions.Clear();
-        using (var conn = new NpgsqlConnection(dbConnection.connectionPath))
-        using (var cmd = new NpgsqlCommand("SELECT id, status FROM public.ticket_status", conn))
+        try
         {
-            conn.Open();
-            using (var reader = cmd.ExecuteReader())
+            dbInformation.ticketStatusOptions.Clear();
+            using (var conn = new NpgsqlConnection(dbConnection.connectionPath))
+            using (var cmd = new NpgsqlCommand("SELECT id, status FROM public.ticket_status", conn))
             {
-                while (reader.Read())
+                conn.Open();
+                using (var reader = cmd.ExecuteReader())
                 {
-                    dbInformation.ticketStatusOptions.Add(reader.GetInt16(0), reader.GetString(1));
+                    while (reader.Read())
+                    {
+                        dbInformation.ticketStatusOptions.Add(reader.GetInt16(0), reader.GetString(1));
+                    }
                 }
             }
+        }
+        catch (Exception ex)
+        {
+            MessageBox.Show(ex.ToString()); 
         }
     }
 
