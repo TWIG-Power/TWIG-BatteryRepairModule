@@ -172,6 +172,7 @@ public partial class BrmMainMenuForm : Form
             {
                 activeForm.Close();
             }
+            
             activeForm = childForm;
             childForm.TopLevel = false;
             childForm.FormBorderStyle = FormBorderStyle.None;

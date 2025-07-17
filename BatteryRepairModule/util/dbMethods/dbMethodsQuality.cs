@@ -86,6 +86,18 @@ public static partial class dbMethods
         }
     }
 
+    public static int checkIfChecklistAlreadyInserted(string fileName)
+    {
+        using (var conn = new NpgsqlConnection(dbConnection.connectionPath))
+        using (var cmd = new NpgsqlCommand("SELECT id FROM public.quality_options WHERE file_name = @fileName LIMIT 1", conn))
+        {
+            cmd.Parameters.AddWithValue("@fileName", fileName);
+            conn.Open();
+            var result = cmd.ExecuteScalar();
+            return Convert.ToInt32(result); 
+        }
+    }
+
     public static int updateLatestChecklistForm(byte[] fileData, string fileName)
     {
         using (var conn = new NpgsqlConnection(dbConnection.connectionPath))

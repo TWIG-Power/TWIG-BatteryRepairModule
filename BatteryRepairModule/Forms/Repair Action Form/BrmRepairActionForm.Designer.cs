@@ -163,9 +163,9 @@ namespace BatteryRepairModule.Forms.BRM
             // panel3
             // 
             panel3.AutoSizeMode = AutoSizeMode.GrowAndShrink;
-            panel3.Controls.Add(label2);
-            panel3.Controls.Add(panel1);
             panel3.Controls.Add(label3);
+            panel3.Controls.Add(panel1);
+            panel3.Controls.Add(label2);
             panel3.Dock = DockStyle.Top;
             panel3.Location = new Point(0, 122);
             panel3.Name = "panel3";
@@ -178,7 +178,7 @@ namespace BatteryRepairModule.Forms.BRM
             label2.AutoSize = true;
             label2.Dock = DockStyle.Left;
             label2.Font = new Font("Segoe UI", 22F, FontStyle.Bold, GraphicsUnit.Point);
-            label2.Location = new Point(464, 10);
+            label2.Location = new Point(10, 10);
             label2.Name = "label2";
             label2.Padding = new Padding(5);
             label2.Size = new Size(251, 51);
@@ -188,7 +188,7 @@ namespace BatteryRepairModule.Forms.BRM
             // panel1
             // 
             panel1.Dock = DockStyle.Left;
-            panel1.Location = new Point(258, 10);
+            panel1.Location = new Point(261, 10);
             panel1.Name = "panel1";
             panel1.Size = new Size(206, 42);
             panel1.TabIndex = 2;
@@ -198,7 +198,7 @@ namespace BatteryRepairModule.Forms.BRM
             label3.AutoSize = true;
             label3.Dock = DockStyle.Left;
             label3.Font = new Font("Segoe UI", 22F, FontStyle.Bold, GraphicsUnit.Point);
-            label3.Location = new Point(10, 10);
+            label3.Location = new Point(467, 10);
             label3.Name = "label3";
             label3.Padding = new Padding(5);
             label3.Size = new Size(248, 51);
@@ -207,9 +207,9 @@ namespace BatteryRepairModule.Forms.BRM
             // 
             // panel5
             // 
-            panel5.Controls.Add(repairActionsListBox);
-            panel5.Controls.Add(panel4);
             panel5.Controls.Add(reportedIssuesListBox);
+            panel5.Controls.Add(panel4);
+            panel5.Controls.Add(repairActionsListBox);
             panel5.Dock = DockStyle.Top;
             panel5.Location = new Point(0, 179);
             panel5.MaximumSize = new Size(931, 215);
@@ -223,7 +223,7 @@ namespace BatteryRepairModule.Forms.BRM
             repairActionsListBox.Font = new Font("Segoe UI", 18F, FontStyle.Regular, GraphicsUnit.Point);
             repairActionsListBox.FormattingEnabled = true;
             repairActionsListBox.ItemHeight = 32;
-            repairActionsListBox.Location = new Point(0, 0);
+            repairActionsListBox.Location = new Point(475, 0);
             repairActionsListBox.Name = "repairActionsListBox";
             repairActionsListBox.Size = new Size(456, 215);
             repairActionsListBox.TabIndex = 2;
@@ -231,7 +231,7 @@ namespace BatteryRepairModule.Forms.BRM
             // panel4
             // 
             panel4.Dock = DockStyle.Right;
-            panel4.Location = new Point(456, 0);
+            panel4.Location = new Point(458, 0);
             panel4.Name = "panel4";
             panel4.Size = new Size(17, 215);
             panel4.TabIndex = 1;
@@ -242,7 +242,7 @@ namespace BatteryRepairModule.Forms.BRM
             reportedIssuesListBox.Font = new Font("Segoe UI", 18F, FontStyle.Regular, GraphicsUnit.Point);
             reportedIssuesListBox.FormattingEnabled = true;
             reportedIssuesListBox.ItemHeight = 32;
-            reportedIssuesListBox.Location = new Point(473, 0);
+            reportedIssuesListBox.Location = new Point(0, 0);
             reportedIssuesListBox.Name = "reportedIssuesListBox";
             reportedIssuesListBox.Size = new Size(458, 215);
             reportedIssuesListBox.TabIndex = 0;

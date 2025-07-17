@@ -85,7 +85,14 @@ namespace BatteryRepairModule.Forms.Add_Forms
 
             try
             {
-                int updated = dbMethods.updateLatestChecklistForm(fileData, fileName);
+                int updated; 
+                int checkDuplicateKey = dbMethods.checkIfChecklistAlreadyInserted(fileName);
+                
+                if (checkDuplicateKey != 0)
+                    updated = checkDuplicateKey; 
+                else
+                    updated = dbMethods.updateLatestChecklistForm(fileData, fileName);
+
                 dbMethods.updateOemChecklist(updated); 
                 MessageBox.Show("File saved to database successfully.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 this.Close(); 
