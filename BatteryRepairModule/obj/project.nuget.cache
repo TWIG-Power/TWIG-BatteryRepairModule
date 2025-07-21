@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "Vfovm5r2G1I=",
+  "dgSpecHash": "NWU7RKxpXqY=",
   "success": true,
-  "projectFilePath": "c:\\Users\\FMustico\\Documents\\github\\TWIG-BatteryRepairModule\\BatteryRepairModule\\BatteryRepairModule.csproj",
+  "projectFilePath": "C:\\Users\\FMustico\\Documents\\github\\TWIG-BatteryRepairModule\\BatteryRepairModule\\BatteryRepairModule.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\FMustico\\.nuget\\packages\\fluid.core\\2.25.0\\fluid.core.2.25.0.nupkg.sha512",
     "C:\\Users\\FMustico\\.nuget\\packages\\microsoft.csharp\\4.7.0\\microsoft.csharp.4.7.0.nupkg.sha512",

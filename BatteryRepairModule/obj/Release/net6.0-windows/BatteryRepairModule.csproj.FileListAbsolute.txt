@@ -44,6 +44,11 @@ C:\Users\FMustico\Documents\github\TWIG-BatteryRepairModule\BatteryRepairModule\
 C:\Users\FMustico\Documents\github\TWIG-BatteryRepairModule\BatteryRepairModule\obj\Release\net6.0-windows\BatteryRepairModule.Forms.Shipping.shippingForm.resources
 C:\Users\FMustico\Documents\github\TWIG-BatteryRepairModule\BatteryRepairModule\obj\Release\net6.0-windows\BatteryRepairModule.Forms.Add_Forms.activateDeactivateRepairForm.resources
 C:\Users\FMustico\Documents\github\TWIG-BatteryRepairModule\BatteryRepairModule\obj\Release\net6.0-windows\BatteryRepairModule.Forms.Status_Review.statusReviewForm.resources
+C:\Users\FMustico\Documents\github\TWIG-BatteryRepairModule\BatteryRepairModule\bin\Release\net6.0-windows\Fluid.dll
+C:\Users\FMustico\Documents\github\TWIG-BatteryRepairModule\BatteryRepairModule\bin\Release\net6.0-windows\Microsoft.Extensions.FileProviders.Abstractions.dll
+C:\Users\FMustico\Documents\github\TWIG-BatteryRepairModule\BatteryRepairModule\bin\Release\net6.0-windows\Microsoft.Extensions.Primitives.dll
+C:\Users\FMustico\Documents\github\TWIG-BatteryRepairModule\BatteryRepairModule\bin\Release\net6.0-windows\Parlot.dll
+C:\Users\FMustico\Documents\github\TWIG-BatteryRepairModule\BatteryRepairModule\bin\Release\net6.0-windows\TimeZoneConverter.dll
 C:\Users\FMustico\Documents\github\TWIG-BatteryRepairModule\BatteryRepairModule\bin\Release\net6.0-windows\BatteryRepairModule.dll.manifest
 C:\Users\FMustico\Documents\github\TWIG-BatteryRepairModule\BatteryRepairModule\bin\Release\net6.0-windows\BatteryRepairModule.application
 C:\Users\FMustico\Documents\github\TWIG-BatteryRepairModule\BatteryRepairModule\obj\Release\net6.0-windows\BatteryRepairModule.dll.manifest

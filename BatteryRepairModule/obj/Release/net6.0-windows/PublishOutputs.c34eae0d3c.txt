@@ -3,10 +3,15 @@ C:\Users\FMustico\Documents\github\TWIG-BatteryRepairModule\BatteryRepairModule\
 C:\Users\FMustico\Documents\github\TWIG-BatteryRepairModule\BatteryRepairModule\bin\Release\net6.0-windows\app.publish\BatteryRepairModule.deps.json
 C:\Users\FMustico\Documents\github\TWIG-BatteryRepairModule\BatteryRepairModule\bin\Release\net6.0-windows\app.publish\BatteryRepairModule.runtimeconfig.json
 C:\Users\FMustico\Documents\github\TWIG-BatteryRepairModule\BatteryRepairModule\bin\Release\net6.0-windows\app.publish\BatteryRepairModule.pdb
+C:\Users\FMustico\Documents\github\TWIG-BatteryRepairModule\BatteryRepairModule\bin\Release\net6.0-windows\app.publish\Fluid.dll
 C:\Users\FMustico\Documents\github\TWIG-BatteryRepairModule\BatteryRepairModule\bin\Release\net6.0-windows\app.publish\Microsoft.Extensions.DependencyInjection.Abstractions.dll
+C:\Users\FMustico\Documents\github\TWIG-BatteryRepairModule\BatteryRepairModule\bin\Release\net6.0-windows\app.publish\Microsoft.Extensions.FileProviders.Abstractions.dll
 C:\Users\FMustico\Documents\github\TWIG-BatteryRepairModule\BatteryRepairModule\bin\Release\net6.0-windows\app.publish\Microsoft.Extensions.Logging.Abstractions.dll
+C:\Users\FMustico\Documents\github\TWIG-BatteryRepairModule\BatteryRepairModule\bin\Release\net6.0-windows\app.publish\Microsoft.Extensions.Primitives.dll
 C:\Users\FMustico\Documents\github\TWIG-BatteryRepairModule\BatteryRepairModule\bin\Release\net6.0-windows\app.publish\Npgsql.dll
+C:\Users\FMustico\Documents\github\TWIG-BatteryRepairModule\BatteryRepairModule\bin\Release\net6.0-windows\app.publish\Parlot.dll
 C:\Users\FMustico\Documents\github\TWIG-BatteryRepairModule\BatteryRepairModule\bin\Release\net6.0-windows\app.publish\System.Diagnostics.DiagnosticSource.dll
 C:\Users\FMustico\Documents\github\TWIG-BatteryRepairModule\BatteryRepairModule\bin\Release\net6.0-windows\app.publish\System.Text.Encodings.Web.dll
 C:\Users\FMustico\Documents\github\TWIG-BatteryRepairModule\BatteryRepairModule\bin\Release\net6.0-windows\app.publish\System.Text.Json.dll
+C:\Users\FMustico\Documents\github\TWIG-BatteryRepairModule\BatteryRepairModule\bin\Release\net6.0-windows\app.publish\TimeZoneConverter.dll
 C:\Users\FMustico\Documents\github\TWIG-BatteryRepairModule\BatteryRepairModule\bin\Release\net6.0-windows\app.publish\runtimes\browser\lib\net6.0\System.Text.Encodings.Web.dll

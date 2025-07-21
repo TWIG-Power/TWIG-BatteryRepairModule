@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <asmv1:assembly xsi:schemaLocation="urn:schemas-microsoft-com:asm.v1 assembly.adaptive.xsd" manifestVersion="1.0" xmlns:asmv1="urn:schemas-microsoft-com:asm.v1" xmlns="urn:schemas-microsoft-com:asm.v2" xmlns:asmv2="urn:schemas-microsoft-com:asm.v2" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:co.v1="urn:schemas-microsoft-com:clickonce.v1" xmlns:asmv3="urn:schemas-microsoft-com:asm.v3" xmlns:dsig="http://www.w3.org/2000/09/xmldsig#" xmlns:co.v2="urn:schemas-microsoft-com:clickonce.v2">
-  <asmv1:assemblyIdentity name="BatteryRepairModule.exe" version="1.2.0.4" publicKeyToken="0000000000000000" language="en-US" processorArchitecture="msil" type="win32" />
+  <asmv1:assemblyIdentity name="BatteryRepairModule.exe" version="1.3.0.0" publicKeyToken="0000000000000000" language="en-US" processorArchitecture="msil" type="win32" />
   <description asmv2:iconFile="BRMLogo.ico" xmlns="urn:schemas-microsoft-com:asm.v1" />
   <application />
   <entryPoint>
@@ -54,31 +54,31 @@
       </hash>
     </dependentAssembly>
   </dependency>
-  <file name="BatteryRepairModule.deps.json" size="5626">
+  <file name="BatteryRepairModule.deps.json" size="9729">
     <hash>
       <dsig:Transforms>
         <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
       </dsig:Transforms>
       <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-      <dsig:DigestValue>N7PhgulQTT+meR4HF5Yyhz4+d0J2geHhhGbWaoEqV/w=</dsig:DigestValue>
+      <dsig:DigestValue>Mv79uSuj8QfSxduNwDTwSW611YDv336/glj6fdUud4g=</dsig:DigestValue>
     </hash>
   </file>
-  <file name="BatteryRepairModule.dll" size="419328">
+  <file name="BatteryRepairModule.dll" size="439808">
     <hash>
       <dsig:Transforms>
         <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
       </dsig:Transforms>
       <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-      <dsig:DigestValue>PEwTV55TjIwr8CqCp/mbMzI76qmrDg6eQsHgMdf2gA8=</dsig:DigestValue>
+      <dsig:DigestValue>ANtsA2zWeCTQGoNnVGvOu0JLKIy+PViAXL2KQIfJdiQ=</dsig:DigestValue>
     </hash>
   </file>
-  <file name="BatteryRepairModule.exe" size="155136">
+  <file name="BatteryRepairModule.exe" size="155648">
     <hash>
       <dsig:Transforms>
         <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
       </dsig:Transforms>
       <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-      <dsig:DigestValue>MnZTqtl6yzEGdEAfX3StjJifq/ULZNSGbYIgJ+H8Z1w=</dsig:DigestValue>
+      <dsig:DigestValue>b8MRPOe2wVI1//28RNHRUjgy8Xs5Tax6Wzp0R3fFX8g=</dsig:DigestValue>
     </hash>
   </file>
   <file name="BatteryRepairModule.runtimeconfig.json" size="372">
@@ -99,6 +99,15 @@
       <dsig:DigestValue>WC+QZ8IHE6iBxN2PCG6G8VdeXf94NigcUpCe5O/ygwc=</dsig:DigestValue>
     </hash>
   </file>
+  <file name="Fluid.dll" size="260608">
+    <hash>
+      <dsig:Transforms>
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+      <dsig:DigestValue>Blm3b7xs0y1FNlhc6DVMcRxjZBNDaKY6YRE0PDn9C7E=</dsig:DigestValue>
+    </hash>
+  </file>
   <file name="Microsoft.Extensions.DependencyInjection.Abstractions.dll" size="62640">
     <hash>
       <dsig:Transforms>
@@ -106,6 +115,15 @@
       </dsig:Transforms>
       <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
       <dsig:DigestValue>rJzZU7fusDz0jjQ8Ws5vybSKyWi2jRyzCtHWERF4v00=</dsig:DigestValue>
+    </hash>
+  </file>
+  <file name="Microsoft.Extensions.FileProviders.Abstractions.dll" size="22280">
+    <hash>
+      <dsig:Transforms>
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+      <dsig:DigestValue>YR7OVh3OTfSCyMpjzRbcySDwmshyW2EWVeNwUkzrmao=</dsig:DigestValue>
     </hash>
   </file>
   <file name="Microsoft.Extensions.Logging.Abstractions.dll" size="66224">
@@ -117,6 +135,15 @@
       <dsig:DigestValue>qzboIB1B3XUcu3EnBNvoSSvdCrG/9vs1Nxz1m82YIYE=</dsig:DigestValue>
     </hash>
   </file>
+  <file name="Microsoft.Extensions.Primitives.dll" size="41264">
+    <hash>
+      <dsig:Transforms>
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+      <dsig:DigestValue>vu0QALpO8eLAuVBRo+Pm5h3u2YFPpsddZIBOVAwuXqU=</dsig:DigestValue>
+    </hash>
+  </file>
   <file name="Npgsql.dll" size="1441280">
     <hash>
       <dsig:Transforms>
@@ -124,6 +151,15 @@
       </dsig:Transforms>
       <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
       <dsig:DigestValue>eE9rWOsG0GXhftbykZxICQBqj86tNB/2Aps358agOGA=</dsig:DigestValue>
+    </hash>
+  </file>
+  <file name="Parlot.dll" size="373760">
+    <hash>
+      <dsig:Transforms>
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+      <dsig:DigestValue>L6Y2QbWwq4Q25yDMjU82GDlezlyv1mxUefDRk0e2jCg=</dsig:DigestValue>
     </hash>
   </file>
   <file name="runtimes\browser\lib\net6.0\System.Text.Encodings.Web.dll" size="71448">
@@ -160,6 +196,15 @@
       </dsig:Transforms>
       <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
       <dsig:DigestValue>c4ACYayalh25gAx8z4A50UK5pOWhT9WKmaR2ClnGXG8=</dsig:DigestValue>
+    </hash>
+  </file>
+  <file name="TimeZoneConverter.dll" size="33280">
+    <hash>
+      <dsig:Transforms>
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+      <dsig:DigestValue>5g+dxtgAXQWuMPhmTLKmKt4igD7fSPMsNO/rYZybrX0=</dsig:DigestValue>
     </hash>
   </file>
 </asmv1:assembly>
