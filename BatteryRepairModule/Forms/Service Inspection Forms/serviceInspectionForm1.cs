@@ -30,7 +30,7 @@ namespace BatteryRepairModule.Forms.Service_Inspection_Forms
 
             try
             {
-                dbMethods.loadStaffNames();
+                dbMethods.loadStaffServiceInspection();
                 dbMethods.getRepairOptions();
 
                 dbMethods.loadModulesAwaitingServiceInspection();

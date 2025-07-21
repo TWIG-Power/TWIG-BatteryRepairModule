@@ -109,7 +109,7 @@ namespace BatteryRepairModule.Forms.Add_Forms
                             dbInformation.tempTestStatusHolder.Clear();
                             dbInformation.tempTestStatusHolder[selectedKvp.Key] = selectedKvp.Value;
 
-                            dbMethods.updateTestStatus("NULL");
+                            dbMethods.updateTestStatus("NULL", 0);
                             dbMethods.getDoesTestHaveNote(); 
                             dbMethods.getAddedTestsByTwigTicket();  
                             modifiedListBox.Items.Clear();

@@ -31,7 +31,7 @@ namespace BatteryRepairModule.Forms.BRM
 
             try
             {
-                dbMethods.loadStaffNames();
+                dbMethods.loadStaffTicketCreation();
                 staffInitiatingReportDropDown.Items.AddRange(dbInformation.staffKeyPairOptions.Values.ToArray());
 
                 dbMethods.loadAllModuleTypes();

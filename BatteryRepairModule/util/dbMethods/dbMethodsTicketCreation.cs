@@ -7,10 +7,10 @@ namespace BatteryRepairModule;
 public static partial class dbMethods
 {
     #region LOAD QUERIES
-    public static void loadStaffNames()
+    public static void loadStaffTicketCreation()
     {
         using (var conn = new NpgsqlConnection(dbConnection.connectionPath))
-        using (var cmd = new NpgsqlCommand("SELECT DISTINCT \"id\", \"name\" FROM public.staff ORDER by name ASC", conn))
+        using (var cmd = new NpgsqlCommand("SELECT DISTINCT \"id\", \"name\" FROM public.staff WHERE open_tickets = true ORDER by name ASC", conn))
         {
             conn.Open();
             dbInformation.staffKeyPairOptions.Clear();

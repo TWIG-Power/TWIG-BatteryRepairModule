@@ -1,16 +1,23 @@
 {
   "version": 2,
-  "dgSpecHash": "39CYbAO+OZg=",
+  "dgSpecHash": "Vfovm5r2G1I=",
   "success": true,
-  "projectFilePath": "C:\\Users\\FMustico\\Documents\\github\\TWIG-BatteryRepairModule\\BatteryRepairModule\\BatteryRepairModule.csproj",
+  "projectFilePath": "c:\\Users\\FMustico\\Documents\\github\\TWIG-BatteryRepairModule\\BatteryRepairModule\\BatteryRepairModule.csproj",
   "expectedPackageFiles": [
+    "C:\\Users\\FMustico\\.nuget\\packages\\fluid.core\\2.25.0\\fluid.core.2.25.0.nupkg.sha512",
+    "C:\\Users\\FMustico\\.nuget\\packages\\microsoft.csharp\\4.7.0\\microsoft.csharp.4.7.0.nupkg.sha512",
     "C:\\Users\\FMustico\\.nuget\\packages\\microsoft.extensions.dependencyinjection.abstractions\\8.0.2\\microsoft.extensions.dependencyinjection.abstractions.8.0.2.nupkg.sha512",
+    "C:\\Users\\FMustico\\.nuget\\packages\\microsoft.extensions.fileproviders.abstractions\\6.0.1\\microsoft.extensions.fileproviders.abstractions.6.0.1.nupkg.sha512",
     "C:\\Users\\FMustico\\.nuget\\packages\\microsoft.extensions.logging.abstractions\\8.0.2\\microsoft.extensions.logging.abstractions.8.0.2.nupkg.sha512",
+    "C:\\Users\\FMustico\\.nuget\\packages\\microsoft.extensions.primitives\\6.0.1\\microsoft.extensions.primitives.6.0.1.nupkg.sha512",
     "C:\\Users\\FMustico\\.nuget\\packages\\npgsql\\9.0.3\\npgsql.9.0.3.nupkg.sha512",
+    "C:\\Users\\FMustico\\.nuget\\packages\\parlot\\1.4.0\\parlot.1.4.0.nupkg.sha512",
     "C:\\Users\\FMustico\\.nuget\\packages\\system.diagnostics.diagnosticsource\\8.0.1\\system.diagnostics.diagnosticsource.8.0.1.nupkg.sha512",
+    "C:\\Users\\FMustico\\.nuget\\packages\\system.reflection.emit.lightweight\\4.7.0\\system.reflection.emit.lightweight.4.7.0.nupkg.sha512",
     "C:\\Users\\FMustico\\.nuget\\packages\\system.runtime.compilerservices.unsafe\\6.0.0\\system.runtime.compilerservices.unsafe.6.0.0.nupkg.sha512",
     "C:\\Users\\FMustico\\.nuget\\packages\\system.text.encodings.web\\8.0.0\\system.text.encodings.web.8.0.0.nupkg.sha512",
-    "C:\\Users\\FMustico\\.nuget\\packages\\system.text.json\\8.0.5\\system.text.json.8.0.5.nupkg.sha512"
+    "C:\\Users\\FMustico\\.nuget\\packages\\system.text.json\\8.0.5\\system.text.json.8.0.5.nupkg.sha512",
+    "C:\\Users\\FMustico\\.nuget\\packages\\timezoneconverter\\7.0.0\\timezoneconverter.7.0.0.nupkg.sha512"
   ],
   "logs": []
 }

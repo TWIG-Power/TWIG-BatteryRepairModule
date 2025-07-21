@@ -207,7 +207,7 @@ public static partial class dbMethods
         {
             conn.Open();
             using (var cmd = new NpgsqlCommand(
-                @"SELECT t.id, s.name, tt.test, st.status, t.note, t.state_of_health
+                @"SELECT t.id, s.name, tt.test, st.status, t.note, t.state_of_health, t.watt_hour
                 FROM public.testing_added t
                 LEFT JOIN public.staff s ON t.staff_fk = s.id
                 LEFT JOIN public.testing_options tt ON t.test_fk = tt.id
@@ -226,8 +226,9 @@ public static partial class dbMethods
                         string status = reader.IsDBNull(3) ? "Unknown" : reader.GetString(3);
                         string note = reader.IsDBNull(4) ? "" : reader.GetString(4);
                         string stateOfHealth = reader.IsDBNull(5) ? "Unknown" : reader.GetString(5);
+                        int wattHour = reader.IsDBNull(6) ? 0 : reader.GetInt32(6);
 
-                        testAction test = new testAction(id, staff, testName, status, note, stateOfHealth);
+                        testAction test = new testAction(id, staff, testName, status, note, stateOfHealth, wattHour);
                         testsList.Add(test);
                     }
                 }
@@ -236,12 +237,75 @@ public static partial class dbMethods
             return testsList;
         }
     }
-/*
+
     public static Module getAllTicketInformation(int ticketnumber)
     {
-        initialAssesment initialAssesment = dbMethods.getCompletedInitialAssesment(ticketnumber); 
-        
+        initialAssesment initialAssesment = dbMethods.getCompletedInitialAssesment(ticketnumber);
+        serviceInspection serviceInspection = dbMethods.getCompletedServiceInspection(ticketnumber);
+        List<CustomerReport> customerReport = dbMethods.GetCustomerReports(ticketnumber);
+        List<RepairAction> repairActions = dbMethods.getCompletedRepairActions(ticketnumber);
+        List<testAction> testActions = dbMethods.GetCompletedTests(ticketnumber);
 
+        using (var conn = new NpgsqlConnection(dbConnection.connectionPath))
+        using (var cmd = new NpgsqlCommand(@"
+            SELECT DISTINCT t.id, t.twig_ticket_number, t.serial_number, t.status_fk, vehicle_vin_number,
+            CASE
+                WHEN t.cobra_fk IS NOT NULL THEN 'Cobra'
+                WHEN t.ktm_fk IS NOT NULL THEN 'KTM'
+                WHEN t.misc_fk IS NOT NULL THEN 'Misc'
+                ELSE 'Unknown'
+            END AS oem,
+            CASE 
+                WHEN t.cobra_fk IS NOT NULL THEN (SELECT module_type FROM public.cobra_oem WHERE cobra_oem.id = t.cobra_fk)
+                WHEN t.ktm_fk IS NOT NULL THEN (SELECT module_type FROM public.ktm_oem WHERE ktm_oem.id = t.ktm_fk)
+                WHEN t.misc_fk IS NOT NULL THEN (SELECT module_type FROM public.misc_oem WHERE misc_oem.id = t.misc_fk)
+                ELSE 'Unknown'
+            END AS module_type,
+            (
+                SELECT ta2.state_of_health
+                FROM public.testing_added ta2
+                WHERE ta2.ticket_fk = t.id
+                ORDER BY ta2.id ASC
+                LIMIT 1
+            ) AS state_of_health
+            FROM public.ticket t
+            WHERE t.id = @id", conn))
+        {
+            cmd.Parameters.AddWithValue("@id", ticketnumber);
+            conn.Open(); 
+            using (var reader = cmd.ExecuteReader())
+            {
+                while (reader.Read())
+                {
+                    int ticketSurroKey = reader.GetInt32(0);
+                    int twigTicketNumber = reader.GetInt32(1);
+                    int serialNumber = reader.GetInt32(2);
+                    int status = reader.GetInt16(3);
+                    string vehicleVinNumber = reader.GetString(4); 
+                    string oem = reader.GetString(5);
+                    string moduleType = reader.IsDBNull(6) ? "Unknown" : reader.GetString(6);
+                    string stateOfHealth = reader.IsDBNull(7) ? "Unknown" : reader.GetString(7);
+
+                    string status2 = dbInformation.ticketStatusOptions.FirstOrDefault(kvp => kvp.Key == status).Value;
+
+                    Module module = new Module(ticketSurroKey,
+                                                twigTicketNumber,
+                                                serialNumber,
+                                                oem,
+                                                moduleType,
+                                                vehicleVinNumber, 
+                                                stateOfHealth,
+                                                status.ToString(),
+                                                repairActions,
+                                                customerReport,
+                                                testActions,
+                                                initialAssesment,
+                                                serviceInspection);
+
+                    return module;
+                }
+            }
+        }
+        return null; 
     }
-*/
 }

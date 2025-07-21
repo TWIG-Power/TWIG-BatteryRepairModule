@@ -28,7 +28,7 @@ namespace BatteryRepairModule.Forms.Testing
                 twigTicketNumberDropDown.Items.Add($"[{module.ticketId}] - [{module.model}] - {module.SerialNumber}");
             }
 
-            dbMethods.loadStaffNames();
+            dbMethods.loadStaffTesting();
             staffDropDown.Items.AddRange(dbInformation.staffKeyPairOptions.Select(kvp => kvp.Value.ToString()).ToArray());
 
             dbMethods.getTestingOptions();
@@ -40,7 +40,8 @@ namespace BatteryRepairModule.Forms.Testing
             returnBatteryToRepairButton.Enabled = false;
             clearBatteryForQualityButton.Enabled = false;
             viewRepairNoteButton.Enabled = false;
-            diagnosticReportButton.Enabled = false; 
+            diagnosticReportButton.Enabled = false;
+            staffDropDown.Enabled = false; 
 
         }
 
@@ -113,7 +114,9 @@ namespace BatteryRepairModule.Forms.Testing
                 var converted = selectedValue.Split('[')[1].Split(']')[0];
                 var selectedKvp = dbInformation.activeModules.FirstOrDefault(mod => mod.ticketId.ToString() == converted);
                 dbInformation.selectedTwigTicketKeyPair.Clear();
-                dbInformation.selectedTwigTicketKeyPair[selectedKvp.ticketSurrogateKey] = selectedKvp.ticketId; ;
+                dbInformation.selectedTwigTicketKeyPair[selectedKvp.ticketSurrogateKey] = selectedKvp.ticketId;
+
+                staffDropDown.Enabled = true; 
 
                 repairActionsListBox.Items.Clear();
 

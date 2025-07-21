@@ -39,15 +39,11 @@
             panel4 = new Panel();
             panel8 = new Panel();
             viewDetailedReport = new Button();
-            panel6 = new Panel();
-            panel10 = new Panel();
-            markModuleAsInvoiced = new Button();
             panel1.SuspendLayout();
             panel2.SuspendLayout();
             panel3.SuspendLayout();
             panel4.SuspendLayout();
             panel8.SuspendLayout();
-            panel10.SuspendLayout();
             SuspendLayout();
             // 
             // panel1
@@ -148,8 +144,6 @@
             // 
             panel4.AutoSizeMode = AutoSizeMode.GrowAndShrink;
             panel4.Controls.Add(panel8);
-            panel4.Controls.Add(panel6);
-            panel4.Controls.Add(panel10);
             panel4.Dock = DockStyle.Top;
             panel4.Location = new Point(0, 428);
             panel4.Name = "panel4";
@@ -161,10 +155,10 @@
             panel8.AutoSizeMode = AutoSizeMode.GrowAndShrink;
             panel8.Controls.Add(viewDetailedReport);
             panel8.Dock = DockStyle.Left;
-            panel8.Location = new Point(473, 0);
+            panel8.Location = new Point(0, 0);
             panel8.Name = "panel8";
             panel8.Padding = new Padding(2);
-            panel8.Size = new Size(450, 81);
+            panel8.Size = new Size(925, 81);
             panel8.TabIndex = 18;
             // 
             // viewDetailedReport
@@ -175,44 +169,11 @@
             viewDetailedReport.Location = new Point(2, 2);
             viewDetailedReport.Name = "viewDetailedReport";
             viewDetailedReport.Padding = new Padding(3);
-            viewDetailedReport.Size = new Size(446, 77);
+            viewDetailedReport.Size = new Size(921, 77);
             viewDetailedReport.TabIndex = 18;
             viewDetailedReport.Text = "View Detailed Report ";
             viewDetailedReport.UseVisualStyleBackColor = true;
             viewDetailedReport.Click += viewDetailedReport_Click;
-            // 
-            // panel6
-            // 
-            panel6.AutoSizeMode = AutoSizeMode.GrowAndShrink;
-            panel6.Dock = DockStyle.Left;
-            panel6.Location = new Point(450, 0);
-            panel6.Name = "panel6";
-            panel6.Padding = new Padding(2);
-            panel6.Size = new Size(23, 81);
-            panel6.TabIndex = 17;
-            // 
-            // panel10
-            // 
-            panel10.AutoSizeMode = AutoSizeMode.GrowAndShrink;
-            panel10.Controls.Add(markModuleAsInvoiced);
-            panel10.Dock = DockStyle.Left;
-            panel10.Location = new Point(0, 0);
-            panel10.Name = "panel10";
-            panel10.Padding = new Padding(3);
-            panel10.Size = new Size(450, 81);
-            panel10.TabIndex = 15;
-            // 
-            // markModuleAsInvoiced
-            // 
-            markModuleAsInvoiced.AutoSize = true;
-            markModuleAsInvoiced.Dock = DockStyle.Fill;
-            markModuleAsInvoiced.Font = new Font("Segoe UI", 15.75F, FontStyle.Regular, GraphicsUnit.Point);
-            markModuleAsInvoiced.Location = new Point(3, 3);
-            markModuleAsInvoiced.Name = "markModuleAsInvoiced";
-            markModuleAsInvoiced.Size = new Size(444, 75);
-            markModuleAsInvoiced.TabIndex = 17;
-            markModuleAsInvoiced.Text = "Mark Module As Invoiced";
-            markModuleAsInvoiced.UseVisualStyleBackColor = true;
             // 
             // statusReviewForm
             // 
@@ -234,8 +195,6 @@
             panel4.ResumeLayout(false);
             panel8.ResumeLayout(false);
             panel8.PerformLayout();
-            panel10.ResumeLayout(false);
-            panel10.PerformLayout();
             ResumeLayout(false);
         }
 
@@ -252,8 +211,5 @@
         private Panel panel4;
         private Panel panel8;
         private Button viewDetailedReport;
-        private Panel panel6;
-        private Panel panel10;
-        private Button markModuleAsInvoiced;
     }
 }

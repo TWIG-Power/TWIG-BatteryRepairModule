@@ -57,6 +57,23 @@ public static partial class dbMethods
         }
     }
 
+    public static void loadStaffAuthorize()
+    {
+        using (var conn = new NpgsqlConnection(dbConnection.connectionPath))
+        using (var cmd = new NpgsqlCommand("SELECT DISTINCT \"id\", \"name\" FROM public.staff WHERE authorize_repairs = true ORDER by name ASC", conn))
+        {
+            conn.Open();
+            dbInformation.staffKeyPairOptions.Clear();
+            using (var reader = cmd.ExecuteReader())
+            {
+                while (reader.Read())
+                {
+                    dbInformation.staffKeyPairOptions.Add(reader.GetInt16(0), reader.GetString(1));
+                }
+            }
+        }
+    }
+
     public static bool insertAuthorizedRepairs()
     {
         using (var conn = new NpgsqlConnection(dbConnection.connectionPath))

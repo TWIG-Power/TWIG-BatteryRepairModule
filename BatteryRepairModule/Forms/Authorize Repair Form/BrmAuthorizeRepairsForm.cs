@@ -30,7 +30,7 @@ namespace BatteryRepairModule.Forms.BRM
                 twigTicketNumberDropDown.Items.Add($"[{module.ticketId}] - [{module.model}] - {module.SerialNumber}");
             }
 
-            dbMethods.loadStaffNames();
+            dbMethods.loadStaffAuthorize();
             staffDropDown.Items.AddRange(dbInformation.staffKeyPairOptions.Values.ToArray());
 
             addAuthorizedRepairAction.Enabled = false;
@@ -38,6 +38,7 @@ namespace BatteryRepairModule.Forms.BRM
             addTestButton.Enabled = false;
             continueButton.Enabled = false;
             pullDiagnosticFileButton.Enabled = false;
+            staffDropDown.Enabled = false; 
         }
 
         private void addAuthorizedRepairAction_Click(object sender, EventArgs e)
@@ -75,6 +76,8 @@ namespace BatteryRepairModule.Forms.BRM
                 var selectedKvp = dbInformation.activeModules.FirstOrDefault(module => module.ticketId == converted);
                 dbInformation.selectedTwigTicketKeyPair.Clear();
                 dbInformation.selectedTwigTicketKeyPair[selectedKvp.ticketSurrogateKey] = selectedKvp.ticketId; ;
+
+                staffDropDown.Enabled = true; 
 
                 loadReportedIssues();
                 loadSuggestedRepairs();

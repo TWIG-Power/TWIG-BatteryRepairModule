@@ -59,6 +59,23 @@ public static partial class dbMethods
         }
     }
 
+    public static void loadStaffTesting()
+    {
+        using (var conn = new NpgsqlConnection(dbConnection.connectionPath))
+        using (var cmd = new NpgsqlCommand("SELECT DISTINCT \"id\", \"name\" FROM public.staff WHERE testing = true ORDER by name ASC", conn))
+        {
+            conn.Open();
+            dbInformation.staffKeyPairOptions.Clear();
+            using (var reader = cmd.ExecuteReader())
+            {
+                while (reader.Read())
+                {
+                    dbInformation.staffKeyPairOptions.Add(reader.GetInt16(0), reader.GetString(1));
+                }
+            }
+        }
+    }
+
     public static void getTestingOptions()
     {
         using (var conn = new NpgsqlConnection(dbConnection.connectionPath))
@@ -181,12 +198,12 @@ public static partial class dbMethods
         }
     }
 
-    public static void updateTestStatus(string stateOfHealth)
+    public static void updateTestStatus(string stateOfHealth, int wattHour)
     {
         try
         {
             using (var conn = new NpgsqlConnection(dbConnection.connectionPath))
-            using (var cmd = new NpgsqlCommand("UPDATE public.testing_added SET staff_fk = @staffFk, timestamp = @timestamp, status_fk = @status, state_of_health = @soh WHERE ticket_fk = @ticketId AND id = @testId", conn))
+            using (var cmd = new NpgsqlCommand("UPDATE public.testing_added SET staff_fk = @staffFk, timestamp = @timestamp, status_fk = @status, state_of_health = @soh, watt_hour = @wattHour WHERE ticket_fk = @ticketId AND id = @testId", conn))
             {
                 conn.Open();
                 cmd.Parameters.AddWithValue("@staffFk", dbInformation.selectedStaffKeyValue.Keys.First());
@@ -195,6 +212,7 @@ public static partial class dbMethods
                 cmd.Parameters.AddWithValue("@ticketId", dbInformation.selectedTwigTicketKeyPair.Keys.First());
                 cmd.Parameters.AddWithValue("@testId", dbInformation.tempTestTestHolder.Keys.First());
                 cmd.Parameters.AddWithValue("@soh", stateOfHealth);
+                cmd.Parameters.AddWithValue("@wattHour", wattHour); 
 
                 int rowsAffected = cmd.ExecuteNonQuery();
             }

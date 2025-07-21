@@ -27,7 +27,7 @@ namespace BatteryRepairModule.Forms.BRM
                 twigTicketNumberDropDown.Items.Add($"[{module.ticketId}] - [{module.model}] - {module.SerialNumber}");
             }
 
-            dbMethods.loadStaffNames();
+            dbMethods.loadStaffRepairActions();
             staffDropDown.Items.AddRange(dbInformation.staffKeyPairOptions.Values.ToArray());
 
             addRepairActionButton.Enabled = false;
@@ -37,6 +37,7 @@ namespace BatteryRepairModule.Forms.BRM
             updateRepairStatus.Enabled = false;
             addTestButton.Enabled = false;
             clearModuleForTestingButton.Enabled = false;
+            staffDropDown.Enabled = false; 
 
         }
 
@@ -89,11 +90,12 @@ namespace BatteryRepairModule.Forms.BRM
             {
                 reportedIssuesListBox.Items.Clear();
                 repairActionsListBox.Items.Clear();
+                staffDropDown.Enabled = true; 
 
                 if (twigTicketNumberDropDown.SelectedItem.ToString() != null)
                 {
                     var selectedValue = twigTicketNumberDropDown.SelectedItem.ToString();
-                    var converted = Int32.Parse(selectedValue.Split('[')[1].Split(']')[0]); 
+                    var converted = Int32.Parse(selectedValue.Split('[')[1].Split(']')[0]);
                     var selectedKvp = dbInformation.activeModules.FirstOrDefault(module => module.ticketId == converted);
                     dbInformation.selectedTwigTicketKeyPair.Clear();
                     dbInformation.selectedTwigTicketKeyPair[selectedKvp.ticketSurrogateKey] = selectedKvp.ticketId;

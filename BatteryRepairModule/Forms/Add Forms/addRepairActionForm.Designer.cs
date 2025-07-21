@@ -52,7 +52,7 @@ namespace BatteryRepairModule.Forms.BRM
             panel1.Location = new Point(0, 0);
             panel1.Name = "panel1";
             panel1.Padding = new Padding(10);
-            panel1.Size = new Size(374, 342);
+            panel1.Size = new Size(434, 342);
             panel1.TabIndex = 0;
             // 
             // listBox1
@@ -63,7 +63,7 @@ namespace BatteryRepairModule.Forms.BRM
             listBox1.ItemHeight = 32;
             listBox1.Location = new Point(10, 10);
             listBox1.Name = "listBox1";
-            listBox1.Size = new Size(354, 322);
+            listBox1.Size = new Size(414, 322);
             listBox1.TabIndex = 0;
             // 
             // panel2
@@ -73,17 +73,17 @@ namespace BatteryRepairModule.Forms.BRM
             panel2.Dock = DockStyle.Fill;
             panel2.Location = new Point(0, 342);
             panel2.Name = "panel2";
-            panel2.Size = new Size(374, 119);
+            panel2.Size = new Size(434, 119);
             panel2.TabIndex = 1;
             // 
             // panel4
             // 
             panel4.Controls.Add(continueButton);
             panel4.Dock = DockStyle.Left;
-            panel4.Location = new Point(188, 0);
+            panel4.Location = new Point(223, 0);
             panel4.Name = "panel4";
             panel4.Padding = new Padding(10);
-            panel4.Size = new Size(176, 119);
+            panel4.Size = new Size(211, 119);
             panel4.TabIndex = 1;
             // 
             // continueButton
@@ -91,10 +91,10 @@ namespace BatteryRepairModule.Forms.BRM
             continueButton.Dock = DockStyle.Fill;
             continueButton.Font = new Font("Segoe UI", 18F, FontStyle.Regular, GraphicsUnit.Point);
             continueButton.Location = new Point(10, 10);
-            continueButton.MaximumSize = new Size(175, 70);
+            continueButton.MaximumSize = new Size(210, 70);
             continueButton.Name = "continueButton";
             continueButton.Padding = new Padding(10);
-            continueButton.Size = new Size(156, 70);
+            continueButton.Size = new Size(191, 70);
             continueButton.TabIndex = 14;
             continueButton.Text = "Continue";
             continueButton.UseVisualStyleBackColor = true;
@@ -107,7 +107,7 @@ namespace BatteryRepairModule.Forms.BRM
             panel3.Location = new Point(0, 0);
             panel3.Name = "panel3";
             panel3.Padding = new Padding(10);
-            panel3.Size = new Size(188, 119);
+            panel3.Size = new Size(223, 119);
             panel3.TabIndex = 0;
             // 
             // cancelButton
@@ -115,10 +115,10 @@ namespace BatteryRepairModule.Forms.BRM
             cancelButton.Dock = DockStyle.Fill;
             cancelButton.Font = new Font("Segoe UI", 18F, FontStyle.Regular, GraphicsUnit.Point);
             cancelButton.Location = new Point(10, 10);
-            cancelButton.MaximumSize = new Size(175, 70);
+            cancelButton.MaximumSize = new Size(210, 70);
             cancelButton.Name = "cancelButton";
             cancelButton.Padding = new Padding(10);
-            cancelButton.Size = new Size(168, 70);
+            cancelButton.Size = new Size(203, 70);
             cancelButton.TabIndex = 15;
             cancelButton.Text = "Cancel";
             cancelButton.UseVisualStyleBackColor = true;
@@ -128,12 +128,12 @@ namespace BatteryRepairModule.Forms.BRM
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(374, 461);
+            ClientSize = new Size(434, 461);
             Controls.Add(panel2);
             Controls.Add(panel1);
             MaximizeBox = false;
-            MaximumSize = new Size(390, 500);
-            MinimumSize = new Size(390, 500);
+            MaximumSize = new Size(450, 500);
+            MinimumSize = new Size(450, 500);
             Name = "addRepairActionForm";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "addRepairActionForm";

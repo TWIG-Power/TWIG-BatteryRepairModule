@@ -31,7 +31,7 @@ namespace BatteryRepairModule.Forms.Quality
                 twigTicketNumberDropDown.Items.Add($"[{module.ticketId}] - [{module.model}] - {module.SerialNumber}");
             }
 
-            dbMethods.loadStaffNames();
+            dbMethods.loadStaffQuality();
             staffInitiatingReportDropDown.Items.AddRange(dbInformation.staffKeyPairOptions.Select(kvp => kvp.Value.ToString()).ToArray());
 
             staffInitiatingReportDropDown.Enabled = false;

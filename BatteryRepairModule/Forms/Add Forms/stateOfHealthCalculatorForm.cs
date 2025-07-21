@@ -129,7 +129,7 @@ namespace BatteryRepairModule.Forms.Add_Forms
                 
                 writtenStateOfHealth = stateOfHealthGradeChangeLabel.Text;
                 dbInformation.conditionalClosureFailure = false;
-                dbMethods.updateTestStatus(writtenStateOfHealth);
+                dbMethods.updateTestStatus(writtenStateOfHealth, Int32.Parse(maskedTextBox1.Text));
 
                 dbMethods.getDoesTestHaveNote();
                 dbMethods.getAddedTestsByTwigTicket();

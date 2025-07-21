@@ -8,12 +8,14 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
+using System.IO;
+using System.Text; 
+
 namespace BatteryRepairModule.Forms.Status_Review
 {
     public partial class statusReviewForm : Form
     {
         private string[] oems = { "Cobra", "KTM", "Misc", "All" };
-        private List<Module> filteredList = new List<Module>();
         public statusReviewForm()
         {
             InitializeComponent();
@@ -39,17 +41,12 @@ namespace BatteryRepairModule.Forms.Status_Review
             }
 
             int selectedTicket = Int32.Parse(queryListBox.SelectedItem.ToString().Split('[')[1].Split(']')[0]);
-            int selectedModule = dbInformation.activeModules.FirstOrDefault(m => m.ticketId == selectedTicket).ticketSurrogateKey; 
+            int selectedModule = dbInformation.activeModules.FirstOrDefault(m => m.ticketId == selectedTicket).ticketSurrogateKey;
 
-            initialAssesment test = dbMethods.getCompletedInitialAssesment(selectedModule);
-            serviceInspection test2 = dbMethods.getCompletedServiceInspection(selectedModule);
-            List<RepairAction> test3 = dbMethods.getCompletedRepairActions(selectedModule);
-            List<CustomerReport> test4 = dbMethods.GetCustomerReports(selectedModule);
-            List<testAction> test5 = dbMethods.GetCompletedTests(selectedModule); 
-            
+            // Store all of the information in one object.
+            Module result = dbMethods.getAllTicketInformation(selectedModule);
 
-            MessageBox.Show($"{test2.id} // {test2.staff}");
-
+            HTMLReportGenerator.generateModuleReport(result); 
         }
 
         private void moduleOemFilterDropDown_SelectedIndexChanged(object sender, EventArgs e)
@@ -58,7 +55,8 @@ namespace BatteryRepairModule.Forms.Status_Review
 
             var filteredList = dbInformation.activeModules
             .Where(module => moduleOemFilterDropDown.SelectedItem.ToString() == "All" || module.Oem == moduleOemFilterDropDown.SelectedItem.ToString())
-            .OrderBy(module => module.SerialNumber)
+            .OrderBy(module => module.model)
+            .ThenBy(module => module.SerialNumber)
             .ToList();
 
             queryListBox.Items.Clear();
@@ -71,7 +69,7 @@ namespace BatteryRepairModule.Forms.Status_Review
 
         private void partNumberModelFilter_SelectedIndexChanged(object sender, EventArgs e)
         {
-
+            
         }
 
         public static void getTicketInformation()

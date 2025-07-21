@@ -1,5 +1,6 @@
 using System.Diagnostics;
 using BatteryRepairModule.Forms.BRM;
+using BatteryRepairModule.Forms.Status_Review;
 
 namespace BatteryRepairModule;
 
@@ -135,6 +136,7 @@ public class Module
     public int SerialNumber { get; set; }
     public string model { get; set; } = string.Empty;
     public string Oem { get; set; } = string.Empty;
+    public string vehicleVinNumber { get; set; } = string.Empty; 
     public string stateOfHealth { get; set; } = string.Empty;
     public string ticketStatus { get; set; } = string.Empty;
     public List<CustomerReport> reportList { get; set; }
@@ -162,7 +164,7 @@ public class Module
         this.stateOfHealth = stateOfHealth;
         ticketStatus = status;
     }
-    public Module(int surroKey, int id, int serialNumber, string oem, string type, string stateOfHealth, string status, List<RepairAction> repairList, List<CustomerReport> reportList, List<testAction> testList, initialAssesment initialAssesment, serviceInspection serviceInspection)
+    public Module(int surroKey, int id, int serialNumber, string oem, string type, string vehicleVinNumber, string stateOfHealth, string status, List<RepairAction> repairList, List<CustomerReport> reportList, List<testAction> testList, initialAssesment initialAssesment, serviceInspection serviceInspection)
     {
         ticketSurrogateKey = surroKey;
         ticketId = id;
@@ -171,6 +173,7 @@ public class Module
         model = type;
         this.stateOfHealth = stateOfHealth;
         ticketStatus = status;
+        this.vehicleVinNumber = vehicleVinNumber; 
 
         // imported from other methods. 
         this.repairList = repairList;
@@ -231,14 +234,15 @@ public class initialAssesment
 }
 public class testAction
 {
-    int id { get; set; }
-    string staff { get; set; }
-    string description { get; set; }
-    string status { get; set; }
-    string note { get; set; }
-    string stateOfHealth { get; set; }
+    public int id { get; set; }
+    public string staff { get; set; }
+    public string description { get; set; }
+    public string status { get; set; }
+    public string note { get; set; }
+    public string stateOfHealth { get; set; }
+    public int wattHour { get; set;}
 
-    public testAction(int id, string staff, string description, string status, string note, string stateOfHealth)
+    public testAction(int id, string staff, string description, string status, string note, string stateOfHealth, int wattHour)
     {
         this.id = id;
         this.staff = staff;
@@ -246,6 +250,7 @@ public class testAction
         this.status = status;
         this.note = note;
         this.stateOfHealth = stateOfHealth;
+        this.wattHour = wattHour; 
     }
 }
 public class RepairAction
