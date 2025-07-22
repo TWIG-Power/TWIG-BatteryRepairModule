@@ -201,7 +201,7 @@ namespace BatteryRepairModule.Forms.BRM
                 {
                     status = item.Substring(parenIndex + 1).TrimEnd(')', '*');
                 }
-                if (status != "Complete")
+                if (status != "Complete" && status != "Skipped")
                 {
                     MessageBox.Show("This module has repairs that haven't been completed yet.", "Unresolved Repairs", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return;

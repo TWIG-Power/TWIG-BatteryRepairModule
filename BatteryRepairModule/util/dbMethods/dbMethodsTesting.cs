@@ -340,7 +340,7 @@ public static partial class dbMethods
         using (var conn = new NpgsqlConnection(dbConnection.connectionPath))
         using (var cmd = new NpgsqlCommand("SELECT diagnostic_report FROM public.service_inspection WHERE ticket_fk = @id", conn))
         {
-            cmd.Parameters.AddWithValue("@id", dbInformation.selectedTwigTicketKeyPair.Keys.First());
+            cmd.Parameters.AddWithValue("@id", ticketId);
             conn.Open();
             using (var reader = cmd.ExecuteReader())
             {

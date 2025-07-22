@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <asmv1:assembly xsi:schemaLocation="urn:schemas-microsoft-com:asm.v1 assembly.adaptive.xsd" manifestVersion="1.0" xmlns:asmv1="urn:schemas-microsoft-com:asm.v1" xmlns="urn:schemas-microsoft-com:asm.v2" xmlns:asmv2="urn:schemas-microsoft-com:asm.v2" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:co.v1="urn:schemas-microsoft-com:clickonce.v1" xmlns:asmv3="urn:schemas-microsoft-com:asm.v3" xmlns:dsig="http://www.w3.org/2000/09/xmldsig#" xmlns:co.v2="urn:schemas-microsoft-com:clickonce.v2">
-  <asmv1:assemblyIdentity name="BatteryRepairModule.exe" version="1.4.0.4" publicKeyToken="0000000000000000" language="en-US" processorArchitecture="msil" type="win32" />
+  <asmv1:assemblyIdentity name="BatteryRepairModule.exe" version="1.3.0.11" publicKeyToken="0000000000000000" language="en-US" processorArchitecture="msil" type="win32" />
   <description asmv2:iconFile="BRMLogo.ico" xmlns="urn:schemas-microsoft-com:asm.v1" />
   <application />
   <entryPoint>
@@ -63,13 +63,13 @@
       <dsig:DigestValue>Mv79uSuj8QfSxduNwDTwSW611YDv336/glj6fdUud4g=</dsig:DigestValue>
     </hash>
   </file>
-  <file name="BatteryRepairModule.dll" size="440320">
+  <file name="BatteryRepairModule.dll" size="440832">
     <hash>
       <dsig:Transforms>
         <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
       </dsig:Transforms>
       <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-      <dsig:DigestValue>QNSfkYPjFOgYxFzUw0BaxYwNqckGP/0sUtUoBlBWLZw=</dsig:DigestValue>
+      <dsig:DigestValue>z3PSw1HcO0XU5qe9p7jjPp+GHP4bUYaUMrPEMLa9uu0=</dsig:DigestValue>
     </hash>
   </file>
   <file name="BatteryRepairModule.exe" size="155136">
@@ -78,7 +78,7 @@
         <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
       </dsig:Transforms>
       <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-      <dsig:DigestValue>l1jjmy7e6Q+EnhSazul/09LLnHm24TH04a3A5fNvBDw=</dsig:DigestValue>
+      <dsig:DigestValue>m+FEusyy0Cwvcdra0W13tGxdhJrV0SzQk7UkEhKqiIU=</dsig:DigestValue>
     </hash>
   </file>
   <file name="BatteryRepairModule.runtimeconfig.json" size="372">
