@@ -308,7 +308,7 @@ namespace BatteryRepairModule.Forms.Testing
 
         private void diagnosticReportButton_Click(object sender, EventArgs e)
         {
-            byte[] file = dbMethods.pullDiagnosticFile();
+            byte[] file = dbMethods.pullDiagnosticFile(dbInformation.selectedTwigTicketKeyPair.Keys.First());
             if (file != null && file.Length > 0)
             {
                 string folderPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Desktop), "BRM Diagnostic Reports"); // Save in "BRM Diagnostic Reports" folder on Desktop

@@ -1,4 +1,6 @@
+using System.Data;
 using System.Net.NetworkInformation;
+using Fluid.Ast.BinaryExpressions;
 using Npgsql;
 using NpgsqlTypes; 
 
@@ -272,7 +274,7 @@ public static partial class dbMethods
             WHERE t.id = @id", conn))
         {
             cmd.Parameters.AddWithValue("@id", ticketnumber);
-            conn.Open(); 
+            conn.Open();
             using (var reader = cmd.ExecuteReader())
             {
                 while (reader.Read())
@@ -281,7 +283,7 @@ public static partial class dbMethods
                     int twigTicketNumber = reader.GetInt32(1);
                     int serialNumber = reader.GetInt32(2);
                     int status = reader.GetInt16(3);
-                    string vehicleVinNumber = reader.GetString(4); 
+                    string vehicleVinNumber = reader.GetString(4);
                     string oem = reader.GetString(5);
                     string moduleType = reader.IsDBNull(6) ? "Unknown" : reader.GetString(6);
                     string stateOfHealth = reader.IsDBNull(7) ? "Unknown" : reader.GetString(7);
@@ -293,7 +295,7 @@ public static partial class dbMethods
                                                 serialNumber,
                                                 oem,
                                                 moduleType,
-                                                vehicleVinNumber, 
+                                                vehicleVinNumber,
                                                 stateOfHealth,
                                                 status.ToString(),
                                                 repairActions,
@@ -303,6 +305,24 @@ public static partial class dbMethods
                                                 serviceInspection);
 
                     return module;
+                }
+            }
+        }
+        return null;
+    }
+
+    public static byte[] pullQualityChecklist(Module module)
+    {
+        using (var conn = new NpgsqlConnection(dbConnection.connectionPath))
+        using (var cmd = new NpgsqlCommand("SELECT checklist FROM public.quality_recorded WHERE ticket_fk = @ticketId", conn))
+        {
+            conn.Open();
+            cmd.Parameters.AddWithValue("@ticketId", module.ticketSurrogateKey);
+            using (var reader = cmd.ExecuteReader())
+            {
+                while (reader.Read())
+                {
+                    return (byte[])reader[0];
                 }
             }
         }

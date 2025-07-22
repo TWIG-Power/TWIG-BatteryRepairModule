@@ -8,6 +8,7 @@
     <ImplicitUsings>enable</ImplicitUsings>
     <PackageIcon>ChatGPT Image Jul 15, 2025, 07_10_59 AM.png</PackageIcon>
     <ApplicationIcon>BRMLogo.ico</ApplicationIcon>
+	<SelfContained>false</SelfContained>
   </PropertyGroup>
 
   <ItemGroup>

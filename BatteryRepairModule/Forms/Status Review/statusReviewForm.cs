@@ -43,10 +43,12 @@ namespace BatteryRepairModule.Forms.Status_Review
             int selectedTicket = Int32.Parse(queryListBox.SelectedItem.ToString().Split('[')[1].Split(']')[0]);
             int selectedModule = dbInformation.activeModules.FirstOrDefault(m => m.ticketId == selectedTicket).ticketSurrogateKey;
 
-            // Store all of the information in one object.
             Module result = dbMethods.getAllTicketInformation(selectedModule);
 
-            HTMLReportGenerator.generateModuleReport(result); 
+            HTMLReportGenerator.generateModuleReport(result);
+            pullDiagnosticFile(result);
+            pullQualityChecklist(result); 
+
         }
 
         private void moduleOemFilterDropDown_SelectedIndexChanged(object sender, EventArgs e)
@@ -54,10 +56,11 @@ namespace BatteryRepairModule.Forms.Status_Review
             partNumberModelFilter.Enabled = true;
 
             var filteredList = dbInformation.activeModules
-            .Where(module => moduleOemFilterDropDown.SelectedItem.ToString() == "All" || module.Oem == moduleOemFilterDropDown.SelectedItem.ToString())
-            .OrderBy(module => module.model)
-            .ThenBy(module => module.SerialNumber)
-            .ToList();
+                .Where(module => moduleOemFilterDropDown.SelectedItem.ToString() == "All" || module.Oem == moduleOemFilterDropDown.SelectedItem.ToString())
+                .OrderBy(module => module.model)
+                .ThenBy(module => module.SerialNumber)
+                .ThenBy(module => module.ticketStatus)
+                .ToList();
 
             queryListBox.Items.Clear();
 
@@ -69,12 +72,45 @@ namespace BatteryRepairModule.Forms.Status_Review
 
         private void partNumberModelFilter_SelectedIndexChanged(object sender, EventArgs e)
         {
-            
+
         }
 
-        public static void getTicketInformation()
+        private void pullDiagnosticFile(Module result)
         {
+            byte[] file = dbMethods.pullDiagnosticFile(result.ticketSurrogateKey);
+            if (file != null && file.Length > 0)
+            {
+                string folderPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Desktop), "Battery-Repair-Module", "Status-Review-Reports", $"Service_Report_{result.ticketId}");
+
+                string fileName = $"Diagnostic_Report_{result.ticketId}.html";
+                string filePath = Path.Combine(folderPath, fileName);
+
+                File.WriteAllBytes(filePath, file);
+                MessageBox.Show("Diagnostic report saved successfully.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+            else
+            {
+                MessageBox.Show("No diagnostic file was found for the selected ticket.", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+        }
+
+        private void pullQualityChecklist(Module result)
+        {
+            byte[] file = dbMethods.pullQualityChecklist(result);
+            if (file != null && file.Length > 0)
+            {
+                string folderPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Desktop), "Battery-Repair-Module", "Status-Review-Reports", $"Service_Report_{result.ticketId}");
+
+                string fileName = $"Quality_Checklist_{result.ticketId}.pdf";
+                string filePath = Path.Combine(folderPath, fileName);
+
+                File.WriteAllBytes(filePath, file);
+                MessageBox.Show("Quality checklist report saved successfully.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+            else
+            {
+                MessageBox.Show("Error getting quality checklist. Please try again.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
     }
 }
-

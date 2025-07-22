@@ -64,7 +64,7 @@ namespace BatteryRepairModule.Forms.Add_Forms
                             dbInformation.selectedOemModelKeyPair.Add(manufacturer, match2);
                             break;
                         case "misc":
-                            int match3 = dbInformation.moduleTypesByOEM[0].FirstOrDefault(kvp => kvp.Value == moduleType).Key;
+                            int match3 = dbInformation.moduleTypesByOEM[2].FirstOrDefault(kvp => kvp.Value == moduleType).Key;
                             dbInformation.selectedOemModelKeyPair.Add(manufacturer, match3);
                             break;
                         default:

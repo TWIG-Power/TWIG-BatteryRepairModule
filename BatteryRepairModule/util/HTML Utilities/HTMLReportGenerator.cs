@@ -20,7 +20,8 @@ namespace BatteryRepairModule
                 string filePathFolder = Path.Combine(
                     Environment.GetFolderPath(Environment.SpecialFolder.Desktop),
                     "Battery-Repair-Module",
-                    "Status-Review-Reports"
+                    "Status-Review-Reports", 
+                    $"Service_Report_{result.ticketId}"
                 );
 
                 if (!Directory.Exists(filePathFolder))
@@ -28,7 +29,7 @@ namespace BatteryRepairModule
                     Directory.CreateDirectory(filePathFolder);
                 }
 
-                string fileName = $"ServiceReport_{result.ticketId}.html";
+                string fileName = $"Service_Report_{result.ticketId}.html";
                 string fullPath = Path.Combine(filePathFolder, fileName);
 
                 var parser = new FluidParser();

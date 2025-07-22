@@ -335,7 +335,7 @@ public static partial class dbMethods
         }
     }
 
-    public static byte[] pullDiagnosticFile()
+    public static byte[] pullDiagnosticFile(int ticketId)
     {
         using (var conn = new NpgsqlConnection(dbConnection.connectionPath))
         using (var cmd = new NpgsqlCommand("SELECT diagnostic_report FROM public.service_inspection WHERE ticket_fk = @id", conn))
