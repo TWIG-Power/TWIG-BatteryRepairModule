@@ -43,8 +43,9 @@ namespace BatteryRepairModule
             { "Missing Wires", BrmTicketCreationForm2.tempCheckMissingWires },
             { "Charge Port Damage", BrmTicketCreationForm2.tempCheckChargePort },
             { "Cable Damage", BrmTicketCreationForm2.tempCheckCableDamage },
-            { "Gove Vent Damage", BrmTicketCreationForm2.tempCheckGoveVent },
-            { "Communication Port Damage", BrmTicketCreationForm2.tempCheckCommPort }
+            { "Gore Vent Damage", BrmTicketCreationForm2.tempCheckGoveVent },
+            { "Communication Port Damage", BrmTicketCreationForm2.tempCheckCommPort },
+            { "Missing Studs", BrmTicketCreationForm2.tempMissingStuds}
             };
 
             foreach (var error in errorChecks)

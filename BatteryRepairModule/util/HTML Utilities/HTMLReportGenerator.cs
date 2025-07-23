@@ -90,7 +90,7 @@ namespace BatteryRepairModule
             int counter = 0; 
             foreach (var report in result.reportList)
             {
-                customerReportsHtml.AppendLine($"<div class=\"param-name\"> ------------ Reported Issue {counter+=1} ------------ </div>");
+                customerReportsHtml.AppendLine($"<div class=\"param-name\"> ------------------------ Reported Issue {counter+=1} ------------------------ </div>");
                 customerReportsHtml.AppendLine($"<div class=\"param-name\">Description:         {report.description ?? "Unknown"}</div>");
                 customerReportsHtml.AppendLine($"<div class=\"param-name\">Status:              {report.status ?? "Unknown"}</div>");
             }
@@ -106,7 +106,7 @@ namespace BatteryRepairModule
             counter = 0;
             foreach (var repairAction in result.repairList)
             {
-                repairActionsHtml.AppendLine($"<div class=\"param-name\"> ------------ Repair Action {counter += 1} ------------ </div>");
+                repairActionsHtml.AppendLine($"<div class=\"param-name\"> ------------------------ Repair Action {counter += 1} ------------------------ </div>");
                 repairActionsHtml.AppendLine($"<div class=\"param-name\"> Repair ID: {repairAction.repairId}</div>");
                 repairActionsHtml.AppendLine($"<div class=\"param-name\"> Description: {repairAction.description}</div>");
                 repairActionsHtml.AppendLine($"<div class=\"param-name\"> Status: {repairAction.status}</div>");
@@ -120,7 +120,7 @@ namespace BatteryRepairModule
             counter = 0;
             foreach (var test in result.testList)
             {
-                testActionsHtml.AppendLine($"<div class=\"param-name\"> ------------ Test Action {counter += 1} ------------ </div>");
+                testActionsHtml.AppendLine($"<div class=\"param-name\"> ------------------------ Test Action {counter += 1} ------------------------ </div>");
                 testActionsHtml.AppendLine($"<div class=\"param-name\"> Test ID: {test.id}</div>");
                 testActionsHtml.AppendLine($"<div class=\"param-name\"> Description: {test.description}</div>");
                 testActionsHtml.AppendLine($"<div class=\"param-name\"> Status: {test.status}</div>");

@@ -105,7 +105,6 @@ namespace BatteryRepairModule.Forms.Status_Review
                 string filePath = Path.Combine(folderPath, fileName);
 
                 File.WriteAllBytes(filePath, file);
-                MessageBox.Show("Quality checklist report saved successfully.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
             else
             {

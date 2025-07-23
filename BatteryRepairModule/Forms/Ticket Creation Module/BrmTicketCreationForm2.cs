@@ -25,6 +25,7 @@ namespace BatteryRepairModule.Forms.BRM
         public static bool? tempCheckCableDamage;
         public static bool? tempCheckGoveVent;
         public static bool? tempCheckCommPort;
+        public static bool? tempMissingStuds; 
 
         private BrmMainMenuForm parentForm;
         public BrmTicketCreationForm2(BrmMainMenuForm parent)
@@ -53,7 +54,7 @@ namespace BatteryRepairModule.Forms.BRM
                             break;
                         case "N/A":
                             doesNotApplyShippingButton.Checked = true;
-                            break; 
+                            break;
                         default:
                             break;
                     }
@@ -85,6 +86,8 @@ namespace BatteryRepairModule.Forms.BRM
                     goveVentCheckBox.Checked = tempCheckGoveVent.Value;
                 if (tempCheckCommPort.HasValue)
                     commPortCheckBox.Checked = tempCheckCommPort.Value;
+                if (tempMissingStuds.HasValue)
+                    MissingStudsCheckBox.Checked = tempMissingStuds.Value; 
             }
             catch (Exception ex)
             {
@@ -113,6 +116,7 @@ namespace BatteryRepairModule.Forms.BRM
                 tempCheckCableDamage = cableDamageCheckBox.Checked;
                 tempCheckGoveVent = goveVentCheckBox.Checked;
                 tempCheckCommPort = commPortCheckBox.Checked;
+                tempMissingStuds = MissingStudsCheckBox.Checked; 
 
                 if (string.IsNullOrEmpty(tempVerifyShippingChoice))
                 {

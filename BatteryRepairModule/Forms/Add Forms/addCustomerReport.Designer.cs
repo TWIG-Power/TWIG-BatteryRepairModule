@@ -111,14 +111,14 @@
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(800, 223);
+            ClientSize = new Size(800, 293);
             Controls.Add(cancelButton);
             Controls.Add(continueButton);
             Controls.Add(panel2);
             Controls.Add(panel1);
             MaximizeBox = false;
-            MaximumSize = new Size(816, 262);
-            MinimumSize = new Size(816, 262);
+            MaximumSize = new Size(816, 332);
+            MinimumSize = new Size(816, 332);
             Name = "addCustomerReport";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "addCustomerReport";

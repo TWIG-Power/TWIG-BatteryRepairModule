@@ -163,9 +163,9 @@ public static partial class dbMethods
                         string statusName = reader.IsDBNull(4) ? "Unknown" : reader.GetString(4);
                         RepairAction repairAction = new RepairAction(id, staff, optionName, statusName, note);
                         repairActionList.Add(repairAction);
-                        return repairActionList;
                     }
                 }
+                return repairActionList;
             }
         }
         return null;
@@ -235,7 +235,6 @@ public static partial class dbMethods
                     }
                 }
             }
-
             return testsList;
         }
     }
@@ -283,7 +282,7 @@ public static partial class dbMethods
                     int twigTicketNumber = reader.GetInt32(1);
                     int serialNumber = reader.GetInt32(2);
                     int status = reader.GetInt16(3);
-                    string vehicleVinNumber = reader.GetString(4);
+                    string vehicleVinNumber = reader.IsDBNull(4) ? null : reader.GetString(4);
                     string oem = reader.GetString(5);
                     string moduleType = reader.IsDBNull(6) ? "Unknown" : reader.GetString(6);
                     string stateOfHealth = reader.IsDBNull(7) ? "Unknown" : reader.GetString(7);

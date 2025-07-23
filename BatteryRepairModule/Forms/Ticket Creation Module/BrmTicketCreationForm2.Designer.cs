@@ -45,6 +45,7 @@ namespace BatteryRepairModule.Forms.BRM
             housingScrapesCheckBox = new CheckBox();
             label2 = new Label();
             panel3 = new Panel();
+            MissingStudsCheckBox = new CheckBox();
             commPortCheckBox = new CheckBox();
             goveVentCheckBox = new CheckBox();
             cableDamageCheckBox = new CheckBox();
@@ -224,6 +225,7 @@ namespace BatteryRepairModule.Forms.BRM
             // 
             // panel3
             // 
+            panel3.Controls.Add(MissingStudsCheckBox);
             panel3.Controls.Add(commPortCheckBox);
             panel3.Controls.Add(goveVentCheckBox);
             panel3.Controls.Add(cableDamageCheckBox);
@@ -234,6 +236,19 @@ namespace BatteryRepairModule.Forms.BRM
             panel3.Name = "panel3";
             panel3.Size = new Size(931, 262);
             panel3.TabIndex = 5;
+            // 
+            // MissingStudsCheckBox
+            // 
+            MissingStudsCheckBox.AutoSize = true;
+            MissingStudsCheckBox.Dock = DockStyle.Top;
+            MissingStudsCheckBox.Font = new Font("Segoe UI", 20F, FontStyle.Regular, GraphicsUnit.Point);
+            MissingStudsCheckBox.Location = new Point(578, 196);
+            MissingStudsCheckBox.Name = "MissingStudsCheckBox";
+            MissingStudsCheckBox.Padding = new Padding(0, 0, 0, 8);
+            MissingStudsCheckBox.Size = new Size(353, 49);
+            MissingStudsCheckBox.TabIndex = 9;
+            MissingStudsCheckBox.Text = "Missing Studs";
+            MissingStudsCheckBox.UseVisualStyleBackColor = true;
             // 
             // commPortCheckBox
             // 
@@ -417,5 +432,6 @@ namespace BatteryRepairModule.Forms.BRM
         private RadioButton battLeadProtectNo;
         private Button continueButton;
         private Button cancelButton;
+        private CheckBox MissingStudsCheckBox;
     }
 }
