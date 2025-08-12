@@ -15,13 +15,20 @@ namespace BatteryRepairModule.Forms.Status_Review
 {
     public partial class statusReviewForm : Form
     {
-        private string[] oems = { "Cobra", "KTM", "Misc", "All" };
+        private string[] oems = {
+            "Cobra",
+            "KTM",
+            "Misc",
+            "All"
+        };
         public statusReviewForm()
         {
             InitializeComponent();
             ThemeHelper.ApplyTheme(this);
 
             dbMethods.loadAllTickets();
+
+            dbMethods.getTicketStatusOptions();
 
             foreach (Module module in dbInformation.activeModules)
             {
@@ -30,6 +37,8 @@ namespace BatteryRepairModule.Forms.Status_Review
 
             moduleOemFilterDropDown.Items.AddRange(oems);
             partNumberModelFilter.Enabled = false;
+
+            partNumberModelFilter.Items.AddRange(dbInformation.ticketStatusOptions.Select(s => s.Value.ToString()).ToArray()); 
         }
 
         private void viewDetailedReport_Click(object sender, EventArgs e)
@@ -72,7 +81,19 @@ namespace BatteryRepairModule.Forms.Status_Review
 
         private void partNumberModelFilter_SelectedIndexChanged(object sender, EventArgs e)
         {
+            var filteredList = dbInformation.activeModules
+                .Where(module => moduleOemFilterDropDown.SelectedItem.ToString() == "All" || module.Oem == moduleOemFilterDropDown.SelectedItem.ToString())
+                .Where(module => partNumberModelFilter.SelectedItem.ToString() == "All" || module.ticketStatus == partNumberModelFilter.SelectedItem.ToString())
+                .OrderBy(module => module.model)
+                .ThenBy(module => module.SerialNumber)
+                .ToList();
 
+            queryListBox.Items.Clear();
+
+            foreach (var module in filteredList)
+            {
+                queryListBox.Items.Add($"[{module.ticketId}] - {module.model} - ({module.SerialNumber}) - {module.stateOfHealth} - {module.ticketStatus}");
+            }
         }
 
         private void pullDiagnosticFile(Module result)
