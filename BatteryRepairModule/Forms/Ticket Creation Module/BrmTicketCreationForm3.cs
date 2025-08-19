@@ -101,6 +101,11 @@ namespace BatteryRepairModule
                         }
                     }
                 }
+                if (addedErrorsListBox.Items.Count == 0)
+                    {
+                        MessageBox.Show("Please add at least one reported error before continuing.", "Input Required", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        return;
+                    }
 
                 bool cond1 = dbMethods.createDatabaseTicket(dbInformation.selectedTwigTicketKeyPair.Values.First(), dbInformation.selectedStaffKeyValue);
                 bool cond2 = dbMethods.insertInitialAssessment();

@@ -126,7 +126,7 @@ namespace BatteryRepairModule.Forms.BRM
                     return;
 
                 control = ParseAndCheckRecycle();
-                if (control)
+                if (!control)
                     return;
 
 
@@ -227,6 +227,11 @@ namespace BatteryRepairModule.Forms.BRM
                                 }
                                 else if (recycleResult == DialogResult.Yes)
                                 {
+                                    using (var newNotesForm = new addNotesForm(null, false, "recycle"))
+                                    {
+                                        newNotesForm.ShowDialog(this); 
+                                    }
+
                                     dbMethods.recycleStatus();
                                     MessageBox.Show("Recycle detected. Recycling process will proceed.", "Recycle Detected", MessageBoxButtons.OK, MessageBoxIcon.Information);
                                     this.Close();

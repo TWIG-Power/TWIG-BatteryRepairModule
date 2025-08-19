@@ -16,12 +16,16 @@ namespace BatteryRepairModule.Forms.Add_Forms
         private bool viewOnly;
         private ListBox referenceListBox;
         private string localTable;
-        public addNotesForm(ListBox passedListBox, bool viewOnlyRef, string table)
+        public addNotesForm(ListBox? passedListBox, bool viewOnlyRef, string table)
         {
             InitializeComponent();
             ThemeHelper.ApplyTheme(this);
             this.viewOnly = viewOnlyRef;
-            this.referenceListBox = passedListBox;
+
+            if (passedListBox != null)
+            {
+                this.referenceListBox = passedListBox;
+            }
             this.localTable = table;
 
             // Reset the variable used to load the selected repair
@@ -54,7 +58,7 @@ namespace BatteryRepairModule.Forms.Add_Forms
                         richTextBox1.Enabled = true;
                         break;
                     default:
-                        break; 
+                        break;
                 }
             }
         }
@@ -72,7 +76,7 @@ namespace BatteryRepairModule.Forms.Add_Forms
                     switch (localTable)
                     {
                         case "repair":
-                            dbInformation.tempUpdateNotesRepairHolder.Clear(); 
+                            dbInformation.tempUpdateNotesRepairHolder.Clear();
                             var selectedValue = referenceListBox.SelectedItem as string;
                             var selectedRepaired = selectedValue?.Split('(')[0].Trim();
                             var selectedKvp = dbInformation.clearedRepairsKeyValPair.FirstOrDefault(kvp => kvp.Value.ToString() == selectedRepaired);
@@ -83,8 +87,8 @@ namespace BatteryRepairModule.Forms.Add_Forms
                             break;
 
                         case "test":
-                            List<string> temp = new List<string>(); 
-                            
+                            List<string> temp = new List<string>();
+
                             dbInformation.tempTestNoteHolder.Clear();
                             var selectedValue2 = referenceListBox.SelectedItem as string;
                             if (!string.IsNullOrEmpty(selectedValue2))
@@ -114,7 +118,7 @@ namespace BatteryRepairModule.Forms.Add_Forms
                                     }
                                 }
                                 temp.Sort();
-                                referenceListBox.Items.AddRange(temp.ToArray()); 
+                                referenceListBox.Items.AddRange(temp.ToArray());
                             }
                             else
                             {
@@ -122,6 +126,22 @@ namespace BatteryRepairModule.Forms.Add_Forms
                             }
 
                             break;
+                        case "recycle":
+                            dbInformation.recycleNote = string.Empty;
+                            if (string.IsNullOrEmpty(richTextBox1.Text) || richTextBox1.Text == null)
+                            {
+                                var dialogResult = MessageBox.Show("You have chosen to skip the recycle note. Would you like to proceed?", "No recycle note", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Warning);
+                                if (dialogResult == DialogResult.Yes)
+                                {
+                                    break;
+                                }
+                                else
+                                {
+                                    return;
+                                }
+                            }
+                            dbInformation.recycleNote = richTextBox1.Text.ToString(); 
+                            break; 
                         default:
                             break;
                     }
@@ -202,13 +222,13 @@ namespace BatteryRepairModule.Forms.Add_Forms
                     else
                     {
                         MessageBox.Show("Selected test not found in the dictionary.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                        return; 
-                        }
+                        return;
                     }
-                    else
-                    {
-                        MessageBox.Show("No test selected.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    }
+                }
+                else
+                {
+                    MessageBox.Show("No test selected.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
             }
             catch (Exception ex)
             {

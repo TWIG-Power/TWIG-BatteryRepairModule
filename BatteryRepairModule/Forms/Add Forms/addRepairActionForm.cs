@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using BatteryRepairModule.Forms.Add_Forms;
 
 namespace BatteryRepairModule.Forms.BRM
 {
@@ -67,6 +68,10 @@ namespace BatteryRepairModule.Forms.BRM
                                 }
                                 else if (recycleResult == DialogResult.Yes)
                                 {
+                                    using (var newNotesForm = new addNotesForm(null, false, "recycle"))
+                                    {
+                                        newNotesForm.ShowDialog(this); 
+                                    }
                                     dbMethods.recycleStatus();
                                     dbInformation.recycled = true; 
                                     this.Close();

@@ -65,6 +65,12 @@ namespace BatteryRepairModule.Forms.Service_Inspection_Forms
                     fileBytes = null;
                 }
 
+                if (repairActionsListBox.Items.Count == 0)
+                {
+                    MessageBox.Show("Please add at least one repair action before continuing.", "Missing Repair Action", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+
                 bool cond1 = dbMethods.createServiceInpsection(fileBytes);
                 bool cond2 = dbMethods.insertSuggestedRepairs();
                 if (cond1 && cond2)

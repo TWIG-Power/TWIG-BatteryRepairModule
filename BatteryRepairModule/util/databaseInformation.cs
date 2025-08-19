@@ -49,6 +49,7 @@ public static class dbInformation
     #endregion
 
     #region Authorize Repairs 
+    public static string recycleNote = string.Empty; 
     public static Dictionary<int, string> clearedRepairsKeyValPair = new Dictionary<int, string>();
     public static Dictionary<int, string> clearedRepairsKeyStatusPair = new Dictionary<int, string>();
     public static Dictionary<string, string> clearedRepairsValueStatusPair = new Dictionary<string, string>();
