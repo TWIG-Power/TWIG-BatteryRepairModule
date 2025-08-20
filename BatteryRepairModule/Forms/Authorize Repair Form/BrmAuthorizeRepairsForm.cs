@@ -125,8 +125,8 @@ namespace BatteryRepairModule.Forms.BRM
                 if (!control)
                     return;
 
-                control = ParseAndCheckRecycle();
-                if (!control)
+                (control, bool secondControl) = ParseAndCheckRecycle();
+                if (control || !secondControl)
                     return;
 
 
@@ -204,7 +204,7 @@ namespace BatteryRepairModule.Forms.BRM
                 newForm.ShowDialog(this);
         }
 
-        private bool ParseAndCheckRecycle()
+        private (bool, bool) ParseAndCheckRecycle()
         {
             try
             {
@@ -223,7 +223,7 @@ namespace BatteryRepairModule.Forms.BRM
                                 var recycleResult = MessageBox.Show("Are you sure you want to authorize recycling for this item?", "Confirm Recycle", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
                                 if (recycleResult == DialogResult.No)
                                 {
-                                    return false;
+                                    return (false, false);
                                 }
                                 else if (recycleResult == DialogResult.Yes)
                                 {
@@ -236,18 +236,18 @@ namespace BatteryRepairModule.Forms.BRM
                                     MessageBox.Show("Recycle detected. Recycling process will proceed.", "Recycle Detected", MessageBoxButtons.OK, MessageBoxIcon.Information);
                                     this.Close();
                                     recycled = true;
-                                    return true;
+                                    return (true, true);
                                 }
                             }
                         }
                     }
                 }
-                return false;
+                return (false, true);
             }
             catch (Exception ex)
             {
                 MessageBox.Show($"An error occurred: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return false;
+                return (false, false);
             }
         }
 
