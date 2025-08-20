@@ -49,15 +49,33 @@ namespace BatteryRepairModule.Forms.Status_Review
                 return;
             }
 
-            int selectedTicket = Int32.Parse(queryListBox.SelectedItem.ToString().Split('[')[1].Split(']')[0]);
+            string selectedText = queryListBox.SelectedItem.ToString();
+            string[] parts = selectedText.Split('-');
+            string pulledStatus = parts.Length > 4 ? parts[4].Trim() : string.Empty;
+
+            int selectedTicket = Int32.Parse(selectedText.Split('[')[1].Split(']')[0]);
             int selectedModule = dbInformation.activeModules.FirstOrDefault(m => m.ticketId == selectedTicket).ticketSurrogateKey;
+
+            switch (pulledStatus)
+            {
+                case "Awaiting Service Inspection":
+                    List<CustomerReport> list = dbMethods.GetCustomerReports(selectedModule);
+                    string listOfRepots = string.Empty;
+                    foreach (CustomerReport report in list) {
+                        listOfRepots += $"{report.description} \n";
+                    }
+                    MessageBox.Show($"Customer Reports: \n" + listOfRepots, "Customer Report List", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    goto awaitingServiceInspectionSkip;
+            }
 
             Module result = dbMethods.getAllTicketInformation(selectedModule);
 
             HTMLReportGenerator.generateModuleReport(result);
             pullDiagnosticFile(result);
-            pullQualityChecklist(result); 
+            pullQualityChecklist(result);
 
+        awaitingServiceInspectionSkip:
+            Thread.Sleep(1); 
         }
 
         private void moduleOemFilterDropDown_SelectedIndexChanged(object sender, EventArgs e)
